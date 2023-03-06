@@ -7,7 +7,7 @@ void main() {
     MaterialApp(
       title: 'Gojo',
       theme: ThemeData(
-        primarySwatch: Resources.appColors.primaryMaterialColor.materialColor,
+        primarySwatch: Resources.gojoColors.primaryMaterialColor.materialColor,
       ),
       home: App(),
     ),

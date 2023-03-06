@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/resources/color/material_color.dart';
 
-class AppColors {
+class GojoColors {
   final Color primaryColor = const Color.fromARGB(255, 27, 181, 92);
 
   final AppMaterialColor primaryMaterialColor =

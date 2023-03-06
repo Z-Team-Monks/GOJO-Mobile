@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class IconText extends StatelessWidget {
+class GojoIconText extends StatelessWidget {
   final IconData iconData;
   final String title;
 
-  const IconText({super.key, required this.iconData, required this.title});
+  const GojoIconText({super.key, required this.iconData, required this.title});
 
   @override
   Widget build(BuildContext context) {

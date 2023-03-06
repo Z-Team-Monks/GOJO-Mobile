@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:gojo/UI/widgets/icon_text.dart';
 import 'package:gojo/resources/resources.dart';
 
-class MediaCard extends StatelessWidget {
+class GojoMediaCard extends StatelessWidget {
   final String title;
-  final List<IconText> iconTexts;
+  final List<GojoIconText> iconTexts;
 
-  MediaCard({super.key, required this.title, required this.iconTexts});
+  GojoMediaCard({super.key, required this.title, required this.iconTexts});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          Image(  
-            image: AssetImage(Resources.appImages.sofaSaloon),
+          Image(
+            image: AssetImage(Resources.gojoImages.sofaSaloon),
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),

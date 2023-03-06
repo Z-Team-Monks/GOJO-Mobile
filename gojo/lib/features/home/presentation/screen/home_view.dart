@@ -20,14 +20,14 @@ class HomeView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: MediaCard(
+                  child: GojoMediaCard(
                     title: "Villa, Kemah Tinggi",
                     iconTexts: const [
-                      IconText(
+                      GojoIconText(
                         iconData: Icons.bed,
                         title: "2 bedrooms",
                       ),
-                      IconText(
+                      GojoIconText(
                         iconData: Icons.crop_square,
                         title: "214 sq.ms",
                       ),

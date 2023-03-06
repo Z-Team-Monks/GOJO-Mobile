@@ -1,7 +1,7 @@
-class AppImages {
+class GojoImages {
   final String basePath;
 
-  AppImages({required this.basePath});
+  GojoImages({required this.basePath});
 
   String get sofaSaloon => "$basePath/sofa.jpeg";
 }

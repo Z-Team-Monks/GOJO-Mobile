@@ -1,3 +1,3 @@
-class AppFonts {
+class GojoFonts {
   final String roboto = "Roboto";
 }
