@@ -3,5 +3,6 @@ class GojoImages {
 
   GojoImages({required this.basePath});
 
-  String get sofaSaloon => "$basePath/sofa.jpeg";
+  String get sofa => "$basePath/sofa.jpeg";
+  String get appIcon => "$basePath/hut_icon.svg";
 }

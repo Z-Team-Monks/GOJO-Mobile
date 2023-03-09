@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/resources/color/colors.dart';
 
 class AppMaterialColor {
   final Color color;
