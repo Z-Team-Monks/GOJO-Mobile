@@ -5,7 +5,7 @@ import 'package:gojo/UI/widgets/app_icon.dart';
 import 'package:gojo/UI/widgets/bar_button.dart';
 import 'package:gojo/UI/widgets/parent_view.dart';
 import 'package:gojo/UI/widgets/text_link.dart';
-import 'package:gojo/features/home/presentation/screen/home_view.dart';
+import 'package:gojo/resources/strings/app_routes.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -46,9 +46,7 @@ class SignInView extends StatelessWidget {
             GojoBarButton(
               title: "Login",
               onClick: (() {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return HomeView();
-                }));
+                Navigator.pushNamed(context, GojoRoutes.root);
               }),
             ),
             const Spacer(),

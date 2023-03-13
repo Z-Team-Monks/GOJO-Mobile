@@ -9,7 +9,7 @@ class GojoAppIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      Resources.gojoImages.appIcon,
+      Resources.gojoImages.appIconSvg,
       semanticsLabel: 'App Icon',
       height: height ?? 100,
     );

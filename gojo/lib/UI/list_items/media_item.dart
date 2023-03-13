@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/UI/design_tokens/borders.dart';
 import 'package:gojo/UI/widgets/icon_text.dart';
-import 'package:gojo/resources/resources.dart';
 
-class GojoMediaCard extends StatelessWidget {
+class GojoMediaItem extends StatelessWidget {
   final String title;
   final String leftTrailingTitle;
   final List<GojoIconText> iconTexts;
   final Image image;
 
-  GojoMediaCard({
+  const GojoMediaItem({
     super.key,
     required this.title,
     required this.leftTrailingTitle,

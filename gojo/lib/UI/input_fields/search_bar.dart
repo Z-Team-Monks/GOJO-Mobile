@@ -3,34 +3,24 @@ import 'package:gojo/UI/input_fields/text_field.dart';
 
 class GojoSearchBar extends StatelessWidget {
   final String label;
-  final Function()? onFilterIconPressed;
+  final Widget? suffixIcon;
 
   const GojoSearchBar({
     required this.label,
-    this.onFilterIconPressed,
+    this.suffixIcon,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        GojoTextField(
-          hintText: label,
-          prefixIcon: const Icon(Icons.search),
-          onChanged: ((value) {}),
-        ),
-        Positioned(
-          right: 20,
-          top: 20,
-          child: InkWell(
-            onTap: onFilterIconPressed,
-            child: const Icon(
-              Icons.tune,
-            ),
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: GojoTextField(
+        hintText: label,
+        prefixIcon: const Icon(Icons.search),
+        suffixIcon: suffixIcon,
+        onChanged: ((value) {}),
+      ),
     );
   }
 }

@@ -4,26 +4,30 @@ import 'package:gojo/resources/resources.dart';
 
 class GojoTextField extends StatelessWidget {
   final String? labelText;
-  final Widget? prefixIcon;
-  final ValueChanged<String>? onChanged;
   final String? initialValue;
   final String? hintText;
-  final bool isObscure;
-  final String? Function(String?)? validator;
   final String? errorText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final bool isObscure;
+  final int? maxLines;
+  final ValueChanged<String>? onChanged;
+  final String? Function(String?)? validator;
   final String? Function(String?)? customValidator;
 
   const GojoTextField({
     Key? key,
     this.labelText,
-    this.onChanged,
-    this.hintText,
-    this.validator,
-    this.errorText,
-    this.isObscure = false,
-    this.customValidator,
     this.initialValue,
+    this.errorText,
     this.prefixIcon,
+    this.suffixIcon,
+    this.hintText,
+    this.onChanged,
+    this.validator,
+    this.customValidator,
+    this.isObscure = false,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
@@ -33,8 +37,10 @@ class GojoTextField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: onChanged,
       validator: validator,
+      maxLines: maxLines,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         focusedBorder: GojoBorders.rounded(
           GojoBorderRadiusSize.medium,
           borderSide: BorderSide(

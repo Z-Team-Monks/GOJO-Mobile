@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/UI/design_tokens/padding.dart';
-import 'package:gojo/UI/widgets/app_icon.dart';
 import 'package:gojo/resources/resources.dart';
 
 class GojoParentView extends StatelessWidget {
@@ -21,8 +20,7 @@ class GojoParentView extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: GojoPadding.extraSmall),
+          padding: const EdgeInsets.all(GojoPadding.small),
           child: child,
         ),
       ),
