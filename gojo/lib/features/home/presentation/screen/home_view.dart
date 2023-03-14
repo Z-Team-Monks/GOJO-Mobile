@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/UI/design_tokens/borders.dart';
-import 'package:gojo/UI/input_fields/search_bar.dart';
-import 'package:gojo/UI/widgets/icon_text.dart';
-import 'package:gojo/UI/list_items/media_item.dart';
-import 'package:gojo/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
+import '../../../../Gojo-Mobile-Shared/UI/list_items/media_item.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo/features/home/presentation/screen/home_model_sheet.dart';
-import 'package:gojo/resources/resources.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

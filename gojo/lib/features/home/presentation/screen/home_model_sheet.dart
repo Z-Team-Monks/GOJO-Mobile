@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gojo/UI/design_tokens/padding.dart';
-import 'package:gojo/UI/input_fields/text_field.dart';
-import 'package:gojo/UI/input_fields/text_radio_button.dart';
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
 
 class GojoHomeModalSheet extends StatelessWidget {
   GojoHomeModalSheet({super.key});

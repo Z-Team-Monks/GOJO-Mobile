@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/UI/widgets/splash.dart';
+import 'Gojo-Mobile-Shared/UI/widgets/splash.dart';
 import 'package:gojo/features/auth/signin/presentation/screen/signin_view.dart';
 
 // Logic deciding which screen to go to after splash goes here.

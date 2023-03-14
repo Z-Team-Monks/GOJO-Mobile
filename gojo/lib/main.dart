@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/navigation/routeGenerator.dart';
-import 'package:gojo/resources/resources.dart';
-import 'package:gojo/resources/strings/app_routes.dart';
+import 'package:gojo/navigation/route_generator.dart';
+import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/features/home/presentation/screen/home_view.dart';
 import 'package:gojo/features/messages/contacts/presentation/screen/contacts_view.dart';
-import 'package:gojo/resources/resources.dart';
+import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/UI/design_tokens/padding.dart';
-import 'package:gojo/UI/input_fields/text_field.dart';
-import 'package:gojo/UI/widgets/app_icon.dart';
-import 'package:gojo/UI/widgets/bar_button.dart';
-import 'package:gojo/UI/widgets/parent_view.dart';
-import 'package:gojo/UI/widgets/text_link.dart';
-import 'package:gojo/resources/strings/app_routes.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/app_icon.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/text_link.dart';
+import 'package:gojo/constants/strings/app_routes.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
