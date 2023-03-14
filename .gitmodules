@@ -1,0 +1,9 @@
+[submodule "gojo/lib/gojo_shared/Gojo-Mobile-Shared"]
+	path = gojo/lib/gojo_shared/Gojo-Mobile-Shared
+	url = https://github.com/Z-Team-Monks/Gojo-Mobile-Shared.git
+[submodule "gojo/lib/Gojo-Mobile-Shared"]
+	path = gojo/lib/Gojo-Mobile-Shared
+	url = https://github.com/Z-Team-Monks/Gojo-Mobile-Shared.git
+[submodule "gojo_landlord/lib/Gojo-Mobile-Shared"]
+	path = gojo_landlord/lib/Gojo-Mobile-Shared
+	url = https://github.com/Z-Team-Monks/Gojo-Mobile-Shared.git
