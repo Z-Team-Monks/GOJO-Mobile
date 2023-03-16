@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
@@ -27,6 +28,35 @@ class GojoHomeModalSheet extends StatelessWidget {
               "Apartment",
             ],
             onItemSelected: (String, int, bool) {},
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Price range",
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          StatefulBuilder(
+            builder: (BuildContext context,
+                void Function(void Function()) setState) {
+              return RangeSlider(
+                values: _currentRangeValues,
+                max: 100,
+                divisions: 5,
+                labels: RangeLabels(
+                  _currentRangeValues.start.round().toString(),
+                  _currentRangeValues.end.round().toString(),
+                ),
+                onChanged: (RangeValues values) {
+                  setState(() {
+                    _currentRangeValues = values;
+                  });
+                },
+              );
+            },
           ),
           GojoTextRadioButton(
             label: "Facilities",
@@ -62,35 +92,11 @@ class GojoHomeModalSheet extends StatelessWidget {
             ],
             onItemSelected: (String, int, bool) {},
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Price range",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          StatefulBuilder(
-            builder: (BuildContext context,
-                void Function(void Function()) setState) {
-              return RangeSlider(
-                values: _currentRangeValues,
-                max: 100,
-                divisions: 5,
-                labels: RangeLabels(
-                  _currentRangeValues.start.round().toString(),
-                  _currentRangeValues.end.round().toString(),
-                ),
-                onChanged: (RangeValues values) {
-                  setState(() {
-                    _currentRangeValues = values;
-                  });
-                },
-              );
-            },
-          )
+          SizedBox(height: 12),
+          GojoBarButton(title: "Apply", onClick: () {}),
+          SizedBox(height: 12),
+          GojoBarButton(title: "Reset", onClick: () {}),
+          SizedBox(height: 12),
         ],
       ),
     );
