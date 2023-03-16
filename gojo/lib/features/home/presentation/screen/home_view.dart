@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/constants/strings/app_routes.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
@@ -39,25 +40,30 @@ class HomeView extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               itemCount: 3,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: GojoMediaItem(
-                    title: "Villa, Kemah Tinggi",
-                    leftTrailingTitle: "14,000 Birr",
-                    image: Image(
-                      image: AssetImage(Resources.gojoImages.sofa),
-                      fit: BoxFit.fill,
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, GojoRoutes.propertyDetail);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: GojoMediaItem(
+                      title: "Villa, Kemah Tinggi",
+                      leftTrailingTitle: "14,000 Birr",
+                      image: Image(
+                        image: AssetImage(Resources.gojoImages.sofa),
+                        fit: BoxFit.fill,
+                      ),
+                      iconTexts: const [
+                        GojoIconText(
+                          iconData: Icons.bed,
+                          title: "2 bedrooms",
+                        ),
+                        GojoIconText(
+                          iconData: Icons.crop_square,
+                          title: "214 sq.ms",
+                        ),
+                      ],
                     ),
-                    iconTexts: const [
-                      GojoIconText(
-                        iconData: Icons.bed,
-                        title: "2 bedrooms",
-                      ),
-                      GojoIconText(
-                        iconData: Icons.crop_square,
-                        title: "214 sq.ms",
-                      ),
-                    ],
                   ),
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/app.dart';
 import 'package:gojo/features/auth/signin/presentation/screen/signin_view.dart';
+import 'package:gojo/features/detail/presentation/detail.dart';
 import 'package:gojo/features/home/presentation/screen/home_view.dart';
 import 'package:gojo/features/messages/chat/presentation/screen/chat_view.dart';
 import 'package:gojo/features/messages/contacts/presentation/screen/contacts_view.dart';
@@ -12,6 +13,8 @@ class RouteGenerator {
     switch (settings.name) {
       case GojoRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeView());
+      case GojoRoutes.propertyDetail:
+        return MaterialPageRoute(builder: (_) => const DetailPage());
       case GojoRoutes.signin:
         return MaterialPageRoute(builder: (_) => const SignInView());
       case GojoRoutes.contacts:

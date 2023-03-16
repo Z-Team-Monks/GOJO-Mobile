@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gojo/features/auth/signin/presentation/screen/signin_view.dart';
 
 class App extends StatelessWidget {
-  App({super.key});
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {

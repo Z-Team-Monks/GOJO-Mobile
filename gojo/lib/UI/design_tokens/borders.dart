@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/resources/resources.dart';
 
 enum GojoBorderRadiusSize {
   small,
@@ -30,8 +29,9 @@ class GojoBorders {
       borderSide: borderSide,
     );
   }
-  static BorderRadiusGeometry border(GojoBorderRadiusSize type){
-    switch(type){
+
+  static BorderRadiusGeometry border(GojoBorderRadiusSize type) {
+    switch (type) {
       case GojoBorderRadiusSize.small:
         return BorderRadius.circular(5);
       case GojoBorderRadiusSize.medium:

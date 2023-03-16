@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo/UI/design_tokens/borders.dart';
 
 class TabBest extends StatelessWidget {
@@ -8,11 +9,11 @@ class TabBest extends StatelessWidget {
       {onPressed, isActive = false, IconData? iconData}) {
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 5),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: GojoBorders.border(GojoBorderRadiusSize.small),
-          color: Colors.teal,
+          color: Resources.gojoColors.primaryColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -23,7 +24,12 @@ class TabBest extends StatelessWidget {
                 flex: 1,
                 child: Container(),
               ),
-              Text(label),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Resources.gojoColors.primaryContrastColor,
+                ),
+              ),
               Expanded(
                 flex: 1,
                 child: Container(),
@@ -32,6 +38,7 @@ class TabBest extends StatelessWidget {
                   ? Icon(
                       iconData,
                       size: 16,
+                      color: Resources.gojoColors.primaryContrastColor,
                     )
                   : Container()
             ],
