@@ -63,7 +63,7 @@ class TabBest extends StatelessWidget {
             onPressed: () {
           Navigator.pushNamed(context, GojoRoutes.appointment);
         }),
-        buildButton("Call", iconData: Icons.call),
+        buildButton("Message", iconData: Icons.message),
         buildButton("Apply For Rent", iconData: Icons.add_card_rounded),
       ],
     );

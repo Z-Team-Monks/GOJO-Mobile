@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/constants/strings/app_routes.dart';
 
 class HostAvatar extends StatelessWidget {
   const HostAvatar({Key? key}) : super(key: key);
@@ -23,9 +24,7 @@ class HostAvatar extends StatelessWidget {
                 Row(
                   children: const [
                     Text("Host"),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    SizedBox(width: 10),
                     Icon(Icons.account_circle),
                   ],
                 ),
@@ -40,20 +39,17 @@ class HostAvatar extends StatelessWidget {
               child: Container(),
             ),
             Row(
-              children: const [
-                Icon(Icons.calendar_month),
-                SizedBox(
-                  width: 8,
+              children: [
+                InkWell(
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.remove_red_eye),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, GojoRoutes.virtualTour);
+                  },
                 ),
-                Icon(Icons.gps_fixed),
-                SizedBox(
-                  width: 8,
-                ),
-                Icon(Icons.chat_bubble),
-                SizedBox(
-                  width: 8,
-                ),
-                Icon(Icons.call),
+                const SizedBox(width: 8),
               ],
             )
           ],

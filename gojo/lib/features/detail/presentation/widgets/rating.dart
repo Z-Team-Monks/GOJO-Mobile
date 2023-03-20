@@ -10,12 +10,15 @@ class RatingIndicator extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        borderRadius: GojoBorders.border(GojoBorderRadiusSize.small),
-        color: Colors.grey
-      ),
+          borderRadius: GojoBorders.border(GojoBorderRadiusSize.small),
+          color: Colors.grey),
       child: Row(
         children: [
-          const Icon(Icons.star, color: Colors.amber,),
+          const Icon(
+            Icons.star,
+            color: Colors.amber,
+          ),
+          const SizedBox(width: 4),
           Text(rating.toString())
         ],
       ),
