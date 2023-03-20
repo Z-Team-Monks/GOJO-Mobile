@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
                           title: "2 bedrooms",
                         ),
                         GojoIconText(
-                          iconData: Icons.crop_square,
+                          iconData: Icons.aspect_ratio,
                           title: "214 sq.ms",
                         ),
                       ],
