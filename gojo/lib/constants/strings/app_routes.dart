@@ -4,6 +4,7 @@ class GojoRoutes {
   static const contacts = '/contacts';
   static const chat = '/chat';
   static const signin = 'signin';
+  static const register = '/register';
   static const propertyDetail = 'property detail';
   static const app = '/';
 }
