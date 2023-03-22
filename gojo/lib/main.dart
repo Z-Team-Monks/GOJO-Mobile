@@ -6,6 +6,8 @@ import 'package:gojo/navigation/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MaterialApp(
       title: 'Gojo',

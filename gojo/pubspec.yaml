@@ -45,6 +45,8 @@ dependencies:
   page_transition: ^2.0.9
   
   dashed_rect: ^0.0.4
+  animated_snack_bar: ^0.3.0
+  webview_flutter: ^4.0.7
 
 
 

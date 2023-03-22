@@ -16,8 +16,8 @@ class _RootViewState extends State<RootView> {
   final List _pages = [
     const HomeView(),
     const ContactsView(),
-    const Center(child: Text("Notfications")),
     const Center(child: Text("Profile")),
+    const Center(child: Text("Notfications")),
     const Center(child: Text("Settings")),
   ];
 
@@ -39,9 +39,9 @@ class _RootViewState extends State<RootView> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "Messages"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(
               icon: Icon(Icons.notifications), label: "Notifications"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: "Settings"),
         ],

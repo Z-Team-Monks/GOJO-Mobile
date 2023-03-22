@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo/UI/design_tokens/borders.dart';
 import 'package:gojo/features/detail/presentation/widgets/host_avatar.dart';
-import 'package:gojo/features/detail/presentation/widgets/property_description.dart';
 import 'package:gojo/features/detail/presentation/widgets/rating.dart';
 import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_best.dart';
 
@@ -142,21 +142,9 @@ class _DetailPageState extends State<DetailPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                PropertyDescription(
-                  itemCount: 5,
-                  label: "bedrooms",
-                  iconData: Icons.bed_rounded,
-                ),
-                PropertyDescription(
-                  itemCount: 214,
-                  label: "m2",
-                  iconData: Icons.aspect_ratio,
-                ),
-                PropertyDescription(
-                  itemCount: 5,
-                  label: "baths",
-                  iconData: Icons.bathtub,
-                )
+                GojoIconText(iconData: Icons.bed_rounded, title: "5 bedrooms"),
+                GojoIconText(iconData: Icons.aspect_ratio, title: "214 sq.ms"),
+                GojoIconText(iconData: Icons.bathtub, title: "2 baths"),
               ],
             ),
             const SizedBox(
