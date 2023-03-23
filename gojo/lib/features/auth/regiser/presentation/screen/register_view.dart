@@ -1,9 +1,9 @@
 import 'package:dashed_rect/dashed_rect.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/color/colors.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -75,7 +75,7 @@ class _RegisterView extends State<RegisterView> {
                   Step(
                     title: const Text('ID Card'),
                     content: DashedRect(
-                      color: GojoColors().primaryColor,
+                      color: Resources.gojoColors.primaryColor,
                       child: Padding(
                         padding: const EdgeInsets.all(60),
                         child: GestureDetector(
@@ -83,7 +83,7 @@ class _RegisterView extends State<RegisterView> {
                           child: Icon(
                             Icons.upload_file_sharp,
                             size: 60,
-                            color: GojoColors().primaryColor,
+                            color: Resources.gojoColors.primaryColor,
                           ),
                         ),
                       ),
