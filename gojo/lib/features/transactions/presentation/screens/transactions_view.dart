@@ -48,26 +48,23 @@ class TransactionsView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           _buildLabel(context: context, label: "History"),
-          GojoContentItem(
-            image: AssetImage(Resources.gojoImages.sofa),
-            title: "Mansion",
-            content: "Rent for july",
-            rightAlignedTitle: "Mar 1,2023",
-            rightAlignedContent: "18,0000",
-          ),
-          GojoContentItem(
-            image: AssetImage(Resources.gojoImages.sofa),
-            title: "Mansion",
-            content: "Rent for july",
-            rightAlignedTitle: "Mar 1,2023",
-            rightAlignedContent: "18,0000",
-          ),
-          GojoContentItem(
-            image: AssetImage(Resources.gojoImages.sofa),
-            title: "Mansion",
-            content: "Rent for july",
-            rightAlignedTitle: "Mar 1,2023",
-            rightAlignedContent: "18,0000",
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: GojoPadding.small,
+                ),
+                child: GojoContentItem(
+                  image: AssetImage(Resources.gojoImages.sofa),
+                  title: "Mansion",
+                  content: "Rent for july",
+                  rightAlignedTitle: "Mar 1,2023",
+                  rightAlignedContent: "18,0000",
+                ),
+              );
+            },
           ),
         ],
       ),
