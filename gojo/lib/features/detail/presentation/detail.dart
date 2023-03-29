@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/UI/design_tokens/borders.dart';
 import 'package:gojo/features/detail/presentation/widgets/host_avatar.dart';
 import 'package:gojo/features/detail/presentation/widgets/rating.dart';
 import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_best.dart';

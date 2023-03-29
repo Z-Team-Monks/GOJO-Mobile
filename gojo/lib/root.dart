@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gojo/features/home/presentation/screen/home_view.dart';
 import 'package:gojo/features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
+import 'package:gojo/features/profile/presentation/screens/profile_view.dart';
+import 'package:gojo/features/transactions/presentation/screens/transactions_view.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -16,9 +18,9 @@ class _RootViewState extends State<RootView> {
   final List _pages = [
     const HomeView(),
     const ContactsView(),
-    const Center(child: Text("Profile")),
+    const ProfileView(),
     const Center(child: Text("Notfications")),
-    const Center(child: Text("Settings")),
+    const TransactionsView(),
   ];
 
   _changeTab(int index) {
@@ -43,7 +45,7 @@ class _RootViewState extends State<RootView> {
           BottomNavigationBarItem(
               icon: Icon(Icons.notifications), label: "Notifications"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
+              icon: Icon(Icons.paid), label: "Transactions"),
         ],
       ),
     );

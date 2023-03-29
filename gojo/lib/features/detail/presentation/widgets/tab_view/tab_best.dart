@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/UI/design_tokens/borders.dart';
 import 'package:gojo/constants/strings/app_routes.dart';
 
 class TabBest extends StatelessWidget {
   const TabBest({Key? key}) : super(key: key);
 
-  Widget buildButton(
+  Widget _buildButton(
     String label, {
     onPressed,
     isActive = false,
@@ -56,15 +56,58 @@ class TabBest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showApplyForRentDialogue() async {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'Are you sure you want to apply?',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Yes'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('No'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Column(
       children: [
-        buildButton("Directions"),
-        buildButton("Request Appointment", iconData: Icons.calendar_today,
-            onPressed: () {
-          Navigator.pushNamed(context, GojoRoutes.appointment);
-        }),
-        buildButton("Message", iconData: Icons.message),
-        buildButton("Apply For Rent", iconData: Icons.add_card_rounded),
+        _buildButton("Directions"),
+        _buildButton(
+          "Request Appointment",
+          iconData: Icons.calendar_today,
+          onPressed: () {
+            Navigator.pushNamed(context, GojoRoutes.appointment);
+          },
+        ),
+        _buildButton(
+          "Message",
+          iconData: Icons.message,
+          onPressed: () {
+            Navigator.pushNamed(context, GojoRoutes.chat);
+          },
+        ),
+        _buildButton(
+          "Apply For Rent",
+          iconData: Icons.add_card_rounded,
+          onPressed: () {
+            _showApplyForRentDialogue();
+          },
+        ),
       ],
     );
   }
