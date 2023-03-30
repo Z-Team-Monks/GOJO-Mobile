@@ -4,6 +4,7 @@ import 'package:gojo/features/messages/contacts/presentation/screen/contacts_vie
 import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo/features/profile/presentation/screens/profile_view.dart';
 import 'package:gojo/features/transactions/presentation/screens/transactions_view.dart';
+import 'package:gojo/features/notification/presentation/notification_view.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -19,7 +20,7 @@ class _RootViewState extends State<RootView> {
     const HomeView(),
     const ContactsView(),
     const ProfileView(),
-    const Center(child: Text("Notfications")),
+    const NotificationView(),
     const TransactionsView(),
   ];
 
