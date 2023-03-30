@@ -5,6 +5,7 @@ class GojoRoutes {
   static const chat = '/chat';
   static const signin = 'signin';
   static const register = '/register';
+  static const notification = '/notification';
   static const propertyDetail = 'property detail';
   static const appointment = 'appointment';
   static const virtualTour = 'virtual tour';
