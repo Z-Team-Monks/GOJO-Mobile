@@ -14,17 +14,17 @@ class NotificationView extends StatelessWidget {
             GojoNotificationItem(
               isAppointment: false,
               title: "Nabek Abebe",
-              subtitle: "Paid 10,0000 Birrs for Kidus",
+              subtitle: "Withdrew 10,0000 Birrs",
             ),
             GojoNotificationItem(
-              isAppointment: false,
+              isAppointment: true,
               title: "Kidus Yoseph",
-              subtitle: "Approved an appoinment for Mar 27 at 8:00 AM",
+              subtitle: "Scheduled an appointment for Mar 27 at 8:00 AM",
             ),
             GojoNotificationItem(
               isAppointment: false,
               title: "Lingerew Getie",
-              subtitle: "The home you wanted is now available",
+              subtitle: "Applied for a rent",
             ),
           ],
         ),

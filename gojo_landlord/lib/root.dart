@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo_landlord/features/messages/contacts/presentation/screen/contacts_view.dart';
+import 'package:gojo_landlord/features/notification/presentation/notification_view.dart';
 import 'package:gojo_landlord/features/profile/presentation/screens/profile_view.dart';
 import 'package:gojo_landlord/features/withdrawal/withdrawal.dart';
 
@@ -18,7 +19,7 @@ class _RootViewState extends State<RootView> {
     const ProfileView(),
     const ContactsView(),
     const WithdrawRequest(),
-    const Center(child: Text("Notfications")),
+    const NotificationView(),
   ];
 
   _changeTab(int index) {

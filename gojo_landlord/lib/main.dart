@@ -8,7 +8,7 @@ void main() {
 
   runApp(
     MaterialApp(
-      title: 'Gojo',
+      title: 'Gojo Landlord',
       theme: ThemeData(
         fontFamily: GoogleFonts.nunito().fontFamily,
         primarySwatch: Resources.gojoColors.primaryMaterialColor.materialColor,
