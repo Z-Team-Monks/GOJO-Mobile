@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/constants/strings/app_routes.dart';
 import 'package:gojo_landlord/navigation/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Gojo-Mobile-Shared/resources/resources.dart';
@@ -16,7 +15,6 @@ void main() {
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
-      initialRoute: GojoRoutes.requests,
     ),
   );
 }

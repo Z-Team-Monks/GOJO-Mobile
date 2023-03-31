@@ -7,7 +7,6 @@ class WithdrawRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Withdraw Request",
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(children: [
@@ -34,10 +33,7 @@ class WithdrawRequest extends StatelessWidget {
                 )),
           ),
           Expanded(child: Container()),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: ElevatedButton(
-                  onPressed: () {}, child: const Text("Send Request"))),
+          ElevatedButton(onPressed: () {}, child: const Text("Send Request")),
         ]),
       ),
     );

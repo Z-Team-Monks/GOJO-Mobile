@@ -3,7 +3,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo_landlord/constants/strings/app_routes.dart';
+import 'package:gojo_landlord/features/profile/presentation/screens/posted_media_item.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -50,13 +50,11 @@ class ProfileView extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        _buildProfileTab(
-                            children: List.filled(
-                          8,
-                          _buildMiniMediaItem(
-                            context,
-                          ),
-                        )),
+                        ListView.builder(
+                            itemCount: 5,
+                            itemBuilder: ((context, index) {
+                              return PostedMediaItem();
+                            })),
                         _buildProfileTab(
                             children: List.filled(
                           8,

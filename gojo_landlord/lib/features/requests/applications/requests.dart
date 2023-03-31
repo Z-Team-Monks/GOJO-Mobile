@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/features/requests/user_request.dart';
+import 'package:gojo_landlord/features/requests/applications/user_request.dart';
 
 class RequestsPage extends StatefulWidget {
   const RequestsPage({super.key});
