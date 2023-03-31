@@ -5,6 +5,8 @@ import 'package:gojo_landlord/features/auth/signin/presentation/screen/signin_vi
 import 'package:gojo_landlord/features/messages/chat/presentation/screen/chat_view.dart';
 import 'package:gojo_landlord/features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'package:gojo_landlord/root.dart';
+import 'package:gojo_landlord/features/requests/requests.dart';
+import 'package:gojo_landlord/features/withdrawal/withdrawal.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -17,6 +19,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const RootView());
       case GojoRoutes.chat:
         return MaterialPageRoute(builder: (_) => const ChatView());
+      case GojoRoutes.requests:
+        return MaterialPageRoute(builder: (_) => const RequestsPage());
+      case GojoRoutes.withdraw:
+        return MaterialPageRoute(builder: (_) => const WithdrawRequest());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
