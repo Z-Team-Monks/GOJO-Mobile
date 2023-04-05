@@ -48,6 +48,7 @@ dependencies:
   animated_snack_bar: ^0.3.0
   webview_flutter: ^4.0.7
 
+  flutter_rating_bar: ^4.0.1
 
 
 dev_dependencies:
