@@ -11,8 +11,7 @@ class VirtualTourView extends StatefulWidget {
 
 class _VirtualTourViewState extends State<VirtualTourView> {
   late final WebViewController controller;
-  final virtualTourUrl =
-      'https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg';
+  final virtualTourUrl = 'https://vr-demo-git-main-par0s.vercel.app/';
 
   @override
   void initState() {
