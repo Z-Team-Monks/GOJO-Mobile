@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/app.dart';
-import 'package:gojo/features/auth/regiser/presentation/screen/register_view.dart';
+import 'package:gojo/features/auth/register/presentation/screen/register_view.dart';
 import 'package:gojo/features/appointment/presentation/screen/appointment.dart';
 import 'package:gojo/features/auth/signin/presentation/screen/signin_view.dart';
 import 'package:gojo/features/detail/presentation/detail.dart';
