@@ -18,6 +18,7 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             GojoSearchBar(
+              onChanged:(p0) => debugPrint(p0),
               label: "Search for your next home",
               suffixIcon: InkWell(
                 onTap: (() {

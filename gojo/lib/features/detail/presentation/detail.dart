@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
-import 'package:gojo/features/add_review/review_view.dart';
+import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_reviews.dart';
+import 'package:gojo/features/review/presentation/review_view.dart';
 import 'package:gojo/features/detail/presentation/widgets/host_avatar.dart';
 import 'package:gojo/features/detail/presentation/widgets/rating.dart';
 import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_best.dart';
@@ -67,15 +67,17 @@ class _DetailPageState extends State<DetailPage> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/sofa.jpeg'),
-                                    fit: BoxFit.cover),
-                                borderRadius: GojoBorders.border(
-                                    GojoBorderRadiusSize.large),
-                                color: Colors.amber));
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/sofa.jpeg'),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius:
+                                GojoBorders.border(GojoBorderRadiusSize.large),
+                            color: Colors.amber,
+                          ),
+                        );
                       },
                     );
                   }).toList(),
@@ -180,18 +182,9 @@ class _DetailPageState extends State<DetailPage> {
               height: 250,
               child: PageView(
                 controller: _pageController,
-                children: [
+                children: const [
                   TabBest(),
-                  IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AddReviewPopup();
-                          },
-                        );
-                      },
-                      icon: Icon(Icons.add))
+                  TabReviews(),
                 ],
               ),
             ),
