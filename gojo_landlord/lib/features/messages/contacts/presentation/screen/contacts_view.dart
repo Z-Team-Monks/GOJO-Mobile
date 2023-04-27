@@ -18,7 +18,10 @@ class ContactsView extends StatelessWidget {
     return GojoParentView(
       child: Column(
         children: [
-          const GojoSearchBar(label: "Search"),
+          GojoSearchBar(
+            label: "Search",
+            onChanged: (val) => debugPrint(val),
+          ),
           ListView.builder(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
