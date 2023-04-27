@@ -40,6 +40,7 @@ dependencies:
   animated_splash_screen: ^1.3.0
   google_fonts: ^4.0.3
   animated_snack_bar: ^0.3.0
+  dio: ^5.1.1
 
 dev_dependencies:
   flutter_test:
