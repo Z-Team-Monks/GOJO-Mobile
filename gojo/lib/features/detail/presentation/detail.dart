@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
+import '../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
+import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_reviews.dart';
-import 'package:gojo/features/review/presentation/review_view.dart';
 import 'package:gojo/features/detail/presentation/widgets/host_avatar.dart';
 import 'package:gojo/features/detail/presentation/widgets/rating.dart';
 import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_best.dart';
@@ -22,13 +22,17 @@ class _DetailPageState extends State<DetailPage> {
   int currentPage = 0;
 
   scrollTo(int page) {
-    setState(() {
-      currentPage = page;
+    setState(
+      () {
+        currentPage = page;
 
-      _pageController.animateToPage(currentPage,
+        _pageController.animateToPage(
+          currentPage,
           duration: const Duration(milliseconds: 500),
-          curve: Curves.decelerate);
-    });
+          curve: Curves.decelerate,
+        );
+      },
+    );
   }
 
   Widget buildPageViewTab(
@@ -38,9 +42,16 @@ class _DetailPageState extends State<DetailPage> {
     return GestureDetector(
       onTap: () => onSelected(label),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+        padding: const EdgeInsets.symmetric(
+          vertical: 8,
+          horizontal: 4,
+        ),
         decoration: isSelected
-            ? const BoxDecoration(border: Border(bottom: BorderSide(width: 2)))
+            ? const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 2),
+                ),
+              )
             : null,
         child: Text(
           label,
@@ -73,8 +84,9 @@ class _DetailPageState extends State<DetailPage> {
                               image: AssetImage('assets/images/sofa.jpeg'),
                               fit: BoxFit.cover,
                             ),
-                            borderRadius:
-                                GojoBorders.border(GojoBorderRadiusSize.large),
+                            borderRadius: GojoBorders.border(
+                              GojoBorderRadiusSize.large,
+                            ),
                             color: Colors.amber,
                           ),
                         );
@@ -137,11 +149,12 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Text("Jl, Kartika Plaza, 38/1",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge
-                      ?.copyWith(color: Colors.grey[500])),
+              child: Text(
+                "Jl, Kartika Plaza, 38/1",
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Colors.grey[500],
+                    ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -151,9 +164,7 @@ class _DetailPageState extends State<DetailPage> {
                 GojoIconText(iconData: Icons.bathtub, title: "2 baths"),
               ],
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             const Text(
               "Excellent two-storey villa terrace, private pool and parking spaces is located only 5 minutes from the Ashawa Meda",
               maxLines: 2,
@@ -166,27 +177,26 @@ class _DetailPageState extends State<DetailPage> {
             Row(
               children: [
                 buildPageViewTab(
-                    label: "Best",
-                    isSelected: currentPage == 0,
-                    onSelected: (val) => scrollTo(0)),
+                  label: "Best",
+                  isSelected: currentPage == 0,
+                  onSelected: (val) => scrollTo(0),
+                ),
                 const SizedBox(
                   width: 20,
                 ),
                 buildPageViewTab(
-                    label: "Reviews",
-                    isSelected: currentPage == 1,
-                    onSelected: (val) => scrollTo(1))
+                  label: "Reviews",
+                  isSelected: currentPage == 1,
+                  onSelected: (val) => scrollTo(1),
+                )
               ],
             ),
-            SizedBox(
-              height: 250,
-              child: PageView(
-                controller: _pageController,
-                children: const [
-                  TabBest(),
-                  TabReviews(),
-                ],
-              ),
+            ExpandablePageView(
+              controller: _pageController,
+              children: const [
+                TabBest(),
+                TabReviews(),
+              ],
             ),
           ],
         ),
