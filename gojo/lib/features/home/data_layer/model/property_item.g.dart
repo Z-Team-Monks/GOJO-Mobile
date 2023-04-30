@@ -7,17 +7,17 @@ part of 'property_item.dart';
 // **************************************************************************
 
 Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
-      count: json['count'] as int,
       name: json['name'] as String,
+      count: json['count'] as int,
     );
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) => <String, dynamic>{
-      'count': instance.count,
       'name': instance.name,
+      'count': instance.count,
     };
 
 PropertyItem _$PropertyItemFromJson(Map<String, dynamic> json) => PropertyItem(
-      id: json['id'] as int,
+      id: json['id'] as String,
       title: json['title'] as String,
       thumbnailUrl: json['thumbnailUrl'] as String,
       category: json['category'] as String,

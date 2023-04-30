@@ -47,7 +47,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
   Future<List<PropertyItem>> getPropertyItems() {
     final items = [
       PropertyItem(
-        id: 1,
+        id: "1",
         title: "Villa, Kemah Tinggi",
         thumbnailUrl: Resources.gojoImages.sofa,
         category: "Villa",
@@ -58,7 +58,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
         rent: 14000,
       ),
       PropertyItem(
-        id: 1,
+        id: "2",
         title: "Studio in 4kilo",
         thumbnailUrl: Resources.gojoImages.sofa,
         category: "Studio",
@@ -69,7 +69,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
         rent: 24000,
       ),
       PropertyItem(
-        id: 1,
+        id: "3",
         title: "Condominium",
         thumbnailUrl: Resources.gojoImages.sofa,
         category: "Studio",
