@@ -41,6 +41,8 @@ dependencies:
   google_fonts: ^4.0.3
   animated_snack_bar: ^0.3.0
   dio: ^5.1.1
+  flutter_bloc: ^8.1.2
+  get_it: ^7.3.0
 
 dev_dependencies:
   flutter_test:
