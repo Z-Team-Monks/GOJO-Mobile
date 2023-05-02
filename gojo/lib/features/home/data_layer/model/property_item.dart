@@ -15,7 +15,7 @@ class Facility {
 
 @JsonSerializable()
 class PropertyItem {
-  final int id;
+  final String id;
   final String title;
   final String thumbnailUrl;
   final String category;
