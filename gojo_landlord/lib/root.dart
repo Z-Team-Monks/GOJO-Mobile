@@ -3,6 +3,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo_landlord/features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'package:gojo_landlord/features/notification/presentation/notification_view.dart';
 import 'package:gojo_landlord/features/profile/presentation/screens/profile_view.dart';
+import 'package:gojo_landlord/features/property/create_property/presentation/screen/create_property_view.dart';
 import 'package:gojo_landlord/features/withdrawal/withdrawal.dart';
 
 class RootView extends StatefulWidget {
@@ -18,6 +19,7 @@ class _RootViewState extends State<RootView> {
   final List _pages = [
     const ProfileView(),
     const ContactsView(),
+    const CreatePropertyView(),
     const WithdrawRequest(),
     const NotificationView(),
   ];
@@ -40,6 +42,7 @@ class _RootViewState extends State<RootView> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "Messages"),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: "Add"),
           BottomNavigationBarItem(
               icon: Icon(Icons.paid), label: "Transactions"),
           BottomNavigationBarItem(
