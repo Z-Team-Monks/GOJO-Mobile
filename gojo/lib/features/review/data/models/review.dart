@@ -1,34 +1,38 @@
 import 'package:equatable/equatable.dart';
 
-class ReviewModel extends Equatable {
-  final String? userId;
-  // final User? user;
-  final String message;
-  final num? rating;
+import '../../../../core/model/user.dart';
 
-  const ReviewModel({
-    this.userId,
-    required this.message,
-    this.rating,
-    // this.user,
+class Review extends Equatable {
+  final User user;
+  final String comment;
+  final num rating;
+
+  const Review({
+    required this.user,
+    required this.comment,
+    required this.rating,
   });
 
-  factory ReviewModel.fromJson(Map<String, dynamic> json) {
-    return ReviewModel(
-      message: json["message"],
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+      comment: json["comment"],
       rating: json["rating"],
-      // user: User.fromJson(json["user"]),
+      user: User.fromJson(json["user"]),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      // "id": this.userId,
-      "message": message,
+      "user": user,
+      "comment": comment,
       "rating": rating,
     };
   }
 
   @override
-  List<Object?> get props => [userId, message, rating];
+  List<Object?> get props => [
+        user,
+        comment,
+        rating,
+      ];
 }

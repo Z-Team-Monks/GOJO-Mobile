@@ -1,13 +1,12 @@
-import 'dart:math';
-
 import 'package:gojo/features/review/data/models/review.dart';
 
+import '../../../../core/model/user.dart';
 import 'review_client_api.dart';
 
 /// An abstract class defining the interface for a review repository API.
 abstract class ReviewRepositoryAPI {
   /// Returns a `Future` that resolves to a list of review property items.
-  Future<ReviewModel> createReview(ReviewModel review);
+  Future<Review> createReview(Review review);
 }
 
 class ReviewRepositoryImpl implements ReviewRepositoryAPI {
@@ -16,7 +15,7 @@ class ReviewRepositoryImpl implements ReviewRepositoryAPI {
   ReviewRepositoryImpl(this.reviewClient);
 
   @override
-  Future<ReviewModel> createReview(ReviewModel review) async {
+  Future<Review> createReview(Review review) async {
     final newReview = await reviewClient.createReview(review);
     return newReview;
   }
@@ -25,18 +24,23 @@ class ReviewRepositoryImpl implements ReviewRepositoryAPI {
 /// A Fake implementation of the [ReviewRepositoryAPI] contract.
 class ReviewRepositoryFake implements ReviewRepositoryAPI {
   @override
-  Future<ReviewModel> createReview(ReviewModel review) {
-    final random = Random();
-    var list = [201, 409, 404, 500];
-    switch (list[random.nextInt(list.length)]) {
-      case 409:
-        throw ("Review already exists");
-      case 404:
-        throw ("User doesn't exist");
-      case 500:
-        throw ("Server Error Try Again Later");
-      default:
-        return Future.value(review);
-    }
+  Future<Review> createReview(Review review) {
+    const user = User(
+      id: "id",
+      firstName: "Kebede",
+      lastName: "Alemayehu",
+      phoneNumber: "0949024607",
+      profilePicture: "",
+    );
+    const review = Review(
+      user: user,
+      rating: 4.5,
+      comment: "This is a comment",
+    );
+
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () => review,
+    );
   }
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../review/data/models/review.dart';
+
 class ReviewCard extends StatelessWidget {
+  final Review review;
   const ReviewCard({
     super.key,
+    required this.review,
   });
 
   @override
@@ -12,25 +16,25 @@ class ReviewCard extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            children: const [
-              CircleAvatar(
+            children: [
+              const CircleAvatar(
                 radius: 25,
-                child: Icon(Icons.person_off_outlined),
+                child: Icon(Icons.person_off_outlined), // TODO: add user avatar
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Kebede Alemayehu",
+                  "${review.user.firstName} ${review.user.lastName}",
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          const Align(
+          Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
+              review.comment,
             ),
           ),
           const SizedBox(height: 10),

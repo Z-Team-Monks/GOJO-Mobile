@@ -3,14 +3,14 @@ import '../models/review.dart';
 
 /// An abstract class defining the API contract for reviewing property
 abstract class ReviewClientAPI {
-  Future<ReviewModel> createReview(ReviewModel review);
+  Future<Review> createReview(Review review);
 }
 
 class ReviewClientImpl extends BaseApiClient implements ReviewClientAPI {
   @override
-  Future<ReviewModel> createReview(ReviewModel review) async {
+  Future<Review> createReview(Review review) async {
     final createReviewResponse =
         await post('/properties/review', review.toJson());
-    return ReviewModel.fromJson(createReviewResponse.data);
+    return Review.fromJson(createReviewResponse.data);
   }
 }
