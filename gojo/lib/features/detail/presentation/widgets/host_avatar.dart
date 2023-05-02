@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/constants/strings/app_routes.dart';
 
+import '../../../../core/model/user.dart';
+
 class HostAvatar extends StatelessWidget {
-  const HostAvatar({Key? key}) : super(key: key);
+  final User owner;
+  const HostAvatar({Key? key, required this.owner}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +26,13 @@ class HostAvatar extends StatelessWidget {
               children: [
                 Row(
                   children: const [
-                    Text("Host"),
+                    Text("Owner"),
                     SizedBox(width: 10),
                     Icon(Icons.account_circle),
                   ],
                 ),
                 Text(
-                  "Konda Nok",
+                  "${owner.firstName} ${owner.lastName}",
                   style: Theme.of(context).textTheme.labelLarge,
                 )
               ],
