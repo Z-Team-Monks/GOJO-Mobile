@@ -26,17 +26,18 @@ class PropertyDetailRepositoryImpl implements PropertyDetailRepositoryAPI {
 class PropertyDetailRepositoryFake implements PropertyDetailRepositoryAPI {
   @override
   Future<Property> fetchProperty(String propertyId) {
+    const user = User(
+      id: "id",
+      firstName: "Kebede",
+      lastName: "Alemayehu",
+      phoneNumber: "0949024607",
+      profilePicture: "",
+    );
     final property = Property(
-      id: "fjkldsaj2",
-      owner: const User(
-        id: "askdfj",
-        firstName: "Konda",
-        lastName: "Nok",
-        phoneNumber: "0949024607",
-        profilePicture: "",
-      ),
+      id: propertyId,
+      owner: user,
       address: "Jl. Kemang Raya No. 12",
-      title: "Villa, Kemah Tinggi",
+      title: "Kemah Tinggi",
       description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id aliquam ultrices, nisl nunc aliquet enim, vitae aliquam nisl nunc eget nunc. Sed euismod, diam id aliquam ultrices, nisl nunc aliquet enim, vitae aliquam nisl nunc eget nunc.",
       category: "Villa",
@@ -45,25 +46,29 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepositoryAPI {
         Facility(name: "Bedroom", count: 2),
       ],
       images: const [
-        "https://images.unsplash.com/photo-1611095787870-4b7b7b7b7b7b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBwcm9wZXJ0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-        "https://images.unsplash.com/photo-1611095787870-4b7b7b7b7b7b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBwcm9wZXJ0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-        "https://images.unsplash.com/photo-1611095787870-4b7b7b7b7b7b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBwcm9wZXJ0eXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+        "",
       ],
-      price: 1000000,
+      price: 10000,
       rating: 4.5,
       area: 100,
       virtualTourId: "skjdflkj",
       reviews: const [
         Review(
-          message:
+          user: user,
+          rating: 2.5,
+          comment:
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
         Review(
-          message:
+          user: user,
+          rating: 3.9,
+          comment:
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
         Review(
-          message:
+          user: user,
+          rating: 4.0,
+          comment:
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
       ],
