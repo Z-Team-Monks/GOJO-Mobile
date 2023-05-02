@@ -56,6 +56,7 @@ dependencies:
   json_annotation: 4.4.0
   dio: ^5.1.1
   get_it: ^7.3.0
+  expandable_page_view: ^1.0.17
 
 
 dev_dependencies:
