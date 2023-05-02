@@ -10,13 +10,13 @@ abstract class ProfileClientAPI {
 class ProfileClientImpl extends BaseApiClient implements ProfileClientAPI {
   @override
   Future<PropertyItemList> getRentedProperties() async {
-    final rentedPropertiesResponse = await get('/rentedProperties');
+    final rentedPropertiesResponse = await get('/property/rented');
     return PropertyItemList.fromJson(rentedPropertiesResponse.data);
   }
 
   @override
   Future<PropertyItemList> getAppliedProperties() async {
-    final appliedPropertiesResponse = await get('/appliedProperties');
+    final appliedPropertiesResponse = await get('/property/applied');
     return PropertyItemList.fromJson(appliedPropertiesResponse.data);
   }
 }

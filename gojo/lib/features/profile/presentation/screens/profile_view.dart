@@ -23,33 +23,9 @@ class ProfileView extends StatelessWidget {
           ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const UserInfoSection(),
-            DefaultTabController(
-              length: 2,
-              child: Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    TabBar(
-                      tabs: [
-                        Tab(text: "Rented"),
-                        Tab(text: "Applied"),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          RentedPropertiesTab(),
-                          AppliedPropertiesTab(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          children: const [
+            UserInfoSection(),
+            UserPropertiesSection(),
           ],
         ),
       ),
@@ -86,6 +62,41 @@ class UserInfoSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserPropertiesSection extends StatelessWidget {
+  const UserPropertiesSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Expanded(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            TabBar(
+              tabs: [
+                Tab(text: "Rented"),
+                Tab(text: "Applied"),
+              ],
+            ),
+            SizedBox(height: 8),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  RentedPropertiesTab(),
+                  AppliedPropertiesTab(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
