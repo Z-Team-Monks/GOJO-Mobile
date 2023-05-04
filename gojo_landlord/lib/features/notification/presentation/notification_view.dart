@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+
 import '../../../Gojo-Mobile-Shared/UI/list_items/gojo_notifcation_item.dart';
+import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
@@ -10,7 +11,7 @@ class NotificationView extends StatelessWidget {
     return GojoParentView(
       child: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             GojoNotificationItem(
               isAppointment: false,
               title: "Nabek Abebe",

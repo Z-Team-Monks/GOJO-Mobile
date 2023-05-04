@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
+
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class CreatePropertyView extends StatelessWidget {
   const CreatePropertyView({super.key});

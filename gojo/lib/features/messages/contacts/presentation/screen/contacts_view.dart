@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
+import '../../../../../constants/strings/app_routes.dart';
 
 /// Represents a screen with a list view of user's chat history.
 class ContactsView extends StatelessWidget {

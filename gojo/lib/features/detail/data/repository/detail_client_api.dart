@@ -1,4 +1,4 @@
-import 'package:gojo/Gojo-Mobile-Shared/network/base_api_client.dart';
+import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 import '../model/property.dart';
 
 /// An abstract class defining the API contract for reviewing property

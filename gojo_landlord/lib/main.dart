@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/locator.dart';
-import 'package:gojo_landlord/navigation/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'Gojo-Mobile-Shared/resources/resources.dart';
+import 'locator.dart';
+import 'navigation/route_generator.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

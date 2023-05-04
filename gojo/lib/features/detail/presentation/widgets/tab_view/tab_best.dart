@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
+
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../../../constants/strings/app_routes.dart';
 
 class TabBest extends StatelessWidget {
   const TabBest({Key? key}) : super(key: key);
@@ -9,7 +10,6 @@ class TabBest extends StatelessWidget {
   Widget _buildButton(
     String label, {
     onPressed,
-    isActive = false,
     IconData? iconData,
   }) {
     return InkWell(
@@ -56,7 +56,7 @@ class TabBest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> _showApplyForRentDialogue() async {
+    Future<void> showApplyForRentDialogue() async {
       return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
@@ -105,7 +105,7 @@ class TabBest extends StatelessWidget {
           "Apply For Rent",
           iconData: Icons.add_card_rounded,
           onPressed: () {
-            _showApplyForRentDialogue();
+            showApplyForRentDialogue();
           },
         ),
       ],

@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gojo/core/model/user.dart';
-import 'package:gojo/features/review/data/models/review.dart';
 
+import '../../../../core/model/user.dart';
+import '../../../../core/value_objects/message_input.dart';
+import '../../data/models/review.dart';
 import '../../data/repository/review_repository.dart';
-import 'package:gojo/core/value_objects/message_input.dart';
 
 part 'review_form_event.dart';
 part 'review_form_state.dart';
@@ -44,7 +44,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
     });
 
     on<ReviewFormSubmitted>((event, emit) {
-      // TODO: implement get user from auth 
+      // TODO: implement get user from auth
       const user = User(
         id: "id",
         firstName: "Kebede",

@@ -1,6 +1,6 @@
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
-import 'package:gojo/features/home/data_layer/repository/home_client.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../model/property_item.dart';
+import 'home_client.dart';
 
 /// An abstract class defining the interface for a home repository API.
 abstract class HomeRepositoryAPI {

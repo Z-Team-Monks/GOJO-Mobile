@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/app_icon.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/text_link.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
+import '../../../../../constants/strings/app_routes.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -14,14 +15,16 @@ class SignInView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GojoParentView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: GojoPadding.small),
+        padding: const EdgeInsets.symmetric(
+          horizontal: GojoPadding.small,
+        ),
         child: Column(
           children: [
             const SizedBox(height: 80),
             const GojoAppIcon(),
             const SizedBox(height: 50),
             Column(
-              children: [
+              children: const [
                 Text(
                   "Welcome to Gojo!",
                   style: TextStyle(
@@ -53,7 +56,7 @@ class SignInView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Don't have an account?"),
+                const Text("Don't have an account?"),
                 const SizedBox(width: 5),
                 TextLink(
                   label: "Register",

@@ -1,6 +1,5 @@
-import 'package:gojo/features/review/data/models/review.dart';
-
 import '../../../../core/model/user.dart';
+import '../models/review.dart';
 import 'review_client_api.dart';
 
 /// An abstract class defining the interface for a review repository API.

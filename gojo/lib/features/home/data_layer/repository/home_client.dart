@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:gojo/Gojo-Mobile-Shared/network/base_api_client.dart';
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
+import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
+import '../model/property_item.dart';
 
 /// An abstract class defining the API contract for retrieving home property
 /// items.

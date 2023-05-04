@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gojo/features/detail/data/model/property.dart';
-import 'package:gojo/features/detail/data/repository/detail_repository.dart';
+
+import '../../../data/model/property.dart';
+import '../../../data/repository/detail_repository.dart';
 
 part 'property_detail_event.dart';
 part 'property_detail_state.dart';

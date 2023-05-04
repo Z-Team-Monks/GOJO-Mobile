@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/chat_input.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';

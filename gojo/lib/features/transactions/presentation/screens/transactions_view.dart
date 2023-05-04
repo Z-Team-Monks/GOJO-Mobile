@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/list_items/content_item.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/features/transactions/presentation/screens/widgets/pending_payment_item.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import 'widgets/pending_payment_item.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({super.key});

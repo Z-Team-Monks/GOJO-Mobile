@@ -1,6 +1,6 @@
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo_landlord/features/profile/data_layer/model/property_item.dart';
-import 'package:gojo_landlord/features/profile/data_layer/repository/profile_client.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../model/property_item.dart';
+import 'profile_client.dart';
 
 abstract class ProfileRepositoryAPI {
   Future<PropertyItemList> getPostedProperties();

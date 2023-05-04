@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
 
+import '../../../../constants/strings/app_routes.dart';
 import '../../../../core/model/user.dart';
 
 class HostAvatar extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/features/requests/applications/user_request.dart';
-import 'package:gojo_landlord/features/requests/appointements/appointment_request.dart';
+
+import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import 'appointment_request.dart';
 
 class AppointmentsView extends StatefulWidget {
   const AppointmentsView({super.key});

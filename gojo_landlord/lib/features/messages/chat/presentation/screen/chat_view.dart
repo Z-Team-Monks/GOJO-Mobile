@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/input_fields/chat_input.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_bubble.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
+
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/chat_input.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_bubble.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class ChatView extends StatelessWidget {
   const ChatView({super.key});

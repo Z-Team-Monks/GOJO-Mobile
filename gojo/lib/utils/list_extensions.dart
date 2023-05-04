@@ -20,8 +20,8 @@ extension ListExtensions<T> on List<T> {
   /// final result = list.getSelectedIndices(selectedItems); // returns [0, 2]
   /// ```
   List<int> getSelectedIndices(List<T> selectedItems) {
-    return List.generate(selectedItems.length,
-        (index) => this.indexOf(selectedItems[index]))
+    return List.generate(
+            selectedItems.length, (index) => this.indexOf(selectedItems[index]))
         .where((index) => index >= 0)
         .toList();
   }
@@ -36,7 +36,7 @@ extension ListExtensions<T> on List<T> {
   /// ```
   List<int> getNotSelectedIndices(List<T> selectedItems) {
     return List.generate(this.length,
-        (index) => selectedItems.contains(this[index]) ? -1 : index)
+            (index) => selectedItems.contains(this[index]) ? -1 : index)
         .where((index) => index != -1)
         .toList();
   }

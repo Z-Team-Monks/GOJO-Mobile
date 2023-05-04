@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 
 class RatingIndicator extends StatelessWidget {
   final double rating;

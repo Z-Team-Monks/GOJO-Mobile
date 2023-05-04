@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
-import 'package:gojo_landlord/features/profile/presentation/screens/widgets/in_review_media_item.dart';
-import 'package:gojo_landlord/features/profile/presentation/screens/widgets/posted_media_item.dart';
+
+import '../../data_layer/repository/profile_repository.dart';
+import '../screens/widgets/in_review_media_item.dart';
+import '../screens/widgets/posted_media_item.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

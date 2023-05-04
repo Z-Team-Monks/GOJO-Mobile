@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
+
+import '../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class UserRequest extends StatelessWidget {
   const UserRequest({super.key});

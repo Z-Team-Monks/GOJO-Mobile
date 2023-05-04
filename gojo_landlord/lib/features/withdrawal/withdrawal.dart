@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+
+import '../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 class WithdrawRequest extends StatelessWidget {
   const WithdrawRequest({super.key});

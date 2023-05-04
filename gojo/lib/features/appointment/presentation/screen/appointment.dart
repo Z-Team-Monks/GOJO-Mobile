@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
+import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class AppointmentView extends StatefulWidget {
   const AppointmentView({super.key});
@@ -33,24 +34,27 @@ class _AppointmentViewState extends State<AppointmentView> {
                 backgroundImage: AssetImage(Resources.gojoImages.headShot),
                 radius: 60,
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 "Konda nok",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Date",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   DropdownButtonHideUnderline(
                     child: DropdownButton(
                       value: monthDropDownValue,
                       underline: null,
-                      items: [
+                      items: const [
                         DropdownMenuItem(
                           value: "March",
                           child: Text("March"),
@@ -89,18 +93,18 @@ class _AppointmentViewState extends State<AppointmentView> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     "Time",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-              SizedBox(height: 8),
-              GojoTextRadioButton(label: null, items: [
+              const SizedBox(height: 8),
+              const GojoTextRadioButton(label: null, items: [
                 "9:00 am",
                 "10:00 am",
                 "11:00 am",
@@ -111,13 +115,13 @@ class _AppointmentViewState extends State<AppointmentView> {
                 "5:00 pm",
                 "6:00 pm"
               ]),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               GojoBarButton(
-                  title: "Request Appointment",
-                  onClick: () {
-                    GojoSnackBars.showError(
-                        context, "Can't connect to internet");
-                  })
+                title: "Request Appointment",
+                onClick: () {
+                  GojoSnackBars.showError(context, "Can't connect to internet");
+                },
+              )
             ],
           ),
         ),

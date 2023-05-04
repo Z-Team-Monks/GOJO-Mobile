@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meta/meta.dart';
 import 'package:gojo/features/home/data_layer/repository/home_repository.dart';
 import 'package:gojo/features/home/presentation/bloc/property_filter/model/filter_input.dart';
 

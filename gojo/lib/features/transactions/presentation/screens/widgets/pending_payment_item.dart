@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/list_items/content_item.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
+
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class GojoPendingPaymentItem extends StatelessWidget {
   final GojoContentItem contentItem;

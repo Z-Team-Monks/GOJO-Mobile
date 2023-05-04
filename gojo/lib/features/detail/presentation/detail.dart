@@ -1,20 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/features/detail/data/repository/detail_repository.dart';
-import 'package:gojo/features/detail/presentation/bloc/property_detail/property_detail_bloc.dart';
-import 'package:gojo/features/detail/presentation/widgets/page_view_tab.dart';
+
 import '../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_reviews.dart';
-import 'package:gojo/features/detail/presentation/widgets/host_avatar.dart';
-import 'package:gojo/features/detail/presentation/widgets/rating.dart';
-import 'package:gojo/features/detail/presentation/widgets/tab_view/tab_best.dart';
-
 import '../../review/data/models/review.dart';
 import '../data/model/property.dart';
+import '../data/repository/detail_repository.dart';
+import 'bloc/property_detail/property_detail_bloc.dart';
+import 'widgets/host_avatar.dart';
+import 'widgets/page_view_tab.dart';
+import 'widgets/rating.dart';
+import 'widgets/tab_view/tab_best.dart';
+import 'widgets/tab_view/tab_reviews.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);

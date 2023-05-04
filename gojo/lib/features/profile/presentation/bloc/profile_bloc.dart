@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/features/profile/data_layer/repository/profile_repository.dart';
-import 'package:gojo/features/profile/presentation/screens/model/profile_media_item.dart';
 import 'package:meta/meta.dart';
+
+import '../../data_layer/repository/profile_repository.dart';
+import '../screens/model/profile_media_item.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:gojo/core/model/user.dart';
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
-import 'package:gojo/features/review/data/models/review.dart';
+
+import '../../../../core/model/user.dart';
+import '../../../home/data_layer/model/property_item.dart';
+import '../../../review/data/models/review.dart';
 
 class Property extends Equatable {
   final String id;

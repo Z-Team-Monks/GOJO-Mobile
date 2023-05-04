@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/app.dart';
-import 'package:gojo_landlord/constants/strings/app_routes.dart';
-import 'package:gojo_landlord/features/auth/signin/presentation/screen/signin_view.dart';
-import 'package:gojo_landlord/features/messages/chat/presentation/screen/chat_view.dart';
-import 'package:gojo_landlord/features/requests/appointements/appointments.dart';
-import 'package:gojo_landlord/root.dart';
-import 'package:gojo_landlord/features/requests/applications/requests.dart';
-import 'package:gojo_landlord/features/withdrawal/withdrawal.dart';
+
+import '../app.dart';
+import '../constants/strings/app_routes.dart';
+import '../features/auth/signin/presentation/screen/signin_view.dart';
+import '../features/messages/chat/presentation/screen/chat_view.dart';
+import '../features/requests/applications/requests.dart';
+import '../features/requests/appointements/appointments.dart';
+import '../features/withdrawal/withdrawal.dart';
+import '../root.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

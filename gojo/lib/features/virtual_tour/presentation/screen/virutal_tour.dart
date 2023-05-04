@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 class VirtualTourView extends StatefulWidget {
   const VirtualTourView({super.key});
@@ -25,7 +25,6 @@ class _VirtualTourViewState extends State<VirtualTourView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
     return GojoParentView(
       child: WebViewWidget(
         controller: controller,
