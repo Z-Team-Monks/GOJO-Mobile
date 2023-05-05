@@ -29,7 +29,7 @@ class RouteGenerator {
       case GojoRoutes.contacts:
         return MaterialPageRoute(builder: (_) => const ContactsView());
       case GojoRoutes.chat:
-        return MaterialPageRoute(builder: (_) => const ChatView());
+        return MaterialPageRoute(builder: (_) => ChatView());
       case GojoRoutes.root:
         return MaterialPageRoute(builder: (_) => const RootView());
       case GojoRoutes.app:
