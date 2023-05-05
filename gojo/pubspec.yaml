@@ -57,6 +57,8 @@ dependencies:
   dio: ^5.1.1
   get_it: ^7.3.0
   expandable_page_view: ^1.0.17
+  web_socket_channel: ^2.4.0
+  responsive_sizer: ^3.1.1
 
 
 dev_dependencies:
