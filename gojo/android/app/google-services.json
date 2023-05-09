@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "942459374670",
+    "project_id": "gojo-b7999",
+    "storage_bucket": "gojo-b7999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942459374670:android:fe5192b057ea1aa543c71f",
+        "android_client_info": {
+          "package_name": "com.example.gojo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942459374670-2jrl1qnqnug8968tbingsvl9c116f8uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuJTNdT2JM4ZnntqkPE11nbdrNJ2uITOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942459374670-2jrl1qnqnug8968tbingsvl9c116f8uq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "942459374670-muti2mqleif2buir7ffbonvpm4km9m9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gojo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,24 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Gojo-Mobile-Shared/UI/list_items/gojo_notifcation_item.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
-class NotificationView extends StatelessWidget {
+class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
+
+  @override
+  State<NotificationView> createState() => _NotificationViewState();
+}
+
+class _NotificationViewState extends State<NotificationView> {
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance
+        .getToken()
+        .then((value) => {print("FCM Token Is: "), print(value)});
+  }
 
   @override
   Widget build(BuildContext context) {
