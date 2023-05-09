@@ -15,7 +15,7 @@ void main() {
     MaterialApp(
       title: 'Gojo Landlord',
       theme: ThemeData(
-        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontFamily: GoogleFonts.poppins().fontFamily,
         primarySwatch: Resources.gojoColors.primaryMaterialColor.materialColor,
       ),
       onGenerateRoute: RouteGenerator.generateRoute,

@@ -1,20 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import '../../review/data/models/review.dart';
+import '../../../constants/strings/app_routes.dart';
 import '../data/model/property.dart';
 import '../data/repository/detail_repository.dart';
 import 'bloc/property_detail/property_detail_bloc.dart';
 import 'widgets/host_avatar.dart';
-import 'widgets/page_view_tab.dart';
 import 'widgets/rating.dart';
-import 'widgets/tab_view/tab_best.dart';
-import 'widgets/tab_view/tab_reviews.dart';
+import 'widgets/reviews.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -107,6 +105,7 @@ class PropertyDetailViewContent extends StatelessWidget {
         Stack(
           children: [
             CarouselSlider(
+              carouselController: CarouselController(),
               options: CarouselOptions(
                 aspectRatio: 1.5,
                 viewportFraction: 1,
@@ -132,7 +131,7 @@ class PropertyDetailViewContent extends StatelessWidget {
               }).toList(),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
@@ -140,12 +139,12 @@ class PropertyDetailViewContent extends StatelessWidget {
                     rating: 4.97,
                   ),
                   Icon(
-                    Icons.favorite,
-                    color: Colors.red,
+                    Icons.favorite_outline,
+                    color: Colors.white,
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
         const SizedBox(
@@ -155,9 +154,24 @@ class PropertyDetailViewContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "${property.category}, ${property.title}",
-              style: Theme.of(context).textTheme.titleLarge,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${property.category}, ${property.title}",
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  property.address,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: Colors.grey[500],
+                      ),
+                ),
+              ],
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +180,11 @@ class PropertyDetailViewContent extends StatelessWidget {
                   children: [
                     Text(
                       "${property.price} ETB",
-                      style: Theme.of(context).textTheme.labelLarge,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: const Color(0xFF4C9FC1),
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16,
+                          ),
                     ),
                     Text(
                       "per month",
@@ -184,95 +202,117 @@ class PropertyDetailViewContent extends StatelessWidget {
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: Text(
-            property.address,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Colors.grey[500],
-                ),
-          ),
-        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
             // TODO: use the state values for Gojo Icon text
-            GojoIconText(iconData: Icons.bed_rounded, title: "5 bedrooms"),
-            GojoIconText(iconData: Icons.aspect_ratio, title: "214 sq.ms"),
+            GojoIconText(iconData: Icons.bed, title: "5 bedrooms"),
+            GojoIconText(
+              iconData: Icons.aspect_ratio,
+              title: "214 m^2",
+            ),
             GojoIconText(iconData: Icons.bathtub, title: "2 baths"),
           ],
         ),
-        const SizedBox(height: 16),
-        Text(
-          property.description,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: HostAvatar(owner: property.owner),
-        ),
-        TabView(reviews: property.reviews),
-      ],
-    );
-  }
-}
-
-class TabView extends StatefulWidget {
-  final List<Review> reviews;
-  const TabView({super.key, required this.reviews});
-
-  @override
-  State<TabView> createState() => _TabViewState();
-}
-
-class _TabViewState extends State<TabView> {
-  int currentPage = 0;
-  final PageController _pageController = PageController();
-
-  scrollTo(int page) {
-    setState(
-      () {
-        currentPage = page;
-
-        _pageController.animateToPage(
-          currentPage,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.decelerate,
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
+        const SizedBox(height: 5),
         Row(
           children: [
-            PageViewTab(
-              label: "Best",
-              isSelected: currentPage == 0,
-              onSelected: (val) => scrollTo(0),
+            GojoBarButton(
+              title: "Apply",
+              customHeight: 30,
+              onClick: () {
+                showApplyForRentDialogue(context);
+              },
             ),
-            const SizedBox(
-              width: 20,
+            const SizedBox(width: 12),
+            GojoBarButton(
+              title: "360",
+              customHeight: 30,
+              onClick: () {
+                Navigator.pushNamed(context, GojoRoutes.virtualTour);
+              },
             ),
-            PageViewTab(
-              label: "Reviews",
-              isSelected: currentPage == 1,
-              onSelected: (val) => scrollTo(1),
-            )
           ],
         ),
-        ExpandablePageView(
-          controller: _pageController,
+        const SizedBox(height: 10),
+        Text(
+          property.description,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 10),
+        Column(
           children: [
-            const TabBest(),
-            TabReviews(reviews: widget.reviews),
+            const Divider(
+              thickness: 0.6,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                HostAvatar(owner: property.owner),
+                Row(
+                  children: [
+                    InkWell(
+                      child: Icon(Icons.calendar_month),
+                      onTap: () {
+                        Navigator.pushNamed(context, GojoRoutes.appointment);
+                      },
+                    ),
+                    const SizedBox(width: 8),
+                    InkWell(
+                      child: Icon(Icons.my_location),
+                      onTap: () {},
+                    ),
+                    const SizedBox(width: 8),
+                    InkWell(
+                      child: Icon(Icons.chat_bubble_outline_rounded),
+                      onTap: () {
+                        Navigator.pushNamed(context, GojoRoutes.chat);
+                      },
+                    ),
+                    const SizedBox(width: 8),
+                    InkWell(
+                      child: Icon(Icons.call),
+                      onTap: () {},
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const Divider(
+              thickness: 0.6,
+            ),
           ],
         ),
+        Reviews(reviews: property.reviews),
       ],
+    );
+  }
+
+  Future<void> showApplyForRentDialogue(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Are you sure you want to apply?',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
