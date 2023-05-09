@@ -240,7 +240,7 @@ class _RegisterViewState extends State<RegisterView> {
         GojoBarButton(
           title: "Confirm",
           onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.home);
+            Navigator.pushNamed(context, GojoRoutes.root);
           },
         ),
       ],
