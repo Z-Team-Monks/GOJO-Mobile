@@ -20,7 +20,13 @@ class RatingIndicator extends StatelessWidget {
             color: Colors.amber,
           ),
           const SizedBox(width: 4),
-          Text(rating.toString())
+          Text(
+            rating.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: Colors.white),
+          )
         ],
       ),
     );
