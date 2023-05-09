@@ -1,5 +1,8 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
+import 'package:gojo/features/notification/notification_service.dart';
 import 'package:gojo/locator.dart';
 import 'package:gojo/navigation/route_generator.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +20,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  NotificationService.setUp();
 
   runApp(
     OverlaySupport(
