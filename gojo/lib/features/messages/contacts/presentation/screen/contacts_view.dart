@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
@@ -16,10 +15,10 @@ class ContactsView extends StatelessWidget {
     return GojoParentView(
       child: Column(
         children: [
-          GojoSearchBar(
-            label: "Search",
-            onChanged: (p0) => debugPrint(p0),
-          ),
+          const Flexible(
+              child: SizedBox(
+            height: 10,
+          )),
           ListView.builder(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),

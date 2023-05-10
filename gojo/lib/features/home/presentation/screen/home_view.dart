@@ -1,49 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
-import 'package:gojo/features/home/data_layer/repository/home_repository.dart';
-import 'package:gojo/features/home/presentation/bloc/property_filter/property_filter_bloc.dart';
-import 'package:gojo/features/home/presentation/bloc/property_filter/model/filter_input.dart';
-import 'package:gojo/features/home/presentation/bloc/property_items/property_items_bloc.dart';
-import 'package:gojo/features/home/presentation/screen/home_filter_form_view.dart';
+
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/media_item.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../../constants/strings/app_routes.dart';
+import '../../data_layer/model/property_item.dart';
+import '../../data_layer/repository/home_repository.dart';
+import '../bloc/property_filter/model/filter_input.dart';
+import '../bloc/property_filter/property_filter_bloc.dart';
+import '../bloc/property_items/property_items_bloc.dart';
+import 'home_filter_form_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GojoParentView(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => PropertyItemsBloc(GetIt.I<HomeRepositoryAPI>())
-              ..add(
-                LoadPropertyItems(
-                    searchQuery: "", filterInput: FilterInput.initialState()),
-              ),
-          ),
-          BlocProvider(
-            create: (context) =>
-                PropertyFilterBloc(GetIt.I<HomeRepositoryAPI>())
-                  ..add(
-                    LoadPropertyFilter(),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Resources.gojoColors.primaryColor,
+        elevation: 3,
+        onPressed: () {},
+        child: const Icon(
+          Icons.place,
+          color: Colors.white,
+          size: 25,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: SafeArea(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  PropertyItemsBloc(GetIt.I<HomeRepositoryAPI>())
+                    ..add(
+                      LoadPropertyItems(
+                          searchQuery: "",
+                          filterInput: FilterInput.initialState()),
+                    ),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  PropertyFilterBloc(GetIt.I<HomeRepositoryAPI>())
+                    ..add(
+                      LoadPropertyFilter(),
+                    ),
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.all(GojoPadding.medium),
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    const [HomeSearchBar()],
                   ),
-          ),
-        ],
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
-              HomeSearchBar(),
-              HomeViewContent(),
-            ],
+                ),
+                const SliverFillRemaining(
+                  hasScrollBody: true,
+                  child: HomeViewContent(),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -86,9 +110,20 @@ class HomeSearchBar extends StatelessWidget {
                 },
               );
             }),
-            child: Icon(
-              Icons.tune,
-              color: Resources.gojoColors.black,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                  color: Resources.gojoColors.primaryColor,
+                ),
+                child: const Icon(
+                  Icons.tune,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         );
@@ -126,7 +161,7 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Couldn't fetch properties");
+    return const Center(child: Text("Couldn't fetch properties"));
   }
 }
 
@@ -138,11 +173,8 @@ class LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
-
-    return Container(
-      margin: EdgeInsets.only(top: deviceSize.height * 0.3),
-      child: const CircularProgressIndicator(),
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

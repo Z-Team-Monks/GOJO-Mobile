@@ -37,23 +37,28 @@ class PropertyDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GojoParentView(
-      child: SingleChildScrollView(
-        child: BlocBuilder<PropertyDetailBloc, PropertyDetailState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case FetchPropertyDetailStatus.loading:
-                return const LoadingView();
-              case FetchPropertyDetailStatus.success:
-                return PropertyDetailViewContent(
-                  property: state.property!,
-                );
-              case FetchPropertyDetailStatus.error:
-                return const ErrorView();
-            }
-          },
-        ),
-      ),
+    return BlocBuilder<PropertyDetailBloc, PropertyDetailState>(
+      builder: (context, state) {
+        return GojoParentView(
+          label: state.property?.title ?? "",
+          child: SingleChildScrollView(
+            child: BlocBuilder<PropertyDetailBloc, PropertyDetailState>(
+              builder: (context, state) {
+                switch (state.status) {
+                  case FetchPropertyDetailStatus.loading:
+                    return const LoadingView();
+                  case FetchPropertyDetailStatus.success:
+                    return PropertyDetailViewContent(
+                      property: state.property!,
+                    );
+                  case FetchPropertyDetailStatus.error:
+                    return const ErrorView();
+                }
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
