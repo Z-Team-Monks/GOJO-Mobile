@@ -31,7 +31,11 @@ class ChatView extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        GojoChatInput(label: "Message", onSendIconPressed: () {}),
+        GojoChatInput(
+          label: "Message",
+          onSendIconPressed: () {},
+          onChanged: (String value) {},
+        ),
       ],
     ));
   }
