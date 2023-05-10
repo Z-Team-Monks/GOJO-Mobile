@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
 import '../features/appointment/presentation/screen/appointment.dart';
-import '../features/auth/register/presentation/screen/register_view.dart';
+import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/detail/presentation/detail.dart';
 import '../features/home/presentation/screen/home_view.dart';
