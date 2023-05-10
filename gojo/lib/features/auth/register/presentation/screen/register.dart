@@ -138,7 +138,14 @@ class _RegisterViewState extends State<RegisterView> {
         SizedBox(height: 15),
         GojoTextField(labelText: "Confirm Password"),
         SizedBox(height: 25),
-        GojoBarButton(title: "Next", onClick: () {}),
+        GojoBarButton(
+          title: "Next",
+          onClick: () {
+            setState(() {
+              currentStep = 2;
+            });
+          },
+        ),
       ],
     );
   }
@@ -172,7 +179,14 @@ class _RegisterViewState extends State<RegisterView> {
         SizedBox(height: 25),
         _buildSelectedFileView(context),
         SizedBox(height: 15),
-        GojoBarButton(title: "Next", onClick: () {}),
+        GojoBarButton(
+          title: "Next",
+          onClick: () {
+            setState(() {
+              currentStep = 3;
+            });
+          },
+        ),
       ],
     );
   }
@@ -233,14 +247,13 @@ class _RegisterViewState extends State<RegisterView> {
           title: Text("I consent the details are valid"),
           value: true,
           onChanged: (newValue) {},
-          controlAffinity:
-              ListTileControlAffinity.leading, //  <-- leading Checkbox
+          controlAffinity: ListTileControlAffinity.leading,
         ),
         SizedBox(height: 10),
         GojoBarButton(
           title: "Confirm",
           onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.root);
+            Navigator.pushNamed(context, GojoRoutes.signin);
           },
         ),
       ],
