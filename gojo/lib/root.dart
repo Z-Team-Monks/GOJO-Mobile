@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/home/presentation/screen/home_view.dart';
 import 'features/messages/contacts/presentation/screen/contacts_view.dart';
-import 'features/notification/presentation/notification_view.dart';
 import 'features/profile/presentation/screens/profile_view.dart';
 import 'features/transactions/presentation/screens/transactions_view.dart';
+import 'Gojo-Mobile-Shared/shared_features/notification/repository/notification_service.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -21,7 +21,6 @@ class _RootViewState extends State<RootView> {
     const HomeView(),
     const ContactsView(),
     const ProfileView(),
-    const NotificationView(),
     const TransactionsView(),
   ];
 
@@ -33,6 +32,12 @@ class _RootViewState extends State<RootView> {
 
   @override
   Widget build(BuildContext context) {
+    // The notification service is set up here because it needs the context
+    // object to show a notification bar.
+    // Another reason is that the notification service should start after a user
+    // has logged in.
+    NotificationService.setUp(context);
+
     return Scaffold(
       body: _pages[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
@@ -52,10 +57,6 @@ class _RootViewState extends State<RootView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notifications",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.paid),
