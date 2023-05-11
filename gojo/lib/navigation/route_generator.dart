@@ -9,7 +9,6 @@ import '../features/detail/presentation/detail.dart';
 import '../features/home/presentation/screen/home_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
-import '../features/notification/presentation/notification_view.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
 import '../root.dart';
 
@@ -36,8 +35,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const App());
       case GojoRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterView());
-      case GojoRoutes.notification:
-        return MaterialPageRoute(builder: (_) => const NotificationView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
