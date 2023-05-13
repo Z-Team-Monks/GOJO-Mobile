@@ -3,8 +3,10 @@ class GojoRoutes {
   static const home = '/home';
   static const contacts = '/contacts';
   static const chat = '/chat';
-  static const signin = 'signin';
+  static const signin = '/signin';
   static const register = '/register';
+  static const otp = '/otp';
+  static const map = '/map';
   static const propertyDetail = 'property detail';
   static const appointment = 'appointment';
   static const virtualTour = 'virtual tour';

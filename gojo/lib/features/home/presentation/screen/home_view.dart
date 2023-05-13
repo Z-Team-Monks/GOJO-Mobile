@@ -25,9 +25,11 @@ class HomeView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Resources.gojoColors.primaryColor,
         elevation: 3,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, GojoRoutes.map);
+        },
         child: const Icon(
-          Icons.place,
+          Icons.explore,
           color: Colors.white,
           size: 25,
         ),
