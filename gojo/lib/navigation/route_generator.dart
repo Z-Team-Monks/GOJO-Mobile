@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/features/auth/otp/presentation/otp_view.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
@@ -7,6 +8,7 @@ import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/detail/presentation/detail.dart';
 import '../features/home/presentation/screen/home_view.dart';
+import '../features/map/presentation/map_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
@@ -28,13 +30,17 @@ class RouteGenerator {
       case GojoRoutes.contacts:
         return MaterialPageRoute(builder: (_) => const ContactsView());
       case GojoRoutes.chat:
-        return MaterialPageRoute(builder: (_) => ChatView());
+        return MaterialPageRoute(builder: (_) => const ChatView());
       case GojoRoutes.root:
         return MaterialPageRoute(builder: (_) => const RootView());
       case GojoRoutes.app:
         return MaterialPageRoute(builder: (_) => const App());
       case GojoRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterView());
+      case GojoRoutes.otp:
+        return MaterialPageRoute(builder: (_) => const OTPView());
+      case GojoRoutes.map:
+        return MaterialPageRoute(builder: (_) => const MapView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

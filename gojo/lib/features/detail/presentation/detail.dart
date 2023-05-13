@@ -116,6 +116,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                 viewportFraction: 1,
               ),
               items: [1, 2, 3, 4, 5].map((i) {
+                // TODO: Replace with fetched data
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
