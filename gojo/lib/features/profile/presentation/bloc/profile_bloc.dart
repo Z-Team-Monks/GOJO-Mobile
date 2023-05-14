@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../data_layer/repository/profile_repository.dart';
-import '../screens/model/profile_media_item.dart';
+import '../screen/model/profile_media_item.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

@@ -8,7 +8,8 @@ import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo/constants/strings/app_routes.dart';
 import 'package:gojo/features/profile/data_layer/repository/profile_repository.dart';
 import 'package:gojo/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:gojo/features/profile/presentation/screens/model/profile_media_item.dart';
+import 'package:gojo/features/profile/presentation/screen/model/profile_media_item.dart';
+import 'package:gojo/features/profile/presentation/screen/profile_icon_button.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -25,6 +26,7 @@ class ProfileView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             UserInfoSection(),
+            ProfileButtons(),
             UserPropertiesSection(),
           ],
         ),
@@ -62,6 +64,41 @@ class UserInfoSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class ProfileButtons extends StatelessWidget {
+  const ProfileButtons({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ProfileIconButton(
+              icon: Icons.description,
+              label: "Applications",
+              onPressed: () {
+                Navigator.pushNamed(context, GojoRoutes.applications);
+              },
+            ),
+          ),
+          const SizedBox(width: 20),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ProfileIconButton(
+              icon: Icons.settings,
+              label: "Settings",
+              onPressed: () {},
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

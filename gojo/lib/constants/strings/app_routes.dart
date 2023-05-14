@@ -11,5 +11,6 @@ class GojoRoutes {
   static const propertyDetail = 'property detail';
   static const appointment = 'appointment';
   static const virtualTour = 'virtual tour';
+  static const applications = 'applications';
   static const app = '/';
 }
