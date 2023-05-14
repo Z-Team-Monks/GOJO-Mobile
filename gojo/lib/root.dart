@@ -4,7 +4,7 @@ import 'package:gojo/features/appointment/my_appointments/presentation/my_appoin
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/home/presentation/screen/home_view.dart';
 import 'features/messages/contacts/presentation/screen/contacts_view.dart';
-import 'features/profile/presentation/screens/profile_view.dart';
+import 'features/profile/presentation/screen/profile_view.dart';
 import 'features/transactions/presentation/screens/transactions_view.dart';
 import 'Gojo-Mobile-Shared/shared_features/notification/repository/notification_service.dart';
 
