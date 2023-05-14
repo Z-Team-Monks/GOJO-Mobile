@@ -43,8 +43,9 @@ class HomeView extends StatelessWidget {
                   PropertyItemsBloc(GetIt.I<HomeRepositoryAPI>())
                     ..add(
                       LoadPropertyItems(
-                          searchQuery: "",
-                          filterInput: FilterInput.initialState()),
+                        searchQuery: "",
+                        filterInput: FilterInput.initialState(),
+                      ),
                     ),
             ),
             BlocProvider(
