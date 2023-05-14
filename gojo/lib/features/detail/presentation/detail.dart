@@ -7,6 +7,7 @@ import '../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../constants/strings/app_routes.dart';
+import '../../appointment/make_appointment/presentation/screen/appointment.dart';
 import '../data/model/property.dart';
 import '../data/repository/detail_repository.dart';
 import 'bloc/property_detail/property_detail_bloc.dart';
@@ -260,7 +261,12 @@ class PropertyDetailViewContent extends StatelessWidget {
                     InkWell(
                       child: Icon(Icons.calendar_month),
                       onTap: () {
-                        Navigator.pushNamed(context, GojoRoutes.appointment);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const AppointmentView();
+                            });
+                        // Navigator.pushNamed(context, GojoRoutes.appointment);
                       },
                     ),
                     const SizedBox(width: 8),

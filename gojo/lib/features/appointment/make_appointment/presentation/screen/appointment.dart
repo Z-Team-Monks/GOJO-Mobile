@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
@@ -15,117 +17,149 @@ class AppointmentView extends StatefulWidget {
 }
 
 class _AppointmentViewState extends State<AppointmentView> {
-  String? monthDropDownValue = "March";
-
-  String _datePickerRadioText(String day, String date) {
-    return " \n $day \n \n   $date \n";
-  }
-
   @override
   Widget build(BuildContext context) {
-    return GojoParentView(
-      child: Center(
+    String? dropdownValue = null;
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: GojoPadding.medium),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          padding: const EdgeInsets.all(18.0),
+          child: ListView(
+            shrinkWrap: true,
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(Resources.gojoImages.headShot),
-                radius: 60,
+              const DatePicker(),
+              const SizedBox(
+                height: 10,
               ),
-              const SizedBox(height: 12),
-              Text(
-                "Konda nok",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 30),
+              const AvailableTimeDropwDown(),
+              const SizedBox(height: 16),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Text(
-                    "Date",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Cancel",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.red),
                     ),
                   ),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                      value: monthDropDownValue,
-                      underline: null,
-                      items: const [
-                        DropdownMenuItem(
-                          value: "March",
-                          child: Text("March"),
-                        ),
-                        DropdownMenuItem(
-                          value: "December",
-                          child: Text("December"),
-                        ),
-                      ],
-                      onChanged: ((value) {
-                        setState(() {
-                          monthDropDownValue = value;
-                        });
-                      }),
-                    ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Request Appointment"),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 110,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                      child: GojoTextRadioButton(label: null, items: [
-                        _datePickerRadioText("Mon", "1"),
-                        _datePickerRadioText("Tue", "2"),
-                        _datePickerRadioText("Wed", "3"),
-                        _datePickerRadioText("Thu", "4"),
-                        _datePickerRadioText("Fri", "5"),
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Time",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              const GojoTextRadioButton(label: null, items: [
-                "9:00 am",
-                "10:00 am",
-                "11:00 am",
-                "12:00 am",
-                "2:00 pm",
-                "3:00 pm",
-                "4:00 pm",
-                "5:00 pm",
-                "6:00 pm"
-              ]),
-              const SizedBox(height: 30),
-              GojoBarButton(
-                title: "Request Appointment",
-                onClick: () {
-                  GojoSnackBars.showError(context, "Can't connect to internet");
-                },
               )
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class DatePicker extends StatefulWidget {
+  const DatePicker({super.key});
+
+  @override
+  State<DatePicker> createState() => _DatePickerState();
+}
+
+class _DatePickerState extends State<DatePicker> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime(DateTime.now().year, 12, 31));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GojoTextField(
+          labelText: "Date",
+          suffixIcon: InkWell(
+            onTap: () {
+              _selectDate(context);
+            },
+            child: const Icon(
+              Icons.calendar_month,
+              size: 18,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 4, left: 8.0),
+          child: Text(
+            "MM/DD/YYYY",
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium
+                ?.copyWith(color: Colors.black.withOpacity(0.7), fontSize: 11),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AvailableTimeDropwDown extends StatefulWidget {
+  const AvailableTimeDropwDown({super.key});
+
+  @override
+  State<AvailableTimeDropwDown> createState() => _AvailableTimeDropwDownState();
+}
+
+class _AvailableTimeDropwDownState extends State<AvailableTimeDropwDown> {
+  List<String> list = <String>['3:00 PM', '5:00 PM', '6:00 PM', '7:00 PM'];
+  String? dropdownValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField(
+      value: dropdownValue,
+      hint: Text(
+        "Pick a Time Slot",
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.black.withOpacity(0.7),
+            ),
+      ),
+      onChanged: (String? newValue) {
+        setState(() {
+          dropdownValue = newValue!;
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(
+            value,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        );
+      }).toList(),
     );
   }
 }
