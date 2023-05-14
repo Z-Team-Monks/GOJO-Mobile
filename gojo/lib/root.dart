@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/features/appointment/my_appointments/presentation/my_appointment_view.dart';
 
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/home/presentation/screen/home_view.dart';
 import 'features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'features/profile/presentation/screens/profile_view.dart';
-import 'features/transactions/presentation/screens/transactions_view.dart';
 import 'Gojo-Mobile-Shared/shared_features/notification/repository/notification_service.dart';
 
 class RootView extends StatefulWidget {
@@ -20,8 +20,8 @@ class _RootViewState extends State<RootView> {
   final List _pages = [
     const HomeView(),
     const ContactsView(),
+    const MyAppointmentsView(),
     const ProfileView(),
-    const TransactionsView(),
   ];
 
   _changeTab(int index) {
@@ -55,12 +55,12 @@ class _RootViewState extends State<RootView> {
             label: "Messages",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.calendar_month),
+            label: "Appointments",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.paid),
-            label: "Transactions",
+            icon: Icon(Icons.person),
+            label: "Profile",
           ),
         ],
       ),

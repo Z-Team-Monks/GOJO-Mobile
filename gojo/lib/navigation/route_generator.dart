@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/features/appointment/my_appointments/presentation/my_appointment_view.dart';
 import 'package:gojo/features/auth/otp/presentation/otp_view.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
-import '../features/appointment/presentation/screen/appointment.dart';
+import '../features/appointment/make_appointment/presentation/screen/appointment.dart';
 import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/detail/presentation/detail.dart';
@@ -41,6 +42,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const OTPView());
       case GojoRoutes.map:
         return MaterialPageRoute(builder: (_) => const MapView());
+      case GojoRoutes.myAppointments:
+        return MaterialPageRoute(builder: (_) => const MyAppointmentsView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

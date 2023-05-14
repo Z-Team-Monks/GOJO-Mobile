@@ -69,6 +69,7 @@ dependencies:
   sms_autofill: ^2.3.0
   flutter_map: ^4.0.0
   latlong2: ^0.8.1
+  expandable: ^5.0.1
 
 
 dev_dependencies:

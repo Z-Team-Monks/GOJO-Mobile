@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
-import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
 class AppointmentView extends StatefulWidget {
   const AppointmentView({super.key});
