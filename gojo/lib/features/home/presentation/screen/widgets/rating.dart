@@ -8,9 +8,13 @@ class Rating extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.star, size: 20),
+        const Icon(
+          Icons.star,
+          size: 15,
+          color: Colors.amber,
+        ),
         const SizedBox(width: 5),
-        Text(rating)
+        Text(rating),
       ],
     );
   }
