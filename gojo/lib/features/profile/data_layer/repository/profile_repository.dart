@@ -5,7 +5,7 @@ import 'profile_client.dart';
 abstract class ProfileRepositoryAPI {
   Future<PropertyItemList> getRentedProperties();
 
-  Future<PropertyItemList> getAppliedProperties();
+  Future<PropertyItemList> getfavoriteProperties();
 }
 
 class ProfileRepositoryImpl implements ProfileRepositoryAPI {
@@ -14,8 +14,8 @@ class ProfileRepositoryImpl implements ProfileRepositoryAPI {
   ProfileRepositoryImpl(this.profileClient);
 
   @override
-  Future<PropertyItemList> getAppliedProperties() {
-    return profileClient.getAppliedProperties();
+  Future<PropertyItemList> getfavoriteProperties() {
+    return profileClient.getfavoriteProperties();
   }
 
   @override
@@ -71,7 +71,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         appliedPropertyItems = appliedPropertyItems ?? fakePropertyItems;
 
   @override
-  Future<PropertyItemList> getAppliedProperties() {
+  Future<PropertyItemList> getfavoriteProperties() {
     return Future.delayed(
       const Duration(seconds: 1),
       () => rentedPropertyItems,

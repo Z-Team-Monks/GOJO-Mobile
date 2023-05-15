@@ -14,7 +14,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<LoadProfileData>((event, emit) async {
       emit(state.copyWith(
         rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-        appliedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
+        favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
       ));
 
       try {
@@ -36,21 +36,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
 
       try {
-        final appliedProperties =
-            await profileRepository.getAppliedProperties();
-        final appliedPropertyMediaItems = appliedProperties.items
+        final favoriteProperties =
+            await profileRepository.getfavoriteProperties();
+        final appliedPropertyMediaItems = favoriteProperties.items
             .map((propertyItem) => ProfileMediaItem.fromPropertyItem(
                   propertyItem,
                 ))
             .toList();
 
         emit(state.copyWith(
-          appliedMediaItems: appliedPropertyMediaItems,
-          appliedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
+          favoriteMediaItems: appliedPropertyMediaItems,
+          favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
         ));
       } catch (e) {
         emit(state.copyWith(
-          appliedMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
+          favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
         ));
       }
     });

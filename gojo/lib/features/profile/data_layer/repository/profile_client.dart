@@ -4,7 +4,7 @@ import '../../../home/data_layer/model/property_item.dart';
 abstract class ProfileClientAPI {
   Future<PropertyItemList> getRentedProperties();
 
-  Future<PropertyItemList> getAppliedProperties();
+  Future<PropertyItemList> getfavoriteProperties();
 }
 
 class ProfileClientImpl extends BaseApiClient implements ProfileClientAPI {
@@ -15,8 +15,8 @@ class ProfileClientImpl extends BaseApiClient implements ProfileClientAPI {
   }
 
   @override
-  Future<PropertyItemList> getAppliedProperties() async {
-    final appliedPropertiesResponse = await get('/property/applied');
-    return PropertyItemList.fromJson(appliedPropertiesResponse.data);
+  Future<PropertyItemList> getfavoriteProperties() async {
+    final favoritePropertiesResponse = await get('/property/applied');
+    return PropertyItemList.fromJson(favoritePropertiesResponse.data);
   }
 }
