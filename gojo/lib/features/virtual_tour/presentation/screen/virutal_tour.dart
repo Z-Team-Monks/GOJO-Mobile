@@ -27,6 +27,7 @@ class _VirtualTourViewState extends State<VirtualTourView> {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
+      isFullScreen: true,
       child: WebViewWidget(
         controller: controller,
       ),

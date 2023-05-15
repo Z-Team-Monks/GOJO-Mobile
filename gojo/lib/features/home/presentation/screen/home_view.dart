@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gojo/features/home/presentation/screen/widgets/rating.dart';
+import 'package:gojo/features/home/presentation/screen/widgets/rent_per_month.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
@@ -207,7 +209,9 @@ class FeedListView extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8.0),
             child: GojoMediaItem(
               title: propertyItem.title,
-              leftTrailingTitle: propertyItem.rent.toString(),
+              rightTopTrailingWidget: const Rating(rating: "4.97"),
+              rightBottomTrailingWidget:
+                  RentPerMonth(rentPerMonth: "${propertyItem.rent}"),
               image: Image(
                 image: AssetImage(propertyItem.thumbnailUrl),
                 fit: BoxFit.fill,

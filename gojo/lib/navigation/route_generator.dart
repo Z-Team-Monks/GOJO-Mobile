@@ -5,7 +5,7 @@ import 'package:gojo/features/applications/presentation/screen/applications_view
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
-import '../features/appointment/make_appointment/presentation/screen/appointment.dart';
+import '../features/appointment/schedule_appointment/presentation/screen/schedule_appointment.dart';
 import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/detail/presentation/detail.dart';
@@ -23,8 +23,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeView());
       case GojoRoutes.propertyDetail:
         return MaterialPageRoute(builder: (_) => const DetailPage());
-      case GojoRoutes.appointment:
-        return MaterialPageRoute(builder: (_) => const AppointmentView());
       case GojoRoutes.virtualTour:
         return MaterialPageRoute(builder: (_) => const VirtualTourView());
       case GojoRoutes.signin:

@@ -4,9 +4,9 @@ import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/features/applications/presentation/screen/widgets/application_status.dart';
+import 'package:gojo/features/applications/presentation/model/application_status.dart';
 
-class ApplicationExpandablePanel extends StatelessWidget {
+class ApplicationRequestItem extends StatelessWidget {
   final String leadingImageUrl;
   final String title;
   final ApplicationStatusType status;
@@ -15,7 +15,7 @@ class ApplicationExpandablePanel extends StatelessWidget {
   final String endDate;
   final String description;
 
-  const ApplicationExpandablePanel({
+  const ApplicationRequestItem({
     super.key,
     required this.leadingImageUrl,
     required this.title,

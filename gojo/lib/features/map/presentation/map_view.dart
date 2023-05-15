@@ -13,6 +13,7 @@ class MapView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GojoParentView(
       label: "Gojo Map View",
+      isFullScreen: true,
       child: Stack(
         children: [
           FlutterMap(
