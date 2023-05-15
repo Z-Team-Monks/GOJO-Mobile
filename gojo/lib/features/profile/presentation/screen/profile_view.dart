@@ -127,7 +127,7 @@ class UserPropertiesSection extends StatelessWidget {
               child: TabBarView(
                 children: [
                   RentedPropertiesTab(),
-                  favoritePropertiesTab(),
+                  FavoritePropertiesTab(),
                 ],
               ),
             ),
@@ -160,8 +160,8 @@ class RentedPropertiesTab extends StatelessWidget {
   }
 }
 
-class favoritePropertiesTab extends StatelessWidget {
-  const favoritePropertiesTab({super.key});
+class FavoritePropertiesTab extends StatelessWidget {
+  const FavoritePropertiesTab({super.key});
 
   @override
   Widget build(BuildContext context) {

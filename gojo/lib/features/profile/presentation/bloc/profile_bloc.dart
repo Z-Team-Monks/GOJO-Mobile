@@ -37,7 +37,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       try {
         final favoriteProperties =
-            await profileRepository.getfavoriteProperties();
+            await profileRepository.getFavoriteProperties();
         final appliedPropertyMediaItems = favoriteProperties.items
             .map((propertyItem) => ProfileMediaItem.fromPropertyItem(
                   propertyItem,
