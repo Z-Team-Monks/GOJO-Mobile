@@ -52,6 +52,7 @@ dependencies:
   equatable: ^2.0.5
   bloc: ^8.1.1
   formz: ^0.6.0
+  intl: ^0.18.1
   cached_network_image: ^3.2.3
   json_annotation: ^4.8.0
   dio: ^5.1.1

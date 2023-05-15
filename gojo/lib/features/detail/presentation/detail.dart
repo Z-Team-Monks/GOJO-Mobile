@@ -1,13 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gojo/features/detail/presentation/widgets/application.dart';
 
 import '../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../constants/strings/app_routes.dart';
-import '../../appointment/make_appointment/presentation/screen/appointment.dart';
+import '../../appointment/schedule_appointment/presentation/screen/schedule_appointment.dart';
 import '../data/model/property.dart';
 import '../data/repository/detail_repository.dart';
 import 'bloc/property_detail/property_detail_bloc.dart';
@@ -264,7 +265,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return const AppointmentView();
+                              return const ScheduleAppointmentView();
                             });
                         // Navigator.pushNamed(context, GojoRoutes.appointment);
                       },
@@ -304,26 +305,7 @@ class PropertyDetailViewContent extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Are you sure you want to apply?',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Yes'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+        return const ApplicationForm();
       },
     );
   }
