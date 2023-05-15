@@ -13,7 +13,7 @@ class OTPView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      hasAppBar: false,
+      label: "Gojo Verification",
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
@@ -82,7 +82,7 @@ class OTPView extends StatelessWidget {
             GojoBarButton(
               title: "Verify",
               onClick: () {
-                Navigator.pushNamed(context, GojoRoutes.root);
+                Navigator.popAndPushNamed(context, GojoRoutes.root);
               },
             ),
           ],

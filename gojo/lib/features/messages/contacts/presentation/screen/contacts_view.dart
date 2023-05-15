@@ -13,6 +13,7 @@ class ContactsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
+      label: "Messages",
       child: Column(
         children: [
           const Flexible(
