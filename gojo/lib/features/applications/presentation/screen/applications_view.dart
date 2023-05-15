@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/features/applications/presentation/screen/widgets/application_status.dart';
-import 'package:gojo/features/applications/presentation/screen/widgets/expandable_panel.dart';
+import 'package:gojo/features/applications/presentation/model/application_status.dart';
+import 'package:gojo/features/applications/presentation/screen/widgets/application_request_item.dart';
 
 class ApplicationsView extends StatelessWidget {
   const ApplicationsView({super.key});
@@ -28,7 +28,7 @@ class ApplicationsView extends StatelessWidget {
                   ListView(
                     children: List.filled(
                       3,
-                      const ApplicationExpandablePanel(
+                      const ApplicationRequestItem(
                         leadingImageUrl: "",
                         title: "Application title",
                         status: ApplicationStatusType.pending,
@@ -42,7 +42,7 @@ class ApplicationsView extends StatelessWidget {
                   ListView(
                     children: List.filled(
                       2,
-                      const ApplicationExpandablePanel(
+                      const ApplicationRequestItem(
                         leadingImageUrl: "",
                         title: "Application title",
                         status: ApplicationStatusType.rejected,
@@ -56,7 +56,7 @@ class ApplicationsView extends StatelessWidget {
                   ListView(
                     children: List.filled(
                       1,
-                      const ApplicationExpandablePanel(
+                      const ApplicationRequestItem(
                         leadingImageUrl: "",
                         title: "Application title",
                         status: ApplicationStatusType.approved,
