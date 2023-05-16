@@ -119,7 +119,7 @@ class UserPropertiesSection extends StatelessWidget {
             TabBar(
               tabs: [
                 Tab(text: "Rented"),
-                Tab(text: "Applied"),
+                Tab(text: "Favorites"),
               ],
             ),
             SizedBox(height: 8),
@@ -127,7 +127,7 @@ class UserPropertiesSection extends StatelessWidget {
               child: TabBarView(
                 children: [
                   RentedPropertiesTab(),
-                  AppliedPropertiesTab(),
+                  FavoritePropertiesTab(),
                 ],
               ),
             ),
@@ -160,17 +160,17 @@ class RentedPropertiesTab extends StatelessWidget {
   }
 }
 
-class AppliedPropertiesTab extends StatelessWidget {
-  const AppliedPropertiesTab({super.key});
+class FavoritePropertiesTab extends StatelessWidget {
+  const FavoritePropertiesTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: ((context, state) {
-        switch (state.appliedMediaItemsFetchStatus) {
+        switch (state.favoriteMediaItemsFetchStatus) {
           case FetchProfileMediaItemStatus.loaded:
             return ProfileTab(
-              children: state.appliedMediaItems,
+              children: state.favoriteMediaItems,
             );
           case FetchProfileMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
