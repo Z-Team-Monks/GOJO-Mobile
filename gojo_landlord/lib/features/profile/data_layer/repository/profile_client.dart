@@ -16,7 +16,7 @@ class ProfileClientImpl extends BaseApiClient implements ProfileClientAPI {
 
   @override
   Future<PropertyItemList> getInReviewProperties() async {
-    final favoritePropertiesResponse = await get('/property/inreview');
-    return PropertyItemList.fromJson(favoritePropertiesResponse.data);
+    final inReviewPropertiesResponse = await get('/property/inreview');
+    return PropertyItemList.fromJson(inReviewPropertiesResponse.data);
   }
 }
