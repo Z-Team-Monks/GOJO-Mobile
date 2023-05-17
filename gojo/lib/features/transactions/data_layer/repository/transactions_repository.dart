@@ -9,18 +9,18 @@ abstract class TransactionsRepositoryAPI {
 }
 
 class TransactionsRepositoryImpl implements TransactionsRepositoryAPI {
-  final TransactionsClientAPI TransactionsClient;
+  final TransactionsClientAPI transactionsClient;
 
-  TransactionsRepositoryImpl(this.TransactionsClient);
+  TransactionsRepositoryImpl(this.transactionsClient);
 
   @override
   Future<List<FinishedTransaction>> getFinishedTransactions() async {
-    return await TransactionsClient.getFinishedTransactions();
+    return await transactionsClient.getFinishedTransactions();
   }
 
   @override
   Future<List<PendingTrasaction>> getPendingTransactions() async {
-    return await TransactionsClient.getPendingTransactions();
+    return await transactionsClient.getPendingTransactions();
   }
 }
 
@@ -35,21 +35,21 @@ class TransactionsRepositoryFake implements TransactionsRepositoryAPI {
           title: "Villa, Kemah Tinggi",
           payedAmount: 14000,
           paymentDate: "12/12/2020",
-          thumbnailUrl: "https://picsum.photos/250?image=9",
+          thumbnailUrl: "https://picsum.photos/250?image=10",
         ),
         FinishedTransaction(
           id: "2",
           title: "Studio in 4kilo",
           payedAmount: 24000,
           paymentDate: "12/12/2020",
-          thumbnailUrl: "https://picsum.photos/250?image=9",
+          thumbnailUrl: "https://picsum.photos/250?image=10",
         ),
         FinishedTransaction(
           id: "3",
           title: "Condominium",
           payedAmount: 34000,
           paymentDate: "12/12/2020",
-          thumbnailUrl: "https://picsum.photos/250?image=9",
+          thumbnailUrl: "https://picsum.photos/250?image=10",
         ),
       ],
     );
@@ -65,14 +65,14 @@ class TransactionsRepositoryFake implements TransactionsRepositoryAPI {
           title: "Studio in 4kilo",
           amount: 24000,
           dueDate: "12/12/2020",
-          thumbnailUrl: "https://picsum.photos/250?image=9",
+          thumbnailUrl: "https://picsum.photos/250?image=10",
         ),
         PendingTrasaction(
           id: "3",
           title: "Condominium",
           amount: 34000,
           dueDate: "12/12/2020",
-          thumbnailUrl: "https://picsum.photos/250?image=9",
+          thumbnailUrl: "https://picsum.photos/250?image=10",
         ),
       ],
     );

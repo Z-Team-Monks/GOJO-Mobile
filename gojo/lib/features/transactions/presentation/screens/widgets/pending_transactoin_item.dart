@@ -12,12 +12,14 @@ class PendingTransactionItem extends StatelessWidget {
   final String title;
   final String dueDate;
   final String dueAmount;
+  final void Function()? onPayNowPressed;
   const PendingTransactionItem({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.dueDate,
     required this.dueAmount,
+    required this.onPayNowPressed,
   });
 
   @override
@@ -39,18 +41,20 @@ class PendingTransactionItem extends StatelessWidget {
   }
 
   Widget _buildPayButton() {
-    return Container(
-      height: 35,
-      margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: GojoBarButton(title: "Pay now", onClick: () {}),
+    return InkWell(
+      onTap: onPayNowPressed,
+      child: Container(
+        height: 35,
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: GojoBarButton(title: "Pay now", onClick: () {}),
+      ),
     );
   }
 
   GojoContentItem _buildHeader() {
     return GojoContentItem(
-      // TODO: Use network image.
-      image: AssetImage(Resources.gojoImages.sofa),
+      image: NetworkImage(imageUrl),
       title: title,
       rightAlignedTitle: "Due $dueDate",
       rightAlignedContent: dueAmount,

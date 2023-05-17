@@ -27,6 +27,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
                   imageUrl: transactionItem.thumbnailUrl,
                   dueAmount: transactionItem.amount.toString(),
                   dueDate: transactionItem.dueDate,
+                  onPayNowPressed: () {},
                 ))
             .toList();
 

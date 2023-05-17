@@ -31,8 +31,7 @@ class FinishedTransactionItem extends StatelessWidget {
         ),
       ),
       child: GojoContentItem(
-        // TODO: Use network image.
-        image: AssetImage(Resources.gojoImages.sofa),
+        image: NetworkImage(imageUrl),
         title: title,
         rightAlignedTitle: "Paid on $paymentDate",
         rightAlignedContent: paidAmount,
