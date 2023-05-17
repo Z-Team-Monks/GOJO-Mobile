@@ -23,7 +23,7 @@ class PendingPaymentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(GojoPadding.extraSmall),
+        padding: const EdgeInsets.all(GojoPadding.small),
         margin: const EdgeInsets.symmetric(vertical: GojoPadding.extraSmall),
         decoration: BoxDecoration(
           borderRadius: GojoBorders.border(GojoBorderRadiusSize.small),
