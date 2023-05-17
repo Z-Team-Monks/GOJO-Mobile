@@ -8,7 +8,7 @@ part 'transactions_event.dart';
 part 'transactions_state.dart';
 
 class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
-  final TransactionRepositoryAPI transactionRepository;
+  final TransactionsRepositoryAPI transactionRepository;
   TransactionsBloc(this.transactionRepository)
       : super(TransactionsState.initial()) {
     on<LoadTransactions>((event, emit) async {
@@ -17,6 +17,29 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
             FetchTransactionItemsStatus.loading,
         pendingTransactionItemsFetchStatus: FetchTransactionItemsStatus.loading,
       ));
+
+      try {
+        final pendingTransactions =
+            await transactionRepository.getPendingTransactions();
+        final pendingTransactionItems = pendingTransactions
+            .map((transactionItem) => PendingTransactionItem(
+                  title: transactionItem.title,
+                  imageUrl: transactionItem.thumbnailUrl,
+                  dueAmount: transactionItem.amount.toString(),
+                  dueDate: transactionItem.dueDate,
+                ))
+            .toList();
+
+        emit(state.copyWith(
+          pendingTransactionItems: pendingTransactionItems,
+          pendingTransactionItemsFetchStatus:
+              FetchTransactionItemsStatus.loaded,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          pendingTransactionItemsFetchStatus: FetchTransactionItemsStatus.error,
+        ));
+      }
 
       try {
         final finishedTransactions =
@@ -39,29 +62,6 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
         emit(state.copyWith(
           finishedTransactionItemsFetchStatus:
               FetchTransactionItemsStatus.error,
-        ));
-      }
-
-      try {
-        final pendingTransactions =
-            await transactionRepository.getPendingTransactions();
-        final pendingTransactionItems = pendingTransactions
-            .map((transactionItem) => PendingTransactionItem(
-                  title: transactionItem.title,
-                  imageUrl: transactionItem.thumbnailUrl,
-                  dueAmount: transactionItem.amount.toString(),
-                  dueDate: transactionItem.dueDate,
-                ))
-            .toList();
-
-        emit(state.copyWith(
-          pendingTransactionItems: pendingTransactionItems,
-          pendingTransactionItemsFetchStatus:
-              FetchTransactionItemsStatus.loaded,
-        ));
-      } catch (e) {
-        emit(state.copyWith(
-          pendingTransactionItemsFetchStatus: FetchTransactionItemsStatus.error,
         ));
       }
     });

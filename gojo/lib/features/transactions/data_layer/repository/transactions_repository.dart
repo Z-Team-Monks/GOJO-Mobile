@@ -2,29 +2,29 @@ import 'package:gojo/features/transactions/data_layer/model/finished_transaction
 import 'package:gojo/features/transactions/data_layer/model/pending_tranasction.dart';
 import 'package:gojo/features/transactions/data_layer/repository/transactions_client.dart';
 
-abstract class TransactionRepositoryAPI {
+abstract class TransactionsRepositoryAPI {
   Future<List<FinishedTransaction>> getFinishedTransactions();
 
   Future<List<PendingTrasaction>> getPendingTransactions();
 }
 
-class TransactionRepositoryImpl implements TransactionRepositoryAPI {
-  final TransactionClientAPI transactionClient;
+class TransactionsRepositoryImpl implements TransactionsRepositoryAPI {
+  final TransactionsClientAPI TransactionsClient;
 
-  TransactionRepositoryImpl(this.transactionClient);
+  TransactionsRepositoryImpl(this.TransactionsClient);
 
   @override
   Future<List<FinishedTransaction>> getFinishedTransactions() async {
-    return await transactionClient.getFinishedTransactions();
+    return await TransactionsClient.getFinishedTransactions();
   }
 
   @override
   Future<List<PendingTrasaction>> getPendingTransactions() async {
-    return await transactionClient.getPendingTransactions();
+    return await TransactionsClient.getPendingTransactions();
   }
 }
 
-class TransactionRepositoryFake implements TransactionRepositoryAPI {
+class TransactionsRepositoryFake implements TransactionsRepositoryAPI {
   @override
   Future<List<FinishedTransaction>> getFinishedTransactions() {
     return Future.delayed(
