@@ -1,7 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
+<<<<<<< HEAD
 import 'package:gojo/features/appointment/schedule_appointment/data/repository/schedule_appointment_repository.dart';
 import 'package:gojo/features/map/data/repository/map_view_repository.dart';
+=======
+>>>>>>> ea8dfa9 (Add application datalayer)
 import 'package:gojo/features/messages/chat/data/repository/chat_repository.dart';
 import 'package:gojo/features/messages/chat/presentation/bloc/chat_gen.dart';
 import 'package:gojo/features/messages/chat/presentation/bloc/chat_message_bloc.dart';
@@ -39,6 +42,7 @@ class Locator {
         chatMessageBloc: GetIt.I<ChatMessageBloc>(),
       ),
     );
+<<<<<<< HEAD
 
     GetIt.I.registerLazySingleton(
       () => ScheduleAppointmentRepositoryFake(),
@@ -47,5 +51,7 @@ class Locator {
     GetIt.I.registerLazySingleton(
       () => MapViewRepositoryFake(),
     );
+=======
+>>>>>>> ea8dfa9 (Add application datalayer)
   }
 }
