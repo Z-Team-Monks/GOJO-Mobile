@@ -7,12 +7,12 @@ import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
-class PendingPaymentItem extends StatelessWidget {
+class PendingTransactionItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String dueDate;
   final String dueAmount;
-  const PendingPaymentItem({
+  const PendingTransactionItem({
     super.key,
     required this.imageUrl,
     required this.title,
