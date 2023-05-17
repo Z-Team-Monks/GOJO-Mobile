@@ -5,6 +5,7 @@ import 'package:gojo/features/messages/chat/presentation/bloc/chat_message_bloc.
 
 import 'features/home/data_layer/repository/home_repository.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
+import 'features/transactions/data_layer/repository/transactions_repository.dart';
 
 class Locator {
   static void setup() {
@@ -26,6 +27,10 @@ class Locator {
       () => ChatGenerator(
         chatMessageBloc: GetIt.I<ChatMessageBloc>(),
       ),
+    );
+
+    GetIt.I.registerLazySingleton<TransactionsRepositoryAPI>(
+      () => TransactionsRepositoryFake(),
     );
   }
 }
