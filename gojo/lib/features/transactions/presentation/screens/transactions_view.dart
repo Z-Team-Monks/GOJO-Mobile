@@ -11,7 +11,7 @@ class TransactionsView extends StatelessWidget {
     return GojoParentView(
       label: "Transactions",
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Column(
           children: [
             const TabBar(
@@ -29,7 +29,7 @@ class TransactionsView extends StatelessWidget {
                         3,
                         const PendingPaymentItem(
                           imageUrl: "",
-                          title: "Nabek's mansion",
+                          title: "Sura's mansion",
                           dueDate: "Oct 3,2023",
                           dueAmount: "18,000",
                         )),
