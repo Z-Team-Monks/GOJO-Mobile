@@ -4,9 +4,9 @@ import 'package:gojo/features/applications/data_layer/repository/application_cil
 abstract class ApplicationsRepositoryAPI {
   Future<List<Application>> getPendingApplications();
 
-  Future<List<Application>> getAcceptedApplications();
+  Future<List<Application>> getApprovedApplications();
 
-  Future<List<Application>> getRequestedAppilcations();
+  Future<List<Application>> getRejectedApplications();
 }
 
 class ApplicationRepositoryImpl implements ApplicationsRepositoryAPI {
@@ -20,13 +20,13 @@ class ApplicationRepositoryImpl implements ApplicationsRepositoryAPI {
   }
 
   @override
-  Future<List<Application>> getAcceptedApplications() async {
-    return await applicationsClient.getAcceptedApplications();
+  Future<List<Application>> getApprovedApplications() async {
+    return await applicationsClient.getApprovedApplications();
   }
 
   @override
-  Future<List<Application>> getRequestedAppilcations() async {
-    return await applicationsClient.getRequestedAppilcations();
+  Future<List<Application>> getRejectedApplications() async {
+    return await applicationsClient.getRejectedApplications();
   }
 }
 
@@ -50,7 +50,7 @@ class ApplicationRepositoryFake implements ApplicationsRepositoryAPI {
   }
 
   @override
-  Future<List<Application>> getAcceptedApplications() {
+  Future<List<Application>> getApprovedApplications() {
     return Future.delayed(
       const Duration(seconds: 1),
       () => List.filled(
@@ -68,7 +68,7 @@ class ApplicationRepositoryFake implements ApplicationsRepositoryAPI {
   }
 
   @override
-  Future<List<Application>> getRequestedAppilcations() {
+  Future<List<Application>> getRejectedApplications() {
     return Future.delayed(
       const Duration(seconds: 1),
       () => List.filled(

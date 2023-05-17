@@ -4,9 +4,9 @@ import 'package:gojo/features/applications/data_layer/model/application.dart';
 abstract class ApplicationsClientAPI {
   Future<List<Application>> getPendingApplications();
 
-  Future<List<Application>> getAcceptedApplications();
+  Future<List<Application>> getApprovedApplications();
 
-  Future<List<Application>> getRequestedAppilcations();
+  Future<List<Application>> getRejectedApplications();
 }
 
 class ApplicationsClientImpl extends BaseApiClient
@@ -20,15 +20,15 @@ class ApplicationsClientImpl extends BaseApiClient
   }
 
   @override
-  Future<List<Application>> getAcceptedApplications() {
-    return get("applications?status=accepted").then((value) =>
+  Future<List<Application>> getApprovedApplications() {
+    return get("applications?status=approved").then((value) =>
         (value.data as List)
             .map((item) => Application.fromJson(item))
             .toList());
   }
 
   @override
-  Future<List<Application>> getRequestedAppilcations() {
+  Future<List<Application>> getRejectedApplications() {
     return get("applications?status=requested").then((value) =>
         (value.data as List)
             .map((item) => Application.fromJson(item))
