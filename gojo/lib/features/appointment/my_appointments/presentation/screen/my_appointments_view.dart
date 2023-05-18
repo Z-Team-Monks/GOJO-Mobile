@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import 'package:gojo/features/appointment/my_appointments/data_layer/model/appointment.dart';
 import 'package:gojo/features/appointment/my_appointments/data_layer/repository/my_appointments_repository.dart';
 import 'package:gojo/features/appointment/my_appointments/presentation/bloc/my_appointments_bloc.dart';
+import 'package:gojo/features/appointment/my_appointments/presentation/screen/widgets/my_appointment_item.dart';
 
 class MyAppointmentsView extends StatelessWidget {
   const MyAppointmentsView({super.key});
@@ -42,26 +45,40 @@ class MyAppointmentsView extends StatelessWidget {
 }
 
 class _MyAppointmentsContent extends StatelessWidget {
-  const _MyAppointmentsContent({
-    super.key,
-  });
+  const _MyAppointmentsContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MyAppointmentsBloc, MyAppointmentsState>(
-        builder: (context, state) {
-      switch (state.status) {
-        case FetchMyAppointmentsStatus.loaded:
-          return ListView(
-            shrinkWrap: true,
-            children: state.appointments,
+    return BlocConsumer<MyAppointmentsBloc, MyAppointmentsState>(
+        listener: (context, state) {
+      switch (state.cancelAppointmentStatus) {
+        case CancelAppointmentStatus.loading:
+          GojoSnackBars.showLoading(context, "Canceling appointment...");
+          break;
+        case CancelAppointmentStatus.error:
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Error cancelling appointment"),
+            ),
           );
-        case FetchMyAppointmentsStatus.loading:
+          break;
+        case CancelAppointmentStatus.success:
+          GojoSnackBars.showSuccess(
+              context, "Appointment cancelled successfully");
+          break;
+        case CancelAppointmentStatus.initial:
+          break;
+      }
+    }, builder: (context, state) {
+      switch (state.fetchAppointmentstatus) {
+        case FetchAppointmentStatus.success:
+          return _MyAppointmentsListView(appointments: state.appointments);
+        case FetchAppointmentStatus.loading:
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: const Center(child: CircularProgressIndicator()),
           );
-        case FetchMyAppointmentsStatus.error:
+        case FetchAppointmentStatus.error:
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: const Center(
@@ -73,10 +90,37 @@ class _MyAppointmentsContent extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({
+class _MyAppointmentsListView extends StatelessWidget {
+  final List<Appointment> appointments;
+  const _MyAppointmentsListView({
     super.key,
+    required this.appointments,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: appointments.length,
+        itemBuilder: (context, index) {
+          return MyAppointementsItem(
+            fullName: appointments[index].fullName,
+            phoneNumber: appointments[index].phoneNumber,
+            date: appointments[index].date,
+            onCancel: () {
+              context.read<MyAppointmentsBloc>().add(
+                    CancelAppointment(
+                      appointments[index].id,
+                    ),
+                  );
+            },
+          );
+        });
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({super.key});
 
   @override
   Widget build(BuildContext context) {

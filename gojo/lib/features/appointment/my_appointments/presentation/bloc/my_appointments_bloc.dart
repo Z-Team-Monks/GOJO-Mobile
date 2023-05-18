@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:gojo/features/appointment/my_appointments/data_layer/model/appointment.dart';
 import 'package:gojo/features/appointment/my_appointments/data_layer/repository/my_appointments_repository.dart';
 import 'package:gojo/features/appointment/my_appointments/presentation/screen/widgets/my_appointment_item.dart';
 import 'package:meta/meta.dart';
@@ -15,27 +16,42 @@ class MyAppointmentsBloc
       : super(MyAppointmentsState.initial()) {
     on<LoadMyAppointments>((event, emit) async {
       emit(state.copyWith(
-        status: FetchMyAppointmentsStatus.loading,
+        fetchAppointmentstatus: FetchAppointmentStatus.loading,
       ));
 
       try {
-        debugPrint("Loading my appointments");
         final myAppointments =
             await myAppointmentsRepositoryAPI.getMyAppointments();
-        final myAppointmentItems = myAppointments
-            .map((appointment) => MyAppointementsItem(
-                  fullName: appointment.fullName,
-                  phoneNumber: appointment.phoneNumber,
-                  date: appointment.date,
-                ))
-            .toList();
+
         emit(state.copyWith(
-          appointments: myAppointmentItems,
-          status: FetchMyAppointmentsStatus.loaded,
+          appointments: myAppointments,
+          fetchAppointmentstatus: FetchAppointmentStatus.success,
         ));
       } catch (e) {
         emit(state.copyWith(
-          status: FetchMyAppointmentsStatus.error,
+          fetchAppointmentstatus: FetchAppointmentStatus.error,
+        ));
+      }
+    });
+
+    on<CancelAppointment>((event, emit) async {
+      try {
+        emit(state.copyWith(
+            cancelAppointmentStatus: CancelAppointmentStatus.loading));
+
+        await myAppointmentsRepositoryAPI
+            .cancelAppointment(event.appointmentId);
+        final updatedAppointments = state.appointments
+            .where((element) => element.id != event.appointmentId)
+            .toList();
+
+        emit(state.copyWith(
+          appointments: updatedAppointments,
+          cancelAppointmentStatus: CancelAppointmentStatus.success,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          cancelAppointmentStatus: CancelAppointmentStatus.error,
         ));
       }
     });

@@ -6,12 +6,14 @@ class MyAppointementsItem extends StatelessWidget {
   final String fullName;
   final String date;
   final String phoneNumber;
+  final Function()? onCancel;
 
   const MyAppointementsItem({
     super.key,
     required this.fullName,
     required this.date,
     required this.phoneNumber,
+    required this.onCancel,
   });
 
   @override
@@ -41,9 +43,7 @@ class MyAppointementsItem extends StatelessWidget {
                 GojoBarButton(
                   customHeight: 40,
                   title: "Cancel ",
-                  onClick: () async {
-                    //TODO: Show snackbar based on cancelResponse.
-                  },
+                  onClick: onCancel,
                 ),
               ],
             ),

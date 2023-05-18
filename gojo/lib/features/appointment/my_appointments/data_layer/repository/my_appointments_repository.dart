@@ -27,25 +27,25 @@ class MyAppointmentsRepositoryFake implements MyAppointmentsRepositoryAPI {
     Appointment(
       phoneNumber: "0911234532",
       id: "1",
-      fullName: "Braha Marlam Roh",
+      fullName: "Braha Marlam Roh I",
       date: "March 21, 2023",
     ),
     Appointment(
       phoneNumber: "0911234532",
       id: "2",
-      fullName: "Braha Marlam Roh",
+      fullName: "Braha Marlam Roh II",
       date: "March 21, 2023",
     ),
     Appointment(
       phoneNumber: "0911234532",
       id: "3",
-      fullName: "Braha Marlam Roh",
+      fullName: "Braha Marlam Roh III ",
       date: "March 21, 2023",
     ),
     Appointment(
       phoneNumber: "0911234532",
       id: "4",
-      fullName: "Braha Marlam Roh",
+      fullName: "Braha Marlam Roh IV",
       date: "March 21, 2023",
     ),
   ];
@@ -57,6 +57,8 @@ class MyAppointmentsRepositoryFake implements MyAppointmentsRepositoryAPI {
 
   @override
   Future<void> cancelAppointment(String id) async {
-    fakeAppointments.removeWhere((element) => element.id == id);
+    await Future.delayed(const Duration(seconds: 2), () {
+      fakeAppointments.removeWhere((element) => element.id == id);
+    });
   }
 }
