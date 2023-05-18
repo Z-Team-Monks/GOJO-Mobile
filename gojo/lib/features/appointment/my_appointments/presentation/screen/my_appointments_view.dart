@@ -56,11 +56,7 @@ class _MyAppointmentsContent extends StatelessWidget {
           GojoSnackBars.showLoading(context, "Canceling appointment...");
           break;
         case CancelAppointmentStatus.error:
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Error cancelling appointment"),
-            ),
-          );
+          GojoSnackBars.showError(context, "Error cancelling appointment");
           break;
         case CancelAppointmentStatus.success:
           GojoSnackBars.showSuccess(
