@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gojo/features/appointment/schedule_appointment/presentation/bloc/schedule_appointment_bloc.dart';
 
 class TimeSlotDropDown extends StatefulWidget {
-  const TimeSlotDropDown({super.key});
+  final List<String> freeTimeSlots;
+
+  const TimeSlotDropDown({super.key, required this.freeTimeSlots});
 
   @override
   State<TimeSlotDropDown> createState() => _TimeSlotDropDownState();
 }
 
 class _TimeSlotDropDownState extends State<TimeSlotDropDown> {
-  List<String> list = <String>['3:00 PM', '5:00 PM', '6:00 PM', '7:00 PM'];
   String? dropdownValue;
 
   @override
@@ -21,12 +24,12 @@ class _TimeSlotDropDownState extends State<TimeSlotDropDown> {
               color: Colors.black.withOpacity(0.7),
             ),
       ),
-      onChanged: (String? newValue) {
-        setState(() {
-          dropdownValue = newValue!;
-        });
+      onChanged: (String? newSlot) {
+        BlocProvider.of<ScheduleAppointmentBloc>(context).add(
+          TimeSlotSelectedChanged(timeSlot: newSlot!),
+        );
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: widget.freeTimeSlots.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(
