@@ -1,6 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:gojo/app.dart';
-import 'package:gojo/features/applications/data_layer/model/application.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
 import 'package:gojo/features/applications/presentation/model/application_status.dart';
 import 'package:gojo/features/applications/presentation/screen/widgets/application_request_item.dart';
@@ -38,6 +36,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       try {
         final approvedApplicationRequestItems =
             await _loadApprovedApplicationRequestItems();
+
         emit(state.copyWith(
           approvedApplications: approvedApplicationRequestItems,
           approvedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
@@ -51,6 +50,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       try {
         final rejectedApplicationRequestItems =
             await _loadRejectedApplicationRequestItems();
+
         emit(state.copyWith(
           rejectedApplications: rejectedApplicationRequestItems,
           rejectedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
