@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gojo/features/appointment/my_appointments/data_layer/model/appointment.dart';
 import 'package:gojo/features/appointment/my_appointments/data_layer/repository/my_appointments_repository.dart';
-import 'package:gojo/features/appointment/my_appointments/presentation/screen/widgets/my_appointment_item.dart';
-import 'package:meta/meta.dart';
 
 part 'my_appointments_event.dart';
 part 'my_appointments_state.dart';
