@@ -4,8 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
 import 'package:gojo/features/applications/presentation/bloc/applications_bloc.dart';
-import 'package:gojo/features/applications/presentation/model/application_status.dart';
-import 'package:gojo/features/applications/presentation/screen/widgets/application_request_item.dart';
 
 class ApplicationsView extends StatelessWidget {
   const ApplicationsView({super.key});
