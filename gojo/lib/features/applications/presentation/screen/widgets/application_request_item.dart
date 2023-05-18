@@ -57,6 +57,7 @@ class ApplicationRequestItem extends StatelessWidget {
               startDate: startDate,
               endDate: endDate,
               description: description,
+              status: status,
             ),
           ],
         ),
@@ -85,8 +86,7 @@ class ApplicationCollapsed extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
-          // TODO: Replace with network image.
-          backgroundImage: AssetImage(Resources.gojoImages.headShot),
+          backgroundImage: NetworkImage(leadingImageUrl),
           radius: 30,
         ),
         const SizedBox(width: 20),
@@ -144,12 +144,14 @@ class ApplicationExpanded extends StatelessWidget {
   final String startDate;
   final String endDate;
   final String description;
+  final ApplicationStatusType status;
 
   const ApplicationExpanded({
     super.key,
     required this.startDate,
     required this.endDate,
     required this.description,
+    required this.status,
   });
 
   @override
@@ -181,12 +183,15 @@ class ApplicationExpanded extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 12),
-          GojoBarButton(
-            title: "Withdraw",
-            onClick: () {},
-            customHeight: 30,
-            customWidth: 150,
-          ),
+          Visibility(
+            visible: status == ApplicationStatusType.pending,
+            child: GojoBarButton(
+              title: "Withdraw",
+              onClick: () {},
+              customHeight: 30,
+              customWidth: 150,
+            ),
+          )
         ],
       ),
     );
