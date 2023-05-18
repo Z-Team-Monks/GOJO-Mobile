@@ -22,19 +22,8 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       ));
 
       try {
-        final pendingApplications =
-            await applicationRepository.getPendingApplications();
-        final pendingApplicationRequestItems = pendingApplications
-            .map((application) => ApplicationRequestItem(
-                  title: application.title,
-                  leadingImageUrl: application.thumbnailUrl,
-                  description: application.description,
-                  status: ApplicationStatusType.pending,
-                  topRightDate: application.applicationDate,
-                  startDate: application.startDate,
-                  endDate: application.endDate,
-                ))
-            .toList();
+        final pendingApplicationRequestItems =
+            await _loadPendingApplicationRequestItems();
 
         emit(state.copyWith(
           pendingApplications: pendingApplicationRequestItems,
@@ -47,20 +36,8 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       }
 
       try {
-        final approvedApplications =
-            await applicationRepository.getApprovedApplications();
-        final approvedApplicationRequestItems = approvedApplications
-            .map((application) => ApplicationRequestItem(
-                  title: application.title,
-                  leadingImageUrl: application.thumbnailUrl,
-                  description: application.description,
-                  status: ApplicationStatusType.approved,
-                  topRightDate: application.applicationDate,
-                  startDate: application.startDate,
-                  endDate: application.endDate,
-                ))
-            .toList();
-
+        final approvedApplicationRequestItems =
+            await _loadApprovedApplicationRequestItems();
         emit(state.copyWith(
           approvedApplications: approvedApplicationRequestItems,
           approvedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
@@ -72,20 +49,8 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       }
 
       try {
-        final rejectedApplications =
-            await applicationRepository.getRejectedApplications();
-        final rejectedApplicationRequestItems = rejectedApplications
-            .map((application) => ApplicationRequestItem(
-                  title: application.title,
-                  leadingImageUrl: application.thumbnailUrl,
-                  description: application.description,
-                  status: ApplicationStatusType.rejected,
-                  topRightDate: application.applicationDate,
-                  startDate: application.startDate,
-                  endDate: application.endDate,
-                ))
-            .toList();
-
+        final rejectedApplicationRequestItems =
+            await _loadRejectedApplicationRequestItems();
         emit(state.copyWith(
           rejectedApplications: rejectedApplicationRequestItems,
           rejectedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
@@ -96,5 +61,56 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
         ));
       }
     });
+  }
+
+  Future<List<ApplicationRequestItem>>
+      _loadPendingApplicationRequestItems() async {
+    final pendingApplications =
+        await applicationRepository.getPendingApplications();
+    return pendingApplications
+        .map((application) => ApplicationRequestItem(
+              title: application.title,
+              leadingImageUrl: application.thumbnailUrl,
+              description: application.description,
+              status: ApplicationStatusType.pending,
+              topRightDate: application.applicationDate,
+              startDate: application.startDate,
+              endDate: application.endDate,
+            ))
+        .toList();
+  }
+
+  Future<List<ApplicationRequestItem>>
+      _loadApprovedApplicationRequestItems() async {
+    final approvedApplications =
+        await applicationRepository.getApprovedApplications();
+    return approvedApplications
+        .map((application) => ApplicationRequestItem(
+              title: application.title,
+              leadingImageUrl: application.thumbnailUrl,
+              description: application.description,
+              status: ApplicationStatusType.approved,
+              topRightDate: application.applicationDate,
+              startDate: application.startDate,
+              endDate: application.endDate,
+            ))
+        .toList();
+  }
+
+  Future<List<ApplicationRequestItem>>
+      _loadRejectedApplicationRequestItems() async {
+    final rejectedApplications =
+        await applicationRepository.getRejectedApplications();
+    return rejectedApplications
+        .map((application) => ApplicationRequestItem(
+              title: application.title,
+              leadingImageUrl: application.thumbnailUrl,
+              description: application.description,
+              status: ApplicationStatusType.rejected,
+              topRightDate: application.applicationDate,
+              startDate: application.startDate,
+              endDate: application.endDate,
+            ))
+        .toList();
   }
 }
