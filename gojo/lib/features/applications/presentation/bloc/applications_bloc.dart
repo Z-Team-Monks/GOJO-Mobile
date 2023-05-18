@@ -36,7 +36,6 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       try {
         final approvedApplicationRequestItems =
             await _loadApprovedApplicationRequestItems();
-
         emit(state.copyWith(
           approvedApplications: approvedApplicationRequestItems,
           approvedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
@@ -50,7 +49,6 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       try {
         final rejectedApplicationRequestItems =
             await _loadRejectedApplicationRequestItems();
-
         emit(state.copyWith(
           rejectedApplications: rejectedApplicationRequestItems,
           rejectedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
