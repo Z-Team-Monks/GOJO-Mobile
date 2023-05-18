@@ -7,23 +7,25 @@ import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
-class PendingPaymentItem extends StatelessWidget {
+class PendingTransactionItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String dueDate;
   final String dueAmount;
-  const PendingPaymentItem({
+  final void Function()? onPayNowPressed;
+  const PendingTransactionItem({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.dueDate,
     required this.dueAmount,
+    required this.onPayNowPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(GojoPadding.extraSmall),
+        padding: const EdgeInsets.all(GojoPadding.small),
         margin: const EdgeInsets.symmetric(vertical: GojoPadding.extraSmall),
         decoration: BoxDecoration(
           borderRadius: GojoBorders.border(GojoBorderRadiusSize.small),
@@ -39,18 +41,20 @@ class PendingPaymentItem extends StatelessWidget {
   }
 
   Widget _buildPayButton() {
-    return Container(
-      height: 35,
-      margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: GojoBarButton(title: "Pay now", onClick: () {}),
+    return InkWell(
+      onTap: onPayNowPressed,
+      child: Container(
+        height: 35,
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: GojoBarButton(title: "Pay now", onClick: () {}),
+      ),
     );
   }
 
   GojoContentItem _buildHeader() {
     return GojoContentItem(
-      // TODO: Use network image.
-      image: AssetImage(Resources.gojoImages.sofa),
+      image: NetworkImage(imageUrl),
       title: title,
       rightAlignedTitle: "Due $dueDate",
       rightAlignedContent: dueAmount,

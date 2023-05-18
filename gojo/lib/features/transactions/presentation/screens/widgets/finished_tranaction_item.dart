@@ -5,12 +5,13 @@ import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 
-class TransactionItem extends StatelessWidget {
+class FinishedTransactionItem extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String paymentDate;
   final String paidAmount;
-  const TransactionItem({
+
+  const FinishedTransactionItem({
     super.key,
     required this.imageUrl,
     required this.title,
@@ -30,8 +31,7 @@ class TransactionItem extends StatelessWidget {
         ),
       ),
       child: GojoContentItem(
-        // TODO: Use network image.
-        image: AssetImage(Resources.gojoImages.sofa),
+        image: NetworkImage(imageUrl),
         title: title,
         rightAlignedTitle: "Paid on $paymentDate",
         rightAlignedContent: paidAmount,

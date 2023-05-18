@@ -5,39 +5,39 @@ enum FetchProfileMediaItemStatus { loading, loaded, error }
 @immutable
 class ProfileState {
   final List<ProfileMediaItem> rentedMediaItems;
-  final List<ProfileMediaItem> appliedMediaItems;
+  final List<ProfileMediaItem> favoriteMediaItems;
   final FetchProfileMediaItemStatus rentedMediaItemsFetchStatus;
-  final FetchProfileMediaItemStatus appliedMediaItemsFetchStatus;
+  final FetchProfileMediaItemStatus favoriteMediaItemsFetchStatus;
 
   const ProfileState({
     required this.rentedMediaItems,
-    required this.appliedMediaItems,
+    required this.favoriteMediaItems,
     required this.rentedMediaItemsFetchStatus,
-    required this.appliedMediaItemsFetchStatus,
+    required this.favoriteMediaItemsFetchStatus,
   });
 
   factory ProfileState.initial() {
     return const ProfileState(
       rentedMediaItems: [],
-      appliedMediaItems: [],
+      favoriteMediaItems: [],
       rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-      appliedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
+      favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
     );
   }
 
   ProfileState copyWith({
     List<ProfileMediaItem>? rentedMediaItems,
-    List<ProfileMediaItem>? appliedMediaItems,
+    List<ProfileMediaItem>? favoriteMediaItems,
     FetchProfileMediaItemStatus? rentedMediaItemsFetchStatus,
-    FetchProfileMediaItemStatus? appliedMediaItemsFetchStatus,
+    FetchProfileMediaItemStatus? favoriteMediaItemsFetchStatus,
   }) {
     return ProfileState(
       rentedMediaItems: rentedMediaItems ?? this.rentedMediaItems,
-      appliedMediaItems: appliedMediaItems ?? this.appliedMediaItems,
+      favoriteMediaItems: favoriteMediaItems ?? this.favoriteMediaItems,
       rentedMediaItemsFetchStatus:
           rentedMediaItemsFetchStatus ?? this.rentedMediaItemsFetchStatus,
-      appliedMediaItemsFetchStatus:
-          appliedMediaItemsFetchStatus ?? this.appliedMediaItemsFetchStatus,
+      favoriteMediaItemsFetchStatus:
+          favoriteMediaItemsFetchStatus ?? this.favoriteMediaItemsFetchStatus,
     );
   }
 }
