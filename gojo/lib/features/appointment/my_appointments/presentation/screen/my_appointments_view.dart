@@ -59,12 +59,15 @@ class _MyAppointmentsContent extends StatelessWidget {
         case FetchMyAppointmentsStatus.loading:
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
+            child: const Center(child: CircularProgressIndicator()),
           );
         case FetchMyAppointmentsStatus.error:
-          return const Center(child: Text("Error"));
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: const Center(
+              child: Text("Error"),
+            ),
+          );
       }
     });
   }
@@ -83,18 +86,16 @@ class _Header extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              "Full Name",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontSize: 16,
-                  ),
-            ),
-            Text(
-              "Date",
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontSize: 16,
-                  ),
-            ),
+            Text("Full Name",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(fontSize: 16)),
+            Text("Date",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(fontSize: 16)),
           ],
         ),
         const Divider(),
