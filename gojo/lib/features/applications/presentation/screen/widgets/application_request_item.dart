@@ -86,8 +86,7 @@ class ApplicationCollapsed extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
-          // TODO: Replace with network image.
-          backgroundImage: AssetImage(Resources.gojoImages.headShot),
+          backgroundImage: NetworkImage(leadingImageUrl),
           radius: 30,
         ),
         const SizedBox(width: 20),
