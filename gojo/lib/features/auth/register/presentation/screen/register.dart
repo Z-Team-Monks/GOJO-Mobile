@@ -253,7 +253,7 @@ class _RegisterViewState extends State<RegisterView> {
         GojoBarButton(
           title: "Confirm",
           onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.signin);
+            Navigator.pushNamed(context, GojoRoutes.otp);
           },
         ),
       ],
@@ -266,9 +266,7 @@ class _RegisterViewState extends State<RegisterView> {
       backgroundColor: Colors.white,
       child: CircleAvatar(
         radius: 40,
-        backgroundImage: CachedNetworkImageProvider(
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&usqp=CAU',
-        ),
+        backgroundImage: Image.asset(Resources.gojoImages.headShot).image,
         child: Align(
           alignment: Alignment.bottomRight,
           child: Icon(

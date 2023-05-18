@@ -82,7 +82,10 @@ class OTPView extends StatelessWidget {
             GojoBarButton(
               title: "Verify",
               onClick: () {
-                Navigator.popAndPushNamed(context, GojoRoutes.root);
+                Navigator.popAndPushNamed(
+                  context,
+                  GojoRoutes.signin,
+                );
               },
             ),
           ],

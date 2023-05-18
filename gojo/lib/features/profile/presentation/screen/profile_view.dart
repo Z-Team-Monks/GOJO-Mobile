@@ -103,8 +103,8 @@ class ProfileButtons extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ProfileIconButton(
-              icon: Icons.logout,
-              label: "Logout",
+              icon: Icons.settings,
+              label: "Settings",
               onPressed: () {},
             ),
           ),
