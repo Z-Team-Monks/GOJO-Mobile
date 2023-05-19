@@ -71,6 +71,9 @@ dependencies:
   flutter_map: ^4.0.0
   latlong2: ^0.8.1
   expandable: ^5.0.1
+  flutter_map_location_marker: ^6.0.0
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
 
 
 dev_dependencies:

@@ -9,7 +9,7 @@ import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/detail/presentation/screen/detail.dart';
 import '../features/home/presentation/screen/home_view.dart';
-import '../features/map/presentation/map_view.dart';
+import '../features/map/presentation/screen/map_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
