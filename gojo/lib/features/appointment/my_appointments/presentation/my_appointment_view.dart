@@ -20,23 +20,19 @@ class MyAppointmentsView extends StatelessWidget {
             ),
             SliverFillRemaining(
               hasScrollBody: true,
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
-                    children: [
-                      _buildExpandableView(context),
-                      Divider(),
-                      _buildExpandableView(context),
-                      Divider(),
-                      _buildExpandableView(context),
-                      Divider(),
-                      _buildExpandableView(context),
-                      Divider(),
-                      _buildExpandableView(context),
-                      Divider(),
-                      _buildExpandableView(context),
-                    ],
+                    children: List.filled(
+                      4,
+                      Column(
+                        children: [
+                          _buildExpandableView(context),
+                          const Divider(),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -85,8 +81,8 @@ class MyAppointmentsView extends StatelessWidget {
         ],
       ),
       collapsed: Container(),
-      expanded: Padding(
-        padding: const EdgeInsets.only(left: 25),
+      expanded: Container(
+        padding: const EdgeInsets.only(left: 26),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

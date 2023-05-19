@@ -1,17 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/features/detail/presentation/widgets/application.dart';
 
-import '../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
-import '../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import '../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
-import '../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import '../../../constants/strings/app_routes.dart';
-import '../../appointment/schedule_appointment/presentation/screen/schedule_appointment.dart';
-import '../data/model/property.dart';
-import '../data/repository/detail_repository.dart';
-import 'bloc/property_detail/property_detail_bloc.dart';
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../constants/strings/app_routes.dart';
+import '../../../appointment/schedule_appointment/presentation/screen/schedule_appointment.dart';
+import '../../data/model/property.dart';
+import '../../data/repository/detail_repository.dart';
+import '../bloc/property_detail/property_detail_bloc.dart';
+import 'widgets/application.dart';
 import 'widgets/host_avatar.dart';
 import 'widgets/rating.dart';
 import 'widgets/reviews.dart';
@@ -259,15 +259,21 @@ class PropertyDetailViewContent extends StatelessWidget {
                 HostAvatar(owner: property.owner),
                 Row(
                   children: [
-                    InkWell(
-                      child: Icon(Icons.calendar_month),
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const ScheduleAppointmentView();
-                            });
-                        // Navigator.pushNamed(context, GojoRoutes.appointment);
+                    BlocBuilder<PropertyDetailBloc, PropertyDetailState>(
+                      builder: (context, state) {
+                        return InkWell(
+                          child: const Icon(Icons.calendar_month),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return ScheduleAppointmentView(
+                                  availablity: state.property!.availability,
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                     const SizedBox(width: 8),

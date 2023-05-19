@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/features/appointment/my_appointments/presentation/my_appointment_view.dart';
 
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/home/presentation/screen/home_view.dart';
@@ -21,9 +20,8 @@ class _RootViewState extends State<RootView> {
   final List _pages = [
     const HomeView(),
     const ContactsView(),
-    const MyAppointmentsView(),
-    const ProfileView(),
     const TransactionsView(),
+    const ProfileView(),
   ];
 
   _changeTab(int index) {
@@ -47,6 +45,10 @@ class _RootViewState extends State<RootView> {
         onTap: (index) => _changeTab(index),
         selectedItemColor: Resources.gojoColors.primaryColor,
         unselectedItemColor: Resources.gojoColors.darkGrey,
+        type: BottomNavigationBarType.fixed,
+        elevation: 10,
+        selectedFontSize: 12,
+        showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -57,16 +59,12 @@ class _RootViewState extends State<RootView> {
             label: "Messages",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: "Appointments",
+            icon: Icon(Icons.payments),
+            label: "Transactions",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.paid),
-            label: "Transactions",
           ),
         ],
       ),

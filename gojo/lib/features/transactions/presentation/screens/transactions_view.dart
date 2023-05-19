@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gojo/features/transactions/data_layer/repository/transactions_repository.dart';
 import 'package:gojo/features/transactions/presentation/bloc/transactions_bloc.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({super.key});

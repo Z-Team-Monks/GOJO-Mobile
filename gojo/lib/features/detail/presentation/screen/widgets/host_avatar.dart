@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/model/user.dart';
+import '../../../../../core/model/user.dart';
 
 class HostAvatar extends StatelessWidget {
   final User owner;

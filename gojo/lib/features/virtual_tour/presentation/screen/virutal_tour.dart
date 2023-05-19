@@ -18,6 +18,7 @@ class _VirtualTourViewState extends State<VirtualTourView> {
   void initState() {
     super.initState();
     controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
         Uri.parse(virtualTourUrl),
       );

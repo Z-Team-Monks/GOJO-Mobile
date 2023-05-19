@@ -1,10 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:gojo/features/appointment/schedule_appointment/data/model/availablity.dart';
 
 import '../../../../core/model/user.dart';
 import '../../../home/data_layer/model/property_item.dart';
 import '../../../review/data/models/review.dart';
 
-class Property extends Equatable {
+class Property {
   final String id;
   final String title;
   final User owner;
@@ -18,6 +18,7 @@ class Property extends Equatable {
   final List<Facility> facilities;
   final List<Review> reviews;
   final String category;
+  final AvailabilityModel availability;
 
   const Property({
     required this.id,
@@ -33,6 +34,7 @@ class Property extends Equatable {
     required this.facilities,
     required this.description,
     required this.category,
+    required this.availability,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
@@ -52,6 +54,7 @@ class Property extends Equatable {
           .toList(),
       description: json['description'],
       category: json['category'],
+      availability: AvailabilityModel.fromMap(json['availability']),
     );
   }
 
@@ -70,23 +73,7 @@ class Property extends Equatable {
       "facilities": facilities,
       "description": description,
       "category": category,
+      "availability": availability,
     };
   }
-
-  @override
-  List<Object> get props => [
-        id,
-        owner,
-        virtualTourId,
-        title,
-        images,
-        price,
-        address,
-        reviews,
-        rating,
-        area,
-        facilities,
-        description,
-        category,
-      ];
 }

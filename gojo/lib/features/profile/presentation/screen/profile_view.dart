@@ -88,7 +88,18 @@ class ProfileButtons extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 15),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: ProfileIconButton(
+              icon: Icons.calendar_month,
+              label: "Appointments",
+              onPressed: () {
+                Navigator.pushNamed(context, GojoRoutes.myAppointments);
+              },
+            ),
+          ),
+          const SizedBox(width: 15),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ProfileIconButton(

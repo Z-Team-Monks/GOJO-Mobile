@@ -1,3 +1,5 @@
+import 'package:gojo/features/appointment/schedule_appointment/data/model/availablity.dart';
+
 import '../../../../core/model/user.dart';
 import '../../../home/data_layer/model/property_item.dart';
 import '../../../review/data/models/review.dart';
@@ -71,6 +73,14 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepositoryAPI {
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
       ],
+      availability: AvailabilityModel(
+        days: [1, 2, 3, 4, 5],
+        timeSlots: {
+          "1": ["10:00 AM", "11:00 AM", "12:00 AM"],
+          "2": ["10:00 AM", "11:00 AM", "12:00 AM"],
+          "3": ["9:00 AM", "11:00 AM", "12:00 AM"],
+        },
+      ),
     );
 
     return Future.delayed(

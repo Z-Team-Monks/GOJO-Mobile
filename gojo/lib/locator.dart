@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
+import 'package:gojo/features/appointment/schedule_appointment/data/repository/schedule_appointment_repository.dart';
 import 'package:gojo/features/messages/chat/data/repository/chat_repository.dart';
 import 'package:gojo/features/messages/chat/presentation/bloc/chat_gen.dart';
 import 'package:gojo/features/messages/chat/presentation/bloc/chat_message_bloc.dart';
@@ -36,6 +37,10 @@ class Locator {
       () => ChatGenerator(
         chatMessageBloc: GetIt.I<ChatMessageBloc>(),
       ),
+    );
+
+    GetIt.I.registerLazySingleton(
+      () => ScheduleAppointmentRepositoryFake(),
     );
   }
 }

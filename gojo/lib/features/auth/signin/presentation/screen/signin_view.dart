@@ -49,7 +49,7 @@ class SignInView extends StatelessWidget {
             GojoBarButton(
               title: "Login",
               onClick: (() {
-                Navigator.pushNamed(context, GojoRoutes.otp);
+                Navigator.pushNamed(context, GojoRoutes.root);
               }),
             ),
             const Spacer(),

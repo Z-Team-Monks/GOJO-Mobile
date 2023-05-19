@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/features/detail/presentation/widgets/review_card.dart';
+import 'package:gojo/features/detail/presentation/screen/widgets/review_card.dart';
 
-import '../../../review/data/models/review.dart';
-import '../../../review/presentation/review_view.dart';
+import '../../../../review/data/models/review.dart';
+import '../../../../review/presentation/screen/review_view.dart';
 
 class Reviews extends StatelessWidget {
   final List<Review> reviews;
