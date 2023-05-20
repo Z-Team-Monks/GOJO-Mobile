@@ -66,6 +66,10 @@ class _RootViewState extends State<RootView> {
             icon: Icon(Icons.person),
             label: "Profile",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payments_outlined),
+            label: "Transactions",
+          ),
         ],
       ),
     );

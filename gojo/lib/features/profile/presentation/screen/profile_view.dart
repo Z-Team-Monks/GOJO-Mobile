@@ -17,6 +17,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
+      label: "Profile",
       child: BlocProvider(
         create: (context) => ProfileBloc(GetIt.I<ProfileRepositoryAPI>())
           ..add(
