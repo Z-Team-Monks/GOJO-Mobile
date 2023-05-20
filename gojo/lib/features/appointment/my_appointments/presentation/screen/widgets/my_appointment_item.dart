@@ -25,7 +25,7 @@ class MyAppointementsItem extends StatelessWidget {
             headerAlignment: ExpandablePanelHeaderAlignment.center,
           ),
           header: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(fullName),
@@ -34,7 +34,7 @@ class MyAppointementsItem extends StatelessWidget {
           ),
           collapsed: Container(),
           expanded: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 12),
+            padding: const EdgeInsets.only(right: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
