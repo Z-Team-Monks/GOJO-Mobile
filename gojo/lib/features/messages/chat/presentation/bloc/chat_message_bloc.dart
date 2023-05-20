@@ -1,33 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/messages/chat/data/repository/chat_repository.dart';
 
 import '../../../../../core/model/user.dart';
-import '../../data/model/chat.dart';
+import '../../../contacts/data/model/chat.dart';
 import 'chat_gen.dart';
 
 part 'chat_message_event.dart';
 part 'chat_message_state.dart';
 
 class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
-  final ChatRepositoryAPI chatRepository;
-
-  ChatMessageBloc({required this.chatRepository})
-      : super(const ChatMessageState()) {
+  ChatMessageBloc() : super(const ChatMessageState()) {
     on<ChatMessageLoad>((event, emit) async {
-      emit(state.copyWith(fetchStatus: FetchChatMessageStatus.loading));
-      try {
-        final messages = await chatRepository.getMessages(event.chatId);
-        emit(
-          state.copyWith(
-            messages: messages,
-            fetchStatus: FetchChatMessageStatus.success,
-          ),
-        );
-      } catch (e) {
-        emit(state.copyWith(fetchStatus: FetchChatMessageStatus.error));
-      }
+      emit(state.copyWith(
+        fetchStatus: FetchChatMessageStatus.success,
+        messages: event.messages,
+      ));
     });
 
     on<ChatMessageChange>((event, emit) {
@@ -51,8 +39,8 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       final messages = state.messages +
           [
             ChatMessage(
-              id: "you",
               message: state.newMessage,
+              timestamp: DateTime.now().toString(),
               sender: user,
             ),
           ];
@@ -65,21 +53,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     });
 
     on<ChatMessageReceive>((event, emit) {
-      const user = User(
-        id: "other",
-        firstName: "Kebede",
-        lastName: "Alemayehu",
-        phoneNumber: "0949024607",
-        profilePicture: "",
-      );
-      final messages = state.messages +
-          [
-            ChatMessage(
-              id: "other",
-              message: event.message,
-              sender: user,
-            ),
-          ];
+      final messages = state.messages + [event.chat];
       emit(state.copyWith(messages: messages));
     });
   }

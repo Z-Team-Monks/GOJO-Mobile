@@ -3,12 +3,12 @@ part of 'chat_message_bloc.dart';
 abstract class ChatMessageEvent extends Equatable {}
 
 class ChatMessageLoad extends ChatMessageEvent {
-  final String chatId;
+  final List<ChatMessage> messages;
 
-  ChatMessageLoad({required this.chatId});
+  ChatMessageLoad({required this.messages});
 
   @override
-  List<Object> get props => [chatId];
+  List<Object> get props => [messages];
 }
 
 class ChatMessageChange extends ChatMessageEvent {
@@ -21,18 +21,19 @@ class ChatMessageChange extends ChatMessageEvent {
 }
 
 class ChatMessageSend extends ChatMessageEvent {
-  ChatMessageSend();
+  final String message;
+
+  ChatMessageSend(this.message);
 
   @override
   List<Object> get props => [];
 }
 
 class ChatMessageReceive extends ChatMessageEvent {
-  final String chatId;
-  final String message;
+  final ChatMessage chat;
 
-  ChatMessageReceive({required this.chatId, required this.message});
+  ChatMessageReceive({required this.chat});
 
   @override
-  List<Object> get props => [chatId, message];
+  List<Object> get props => [chat];
 }

@@ -3,32 +3,30 @@ import 'package:equatable/equatable.dart';
 import '../../../../../core/model/user.dart';
 
 class ChatMessage extends Equatable {
-  final String id;
   final String message;
   final User sender;
+  final String timestamp;
 
   const ChatMessage({
-    required this.id,
     required this.message,
     required this.sender,
+    required this.timestamp,
   });
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) {
     return ChatMessage(
-      id: json['id'],
-      message: json['message'],
+      message: json['content'],
+      timestamp: json['timestamp'],
       sender: User.fromJson(json['sender']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "id": id,
       "message": message,
-      "sender": sender.toJson(),
     };
   }
 
   @override
-  List<Object?> get props => [id, message, sender];
+  List<Object?> get props => [timestamp, message, sender];
 }

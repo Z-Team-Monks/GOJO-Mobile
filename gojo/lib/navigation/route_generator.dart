@@ -12,6 +12,7 @@ import '../features/home/presentation/screen/home_view.dart';
 import '../features/map/presentation/screen/map_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
+import 'args/chat_args.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
 import '../root.dart';
 
@@ -29,7 +30,9 @@ class RouteGenerator {
       case GojoRoutes.contacts:
         return MaterialPageRoute(builder: (_) => const ContactsView());
       case GojoRoutes.chat:
-        return MaterialPageRoute(builder: (_) => const ChatView());
+        final args = settings.arguments as ChatArgs;
+        return MaterialPageRoute(
+            builder: (_) => ChatView(messages: args.messages));
       case GojoRoutes.root:
         return MaterialPageRoute(builder: (_) => const RootView());
       case GojoRoutes.app:

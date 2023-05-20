@@ -1,40 +1,40 @@
 import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:gojo/features/messages/chat/presentation/bloc/chat_message_bloc.dart';
+import 'package:web_socket_channel/io.dart';
+
+import '../../../contacts/data/model/chat.dart';
 
 class ChatGenerator {
-  StreamController<String> _controller = StreamController<String>();
+  final IOWebSocketChannel channel = IOWebSocketChannel.connect(
+    Uri.parse("ws://localhost:8000/ws/chat/2/1/"),
+  );
+
   final ChatMessageBloc chatMessageBloc;
-  int index = 0;
-  final replies = [
-    "Okay, see you then!",
-    "Hey! How are you?",
-    "It was nice meeting you in person.",
-    "See you soon!",
-  ];
 
   ChatGenerator({required this.chatMessageBloc}) {
-    Timer.periodic(const Duration(seconds: 6), (timer) {
-      if (_controller.isClosed) {
-        _controller = StreamController<String>();
-      }
-      if (!_controller.isClosed) {
-        _controller.sink.add(replies[(index++) % replies.length]);
-      }
-    });
-    _controller.stream.listen((event) {
+    debugPrint(channel.toString());
+    channel.stream.listen((event) {
+      debugPrint(event);
       chatMessageBloc.add(
-        ChatMessageReceive(chatId: "1", message: event),
+        ChatMessageReceive(
+          chat: ChatMessage.fromJson(jsonDecode(event)),
+        ),
       );
     });
   }
 
-  Stream<String> get stream => _controller.stream;
+  Stream<dynamic> get stream => channel.stream;
 
   sendMessage(ChatMessageSend chatMessage) {
+    debugPrint(chatMessage.message);
+    channel.sink.add(jsonEncode({"content": chatMessage}));
     chatMessageBloc.add(chatMessage);
   }
 
   dispose() {
-    _controller.close();
+    channel.sink.close();
   }
 }
