@@ -8,12 +8,15 @@ import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../contacts/data/model/chat.dart';
 import '../bloc/chat_message_bloc.dart';
 
 const loggedInUserId = "you";
 
 class ChatView extends StatelessWidget {
-  const ChatView({super.key});
+  final List<ChatMessage> messages;
+
+  const ChatView({super.key, required this.messages});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,9 @@ class ChatView extends StatelessWidget {
       create: (context) {
         return GetIt.I<ChatMessageBloc>()
           ..add(
-            ChatMessageLoad(chatId: "chatId"),
+            ChatMessageLoad(
+              messages: messages,
+            ),
           );
       },
       child: GestureDetector(
@@ -32,7 +37,9 @@ class ChatView extends StatelessWidget {
             currentFocus.unfocus();
           }
         },
-        child: ChatContent(),
+        child: ChatContent(
+            label:
+                "${messages[0].sender.firstName} ${messages[0].sender.lastName}"),
       ),
     );
   }
@@ -42,8 +49,9 @@ class ChatContent extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final ChatGenerator _chatGenerator = GetIt.I<ChatGenerator>();
   final TextEditingController _controller = TextEditingController();
+  final String label;
 
-  ChatContent({super.key});
+  ChatContent({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -57,65 +65,71 @@ class ChatContent extends StatelessWidget {
           );
         }
       },
-      child: GojoParentView(
-        child: Flex(
-          direction: Axis.vertical,
-          children: [
-            Expanded(
-              flex: 9,
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Column(
-                  children: [
-                    BlocBuilder<ChatMessageBloc, ChatMessageState>(
-                      builder: (context, state) {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.messages.length,
-                          itemBuilder: (context, index) {
-                            if (state.messages[index].sender.id ==
-                                loggedInUserId) {
-                              return GojoSentChatBubble(
-                                content: state.messages[index].message,
-                              );
-                            } else {
-                              return GojoReceivedChatBubble(
-                                image: AssetImage(
-                                  Resources.gojoImages.headShot,
-                                ),
-                                content: state.messages[index].message,
-                              );
-                            }
+      child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
+        builder: (context, state) {
+          return GojoParentView(
+            label: label,
+            child: Flex(
+              direction: Axis.vertical,
+              children: [
+                Expanded(
+                  flex: 9,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Column(
+                      children: [
+                        BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                          builder: (context, state) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.messages.length,
+                              itemBuilder: (context, index) {
+                                if (state.messages[index].sender.id ==
+                                    loggedInUserId) {
+                                  return GojoSentChatBubble(
+                                    content: state.messages[index].message,
+                                  );
+                                } else {
+                                  return GojoReceivedChatBubble(
+                                    image: AssetImage(
+                                      Resources.gojoImages.headShot,
+                                    ),
+                                    content: state.messages[index].message,
+                                  );
+                                }
+                              },
+                            );
                           },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                BlocBuilder<ChatMessageBloc, ChatMessageState>(
+                  builder: (context, state) {
+                    return GojoChatInput(
+                      label: "Message",
+                      controller: _controller,
+                      onChanged: (value) {
+                        BlocProvider.of<ChatMessageBloc>(context).add(
+                          ChatMessageChange(message: value),
                         );
                       },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            BlocBuilder<ChatMessageBloc, ChatMessageState>(
-              builder: (context, state) {
-                return GojoChatInput(
-                  label: "Message",
-                  controller: _controller,
-                  onChanged: (value) {
-                    BlocProvider.of<ChatMessageBloc>(context).add(
-                      ChatMessageChange(message: value),
+                      onSendIconPressed: () {
+                        if (state.newMessage.isNotEmpty) {
+                          _chatGenerator
+                              .sendMessage(ChatMessageSend(state.newMessage));
+                        }
+                        _controller.text = "";
+                      },
                     );
                   },
-                  onSendIconPressed: () {
-                    if (state.newMessage.isNotEmpty) {
-                      _chatGenerator.sendMessage(ChatMessageSend());
-                    }
-                    _controller.text = "";
-                  },
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
