@@ -1,20 +1,33 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dashed_rect/dashed_rect.dart';
 import 'package:flutter/material.dart';
+import 'package:gojo/features/auth/register/presentation/screen/widgets/selected_file.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import 'widgets/choose_profile.dart';
+import 'widgets/data_filled.dart';
+import 'widgets/label_row.dart';
+import 'widgets/vertical_line.dart';
 
-class RegisterView extends StatefulWidget {
+class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  Widget build(BuildContext context) {
+    return const _RegisterView();
+  }
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class _RegisterView extends StatefulWidget {
+  const _RegisterView();
+
+  @override
+  State<_RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<_RegisterView> {
   int currentStep = 1;
   List<Widget> views = [];
 
@@ -39,7 +52,7 @@ class _RegisterViewState extends State<RegisterView> {
                           child: SizedBox(height: 20),
                         ),
                         InkWell(
-                          child: _buildRow(
+                          child: LabelRow(
                             step: 1,
                             title: "Personal Information",
                             isSelected: currentStep == 1,
@@ -50,9 +63,9 @@ class _RegisterViewState extends State<RegisterView> {
                             });
                           },
                         ),
-                        _buildLine(true),
+                        const VerticalLine(visible: true),
                         InkWell(
-                          child: _buildRow(
+                          child: LabelRow(
                             step: 2,
                             title: "ID Card",
                             isSelected: currentStep == 2,
@@ -63,9 +76,9 @@ class _RegisterViewState extends State<RegisterView> {
                             });
                           },
                         ),
-                        _buildLine(true),
+                        const VerticalLine(visible: true),
                         InkWell(
-                          child: _buildRow(
+                          child: LabelRow(
                             step: 3,
                             title: "Check and Confirm",
                             isSelected: currentStep == 3,
@@ -76,7 +89,7 @@ class _RegisterViewState extends State<RegisterView> {
                             });
                           },
                         ),
-                        _buildLine(true),
+                        const VerticalLine(visible: true),
                       ],
                     ),
                   ],
@@ -177,7 +190,7 @@ class _RegisterViewState extends State<RegisterView> {
           ),
         ),
         SizedBox(height: 25),
-        _buildSelectedFileView(context),
+        SelectedFileView(context: context),
         SizedBox(height: 15),
         GojoBarButton(
           title: "Next",
@@ -191,153 +204,32 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  Container _buildSelectedFileView(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: Color(0xFFD5D5D5)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(
-              Icons.photo_library,
-              color: Color.fromARGB(150, 27, 181, 92),
-            ),
-            Text(
-              "No Selected File",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildCheckAndConfirm(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(child: _buildProfilePic()),
-        SizedBox(height: 10),
-        _buildDataFilled(
-          context,
-          label: "First Name",
-          value: "Kidus",
-        ),
-        SizedBox(height: 10),
-        _buildDataFilled(
-          context,
-          label: "Last Name",
-          value: "Yoseph",
-        ),
-        SizedBox(height: 10),
-        _buildDataFilled(
-          context,
-          label: "Phone Number",
-          value: "+251955211643",
-        ),
-        SizedBox(height: 10),
-        _buildSelectedFileView(context),
-        SizedBox(height: 10),
+        Center(child: ChooseProfilePic()),
+        const SizedBox(height: 10),
+        DataFilled(label: "First Name", value: "Kidus"),
+        const SizedBox(height: 10),
+        DataFilled(label: "Last Name", value: "Yoseph"),
+        const SizedBox(height: 10),
+        DataFilled(label: "Phone Number", value: "+251955211643"),
+        const SizedBox(height: 10),
+        SelectedFileView(context: context),
+        const SizedBox(height: 10),
         CheckboxListTile(
-          contentPadding: EdgeInsets.all(0),
           title: Text("I consent the details are valid"),
           value: true,
           onChanged: (newValue) {},
           controlAffinity: ListTileControlAffinity.leading,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         GojoBarButton(
           title: "Confirm",
           onClick: () {
             Navigator.pushNamed(context, GojoRoutes.otp);
           },
-        ),
-      ],
-    );
-  }
-
-  CircleAvatar _buildProfilePic() {
-    return CircleAvatar(
-      radius: 50,
-      backgroundColor: Colors.white,
-      child: CircleAvatar(
-        radius: 40,
-        backgroundImage: Image.asset(Resources.gojoImages.headShot).image,
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: Icon(
-            Icons.add_circle,
-            color: Resources.gojoColors.primaryColor,
-            size: 20.0,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Column _buildDataFilled(
-    BuildContext context, {
-    required String label,
-    required String value,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            color: Resources.gojoColors.primaryColor,
-          ),
-        ),
-        Text(
-          value,
-          style:
-              Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18),
-        ),
-        Divider(),
-      ],
-    );
-  }
-
-  Widget _buildLine(bool visible) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 14),
-      child: Container(
-        width: visible ? 1.0 : 0.0,
-        height: 16.0,
-        color: const Color.fromARGB(90, 255, 255, 255),
-      ),
-    );
-  }
-
-  Widget _buildRow({
-    required int step,
-    required String title,
-    required bool isSelected,
-  }) {
-    return Row(
-      children: [
-        CircleAvatar(
-          maxRadius: 15,
-          backgroundColor: isSelected
-              ? Colors.white
-              : const Color.fromARGB(90, 255, 255, 255),
-          foregroundColor: isSelected ? Colors.black : Colors.white,
-          child: Text("$step"),
-        ),
-        const SizedBox(width: 20),
-        Text(
-          title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-          ),
         ),
       ],
     );

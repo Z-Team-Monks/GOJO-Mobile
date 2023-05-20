@@ -84,7 +84,8 @@ class MapViewContent extends StatelessWidget {
                         builder: (context) => IconButton(
                           icon: Icon(
                             Icons.house,
-                            color: Resources.gojoColors.primaryColor,
+                            size: 30,
+                            color: Resources.gojoColors.black,
                           ),
                           onPressed: () {
                             BlocProvider.of<MapViewBloc>(context).add(
