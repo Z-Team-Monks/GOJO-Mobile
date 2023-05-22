@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:gojo/core/model/user.dart';
+import 'package:gojo/core/repository/user_repository.dart';
 import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
 
 abstract class SignInRepositoryAPI {
@@ -11,11 +12,13 @@ abstract class SignInRepositoryAPI {
   Future<void> persistUser(User user);
 }
 
-class SignInRepositoryImpl {
+class SignInRepositoryImpl implements SignInRepositoryAPI {
   final SignInClientAPI signInClient;
+  final UserRepositoryAPI userRepository;
 
-  SignInRepositoryImpl(this.signInClient);
+  SignInRepositoryImpl(this.signInClient, this.userRepository);
 
+  @override
   Future<Either<User, Error>> authenticate({
     required String phoneNumber,
     required String password,
@@ -29,5 +32,10 @@ class SignInRepositoryImpl {
     } catch (e) {
       return Right(e as Error);
     }
+  }
+
+  @override
+  Future<void> persistUser(User user) {
+    return userRepository.persistUser(user);
   }
 }
