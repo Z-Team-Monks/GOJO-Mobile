@@ -2,10 +2,10 @@ import 'package:formz/formz.dart';
 
 enum PhoneNumberError { empty, invalid }
 
-class PhoneNumber extends FormzInput<String, PhoneNumberError> {
-  const PhoneNumber.pure({String value = ''}) : super.pure(value);
+class PhoneNumberInput extends FormzInput<String, PhoneNumberError> {
+  const PhoneNumberInput.pure({String value = ''}) : super.pure(value);
 
-  const PhoneNumber.dirty({String value = ''}) : super.dirty(value);
+  const PhoneNumberInput.dirty({String value = ''}) : super.dirty(value);
 
   // Override validator to handle validating a given input value.
   @override

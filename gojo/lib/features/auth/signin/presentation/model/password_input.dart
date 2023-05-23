@@ -2,10 +2,10 @@ import 'package:formz/formz.dart';
 
 enum PasswordError { empty, invalid }
 
-class Password extends FormzInput<String, PasswordError> {
-  const Password.pure({String value = ''}) : super.pure(value);
+class PasswordInput extends FormzInput<String, PasswordError> {
+  const PasswordInput.pure({String value = ''}) : super.pure(value);
 
-  const Password.dirty({String value = ''}) : super.dirty(value);
+  const PasswordInput.dirty({String value = ''}) : super.dirty(value);
 
   // Override validator to handle validating a given input value.
   @override
