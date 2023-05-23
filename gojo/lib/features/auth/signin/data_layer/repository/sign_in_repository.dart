@@ -1,25 +1,25 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:gojo/core/model/user.dart';
-import 'package:gojo/core/repository/user_repository.dart';
 import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
 
 abstract class SignInRepositoryAPI {
-  Future<Either<User, Error>> authenticate({
+  Future<Either<User, Exception>> authenticate({
     required String phoneNumber,
     required String password,
   });
-
-  Future<void> persistUser(User user);
 }
 
 class SignInRepositoryImpl implements SignInRepositoryAPI {
   final SignInClientAPI signInClient;
-  final UserRepositoryAPI userRepository;
 
-  SignInRepositoryImpl(this.signInClient, this.userRepository);
+  SignInRepositoryImpl(this.signInClient);
 
   @override
-  Future<Either<User, Error>> authenticate({
+  Future<Either<User, Exception>> authenticate({
     required String phoneNumber,
     required String password,
   }) async {
@@ -28,14 +28,16 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
         phoneNumber: phoneNumber,
         password: password,
       );
-      return Left(User.fromJson(response.data));
+      return Left(User.fromJson(response.data['user']));
     } catch (e) {
-      return Right(e as Error);
+      if (e is DioError) {
+        debugPrint("Dio error ${e.message}");
+        if (e.response != null && e.response!.statusCode == 400) {
+          return Right(Exception("Invalid phone number or password!"));
+        }
+      }
+      debugPrint("Other error ${e.toString()}");
+      return Right(Exception("Can't connect at the moment. Try again later!"));
     }
-  }
-
-  @override
-  Future<void> persistUser(User user) {
-    return userRepository.persistUser(user);
   }
 }
