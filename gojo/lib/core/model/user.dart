@@ -16,6 +16,8 @@ class User extends Equatable {
   final String phoneNumber;
   @HiveField(4)
   final String profilePicture;
+  @HiveField(5)
+  final String? token;
 
   const User({
     required this.id,
@@ -23,6 +25,7 @@ class User extends Equatable {
     required this.lastName,
     required this.phoneNumber,
     required this.profilePicture,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -32,6 +35,7 @@ class User extends Equatable {
       lastName: json['last_name'],
       phoneNumber: json['phone'],
       profilePicture: json['avatar'],
+      token: json['token'],
     );
   }
 
@@ -42,6 +46,7 @@ class User extends Equatable {
       "lastName": lastName,
       "phoneNumber": phoneNumber,
       "profilePicture": profilePicture,
+      "token": token,
     };
   }
 
@@ -52,5 +57,6 @@ class User extends Equatable {
         lastName,
         phoneNumber,
         profilePicture,
+        token,
       ];
 }
