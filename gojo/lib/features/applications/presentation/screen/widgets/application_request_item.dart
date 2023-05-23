@@ -14,6 +14,7 @@ class ApplicationRequestItem extends StatelessWidget {
   final String startDate;
   final String endDate;
   final String description;
+  final Function()? onWithDraw;
 
   const ApplicationRequestItem({
     super.key,
@@ -24,6 +25,7 @@ class ApplicationRequestItem extends StatelessWidget {
     required this.startDate,
     required this.endDate,
     required this.description,
+    this.onWithDraw,
   });
 
   @override
@@ -58,6 +60,7 @@ class ApplicationRequestItem extends StatelessWidget {
               endDate: endDate,
               description: description,
               status: status,
+              onWithDraw: onWithDraw,
             ),
           ],
         ),
@@ -102,7 +105,7 @@ class ApplicationCollapsed extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Kanda Nok",
+                      title,
                       softWrap: true,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -145,6 +148,7 @@ class ApplicationExpanded extends StatelessWidget {
   final String endDate;
   final String description;
   final ApplicationStatusType status;
+  final Function()? onWithDraw;
 
   const ApplicationExpanded({
     super.key,
@@ -152,6 +156,7 @@ class ApplicationExpanded extends StatelessWidget {
     required this.endDate,
     required this.description,
     required this.status,
+    this.onWithDraw,
   });
 
   @override
@@ -187,7 +192,7 @@ class ApplicationExpanded extends StatelessWidget {
             visible: status == ApplicationStatusType.pending,
             child: GojoBarButton(
               title: "Withdraw",
-              onClick: () {},
+              onClick: onWithDraw,
               customHeight: 30,
               customWidth: 150,
             ),
