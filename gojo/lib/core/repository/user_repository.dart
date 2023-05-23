@@ -3,6 +3,7 @@ import 'package:gojo/core/model/user.dart';
 
 abstract class UserRepositoryAPI {
   Future<void> persistUser(User user);
+  Future<User?> getUser();
 }
 
 class UserRepositoryImpl implements UserRepositoryAPI {
@@ -13,5 +14,10 @@ class UserRepositoryImpl implements UserRepositoryAPI {
   @override
   Future<void> persistUser(User user) async {
     await localStorage.write("user", user);
+  }
+
+  @override
+  Future<User?> getUser() {
+    return localStorage.read("user");
   }
 }
