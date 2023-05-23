@@ -25,7 +25,7 @@ class ContactRepositoryFakeImpl implements ContactRepository {
   @override
   Future<List<Contact>> getContacts() {
     const user = User(
-      id: "you",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
@@ -33,7 +33,7 @@ class ContactRepositoryFakeImpl implements ContactRepository {
     );
 
     const sender = User(
-      id: "other",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
