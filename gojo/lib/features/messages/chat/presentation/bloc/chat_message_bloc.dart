@@ -30,7 +30,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     on<ChatMessageSend>((event, emit) async {
       // TODO: use logged in user
       const user = User(
-        id: "you",
+        id: 1,
         firstName: "Kebede",
         lastName: "Alemayehu",
         phoneNumber: "0949024607",

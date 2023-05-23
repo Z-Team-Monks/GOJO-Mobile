@@ -46,7 +46,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
     on<ReviewFormSubmitted>((event, emit) {
       // TODO: implement get user from auth
       const user = User(
-        id: "id",
+        id: 1,
         firstName: "Kebede",
         lastName: "Alemayehu",
         phoneNumber: "0949024607",

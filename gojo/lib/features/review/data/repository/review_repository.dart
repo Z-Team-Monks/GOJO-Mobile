@@ -25,7 +25,7 @@ class ReviewRepositoryFake implements ReviewRepositoryAPI {
   @override
   Future<Review> createReview(Review review) {
     const user = User(
-      id: "id",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
