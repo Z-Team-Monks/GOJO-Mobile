@@ -28,7 +28,7 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepositoryAPI {
   @override
   Future<Property> fetchProperty(String propertyId) {
     const user = User(
-      id: "id",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
