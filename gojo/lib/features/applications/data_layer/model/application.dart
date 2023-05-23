@@ -1,5 +1,5 @@
 class Application {
-  final String id;
+  final int id;
   final String title;
   final String thumbnailUrl;
   final String applicationDate;
@@ -18,7 +18,7 @@ class Application {
   });
 
   Application.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
+      : id = json['id'] as int,
         title = json['title'],
         thumbnailUrl = json['thumbnailUrl'],
         applicationDate = json['applicationDate'],
