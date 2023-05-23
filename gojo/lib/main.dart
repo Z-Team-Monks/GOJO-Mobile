@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initializes shared objects using getit.
-  Locator.setup();
+  await Locator.setup();
 
   // Initialize firebase.
   await Firebase.initializeApp(
