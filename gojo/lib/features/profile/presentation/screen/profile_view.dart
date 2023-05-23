@@ -10,6 +10,7 @@ import 'package:gojo/features/profile/data_layer/repository/profile_repository.d
 import 'package:gojo/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:gojo/features/profile/presentation/screen/model/profile_media_item.dart';
 import 'package:gojo/features/profile/presentation/screen/profile_icon_button.dart';
+import 'package:gojo/features/route_guard/presentation/bloc/route_guard_bloc.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -75,7 +76,7 @@ class ProfileButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: GojoPadding.small),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -101,15 +102,30 @@ class ProfileButtons extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: ProfileIconButton(
-              icon: Icons.settings,
-              label: "Settings",
-              onPressed: () {},
-            ),
-          ),
+          const LogoutButton(),
         ],
+      ),
+    );
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ProfileIconButton(
+        icon: Icons.logout,
+        label: "Logout",
+        onPressed: () {
+          context.read<RouteGuardBloc>().add(Logout());
+          Navigator.pushNamedAndRemoveUntil(
+              context, GojoRoutes.app, (route) => false);
+        },
       ),
     );
   }
