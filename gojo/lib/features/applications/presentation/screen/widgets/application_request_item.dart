@@ -44,7 +44,7 @@ class ApplicationRequestItem extends StatelessWidget {
           children: [
             Expanded(
               child: ApplicationCollapsed(
-                leadingImageUrl: Resources.gojoImages.headShot,
+                leadingImageUrl: leadingImageUrl,
                 title: title,
                 status: status,
                 topRightDate: topRightDate,
