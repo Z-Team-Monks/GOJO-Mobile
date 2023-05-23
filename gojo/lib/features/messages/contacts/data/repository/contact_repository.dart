@@ -25,7 +25,7 @@ class ContactRepositoryFakeImpl implements ContactRepository {
   @override
   Future<List<Contact>> getContacts() {
     const user = User(
-      id: "you",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
@@ -33,14 +33,14 @@ class ContactRepositoryFakeImpl implements ContactRepository {
     );
 
     const sender = User(
-      id: "other",
+      id: 1,
       firstName: "Kebede",
       lastName: "Alemayehu",
       phoneNumber: "0949024607",
       profilePicture: "",
     );
 
-    final chats = [
+    const chats = [
       ChatMessage(
         message: "Hey!",
         sender: user,
@@ -66,7 +66,7 @@ class ContactRepositoryFakeImpl implements ContactRepository {
 
     return Future.delayed(
       const Duration(seconds: 1),
-      () => [
+      () => const [
         Contact(
           sender: sender,
           chatMessages: chats,
