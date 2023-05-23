@@ -7,13 +7,15 @@ abstract class ApplicationsClientAPI {
   Future<List<Application>> getApprovedApplications();
 
   Future<List<Application>> getRejectedApplications();
+
+  Future<void> withdrawPendingApplication(int pendingApplicationId);
 }
 
 class ApplicationsClientImpl extends BaseApiClient
     implements ApplicationsClientAPI {
   @override
   Future<List<Application>> getPendingApplications() {
-    return get("applications?status=pending").then((value) =>
+    return get("applications/?status=pending").then((value) =>
         (value.data as List)
             .map((item) => Application.fromJson(item))
             .toList());
@@ -21,7 +23,7 @@ class ApplicationsClientImpl extends BaseApiClient
 
   @override
   Future<List<Application>> getApprovedApplications() {
-    return get("applications?status=approved").then((value) =>
+    return get("applications/?status=approved").then((value) =>
         (value.data as List)
             .map((item) => Application.fromJson(item))
             .toList());
@@ -29,9 +31,14 @@ class ApplicationsClientImpl extends BaseApiClient
 
   @override
   Future<List<Application>> getRejectedApplications() {
-    return get("applications?status=requested").then((value) =>
+    return get("applications/?status=rejected").then((value) =>
         (value.data as List)
             .map((item) => Application.fromJson(item))
             .toList());
+  }
+
+  @override
+  Future<void> withdrawPendingApplication(int pendingApplicationId) {
+    return delete("applications/$pendingApplicationId/");
   }
 }
