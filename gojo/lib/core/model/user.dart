@@ -34,7 +34,7 @@ class User extends Equatable {
       firstName: json['first_name'],
       lastName: json['last_name'],
       phoneNumber: json['phone'],
-      profilePicture: json['avatar'],
+      profilePicture: json['avatar'] ?? "https://tinyurl.com/znyhe2ba",
       token: json['token'],
     );
   }
