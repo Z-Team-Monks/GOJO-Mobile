@@ -18,5 +18,10 @@ class RouteGuardBloc extends Bloc<RouteGuardEvent, RouteGuardState> {
         emit(RouteGuardState.unauthenticated);
       }
     });
+    on<Logout>((event, emit) async {
+      emit(RouteGuardState.loading);
+      await userRepository.deleteUser();
+      emit(RouteGuardState.unauthenticated);
+    });
   }
 }
