@@ -2,19 +2,19 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/property/favorite/data/favorite_repository.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../constants/strings/app_routes.dart';
-import '../../../../appointment/schedule_appointment/presentation/screen/schedule_appointment.dart';
+import '../../../apply_for_rent/presentation/application.dart';
 import '../../../favorite/bloc/favorite_bloc.dart';
+import '../../../favorite/presentation/favorite_button.dart';
+import '../../../schedule_appointment/presentation/screen/schedule_appointment.dart';
 import '../../data/model/property.dart';
 import '../../data/repository/detail_repository.dart';
 import '../bloc/property_detail_bloc.dart';
-import 'widgets/application.dart';
 import 'widgets/host_avatar.dart';
 import 'widgets/rating.dart';
 import 'widgets/reviews.dart';
@@ -152,14 +152,14 @@ class PropertyDetailViewContent extends StatelessWidget {
                       BlocProvider(
                         create: (context) => FavoriteBloc(
                           propertyId: state.property!.id,
-                          favoritePropertyRepository:
-                              GetIt.I<FavoritePropertyRepositoryFake>(),
+                          propertyDetailRepository:
+                              GetIt.I<PropertyDetailRepositoryFake>(),
                         )..add(
                             LoadFavorite(
                               isFavorite: state.property!.isFavorite,
                             ),
                           ),
-                        child: FavoriteButton(),
+                        child: const FavoriteButton(),
                       ),
                     ],
                   ),
@@ -326,31 +326,6 @@ class PropertyDetailViewContent extends StatelessWidget {
       builder: (BuildContext context) {
         return const ApplicationForm();
       },
-    );
-  }
-}
-
-class FavoriteButton extends StatelessWidget {
-  const FavoriteButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        BlocProvider.of<FavoriteBloc>(context).add(
-          FavoriteStatusChanged(),
-        );
-      },
-      icon: BlocBuilder<FavoriteBloc, FavoriteState>(
-        builder: (context, state) {
-          return Icon(
-            state.isFavorite ? Icons.favorite : Icons.favorite_outline,
-            color: state.isFavorite ? Colors.red : Colors.white,
-          );
-        },
-      ),
     );
   }
 }

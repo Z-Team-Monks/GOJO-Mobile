@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/features/appointment/my_appointments/presentation/screen/my_appointments_view.dart';
 import 'package:gojo/features/auth/otp/presentation/otp_view.dart';
 import 'package:gojo/features/applications/presentation/screen/applications_view.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
+import '../features/appointments/presentation/screen/my_appointments_view.dart';
 import '../features/auth/register/presentation/screen/register.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
-import '../features/detail/presentation/screen/detail.dart';
 import '../features/home/presentation/screen/home_view.dart';
 import '../features/map/presentation/screen/map_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
+import '../features/property/detail/presentation/screen/detail.dart';
 import 'args/chat_args.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
 import '../root.dart';
