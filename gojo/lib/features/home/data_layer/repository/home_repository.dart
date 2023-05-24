@@ -56,6 +56,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
           Facility(name: "Bedroom", count: 2),
         ],
         rent: 14000,
+        rating: 4.97,
       ),
       PropertyItem(
         id: "2",
@@ -67,6 +68,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
           Facility(name: "Bedroom", count: 2),
         ],
         rent: 24000,
+        rating: 3.8,
       ),
       PropertyItem(
         id: "3",
@@ -78,6 +80,7 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
           Facility(name: "Bedroom", count: 2),
         ],
         rent: 34000,
+        rating: 4.2,
       ),
     ];
 

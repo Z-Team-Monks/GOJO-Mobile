@@ -25,6 +25,7 @@ PropertyItem _$PropertyItemFromJson(Map<String, dynamic> json) => PropertyItem(
           .map((e) => Facility.fromJson(e as Map<String, dynamic>))
           .toList(),
       rent: json['rent'] as int,
+      rating: (json['rating'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PropertyItemToJson(PropertyItem instance) =>
@@ -35,6 +36,7 @@ Map<String, dynamic> _$PropertyItemToJson(PropertyItem instance) =>
       'category': instance.category,
       'facilities': instance.facilities,
       'rent': instance.rent,
+      'rating': instance.rating,
     };
 
 PropertyItemList _$PropertyItemListFromJson(Map<String, dynamic> json) =>
