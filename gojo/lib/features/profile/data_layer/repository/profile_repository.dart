@@ -39,6 +39,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Bedroom", count: 2),
       ],
       rent: 14000,
+      rating: 4.9,
     ),
     PropertyItem(
       id: "2",
@@ -50,6 +51,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Bedroom", count: 2),
       ],
       rent: 24000,
+      rating: 4.9,
     ),
     PropertyItem(
       id: "3",
@@ -61,6 +63,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Bedroom", count: 2),
       ],
       rent: 34000,
+      rating: 4.9,
     ),
   ]);
 
