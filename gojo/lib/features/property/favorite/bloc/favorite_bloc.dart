@@ -1,15 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gojo/features/property/favorite/data/favorite_repository.dart';
+
+import '../../detail/data/repository/detail_repository.dart';
 
 part 'favorite_event.dart';
 part 'favorite_state.dart';
 
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
-  final FavoritePropertyRepository favoritePropertyRepository;
+  final PropertyDetailRepository propertyDetailRepository;
   final String propertyId;
   FavoriteBloc({
-    required this.favoritePropertyRepository,
+    required this.propertyDetailRepository,
     required this.propertyId,
   }) : super(const FavoriteState()) {
     on<LoadFavorite>((event, emit) {
@@ -30,7 +31,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
   void _handleDeleteFavorite() async {
     try {
-      await favoritePropertyRepository.unfavorProperty(propertyId);
+      await propertyDetailRepository.unfavorProperty(propertyId);
     } catch (e) {
       // ignore
     }
@@ -38,7 +39,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
   void _handlePostFavorite() async {
     try {
-      await favoritePropertyRepository.favorProperty(propertyId);
+      await propertyDetailRepository.favorProperty(propertyId);
     } catch (e) {
       // ignore
     }

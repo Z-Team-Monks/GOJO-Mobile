@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/detail/presentation/screen/detail.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
-import '../../data/model/chat.dart';
+import '../../../../profile/presentation/screen/profile_view.dart';
 import '../../data/repository/contact_repository.dart';
 import '../../../../../navigation/args/chat_args.dart';
 import '../bloc/bloc/contact_bloc.dart';
