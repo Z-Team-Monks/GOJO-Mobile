@@ -29,7 +29,7 @@ class DataFilled extends StatelessWidget {
           style:
               Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18),
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }

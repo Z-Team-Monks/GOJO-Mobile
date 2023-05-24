@@ -30,10 +30,11 @@ class SignInView extends StatelessWidget {
             userRepository: GetIt.I<UserRepositoryAPI>(),
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const _Header(),
               const _SignInForm(),
-              const Spacer(),
+              const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -57,7 +58,7 @@ class SignInView extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({super.key});
+  const _Header();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +83,7 @@ class _Header extends StatelessWidget {
 }
 
 class _SignInForm extends StatelessWidget {
-  const _SignInForm({super.key});
+  const _SignInForm();
 
   @override
   Widget build(BuildContext context) {

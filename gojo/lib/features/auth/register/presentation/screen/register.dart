@@ -29,7 +29,6 @@ class _RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<_RegisterView> {
   int currentStep = 1;
-  List<Widget> views = [];
 
   @override
   Widget build(BuildContext context) {
@@ -39,62 +38,7 @@ class _RegisterViewState extends State<_RegisterView> {
           color: Resources.gojoColors.primaryColor,
           child: Column(
             children: [
-              Flexible(
-                flex: 3,
-                child: Row(
-                  children: [
-                    const SizedBox(width: 20),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Flexible(
-                          child: SizedBox(height: 20),
-                        ),
-                        InkWell(
-                          child: LabelRow(
-                            step: 1,
-                            title: "Personal Information",
-                            isSelected: currentStep == 1,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              currentStep = 1;
-                            });
-                          },
-                        ),
-                        const VerticalLine(visible: true),
-                        InkWell(
-                          child: LabelRow(
-                            step: 2,
-                            title: "ID Card",
-                            isSelected: currentStep == 2,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              currentStep = 2;
-                            });
-                          },
-                        ),
-                        const VerticalLine(visible: true),
-                        InkWell(
-                          child: LabelRow(
-                            step: 3,
-                            title: "Check and Confirm",
-                            isSelected: currentStep == 3,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              currentStep = 3;
-                            });
-                          },
-                        ),
-                        const VerticalLine(visible: true),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              _buildStepperHeader(),
               Flexible(
                 flex: 7,
                 child: Container(
@@ -132,6 +76,63 @@ class _RegisterViewState extends State<_RegisterView> {
     );
   }
 
+  Flexible _buildStepperHeader() {
+    return Flexible(
+      flex: 3,
+      child: Row(
+        children: [
+          const SizedBox(width: 20),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Flexible(child: SizedBox(height: 15)),
+              InkWell(
+                child: LabelRow(
+                  step: 1,
+                  title: "Personal Information",
+                  isSelected: currentStep == 1,
+                ),
+                onTap: () {
+                  setState(() {
+                    currentStep = 1;
+                  });
+                },
+              ),
+              const VerticalLine(visible: true),
+              InkWell(
+                child: LabelRow(
+                  step: 2,
+                  title: "ID Card",
+                  isSelected: currentStep == 2,
+                ),
+                onTap: () {
+                  setState(() {
+                    currentStep = 2;
+                  });
+                },
+              ),
+              const VerticalLine(visible: true),
+              InkWell(
+                child: LabelRow(
+                  step: 3,
+                  title: "Check and Confirm",
+                  isSelected: currentStep == 3,
+                ),
+                onTap: () {
+                  setState(() {
+                    currentStep = 3;
+                  });
+                },
+              ),
+              const VerticalLine(visible: true),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildPersonalInfo(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,17 +141,17 @@ class _RegisterViewState extends State<_RegisterView> {
           "Personal Information",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 10),
         GojoTextField(labelText: "First Name"),
-        SizedBox(height: 15),
+        const SizedBox(height: 10),
         GojoTextField(labelText: "Last Name"),
-        SizedBox(height: 15),
+        const SizedBox(height: 10),
         GojoTextField(labelText: "Phone"),
-        SizedBox(height: 15),
+        const SizedBox(height: 10),
         GojoTextField(labelText: "Password"),
-        SizedBox(height: 15),
+        const SizedBox(height: 10),
         GojoTextField(labelText: "Confirm Password"),
-        SizedBox(height: 25),
+        const SizedBox(height: 20),
         GojoBarButton(
           title: "Next",
           onClick: () {
@@ -189,9 +190,9 @@ class _RegisterViewState extends State<_RegisterView> {
             ),
           ),
         ),
-        SizedBox(height: 25),
+        const SizedBox(height: 25),
         SelectedFileView(context: context),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         GojoBarButton(
           title: "Next",
           onClick: () {
