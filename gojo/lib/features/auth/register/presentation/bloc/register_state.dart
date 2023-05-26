@@ -3,9 +3,6 @@ part of 'register_bloc.dart';
 enum RegisterFormStatus {
   editing,
   validAndConfirmed,
-  verificationInprogress,
-  verificationFailed,
-  verified,
   inprogress,
   success,
   error,
@@ -19,7 +16,7 @@ class RegisterState extends Equatable {
   final String? idPath;
   final String? avatar;
   final bool consentConfirmed;
-  final RegisterFormStatus status;
+  final RegisterFormStatus formStatus;
 
   const RegisterState({
     this.password = const PasswordInput.pure(),
@@ -29,7 +26,7 @@ class RegisterState extends Equatable {
     this.idPath,
     this.avatar,
     this.consentConfirmed = false,
-    this.status = RegisterFormStatus.editing,
+    this.formStatus = RegisterFormStatus.editing,
   });
 
   RegisterState copyWith({
@@ -40,7 +37,7 @@ class RegisterState extends Equatable {
     String? idPath,
     String? avatar,
     bool? consentConfirmed,
-    RegisterFormStatus? status,
+    RegisterFormStatus? formStatus,
   }) {
     return RegisterState(
       password: password ?? this.password,
@@ -50,7 +47,7 @@ class RegisterState extends Equatable {
       idPath: idPath ?? this.idPath,
       avatar: avatar ?? this.avatar,
       consentConfirmed: consentConfirmed ?? this.consentConfirmed,
-      status: status ?? this.status,
+      formStatus: formStatus ?? this.formStatus,
     );
   }
 
@@ -63,7 +60,7 @@ class RegisterState extends Equatable {
         idPath,
         avatar,
         consentConfirmed,
-        status,
+        formStatus,
       ];
 
   bool get isPersonalInfoFormValid =>

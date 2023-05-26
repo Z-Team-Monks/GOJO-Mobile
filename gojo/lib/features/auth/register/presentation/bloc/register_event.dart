@@ -62,16 +62,6 @@ class ConfirmedAndSubmitted extends RegisterEvent {
   List<Object> get props => [];
 }
 
-class SendVerificationCode extends RegisterEvent {
-  @override
-  List<Object> get props => [];
-}
-
-class PhoneVerified extends RegisterEvent {
-  @override
-  List<Object> get props => [];
-}
-
 class ConsentChanged extends RegisterEvent {
   @override
   List<Object> get props => [];

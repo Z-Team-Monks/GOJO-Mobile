@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:gojo/core/model/user.dart';
-import 'package:gojo/features/auth/register/data/repository/register_repository.dart';
-import 'package:gojo/features/auth/signin/presentation/model/password_input.dart';
-import 'package:gojo/features/auth/signin/presentation/model/phone_number_input.dart';
 
+import '../../../signin/presentation/model/password_input.dart';
+import '../../../signin/presentation/model/phone_number_input.dart';
+import '../../data/models/user_reg_model.dart';
+import '../../data/repository/register_repository.dart';
 import '../value_objects/name_input.dart';
 
 part 'register_event.dart';
@@ -20,7 +21,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         state.copyWith(
           fname: NameInput.dirty(value: event.fname),
-          status: RegisterFormStatus.editing,
+          formStatus: RegisterFormStatus.editing,
         ),
       );
     });
@@ -29,7 +30,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         state.copyWith(
           lname: NameInput.dirty(value: event.lname),
-          status: RegisterFormStatus.editing,
+          formStatus: RegisterFormStatus.editing,
         ),
       );
     });
@@ -38,7 +39,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         state.copyWith(
           phone: PhoneNumberInput.dirty(value: event.phone),
-          status: RegisterFormStatus.editing,
+          formStatus: RegisterFormStatus.editing,
         ),
       );
     });
@@ -47,7 +48,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         state.copyWith(
           password: PasswordInput.dirty(value: event.password),
-          status: RegisterFormStatus.editing,
+          formStatus: RegisterFormStatus.editing,
         ),
       );
     });
@@ -56,7 +57,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(
         state.copyWith(
           idPath: event.path,
-          status: RegisterFormStatus.editing,
+          formStatus: RegisterFormStatus.editing,
         ),
       );
     });
@@ -64,7 +65,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<AvatarChanged>((event, emit) {
       emit(state.copyWith(
         avatar: event.path,
-        status: RegisterFormStatus.editing,
+        formStatus: RegisterFormStatus.editing,
       ));
     });
 
@@ -76,41 +77,30 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     on<ConfirmedAndSubmitted>((event, emit) async {
       emit(state.copyWith(
-        status: RegisterFormStatus.success,
+        formStatus: RegisterFormStatus.inprogress,
       ));
 
       try {
-        final user = User(
-          id: 0,
+        final user = UserRegistrationModel(
           firstName: state.fname.value,
           lastName: state.lname.value,
           phoneNumber: state.phone.value,
-          profilePicture: state.avatar!,
+          profilePicture: state.avatar,
+          password: state.password.value,
+          identification: state.idPath!,
         );
-        await registerRepository.registerUser(
-          user: user,
-          filePath: state.idPath,
-        );
+
+        await registerRepository.registerUser(user: user);
         emit(state.copyWith(
-          status: RegisterFormStatus.success,
+          formStatus: RegisterFormStatus.success,
         ));
+        debugPrint("User Registered!!");
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
-          status: RegisterFormStatus.error,
+          formStatus: RegisterFormStatus.error,
         ));
       }
-    });
-
-    on<SendVerificationCode>((event, emit) {
-      emit(state.copyWith(
-        status: RegisterFormStatus.verificationInprogress,
-      ));
-    });
-
-    on<PhoneVerified>((event, emit) {
-      emit(state.copyWith(
-        status: RegisterFormStatus.verified,
-      ));
     });
   }
 }

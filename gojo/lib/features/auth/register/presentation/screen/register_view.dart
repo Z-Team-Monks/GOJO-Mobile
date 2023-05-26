@@ -5,17 +5,20 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/auth/register/presentation/screen/widgets/selected_file.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../../navigation/args/otp_args.dart';
 import '../../data/repository/register_repository.dart';
 import '../bloc/register_bloc.dart';
 import 'widgets/choose_profile.dart';
 import 'widgets/data_filled.dart';
 import 'widgets/label_row.dart';
+import 'widgets/selected_file.dart';
 import 'widgets/vertical_line.dart';
 
 class RegisterView extends StatelessWidget {
@@ -25,7 +28,7 @@ class RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => RegisterBloc(
-        registerRepository: GetIt.I<RegisterRepositoryFake>(),
+        registerRepository: GetIt.I<RegisterRepositoryImpl>(),
       ),
       child: const _RegisterView(),
     );
@@ -44,8 +47,23 @@ class _RegisterViewState extends State<_RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return BlocListener<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state.formStatus == RegisterFormStatus.error) {
+          GojoSnackBars.showError(context, "User Registration Failed!");
+        } else if (state.formStatus == RegisterFormStatus.success) {
+          Navigator.pushNamed(
+            context,
+            GojoRoutes.otp,
+            arguments: OtpArgs(
+              phone: state.phone.value,
+            ),
+          );
+        }
+      },
+      child: GojoParentView(
+        hasAppBar: false,
+        isFullScreen: true,
         child: Container(
           color: Resources.gojoColors.primaryColor,
           child: Stack(
@@ -154,14 +172,14 @@ class _RegisterViewState extends State<_RegisterView> {
               BlocBuilder<RegisterBloc, RegisterState>(
                 builder: (context, state) {
                   return InkWell(
+                    onTap: state.isIdCardSelected
+                        ? _handleCheckAndConfirmSelected
+                        : null,
                     child: LabelRow(
                       step: 3,
                       title: "Check and Confirm",
                       isSelected: currentStep == 3,
                     ),
-                    onTap: state.isIdCardSelected
-                        ? _handleCheckAndConfirmSelected
-                        : null,
                   );
                 },
               ),
@@ -416,9 +434,12 @@ class _RegisterViewState extends State<_RegisterView> {
           builder: (context, state) {
             return GojoBarButton(
               title: "Confirm",
+              loadingState: state.formStatus == RegisterFormStatus.inprogress,
               onClick: state.isRegisterFormValid
                   ? () {
-                      Navigator.pushNamed(context, GojoRoutes.otp);
+                      BlocProvider.of<RegisterBloc>(context).add(
+                        ConfirmedAndSubmitted(),
+                      );
                     }
                   : null,
             );

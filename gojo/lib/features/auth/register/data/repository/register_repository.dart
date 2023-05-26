@@ -1,9 +1,10 @@
-import 'package:gojo/features/auth/register/data/repository/register_client_api.dart';
-
-import '../../../../../core/model/user.dart';
+import '../models/user_reg_model.dart';
+import 'register_client_api.dart';
 
 abstract class RegisterRepository {
-  Future<void> registerUser({required User user, String? filePath});
+  Future<void> registerUser({required UserRegistrationModel user});
+  Future<void> sendOtp({required String phone});
+  Future<void> verifyUser({required String phone, required String otpCode});
 }
 
 class RegisterRepositoryImpl implements RegisterRepository {
@@ -12,14 +13,34 @@ class RegisterRepositoryImpl implements RegisterRepository {
   RegisterRepositoryImpl(this.registerClientAPI);
 
   @override
-  Future<void> registerUser({required User user, String? filePath}) async {
-    await registerClientAPI.registerUser(user: user, filePath: filePath);
+  Future<void> registerUser({required UserRegistrationModel user}) async {
+    await registerClientAPI.registerUser(user: user);
+  }
+
+  @override
+  Future<void> sendOtp({required String phone}) async {
+    await registerClientAPI.sendOtp(phone: phone);
+  }
+
+  @override
+  Future<void> verifyUser({required String phone, required String otpCode}) async {
+    await registerClientAPI.verifyUser(phone: phone, otpCode: otpCode);
   }
 }
 
 class RegisterRepositoryFake implements RegisterRepository {
   @override
-  Future<void> registerUser({required User user, String? filePath}) async {
+  Future<void> registerUser({required UserRegistrationModel user}) async {
+    return Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<void> sendOtp({required String phone}) async {
+    return Future.delayed(const Duration(seconds: 1));
+  }
+
+  @override
+  Future<void> verifyUser({required String phone, required String otpCode}) async {
     return Future.delayed(const Duration(seconds: 1));
   }
 }

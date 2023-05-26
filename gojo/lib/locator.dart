@@ -1,22 +1,23 @@
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
-import 'package:gojo/core/model/user.dart';
-import 'package:gojo/core/repository/user_repository.dart';
-import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
-import 'package:gojo/features/auth/register/data/repository/register_repository.dart';
-import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
-import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_repository.dart';
-import 'package:gojo/features/map/data/repository/map_view_repository.dart';
-import 'package:gojo/features/messages/chat/presentation/bloc/chat_gen.dart';
-import 'package:gojo/features/messages/chat/presentation/bloc/chat_message_bloc.dart';
-import 'package:gojo/features/messages/contacts/data/repository/contact_repository.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:gojo/features/property/detail/data/repository/detail_repository.dart';
 
+import 'Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
+import 'core/model/user.dart';
+import 'core/repository/user_repository.dart';
+import 'features/applications/data_layer/repository/application_repository.dart';
 import 'features/appointments/data_layer/repository/my_appointments_repository.dart';
+import 'features/auth/register/data/repository/register_client_api.dart';
+import 'features/auth/register/data/repository/register_repository.dart';
+import 'features/auth/signin/data_layer/repository/sign_in_client.dart';
+import 'features/auth/signin/data_layer/repository/sign_in_repository.dart';
 import 'features/home/data_layer/repository/home_repository.dart';
+import 'features/map/data/repository/map_view_repository.dart';
+import 'features/messages/chat/presentation/bloc/chat_gen.dart';
+import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
+import 'features/messages/contacts/data/repository/contact_repository.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
+import 'features/property/detail/data/repository/detail_repository.dart';
 import 'features/transactions/data_layer/repository/transactions_repository.dart';
 
 class Locator {
@@ -79,7 +80,9 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton(
-      () => RegisterRepositoryFake(),
+      () => RegisterRepositoryImpl(
+        RegisterClientImpl(),
+      ),
     );
     // GetIt.I.registerLazySingleton(
     //   () => ContactRepositoryImpl(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gojo/features/auth/otp/presentation/otp_view.dart';
-import 'package:gojo/features/applications/presentation/screen/applications_view.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
+import '../features/applications/presentation/screen/applications_view.dart';
 import '../features/appointments/presentation/screen/my_appointments_view.dart';
+import '../features/auth/otp/presentation/screen/otp_view.dart';
 import '../features/auth/register/presentation/screen/register_view.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/home/presentation/screen/home_view.dart';
@@ -12,9 +12,10 @@ import '../features/map/presentation/screen/map_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/messages/contacts/presentation/screen/contacts_view.dart';
 import '../features/property/detail/presentation/screen/detail.dart';
-import 'args/chat_args.dart';
 import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
 import '../root.dart';
+import 'args/chat_args.dart';
+import 'args/otp_args.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -32,7 +33,8 @@ class RouteGenerator {
       case GojoRoutes.chat:
         final args = settings.arguments as ChatArgs;
         return MaterialPageRoute(
-            builder: (_) => ChatView(messages: args.messages));
+          builder: (_) => ChatView(messages: args.messages),
+        );
       case GojoRoutes.root:
         return MaterialPageRoute(builder: (_) => const RootView());
       case GojoRoutes.app:
@@ -40,7 +42,10 @@ class RouteGenerator {
       case GojoRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegisterView());
       case GojoRoutes.otp:
-        return MaterialPageRoute(builder: (_) => const OTPView());
+        final args = settings.arguments as OtpArgs;
+        return MaterialPageRoute(
+          builder: (_) => OTPView(phone: args.phone),
+        );
       case GojoRoutes.map:
         return MaterialPageRoute(builder: (_) => const MapView());
       case GojoRoutes.myAppointments:
