@@ -29,26 +29,29 @@ class SignInView extends StatelessWidget {
             signInRepository: GetIt.I<SignInRepositoryAPI>(),
             userRepository: GetIt.I<UserRepositoryAPI>(),
           ),
-          child: Column(
-            children: [
-              const _Header(),
-              const _SignInForm(),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account?"),
-                  const SizedBox(width: 5),
-                  TextLink(
-                    label: "Register",
-                    onClick: () {
-                      Navigator.pushNamed(context, GojoRoutes.register);
-                    },
-                  )
-                ],
-              ),
-              const SizedBox(height: 30)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const _Header(),
+                const _SignInForm(),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    const SizedBox(width: 5),
+                    TextLink(
+                      label: "Register",
+                      onClick: () {
+                        Navigator.pushNamed(context, GojoRoutes.register);
+                      },
+                    )
+                  ],
+                ),
+                const SizedBox(height: 30)
+              ],
+            ),
           ),
         ),
       ),
@@ -57,7 +60,7 @@ class SignInView extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({super.key});
+  const _Header();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +85,7 @@ class _Header extends StatelessWidget {
 }
 
 class _SignInForm extends StatelessWidget {
-  const _SignInForm({super.key});
+  const _SignInForm();
 
   @override
   Widget build(BuildContext context) {
