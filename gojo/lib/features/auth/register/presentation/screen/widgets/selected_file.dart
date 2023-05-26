@@ -1,12 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-class SelectedFileView extends StatelessWidget {
-  const SelectedFileView({
+class PickAFileButton extends StatelessWidget {
+  final String? path;
+  const PickAFileButton({
     super.key,
-    required this.context,
+    this.path,
   });
-
-  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,16 @@ class SelectedFileView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Icon(
               Icons.photo_library,
               color: Color.fromARGB(150, 27, 181, 92),
             ),
+            const SizedBox(width: 15),
             Text(
-              "No Selected File",
+              path != null
+                  ? path!.substring(max(path!.length - 12, 0))
+                  : "Pick Image",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],

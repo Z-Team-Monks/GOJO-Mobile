@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 
 class LabelRow extends StatelessWidget {
   const LabelRow({
@@ -21,7 +22,8 @@ class LabelRow extends StatelessWidget {
           backgroundColor: isSelected
               ? Colors.white
               : const Color.fromARGB(90, 255, 255, 255),
-          foregroundColor: isSelected ? Colors.black : Colors.white,
+          foregroundColor:
+              isSelected ? Resources.gojoColors.primaryColor : Colors.white,
           child: Text("$step"),
         ),
         const SizedBox(width: 20),

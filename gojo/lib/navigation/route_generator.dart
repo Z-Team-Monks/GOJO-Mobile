@@ -5,7 +5,7 @@ import 'package:gojo/features/applications/presentation/screen/applications_view
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
 import '../features/appointments/presentation/screen/my_appointments_view.dart';
-import '../features/auth/register/presentation/screen/register.dart';
+import '../features/auth/register/presentation/screen/register_view.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/home/presentation/screen/home_view.dart';
 import '../features/map/presentation/screen/map_view.dart';

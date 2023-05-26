@@ -29,27 +29,29 @@ class SignInView extends StatelessWidget {
             signInRepository: GetIt.I<SignInRepositoryAPI>(),
             userRepository: GetIt.I<UserRepositoryAPI>(),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const _Header(),
-              const _SignInForm(),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account?"),
-                  const SizedBox(width: 5),
-                  TextLink(
-                    label: "Register",
-                    onClick: () {
-                      Navigator.pushNamed(context, GojoRoutes.register);
-                    },
-                  )
-                ],
-              ),
-              const SizedBox(height: 30)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const _Header(),
+                const _SignInForm(),
+                const SizedBox(height: 50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    const SizedBox(width: 5),
+                    TextLink(
+                      label: "Register",
+                      onClick: () {
+                        Navigator.pushNamed(context, GojoRoutes.register);
+                      },
+                    )
+                  ],
+                ),
+                const SizedBox(height: 30)
+              ],
+            ),
           ),
         ),
       ),

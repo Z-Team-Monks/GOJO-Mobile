@@ -14,7 +14,9 @@ class ReviewForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ReviewFormBloc(reviewRepository: ReviewRepositoryFake()),
+      create: (_) => ReviewFormBloc(
+        reviewRepository: ReviewRepositoryFake(),
+      ),
       child: const AddReviewPopup(),
     );
   }
@@ -98,22 +100,17 @@ class AddReviewPopup extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   BlocBuilder<ReviewFormBloc, ReviewFormState>(
-                    builder: (context, state) {
-                      switch (state.status) {
-                        case ReviewFormStatus.inprogress:
-                          return const CircularProgressIndicator();
-                        default:
-                          return GojoBarButton(
-                            title: "Submit",
-                            onClick: () {
-                              BlocProvider.of<ReviewFormBloc>(context).add(
-                                ReviewFormSubmitted(),
-                              );
-                            },
-                          );
-                      }
-                    },
-                  ),
+                      builder: (context, state) {
+                    return GojoBarButton(
+                      title: "Submit",
+                      loadingState: state.status == ReviewFormStatus.inprogress,
+                      onClick: () {
+                        BlocProvider.of<ReviewFormBloc>(context).add(
+                          ReviewFormSubmitted(),
+                        );
+                      },
+                    );
+                  }),
                 ],
               ),
             ),

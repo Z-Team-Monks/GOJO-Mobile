@@ -3,6 +3,7 @@ import 'package:gojo/Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
 import 'package:gojo/core/model/user.dart';
 import 'package:gojo/core/repository/user_repository.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
+import 'package:gojo/features/auth/register/data/repository/register_repository.dart';
 import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
 import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_repository.dart';
 import 'package:gojo/features/map/data/repository/map_view_repository.dart';
@@ -62,6 +63,10 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton(
+      () => MyAppointmentsRepositoryFake(),
+    );
+
+    GetIt.I.registerLazySingleton(
       () => PropertyDetailRepositoryFake(),
     );
 
@@ -71,6 +76,10 @@ class Locator {
 
     GetIt.I.registerLazySingleton(
       () => ContactRepositoryFakeImpl(),
+    );
+
+    GetIt.I.registerLazySingleton(
+      () => RegisterRepositoryFake(),
     );
     // GetIt.I.registerLazySingleton(
     //   () => ContactRepositoryImpl(
