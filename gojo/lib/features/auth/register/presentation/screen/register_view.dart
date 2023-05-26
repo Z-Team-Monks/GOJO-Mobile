@@ -139,14 +139,14 @@ class _RegisterViewState extends State<_RegisterView> {
               BlocBuilder<RegisterBloc, RegisterState>(
                 builder: (context, state) {
                   return InkWell(
+                    onTap: state.isPersonalInfoFormValid
+                        ? _handleIdCardSelected
+                        : null,
                     child: LabelRow(
                       step: 2,
                       title: "ID Card",
                       isSelected: currentStep == 2,
                     ),
-                    onTap: () {
-                      _handleIdCardSelected(state);
-                    },
                   );
                 },
               ),
@@ -159,9 +159,9 @@ class _RegisterViewState extends State<_RegisterView> {
                       title: "Check and Confirm",
                       isSelected: currentStep == 3,
                     ),
-                    onTap: () {
-                      _handleCheckAndConfirmSelected(state);
-                    },
+                    onTap: state.isIdCardSelected
+                        ? _handleCheckAndConfirmSelected
+                        : null,
                   );
                 },
               ),
@@ -255,9 +255,11 @@ class _RegisterViewState extends State<_RegisterView> {
           builder: (context, state) {
             return GojoBarButton(
               title: "Next",
-              onClick: () {
-                _handleIdCardSelected(state);
-              },
+              onClick: state.isPersonalInfoFormValid
+                  ? () {
+                      _handleIdCardSelected();
+                    }
+                  : null,
             );
           },
         ),
@@ -265,12 +267,10 @@ class _RegisterViewState extends State<_RegisterView> {
     );
   }
 
-  void _handleIdCardSelected(RegisterState state) {
-    if (state.isPersonalInfoFormValid) {
-      setState(() {
-        currentStep = 2;
-      });
-    }
+  void _handleIdCardSelected() {
+    setState(() {
+      currentStep = 2;
+    });
   }
 
   Widget _buildIdCard(BuildContext context) {
@@ -325,9 +325,9 @@ class _RegisterViewState extends State<_RegisterView> {
           builder: (context, state) {
             return GojoBarButton(
               title: "Next",
-              onClick: () {
-                _handleCheckAndConfirmSelected(state);
-              },
+              onClick: state.isIdCardSelected
+                  ? _handleCheckAndConfirmSelected
+                  : null,
             );
           },
         ),
@@ -335,12 +335,10 @@ class _RegisterViewState extends State<_RegisterView> {
     );
   }
 
-  void _handleCheckAndConfirmSelected(RegisterState state) {
-    if (state.isIdCardSelected) {
-      setState(() {
-        currentStep = 3;
-      });
-    }
+  void _handleCheckAndConfirmSelected() {
+    setState(() {
+      currentStep = 3;
+    });
   }
 
   Widget _buildCheckAndConfirm(BuildContext context) {
@@ -418,11 +416,11 @@ class _RegisterViewState extends State<_RegisterView> {
           builder: (context, state) {
             return GojoBarButton(
               title: "Confirm",
-              onClick: () {
-                if (state.isRegisterFormValid) {
-                  Navigator.pushNamed(context, GojoRoutes.otp);
-                }
-              },
+              onClick: state.isRegisterFormValid
+                  ? () {
+                      Navigator.pushNamed(context, GojoRoutes.otp);
+                    }
+                  : null,
             );
           },
         ),
