@@ -1,6 +1,6 @@
 import 'package:formz/formz.dart';
 
-enum NumberOfBathroomsError { empty, invalid, notNumber }
+enum NumberOfBathroomsError { empty, notNumber }
 
 class NumberOfBathroomsInput
     extends FormzInput<String, NumberOfBathroomsError> {

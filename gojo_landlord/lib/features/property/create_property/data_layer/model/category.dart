@@ -1,14 +1,14 @@
-class Facility {
+class Category {
   final String name;
   final int id;
 
-  Facility({
+  Category({
     required this.name,
     required this.id,
   });
 
-  factory Facility.fromJson(Map<String, dynamic> json) {
-    return Facility(
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
       name: json['name'],
       id: json['id'],
     );

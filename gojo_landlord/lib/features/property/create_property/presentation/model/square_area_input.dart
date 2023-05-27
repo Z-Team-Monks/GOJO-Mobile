@@ -1,24 +1,29 @@
 import 'package:formz/formz.dart';
 
-enum SqaureAreaError { empty, invalid }
+enum SquareAreaError { empty, notNumber }
 
-class SqaureAreaInput extends FormzInput<String, SqaureAreaError> {
-  const SqaureAreaInput.pure({String value = ''}) : super.pure(value);
+class SquareAreaInput extends FormzInput<String, SquareAreaError> {
+  const SquareAreaInput.pure({String value = ''}) : super.pure(value);
 
-  const SqaureAreaInput.dirty({String value = ''}) : super.dirty(value);
+  const SquareAreaInput.dirty({String value = ''}) : super.dirty(value);
 
   @override
-  SqaureAreaError? validator(String value) {
+  SquareAreaError? validator(String value) {
     if (value.isEmpty) {
-      return SqaureAreaError.empty;
+      return SquareAreaError.empty;
+    }
+    if (double.tryParse(value) == null) {
+      return SquareAreaError.notNumber;
     }
     return null;
   }
 
   String getErrorMessage() {
     switch (displayError) {
-      case SqaureAreaError.empty:
-        return "Sqaure area can't be empty!";
+      case SquareAreaError.empty:
+        return "Square area can't be empty!";
+      case SquareAreaError.notNumber:
+        return "Invalid square area input";
       default:
         return "";
     }

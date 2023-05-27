@@ -3,39 +3,54 @@ part of 'create_property_bloc.dart';
 @immutable
 abstract class CreatePropertyEvent {}
 
-class OnTitleInputChanged extends CreatePropertyEvent {
-  final TitleInput titleInput;
-  OnTitleInputChanged(this.titleInput);
+class TitleInputChanged extends CreatePropertyEvent {
+  final String titleInput;
+  TitleInputChanged(this.titleInput);
 }
 
-class OnDescriptionInputChanged extends CreatePropertyEvent {
+class DescriptionInputChanged extends CreatePropertyEvent {
   final String descriptionInput;
-  OnDescriptionInputChanged(this.descriptionInput);
+  DescriptionInputChanged(this.descriptionInput);
 }
 
-class OnNumberOfBedRoomsInputChanged extends CreatePropertyEvent {
-  final NumberOfBedRoomsInput numberOfBedRoomsInput;
-  OnNumberOfBedRoomsInputChanged(this.numberOfBedRoomsInput);
+class NumberOfBedRoomsInputChanged extends CreatePropertyEvent {
+  final String numberOfBedRoomsInput;
+  NumberOfBedRoomsInputChanged(this.numberOfBedRoomsInput);
 }
 
-class OnNumberOfBathroomsInputChanged extends CreatePropertyEvent {
-  final NumberOfBathroomsInput numberOfBathroomsInput;
-  OnNumberOfBathroomsInputChanged(this.numberOfBathroomsInput);
+class NumberOfBathRoomsInputChanged extends CreatePropertyEvent {
+  final String numberOfBathroomsInput;
+  NumberOfBathRoomsInputChanged(this.numberOfBathroomsInput);
 }
 
-class OnSqaureAreaInputChanged extends CreatePropertyEvent {
-  final SqaureAreaInput sqaureAreaInput;
-  OnSqaureAreaInputChanged(this.sqaureAreaInput);
+class SqaureAreaInputChanged extends CreatePropertyEvent {
+  final String squareAreaInput;
+  SqaureAreaInputChanged(this.squareAreaInput);
 }
 
-class OnCategorySelected extends CreatePropertyEvent {
+class CategorySelected extends CreatePropertyEvent {
   final String selectedCategory;
-  OnCategorySelected(this.selectedCategory);
+  CategorySelected(this.selectedCategory);
 }
 
-class OnFacilitySelected extends CreatePropertyEvent {
+class FacilitySelected extends CreatePropertyEvent {
   final String selectedFacility;
-  OnFacilitySelected(this.selectedFacility);
+  FacilitySelected(this.selectedFacility);
 }
 
-class OnSaveButtonPressed extends CreatePropertyEvent {}
+class StartDateSelected extends CreatePropertyEvent {
+  final DateTime startDate;
+  StartDateSelected(this.startDate);
+}
+
+class EndDateSelected extends CreatePropertyEvent {
+  final DateTime endDate;
+  EndDateSelected(this.endDate);
+}
+
+class AddressSelected extends CreatePropertyEvent {
+  final Address address;
+  AddressSelected(this.address);
+}
+
+class SaveButtonPressed extends CreatePropertyEvent {}

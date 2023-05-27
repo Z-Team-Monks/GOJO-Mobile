@@ -1,6 +1,6 @@
 import 'package:formz/formz.dart';
 
-enum NumberOfBedRoomsError { empty, invalid, notNumber }
+enum NumberOfBedRoomsError { empty, notNumber }
 
 class NumberOfBedRoomsInput extends FormzInput<String, NumberOfBedRoomsError> {
   const NumberOfBedRoomsInput.pure({String value = ''}) : super.pure(value);
