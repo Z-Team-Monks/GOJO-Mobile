@@ -5,11 +5,11 @@ import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'locator.dart';
 import 'navigation/route_generator.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initializes repositories using get_it.
-  Locator.setup();
+  await Locator.setup();
 
   runApp(
     MaterialApp(

@@ -77,7 +77,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        Text("Find your next home!"),
+        Text("Elevate your rental buisiness with us!"),
         SizedBox(height: 30),
       ],
     );
