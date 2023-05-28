@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gojo/constants/strings/facility_names.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/rating.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/rent_per_month.dart';
 
@@ -208,28 +209,59 @@ class FeedListView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: GojoMediaItem(
-              title: propertyItem.title,
-              rightTopTrailingWidget: const Rating(rating: "4.97"),
-              rightBottomTrailingWidget:
-                  RentPerMonth(rentPerMonth: "${propertyItem.rent}"),
-              image: Image(
-                image: AssetImage(propertyItem.thumbnailUrl),
-                fit: BoxFit.fill,
+              title: "${propertyItem.category}, ${propertyItem.title}",
+              rightTopTrailingWidget: Rating(
+                rating: propertyItem.rating.toString(),
               ),
-              iconTexts: const [
-                GojoIconText(
-                  iconData: Icons.bed,
-                  title: "2 bedrooms",
+              rightBottomTrailingWidget:
+                  RentPerMonth(rentPerMonth: propertyItem.rent),
+              image: Image(
+                image: NetworkImage(propertyItem.thumbnailUrl),
+                fit: BoxFit.fitHeight,
+              ),
+              iconTexts: [
+                getGojoIconText(
+                  GojoFacilities.numberOfBedRooms,
+                  propertyItem.facilities,
                 ),
-                GojoIconText(
-                  iconData: Icons.aspect_ratio,
-                  title: "214 sq.ms",
+                getGojoIconText(
+                  GojoFacilities.numberOfBathRooms,
+                  propertyItem.facilities,
+                ),
+                getGojoIconText(
+                  GojoFacilities.squareArea,
+                  propertyItem.facilities,
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  Facility getFacility(String facilityName, List<Facility> facilities) {
+    try {
+      return facilities.firstWhere(
+        (element) => element.name == facilityName,
+      );
+    } catch (e) {
+      return Facility(name: facilityName, amount: 0);
+    }
+  }
+
+  GojoIconText getGojoIconText(String facilityName, List<Facility> facilities) {
+    final facility = getFacility(facilityName, facilities);
+
+    final facilityIconMap = {
+      GojoFacilities.numberOfBedRooms: Icons.bed,
+      GojoFacilities.numberOfBathRooms: Icons.bathtub,
+      GojoFacilities.squareArea: Icons.aspect_ratio,
+    };
+
+    return GojoIconText(
+      iconData: facilityIconMap[facility.name] ?? Icons.featured_video,
+      title: "${facility.amount ?? ''}",
     );
   }
 }
