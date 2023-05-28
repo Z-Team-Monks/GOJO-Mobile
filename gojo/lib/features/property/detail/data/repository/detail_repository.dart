@@ -66,8 +66,8 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id aliquam ultrices, nisl nunc aliquet enim, vitae aliquam nisl nunc eget nunc. Sed euismod, diam id aliquam ultrices, nisl nunc aliquet enim, vitae aliquam nisl nunc eget nunc.",
       category: "Villa",
       facilities: [
-        Facility(name: "Kitchen", count: 1),
-        Facility(name: "Bedroom", count: 2),
+        Facility(name: "Kitchen", amount: 1),
+        Facility(name: "Bedroom", amount: 2),
       ],
       images: const [
         "",

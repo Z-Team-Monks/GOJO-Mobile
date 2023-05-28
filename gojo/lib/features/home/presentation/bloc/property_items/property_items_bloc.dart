@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo/features/home/data_layer/repository/home_repository.dart';
@@ -12,14 +13,20 @@ class PropertyItemsBloc extends Bloc<PropertyItemsEvent, PropertyItemsState> {
 
   PropertyItemsBloc(this.homeRepository) : super(PropertyItemsState.initial()) {
     on<LoadPropertyItems>((event, emit) async {
-      emit(state.copyWith(status: FetchPropertyItemsStatus.loading));
+      emit(state.copyWith(
+        searchQuery: event.searchQuery,
+        filterInput: event.filterInput,
+        status: FetchPropertyItemsStatus.loading,
+      ));
+
       try {
-        // TODO: Update [getPropertyItems] of [homeRepository] to use
-        /// 'searchQuery' and 'filterInput' as params.
-        final filterInputs = event.filterInput;
+        final filterInput = event.filterInput;
         final searchQuery = event.searchQuery;
 
-        final items = await homeRepository.getPropertyItems();
+        final items = await homeRepository.getPropertyItems(
+          searchQuery,
+          filterInput,
+        );
         emit(state.copyWith(
             status: FetchPropertyItemsStatus.success, items: items));
       } catch (e) {

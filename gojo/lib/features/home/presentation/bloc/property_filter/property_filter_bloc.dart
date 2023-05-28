@@ -20,8 +20,8 @@ class PropertyFilterBloc
           state.copyWith(
             status: FetchPropertyFilterStatus.success,
             filterInput: state.filterInput.copyWith(
-              categories: categories,
-              facilities: facilities,
+              categories: categories.map((e) => e.name).toList(),
+              facilities: facilities.map((e) => e.name).toList(),
             ),
           ),
         );

@@ -35,8 +35,8 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Villa",
       facilities: [
-        Facility(name: "Kitchen", count: 1),
-        Facility(name: "Bedroom", count: 2),
+        Facility(name: "Kitchen", amount: 1),
+        Facility(name: "Bedroom", amount: 2),
       ],
       rent: "14000",
       rating: 4.9,
@@ -47,8 +47,8 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
       facilities: [
-        Facility(name: "Kitchen", count: 1),
-        Facility(name: "Bedroom", count: 2),
+        Facility(name: "Kitchen", amount: 1),
+        Facility(name: "Bedroom", amount: 2),
       ],
       rent: "24000",
       rating: 4.9,
@@ -59,8 +59,8 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
       facilities: [
-        Facility(name: "Kitchen", count: 1),
-        Facility(name: "Bedroom", count: 2),
+        Facility(name: "Kitchen", amount: 1),
+        Facility(name: "Bedroom", amount: 2),
       ],
       rent: "34000",
       rating: 4.9,

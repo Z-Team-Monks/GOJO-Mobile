@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 import '../model/property_item.dart';
 
@@ -11,32 +9,40 @@ abstract class HomeClientAPI {
   /// This method sends an HTTP GET request to the API to retrieve a list of
   /// home property items. It returns a [PropertyItemList] object
   /// representing the list of items that were retrieved.
-  Future<PropertyItemList> getPropertyItems();
+  Future<PropertyItemList> getPropertyItems(String queryUrl);
 
-  /// Retrieves a list of strings representing available type of categories.
-  Future<List<String>> getCategories();
+  /// Retrieves a list of categories.
+  Future<List<Category>> getCategories();
 
-  /// Retrieves a list of strings representing available type of facilities.
-  Future<List<String>> getFacilities();
+  /// Retrieves a list of facilities.
+  Future<List<Facility>> getFacilities();
 }
 
 /// An implementation of the [HomeClientAPI] contract.
 class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
   @override
-  Future<PropertyItemList> getPropertyItems() async {
-    final homePropertiesResponse = await get('/properties');
+  Future<PropertyItemList> getPropertyItems(String queryUrl) async {
+    String getPropertiesUrl = 'properties/';
+    if (queryUrl.isNotEmpty) {
+      getPropertiesUrl += '?$queryUrl/';
+    }
+    final homePropertiesResponse = await get(getPropertiesUrl);
     return PropertyItemList.fromJson(homePropertiesResponse.data);
   }
 
   @override
-  Future<List<String>> getCategories() async {
-    final categoriesResponse = await get('/categories');
-    return jsonDecode(categoriesResponse.data).cast<String>();
+  Future<List<Category>> getCategories() async {
+    final categoriesResponse = await get('categories/');
+    return categoriesResponse.data['results'].map((categoryJson) {
+      return Category.fromJson(categoryJson);
+    }).toList();
   }
 
   @override
-  Future<List<String>> getFacilities() async {
-    final facilitiesResponse = await get('/facilities');
-    return jsonDecode(facilitiesResponse.data).cast<String>();
+  Future<List<Facility>> getFacilities() async {
+    final facilitiesResponse = await get('facilities/');
+    return facilitiesResponse.data['results'].map((facilityJson) {
+      return Facility.fromJson(facilityJson);
+    }).toList();
   }
 }
