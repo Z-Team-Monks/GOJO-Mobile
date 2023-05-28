@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/features/appointments/data_layer/model/appointment.dart';
-import 'package:gojo/features/appointments/data_layer/repository/my_appointments_repository.dart';
-import 'package:gojo/features/appointments/presentation/bloc/my_appointments_bloc.dart';
-import 'package:gojo/features/appointments/presentation/screen/widgets/my_appointment_item.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../data_layer/model/appointment.dart';
+import '../../data_layer/repository/my_appointments_repository.dart';
+import '../bloc/my_appointments_bloc.dart';
+import 'widgets/my_appointment_item.dart';
 
 class MyAppointmentsView extends StatelessWidget {
   const MyAppointmentsView({super.key});
@@ -30,9 +31,9 @@ class MyAppointmentsView extends StatelessWidget {
               padding: const EdgeInsets.all(GojoPadding.large),
               child: SingleChildScrollView(
                 child: BlocProvider(
-                  create: (context) => MyAppointmentsBloc(
-                      GetIt.I<MyAppointmentsRepositoryFake>())
-                    ..add(LoadMyAppointments()),
+                  create: (context) =>
+                      MyAppointmentsBloc(GetIt.I<MyAppointmentsRepositoryAPI>())
+                        ..add(LoadMyAppointments()),
                   child: const _MyAppointmentsContent(),
                 ),
               ),
@@ -89,7 +90,6 @@ class _MyAppointmentsContent extends StatelessWidget {
 class _MyAppointmentsListView extends StatelessWidget {
   final List<Appointment> appointments;
   const _MyAppointmentsListView({
-    super.key,
     required this.appointments,
   });
 
@@ -102,6 +102,9 @@ class _MyAppointmentsListView extends StatelessWidget {
           return MyAppointementsItem(
             fullName: appointments[index].fullName,
             phoneNumber: appointments[index].phoneNumber,
+            status: appointments[index].status == "pending"
+                ? AppointmentStatusType.pending
+                : AppointmentStatusType.approved,
             date: appointments[index].date,
             onCancel: () {
               context.read<MyAppointmentsBloc>().add(
@@ -116,7 +119,7 @@ class _MyAppointmentsListView extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({super.key});
+  const _Header();
 
   @override
   Widget build(BuildContext context) {

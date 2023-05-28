@@ -18,11 +18,11 @@ class Application {
   });
 
   Application.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int,
-        title = json['title'],
-        thumbnailUrl = json['thumbnailUrl'],
-        applicationDate = json['applicationDate'],
-        startDate = json['startDate'],
-        endDate = json['endDate'],
+      : id = json['id'],
+        title = json['property_title'],
+        thumbnailUrl = json['property_thumbnail_url'],
+        applicationDate = json['application_date'],
+        startDate = json['possible_start_date'],
+        endDate = json['possible_end_date'],
         description = json['description'];
 }

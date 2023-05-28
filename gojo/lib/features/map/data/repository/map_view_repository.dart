@@ -25,10 +25,9 @@ class MapViewRepositoryFake implements MapViewRepository {
   Future<List<PropertyMapViewItem>> fetchPropertiesNearby(Location location) {
     List<PropertyMapViewItem> properties = [
       PropertyMapViewItem(
-        id: "1",
+        id: 1,
         title: "Niko’s Auditorium",
         price: "45,000",
-        address: "Jl. Kartika Plaza, 38/1",
         image: Resources.gojoImages.sofa,
         rating: 4.7,
         location: Location(
@@ -37,10 +36,9 @@ class MapViewRepositoryFake implements MapViewRepository {
         ),
       ),
       PropertyMapViewItem(
-        id: "2",
+        id: 2,
         title: "Villa, The Arsana Estate",
         price: "45,000",
-        address: "Jl. Kartika Plaza, 38/1",
         image: Resources.gojoImages.sofa,
         rating: 4.7,
         location: Location(

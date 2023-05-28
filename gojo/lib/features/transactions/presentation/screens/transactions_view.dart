@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/transactions/data_layer/repository/transactions_repository.dart';
-import 'package:gojo/features/transactions/presentation/bloc/transactions_bloc.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../data_layer/repository/transactions_repository.dart';
+import '../bloc/transactions_bloc.dart';
+import 'widgets/finished_tranaction_item.dart';
+import 'widgets/pending_transactoin_item.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({super.key});
@@ -14,22 +17,25 @@ class TransactionsView extends StatelessWidget {
     return GojoParentView(
       label: "Transactions",
       child: BlocProvider(
-        create: (context) =>
-            TransactionsBloc(GetIt.I<TransactionsRepositoryAPI>())
-              ..add(
-                LoadTransactions(),
-              ),
+        create: (context) => TransactionsBloc(
+          GetIt.I<TransactionsRepositoryAPI>(),
+        )..add(LoadTransactions()),
         child: const TransactionsTabView(),
       ),
     );
   }
 }
 
-class TransactionsTabView extends StatelessWidget {
+class TransactionsTabView extends StatefulWidget {
   const TransactionsTabView({
     super.key,
   });
 
+  @override
+  State<TransactionsTabView> createState() => _TransactionsTabViewState();
+}
+
+class _TransactionsTabViewState extends State<TransactionsTabView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -64,16 +70,47 @@ class PendingPaymentsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TransactionsBloc, TransactionsState>(
+    return BlocConsumer<TransactionsBloc, TransactionsState>(
+      listener: (context, state) async {
+        switch (state.paymentWithChapaStatus) {
+          case PaymentWithChapaStatus.loading:
+            GojoSnackBars.showLoading(context, "Getting chapa url...");
+            break;
+          case PaymentWithChapaStatus.error:
+            GojoSnackBars.showError(context, "Can't get chapa url! Try again.");
+            break;
+          case PaymentWithChapaStatus.transactionCompleted:
+            GojoSnackBars.showSuccess(context, "Transaction completed!");
+            context.read<TransactionsBloc>().add(
+                  ResetTransactionsBloc(),
+                );
+            context.read<TransactionsBloc>().add(
+                  LoadTransactions(),
+                );
+            break;
+          default:
+        }
+      },
       builder: (context, state) {
-        switch (state.pendingTransactionItemsFetchStatus) {
-          case FetchTransactionItemsStatus.loaded:
-            return ListView(
-              children: state.pendingTransactionItems,
-            );
-          case FetchTransactionItemsStatus.loading:
+        switch (state.pendingTransactionFetchStatus) {
+          case FetchTransactionStatus.loaded:
+            return ListView(children: [
+              for (var transactionItem in state.pendingTransactions)
+                PendingTransactionItem(
+                  title: transactionItem.title,
+                  imageUrl: transactionItem.thumbnailUrl,
+                  dueAmount: transactionItem.amount.toString(),
+                  dueDate: transactionItem.dueDate,
+                  onPayNowPressed: () {
+                    context.read<TransactionsBloc>().add(
+                          PayNowClicked(transactionItem.id),
+                        );
+                  },
+                ),
+            ]);
+          case FetchTransactionStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchTransactionItemsStatus.error:
+          case FetchTransactionStatus.error:
             return const Center(child: Text("Error"));
         }
       },
@@ -90,14 +127,20 @@ class FinishedTransactionTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TransactionsBloc, TransactionsState>(
       builder: (context, state) {
-        switch (state.finishedTransactionItemsFetchStatus) {
-          case FetchTransactionItemsStatus.loaded:
-            return ListView(
-              children: state.finishedTransactionItems,
-            );
-          case FetchTransactionItemsStatus.loading:
+        switch (state.finishedTransactionsFetchStatus) {
+          case FetchTransactionStatus.loaded:
+            return ListView(children: [
+              for (var transactionItem in state.finishedTransactions)
+                FinishedTransactionItem(
+                  title: transactionItem.title,
+                  imageUrl: transactionItem.thumbnailUrl,
+                  paidAmount: transactionItem.payedAmount.toString(),
+                  paymentDate: transactionItem.paymentDate,
+                )
+            ]);
+          case FetchTransactionStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchTransactionItemsStatus.error:
+          case FetchTransactionStatus.error:
             return const Center(child: Text("Error"));
         }
       },

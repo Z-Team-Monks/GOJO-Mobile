@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/features/property/detail/data/model/availablity.dart';
-import 'package:gojo/features/property/detail/data/repository/detail_repository.dart';
 
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../detail/data/model/availablity.dart';
+import '../../../detail/data/repository/detail_repository.dart';
 import '../bloc/schedule_appointment_bloc.dart';
 import 'widgets/date_picker.dart';
 import 'widgets/time_slot_drop_down.dart';
@@ -18,7 +18,7 @@ class ScheduleAppointmentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ScheduleAppointmentBloc(
-        propertyDetailRepository: GetIt.I<PropertyDetailRepositoryFake>(),
+        propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
       ),
       child: _ScheduleAppointmentView(availablity: availablity),
     );

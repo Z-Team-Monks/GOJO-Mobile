@@ -1,7 +1,7 @@
 class PendingTrasaction {
-  final String id;
+  final int id;
   final String title;
-  final int amount;
+  final String amount;
   final String dueDate;
   final String thumbnailUrl;
 
@@ -16,10 +16,10 @@ class PendingTrasaction {
   factory PendingTrasaction.fromJson(Map<String, dynamic> json) {
     return PendingTrasaction(
       id: json['id'],
-      title: json['title'],
+      title: json['property_title'],
       amount: json['amount'],
-      dueDate: json['dueDate'],
-      thumbnailUrl: json['thumbnailUrl'],
+      dueDate: json['payment_date'],
+      thumbnailUrl: json['property_image'],
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -30,6 +31,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
         ));
@@ -49,6 +51,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
         ));

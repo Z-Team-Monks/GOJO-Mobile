@@ -1,4 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:gojo/features/applications/data_layer/repository/application_cilent.dart';
+import 'package:gojo/features/appointments/data_layer/repository/my_appointments_client.dart';
+import 'package:gojo/features/map/data/repository/map_view_client.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -13,11 +16,12 @@ import 'features/auth/signin/data_layer/repository/sign_in_client.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_repository.dart';
 import 'features/home/data_layer/repository/home_repository.dart';
 import 'features/map/data/repository/map_view_repository.dart';
-import 'features/messages/chat/presentation/bloc/chat_gen.dart';
 import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
 import 'features/messages/contacts/data/repository/contact_repository.dart';
+import 'features/profile/data_layer/repository/profile_client.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
 import 'features/property/detail/data/repository/detail_repository.dart';
+import 'features/transactions/data_layer/repository/transactions_client.dart';
 import 'features/transactions/data_layer/repository/transactions_repository.dart';
 
 class Locator {
@@ -38,57 +42,49 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
-      () => ProfileRepositoryFake(),
+      // () => ProfileRepositoryFake(),
+      () => ProfileRepositoryImpl(ProfileClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<TransactionsRepositoryAPI>(
       () => TransactionsRepositoryFake(),
+      // () => TransactionsRepositoryImpl(TransactionsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<ApplicationsRepositoryAPI>(
-      () => ApplicationRepositoryFake(),
+      // () => ApplicationRepositoryFake(),
+      () => ApplicationRepositoryImpl(ApplicationsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<MyAppointmentsRepositoryAPI>(
       () => MyAppointmentsRepositoryFake(),
+      // () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton(
       () => ChatMessageBloc(),
     );
 
-    GetIt.I.registerLazySingleton(
-      () => ChatGenerator(
-        chatMessageBloc: GetIt.I<ChatMessageBloc>(),
-      ),
-    );
-
-    GetIt.I.registerLazySingleton(
-      () => MyAppointmentsRepositoryFake(),
-    );
-
-    GetIt.I.registerLazySingleton(
+    GetIt.I.registerLazySingleton<PropertyDetailRepository>(
       () => PropertyDetailRepositoryFake(),
     );
 
-    GetIt.I.registerLazySingleton(
-      () => MapViewRepositoryFake(),
+    GetIt.I.registerLazySingleton<MapViewRepository>(
+      // () => MapViewRepositoryFake(),
+      () => MapViewRepositoryImpl(MapViewClientImpl()),
     );
 
-    GetIt.I.registerLazySingleton(
-      () => ContactRepositoryFakeImpl(),
-    );
-
-    GetIt.I.registerLazySingleton(
+    GetIt.I.registerLazySingleton<RegisterRepository>(
       () => RegisterRepositoryImpl(
         RegisterClientImpl(),
       ),
     );
-    // GetIt.I.registerLazySingleton(
-    //   () => ContactRepositoryImpl(
-    //     conctactClientAPI: ContactClientImpl(),
-    //   ),
-    // );
+    GetIt.I.registerLazySingleton<ContactRepository>(
+      () => const ContactRepositoryFakeImpl(),
+      // () => ContactRepositoryImpl(
+      //   conctactClientAPI: ContactClientImpl(),
+      // ),
+    );
   }
 
   static Future<Box> _getHiveBoxInstance() async {

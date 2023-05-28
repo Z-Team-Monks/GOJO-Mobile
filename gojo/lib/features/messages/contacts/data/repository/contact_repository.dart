@@ -1,7 +1,6 @@
-import 'package:gojo/features/messages/contacts/data/model/contact.dart';
-
 import '../../../../../core/model/user.dart';
 import '../model/chat.dart';
+import '../model/contact.dart';
 import 'contact_client_api.dart';
 
 abstract class ContactRepository {
@@ -40,40 +39,46 @@ class ContactRepositoryFakeImpl implements ContactRepository {
       profilePicture: "",
     );
 
-    final chats = [
+    const chats = [
       ChatMessage(
         message: "Hey!",
         sender: user,
         timestamp: "9:00",
+        fromMe: true,
       ),
       ChatMessage(
         message: "Are you still in town?",
         timestamp: "Mar 21, 9:00",
         sender: user,
+        fromMe: true,
       ),
       ChatMessage(
         message: "Yes! I am in Addis. Are you still interested?",
         timestamp: "Mar 20, 8:00",
         sender: sender,
+        fromMe: false,
       ),
       ChatMessage(
         timestamp: "Mar 20, 7:00",
         message:
             "Yes I am. I will be scheduling a personal visit for tomorrow.",
         sender: user,
+        fromMe: true,
       ),
     ];
 
     return Future.delayed(
       const Duration(seconds: 1),
-      () => [
+      () => const [
         Contact(
-          sender: sender,
+          landlord: user,
+          tenant: sender,
           chatMessages: chats,
           unreadMessages: 5,
         ),
         Contact(
-          sender: sender,
+          landlord: user,
+          tenant: sender,
           chatMessages: chats,
           unreadMessages: 5,
         )

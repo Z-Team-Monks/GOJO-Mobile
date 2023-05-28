@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/features/property/detail/data/repository/detail_repository.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/date_field.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../detail/data/repository/detail_repository.dart';
 import '../bloc/apply_for_rent_bloc.dart';
 
 class ApplicationForm extends StatelessWidget {
@@ -18,7 +18,7 @@ class ApplicationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ApplyForRentBloc(
-        propertyDetailRepository: GetIt.I<PropertyDetailRepositoryFake>(),
+        propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
         propertyId: "",
       ),
       child: const _ApplicationForm(),

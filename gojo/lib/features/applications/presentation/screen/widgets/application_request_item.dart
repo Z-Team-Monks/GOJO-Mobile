@@ -1,10 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/features/applications/presentation/model/application_status.dart';
+
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../model/application_status.dart';
 
 class ApplicationRequestItem extends StatelessWidget {
   final String leadingImageUrl;

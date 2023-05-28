@@ -1,22 +1,25 @@
 import 'package:equatable/equatable.dart';
-import 'package:gojo/features/messages/contacts/data/model/chat.dart';
 
 import '../../../../../core/model/user.dart';
+import 'chat.dart';
 
 class Contact extends Equatable {
-  final User sender;
+  final User landlord;
+  final User tenant;
   final List<ChatMessage> chatMessages;
   final int unreadMessages;
 
   const Contact({
-    required this.sender,
+    required this.tenant,
+    required this.landlord,
     required this.chatMessages,
     required this.unreadMessages,
   });
 
   factory Contact.fromJson(Map<String, dynamic> json) {
     return Contact(
-      sender: User.fromJson(json['user_1']),
+      landlord: User.fromJson(json['landlord']),
+      tenant: User.fromJson(json['tenant']),
       chatMessages: List<ChatMessage>.from(
         json['messages'].map(
           (x) => ChatMessage.fromJson(x),
@@ -27,5 +30,5 @@ class Contact extends Equatable {
   }
 
   @override
-  List<Object?> get props => [sender, chatMessages, unreadMessages];
+  List<Object?> get props => [landlord, tenant, chatMessages, unreadMessages];
 }

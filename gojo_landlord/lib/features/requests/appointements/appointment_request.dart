@@ -40,14 +40,16 @@ class AppointmentRequest extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Reject"))),
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Text("Reject")),
+                ),
                 const SizedBox(
                   width: 12,
                 ),
                 Expanded(
-                    child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Approve")))
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Text("Approve")),
+                )
               ],
             )
           ],

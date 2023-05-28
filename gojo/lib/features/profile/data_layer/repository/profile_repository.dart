@@ -30,7 +30,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
 
   static final fakePropertyItems = PropertyItemList([
     PropertyItem(
-      id: "1",
+      id: 1,
       title: "Villa, Kemah Tinggi",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Villa",
@@ -38,11 +38,11 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Kitchen", count: 1),
         Facility(name: "Bedroom", count: 2),
       ],
-      rent: 14000,
+      rent: "14000",
       rating: 4.9,
     ),
     PropertyItem(
-      id: "2",
+      id: 2,
       title: "Studio in 4kilo",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
@@ -50,11 +50,11 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Kitchen", count: 1),
         Facility(name: "Bedroom", count: 2),
       ],
-      rent: 24000,
+      rent: "24000",
       rating: 4.9,
     ),
     PropertyItem(
-      id: "3",
+      id: 3,
       title: "Condominium",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
@@ -62,7 +62,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
         Facility(name: "Kitchen", count: 1),
         Facility(name: "Bedroom", count: 2),
       ],
-      rent: 34000,
+      rent: "34000",
       rating: 4.9,
     ),
   ]);

@@ -2,7 +2,7 @@ import 'package:gojo/features/home/data_layer/model/property_item.dart';
 
 // Represents data to be displayed in the media item widget of profile page.
 class ProfileMediaItem {
-  final String id;
+  final int id;
   final String title;
   final String thumbnailUrl;
 

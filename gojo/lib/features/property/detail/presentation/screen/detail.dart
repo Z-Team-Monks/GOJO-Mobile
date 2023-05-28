@@ -26,7 +26,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PropertyDetailBloc(
-        propertyDetailRepository: PropertyDetailRepositoryFake(),
+        propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
       )..add(
           LoadPropertyDetail(
             propertyId: "propertyId",
@@ -153,7 +153,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                         create: (context) => FavoriteBloc(
                           propertyId: state.property!.id,
                           propertyDetailRepository:
-                              GetIt.I<PropertyDetailRepositoryFake>(),
+                              GetIt.I<PropertyDetailRepository>(),
                         )..add(
                             LoadFavorite(
                               isFavorite: state.property!.isFavorite,

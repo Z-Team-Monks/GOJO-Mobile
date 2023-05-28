@@ -6,7 +6,7 @@ abstract class MyAppointmentsEvent {}
 class LoadMyAppointments extends MyAppointmentsEvent {}
 
 class CancelAppointment extends MyAppointmentsEvent {
-  final String appointmentId;
+  final int appointmentId;
 
   CancelAppointment(this.appointmentId);
 }

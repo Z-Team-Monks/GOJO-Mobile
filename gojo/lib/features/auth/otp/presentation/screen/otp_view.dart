@@ -19,7 +19,7 @@ class OTPView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OtpBloc(
-        registerRepository: GetIt.I<RegisterRepositoryImpl>(),
+        registerRepository: GetIt.I<RegisterRepository>(),
       )..add(SetPhone(phone: phone)),
       child: const _OTPView(),
     );

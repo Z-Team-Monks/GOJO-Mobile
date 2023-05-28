@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'Gojo-Mobile-Shared/UI/widgets/splash.dart';
 import 'features/auth/signin/presentation/screen/signin_view.dart';
 
 class App extends StatelessWidget {
@@ -8,10 +7,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GojoSplash(
-      nextScreen: () async {
-        return const SignInView();
-      },
-    );
+    return const SignInView();
   }
 }

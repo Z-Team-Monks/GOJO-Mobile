@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gojo/features/messages/contacts/data/repository/contact_repository.dart';
+import 'package:flutter/material.dart';
 
 import '../../../data/model/contact.dart';
+import '../../../data/repository/contact_repository.dart';
 
 part 'contact_event.dart';
 part 'contact_state.dart';
@@ -21,6 +22,7 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
           fetchStatus: FetchContactsStatus.success,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(fetchStatus: FetchContactsStatus.error));
       }
     });

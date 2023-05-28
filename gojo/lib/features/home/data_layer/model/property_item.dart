@@ -1,26 +1,24 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'property_item.g.dart';
-
-@JsonSerializable()
 class Facility {
   final String name;
-  final int count;
+  final double count;
 
   Facility({required this.name, required this.count});
 
-  factory Facility.fromJson(Map<String, dynamic> json) =>
-      _$FacilityFromJson(json);
+  factory Facility.fromJson(Map<String, dynamic> json) {
+    return Facility(
+      name: json['name'],
+      count: json['count'],
+    );
+  }
 }
 
-@JsonSerializable()
 class PropertyItem {
-  final String id;
+  final int id;
   final String title;
   final String thumbnailUrl;
   final String category;
   final List<Facility> facilities;
-  final int rent;
+  final String rent;
   final double rating;
 
   const PropertyItem({
@@ -33,16 +31,28 @@ class PropertyItem {
     required this.rating,
   });
 
-  factory PropertyItem.fromJson(Map<String, dynamic> json) =>
-      _$PropertyItemFromJson(json);
+  factory PropertyItem.fromJson(Map<String, dynamic> json) {
+    return PropertyItem(
+      id: json['id'],
+      title: json['title'],
+      thumbnailUrl: json['thumbnail_url'],
+      category: json['category'],
+      facilities: (json['facilities'] as List<dynamic>)
+          .map((f) => Facility.fromJson(f))
+          .toList(),
+      rent: json['amount'],
+      rating: json['rating'],
+    );
+  }
 }
 
-@JsonSerializable()
 class PropertyItemList {
   final List<PropertyItem> items;
 
   PropertyItemList(this.items);
 
   factory PropertyItemList.fromJson(Map<String, dynamic> json) =>
-      _$PropertyItemListFromJson(json);
+      PropertyItemList((json['results'] as List<dynamic>)
+          .map((f) => PropertyItem.fromJson(f))
+          .toList());
 }

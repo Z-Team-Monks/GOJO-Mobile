@@ -1,46 +1,57 @@
 part of 'transactions_bloc.dart';
 
-enum FetchTransactionItemsStatus { loading, loaded, error }
+enum FetchTransactionStatus { loading, loaded, error }
+
+enum PaymentWithChapaStatus {
+  intial,
+  loading,
+  loaded,
+  error,
+  transactionCompleted
+}
 
 @immutable
 class TransactionsState {
-  final List<PendingTransactionItem> pendingTransactionItems;
-  final List<FinishedTransactionItem> finishedTransactionItems;
-  final FetchTransactionItemsStatus pendingTransactionItemsFetchStatus;
-  final FetchTransactionItemsStatus finishedTransactionItemsFetchStatus;
+  final List<PendingTrasaction> pendingTransactions;
+  final List<FinishedTransaction> finishedTransactions;
+  final FetchTransactionStatus pendingTransactionFetchStatus;
+  final FetchTransactionStatus finishedTransactionsFetchStatus;
+  final PaymentWithChapaStatus paymentWithChapaStatus;
 
   const TransactionsState({
-    required this.pendingTransactionItems,
-    required this.finishedTransactionItems,
-    required this.pendingTransactionItemsFetchStatus,
-    required this.finishedTransactionItemsFetchStatus,
+    required this.pendingTransactions,
+    required this.finishedTransactions,
+    required this.pendingTransactionFetchStatus,
+    required this.finishedTransactionsFetchStatus,
+    required this.paymentWithChapaStatus,
   });
 
   factory TransactionsState.initial() {
     return const TransactionsState(
-      pendingTransactionItems: [],
-      finishedTransactionItems: [],
-      pendingTransactionItemsFetchStatus: FetchTransactionItemsStatus.loading,
-      finishedTransactionItemsFetchStatus: FetchTransactionItemsStatus.loading,
+      pendingTransactions: [],
+      finishedTransactions: [],
+      pendingTransactionFetchStatus: FetchTransactionStatus.loading,
+      finishedTransactionsFetchStatus: FetchTransactionStatus.loading,
+      paymentWithChapaStatus: PaymentWithChapaStatus.intial,
     );
   }
 
   TransactionsState copyWith({
-    List<PendingTransactionItem>? pendingTransactionItems,
-    List<FinishedTransactionItem>? finishedTransactionItems,
-    FetchTransactionItemsStatus? pendingTransactionItemsFetchStatus,
-    FetchTransactionItemsStatus? finishedTransactionItemsFetchStatus,
+    List<PendingTrasaction>? pendingTransactions,
+    List<FinishedTransaction>? finishedTransactions,
+    FetchTransactionStatus? pendingTransactionFetchStatus,
+    FetchTransactionStatus? finishedTransactionsFetchStatus,
+    PaymentWithChapaStatus? paymentWithChapaStatus,
   }) {
     return TransactionsState(
-      pendingTransactionItems:
-          pendingTransactionItems ?? this.pendingTransactionItems,
-      finishedTransactionItems:
-          finishedTransactionItems ?? this.finishedTransactionItems,
-      pendingTransactionItemsFetchStatus: pendingTransactionItemsFetchStatus ??
-          this.pendingTransactionItemsFetchStatus,
-      finishedTransactionItemsFetchStatus:
-          finishedTransactionItemsFetchStatus ??
-              this.finishedTransactionItemsFetchStatus,
+      pendingTransactions: pendingTransactions ?? this.pendingTransactions,
+      finishedTransactions: finishedTransactions ?? this.finishedTransactions,
+      pendingTransactionFetchStatus:
+          pendingTransactionFetchStatus ?? this.pendingTransactionFetchStatus,
+      finishedTransactionsFetchStatus: finishedTransactionsFetchStatus ??
+          this.finishedTransactionsFetchStatus,
+      paymentWithChapaStatus:
+          paymentWithChapaStatus ?? this.paymentWithChapaStatus,
     );
   }
 }

@@ -4,3 +4,10 @@ part of 'transactions_bloc.dart';
 abstract class TransactionsEvent {}
 
 class LoadTransactions extends TransactionsEvent {}
+
+class ResetTransactionsBloc extends TransactionsEvent {}
+
+class PayNowClicked extends TransactionsEvent {
+  final int transactionId;
+  PayNowClicked(this.transactionId);
+}

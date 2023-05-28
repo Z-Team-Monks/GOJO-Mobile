@@ -44,6 +44,7 @@ class MapViewBloc extends Bloc<MapViewEvent, MapViewState> {
           status: MapViewStatus.success,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           status: MapViewStatus.error,
         ));

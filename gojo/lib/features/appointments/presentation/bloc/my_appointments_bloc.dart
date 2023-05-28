@@ -26,6 +26,7 @@ class MyAppointmentsBloc
           fetchAppointmentstatus: FetchAppointmentStatus.success,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           fetchAppointmentstatus: FetchAppointmentStatus.error,
         ));
@@ -34,8 +35,11 @@ class MyAppointmentsBloc
 
     on<CancelAppointment>((event, emit) async {
       try {
-        emit(state.copyWith(
-            cancelAppointmentStatus: CancelAppointmentStatus.loading));
+        emit(
+          state.copyWith(
+            cancelAppointmentStatus: CancelAppointmentStatus.loading,
+          ),
+        );
 
         await myAppointmentsRepositoryAPI
             .cancelAppointment(event.appointmentId);
@@ -48,6 +52,7 @@ class MyAppointmentsBloc
           cancelAppointmentStatus: CancelAppointmentStatus.success,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           cancelAppointmentStatus: CancelAppointmentStatus.error,
         ));

@@ -2,9 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../../core/model/user.dart';
+import '../../../../../core/repository/user_repository.dart';
 import '../../../contacts/data/model/chat.dart';
-import 'chat_gen.dart';
 
 part 'chat_message_event.dart';
 part 'chat_message_state.dart';
@@ -28,20 +27,14 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     });
 
     on<ChatMessageSend>((event, emit) async {
-      // TODO: use logged in user
-      const user = User(
-        id: 1,
-        firstName: "Kebede",
-        lastName: "Alemayehu",
-        phoneNumber: "0949024607",
-        profilePicture: "",
-      );
+      final user = await GetIt.I<UserRepositoryAPI>().getUser();
       final messages = state.messages +
           [
             ChatMessage(
               message: state.newMessage,
               timestamp: DateTime.now().toString(),
-              sender: user,
+              sender: user!,
+              fromMe: true,
             ),
           ];
 
@@ -56,13 +49,5 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       final messages = state.messages + [event.chat];
       emit(state.copyWith(messages: messages));
     });
-  }
-
-  @override
-  Future<void> close() {
-    GetIt.I<ChatGenerator>().dispose();
-    GetIt.I.resetLazySingleton<ChatGenerator>();
-    GetIt.I.resetLazySingleton<ChatMessageBloc>();
-    return super.close();
   }
 }

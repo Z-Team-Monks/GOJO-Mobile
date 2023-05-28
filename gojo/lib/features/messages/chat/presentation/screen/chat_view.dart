@@ -1,22 +1,29 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/messages/chat/presentation/bloc/chat_gen.dart';
+import 'package:web_socket_channel/io.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/chat_input.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../../../core/model/user.dart';
+import '../../../../../core/repository/user_repository.dart';
 import '../../../contacts/data/model/chat.dart';
 import '../bloc/chat_message_bloc.dart';
 
-const loggedInUserId = "you";
-
 class ChatView extends StatelessWidget {
   final List<ChatMessage> messages;
+  final User landlord;
 
-  const ChatView({super.key, required this.messages});
+  const ChatView({
+    super.key,
+    required this.messages,
+    required this.landlord,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +44,40 @@ class ChatView extends StatelessWidget {
             currentFocus.unfocus();
           }
         },
-        child: ChatContent(
-            label:
-                "${messages[0].sender.firstName} ${messages[0].sender.lastName}"),
+        child: ChatContent(landlord: landlord),
       ),
     );
   }
 }
 
-class ChatContent extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
-  final ChatGenerator _chatGenerator = GetIt.I<ChatGenerator>();
-  final TextEditingController _controller = TextEditingController();
-  final String label;
+class ChatContent extends StatefulWidget {
+  final User landlord;
 
-  ChatContent({super.key, required this.label});
+  const ChatContent({super.key, required this.landlord});
+
+  @override
+  State<ChatContent> createState() => _ChatContentState();
+}
+
+class _ChatContentState extends State<ChatContent> {
+  final ScrollController _scrollController = ScrollController();
+  late final IOWebSocketChannel _channel;
+  final TextEditingController _controller = TextEditingController();
+  late final ChatMessageBloc chatMessageBloc = GetIt.I<ChatMessageBloc>();
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () async {
+      final tenant = await GetIt.I<UserRepositoryAPI>().getUser();
+      _channel = IOWebSocketChannel.connect(
+        Uri.parse(
+          "ws://localhost:8000/ws/chat/${tenant!.id}/${widget.landlord.id}/",
+        ),
+      );
+      addListener();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +94,7 @@ class ChatContent extends StatelessWidget {
       child: BlocBuilder<ChatMessageBloc, ChatMessageState>(
         builder: (context, state) {
           return GojoParentView(
-            label: label,
+            label: "${widget.landlord.firstName} ${widget.landlord.lastName}",
             child: Flex(
               direction: Axis.vertical,
               children: [
@@ -85,8 +111,7 @@ class ChatContent extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: state.messages.length,
                               itemBuilder: (context, index) {
-                                if (state.messages[index].sender.id ==
-                                    loggedInUserId) {
+                                if (state.messages[index].fromMe) {
                                   return GojoSentChatBubble(
                                     content: state.messages[index].message,
                                   );
@@ -118,8 +143,9 @@ class ChatContent extends StatelessWidget {
                       },
                       onSendIconPressed: () {
                         if (state.newMessage.isNotEmpty) {
-                          _chatGenerator
-                              .sendMessage(ChatMessageSend(state.newMessage));
+                          sendMessage(
+                            ChatMessageSend(state.newMessage),
+                          );
                         }
                         _controller.text = "";
                       },
@@ -132,5 +158,29 @@ class ChatContent extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void addListener() {
+    _channel.stream.listen((event) {
+      debugPrint(event);
+      chatMessageBloc.add(
+        ChatMessageReceive(
+          chat: ChatMessage.fromJson(jsonDecode(event)),
+        ),
+      );
+    });
+  }
+
+  sendMessage(ChatMessageSend chatMessage) {
+    debugPrint(chatMessage.message);
+    _channel.sink.add(jsonEncode({"content": chatMessage}));
+    chatMessageBloc.add(chatMessage);
+  }
+
+  @override
+  dispose() {
+    _channel.sink.close();
+    GetIt.I.resetLazySingleton<ChatMessageBloc>();
+    super.dispose();
   }
 }

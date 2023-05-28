@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:gojo/features/applications/data_layer/model/application.dart';
 import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
 import 'package:meta/meta.dart';
@@ -22,8 +23,9 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
         emit(state.copyWith(
           withdrawApplicationStatus: WithdrawApplicationStatus.loading,
         ));
-        await applicationRepository
-            .withdrawPendingApplication(event.applicationId);
+        await applicationRepository.withdrawPendingApplication(
+          event.applicationId,
+        );
         final updatedPendingApplications = state.pendingApplications
             .where((element) => element.id != event.applicationId)
             .toList();
@@ -32,6 +34,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
           withdrawApplicationStatus: WithdrawApplicationStatus.success,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           withdrawApplicationStatus: WithdrawApplicationStatus.error,
         ));
@@ -51,6 +54,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
           pendingApplicationsFetchStatus: FetchApplicationsStatus.loaded,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           pendingApplicationsFetchStatus: FetchApplicationsStatus.error,
         ));
@@ -70,6 +74,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
           approvedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           approvedApplicationsFetchStatus: FetchApplicationsStatus.error,
         ));
@@ -89,6 +94,7 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
           rejectedApplicationsFetchStatus: FetchApplicationsStatus.loaded,
         ));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(
           rejectedApplicationsFetchStatus: FetchApplicationsStatus.error,
         ));

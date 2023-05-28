@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo/features/home/presentation/screen/home_view.dart';
-import 'package:gojo/features/home/presentation/screen/widgets/rating.dart';
-import 'package:gojo/features/map/data/repository/map_view_repository.dart';
 import 'package:latlong2/latlong.dart' as latlng;
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../home/presentation/screen/home_view.dart';
+import '../../../home/presentation/screen/widgets/rating.dart';
 import '../../data/model/property_mapview_item.dart';
+import '../../data/repository/map_view_repository.dart';
 import '../bloc/map_view_bloc.dart';
 import 'widgets/property_info_row.dart';
 
@@ -21,8 +21,10 @@ class MapView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return MapViewBloc(GetIt.I<MapViewRepositoryFake>())
-          ..add(MapViewLoad());
+        return MapViewBloc(GetIt.I<MapViewRepository>())
+          ..add(
+            MapViewLoad(),
+          );
       },
       child: const _MapView(),
     );

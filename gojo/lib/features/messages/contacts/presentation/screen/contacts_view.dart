@@ -7,9 +7,9 @@ import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../../navigation/args/chat_args.dart';
 import '../../../../profile/presentation/screen/profile_view.dart';
 import '../../data/repository/contact_repository.dart';
-import '../../../../../navigation/args/chat_args.dart';
 import '../bloc/bloc/contact_bloc.dart';
 
 class ContactsView extends StatelessWidget {
@@ -19,7 +19,7 @@ class ContactsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ContactBloc(
-        GetIt.I<ContactRepositoryFakeImpl>(),
+        GetIt.I<ContactRepository>(),
       )..add(ContactLoad()),
       child: const _ContactsView(),
     );
@@ -45,6 +45,9 @@ class _ContactsView extends StatelessWidget {
                 case FetchContactsStatus.error:
                   return const ErrorView();
                 default:
+                  if (state.contacts.isEmpty) {
+                    return const Center(child: Text("No messages Yet!"));
+                  }
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
@@ -57,6 +60,7 @@ class _ContactsView extends StatelessWidget {
                             GojoRoutes.chat,
                             arguments: ChatArgs(
                               messages: state.contacts[index].chatMessages,
+                              landlord: state.contacts[index].landlord,
                             ),
                           );
                         }),
@@ -66,7 +70,7 @@ class _ContactsView extends StatelessWidget {
                           child: GojoContentItem(
                             image: AssetImage(Resources.gojoImages.headShot),
                             title:
-                                "${state.contacts[index].sender.firstName} ${state.contacts[index].sender.lastName}",
+                                "${state.contacts[index].landlord.firstName} ${state.contacts[index].landlord.lastName}",
                             content:
                                 state.contacts[index].chatMessages[0].message,
                             rightAlignedTitle:

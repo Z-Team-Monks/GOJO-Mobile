@@ -1,8 +1,7 @@
 class PropertyMapViewItem {
-  final String id;
+  final int id;
   final String title;
   final String price;
-  final String address;
   final String image;
   final double rating;
   final Location location;
@@ -11,7 +10,6 @@ class PropertyMapViewItem {
       {required this.id,
       required this.title,
       required this.price,
-      required this.address,
       required this.image,
       required this.rating,
       required this.location});
@@ -20,13 +18,12 @@ class PropertyMapViewItem {
     return PropertyMapViewItem(
       id: json['id'],
       title: json['title'],
-      price: json['price'],
-      address: json['address'],
-      image: json['image'],
+      price: json['amount'],
+      image: json['thumbnail_url'],
       rating: json['rating'],
       location: Location(
-        lat: json['location']['lat'],
-        lng: json['location']['lng'],
+        lat: json['location']['latitude'],
+        lng: json['location']['longitude'],
       ),
     );
   }

@@ -1,7 +1,7 @@
 class FinishedTransaction {
-  final String id;
+  final int id;
   final String title;
-  final int payedAmount;
+  final String payedAmount;
   final String thumbnailUrl;
   final String paymentDate;
 
@@ -16,10 +16,10 @@ class FinishedTransaction {
   factory FinishedTransaction.fromJson(Map<String, dynamic> json) {
     return FinishedTransaction(
       id: json['id'],
-      title: json['title'],
-      payedAmount: json['payedAmount'],
-      thumbnailUrl: json['thumbnailUrl'],
-      paymentDate: json['paymentDate'],
+      title: json['property_title'],
+      payedAmount: json['amount'],
+      thumbnailUrl: json['property_image'],
+      paymentDate: json['payment_date'],
     );
   }
 }

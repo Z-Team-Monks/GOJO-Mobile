@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gojo/features/map/data/model/property_mapview_item.dart';
 
 import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
@@ -12,11 +13,13 @@ class MapViewClientImpl extends BaseApiClient implements MapViewClient {
   Future<List<PropertyMapViewItem>> fetchPropertiesNearby(
       Location location) async {
     final response = await get(
-      '/properties/nearby?lat=${location.lat}&lng=${location.lng}',
+      'properties/?lat=${location.lat}&lng=${location.lng}',
     );
 
+    debugPrint(response.data.toString());
+
     return List<PropertyMapViewItem>.from(
-      response.data.map(
+      (response.data['results'] as List).map(
         (model) => PropertyMapViewItem.fromJson(model),
       ),
     );

@@ -33,7 +33,10 @@ class RouteGenerator {
       case GojoRoutes.chat:
         final args = settings.arguments as ChatArgs;
         return MaterialPageRoute(
-          builder: (_) => ChatView(messages: args.messages),
+          builder: (_) => ChatView(
+            messages: args.messages,
+            landlord: args.landlord,
+          ),
         );
       case GojoRoutes.root:
         return MaterialPageRoute(builder: (_) => const RootView());
