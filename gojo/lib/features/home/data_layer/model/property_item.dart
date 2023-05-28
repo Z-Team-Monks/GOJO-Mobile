@@ -1,13 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+
 class Facility {
   final String name;
-  final double count;
+  final int? amount;
 
-  Facility({required this.name, required this.count});
+  Facility({required this.name, this.amount});
 
   factory Facility.fromJson(Map<String, dynamic> json) {
     return Facility(
-      name: json['name'],
-      count: json['count'],
+      name: json['name'] as String,
+      amount: (json['amount'] as double?)?.toInt(),
+    );
+  }
+}
+
+class Category {
+  final String name;
+  final int id;
+
+  Category({required this.name, required this.id});
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      name: json['name'] as String,
+      id: json['id'] as int,
     );
   }
 }
@@ -33,15 +49,15 @@ class PropertyItem {
 
   factory PropertyItem.fromJson(Map<String, dynamic> json) {
     return PropertyItem(
-      id: json['id'],
-      title: json['title'],
-      thumbnailUrl: json['thumbnail_url'],
-      category: json['category'],
+      id: json['id'] as int,
+      title: json['title'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      category: json['category'] as String,
       facilities: (json['facilities'] as List<dynamic>)
-          .map((f) => Facility.fromJson(f))
+          .map((item) => Facility.fromJson(item as Map<String, dynamic>))
           .toList(),
-      rent: json['amount'],
-      rating: json['rating'],
+      rent: json['amount'] as String,
+      rating: json['rating'] as double,
     );
   }
 }
@@ -51,8 +67,11 @@ class PropertyItemList {
 
   PropertyItemList(this.items);
 
-  factory PropertyItemList.fromJson(Map<String, dynamic> json) =>
-      PropertyItemList((json['results'] as List<dynamic>)
-          .map((f) => PropertyItem.fromJson(f))
-          .toList());
+  factory PropertyItemList.fromJson(Map<String, dynamic> json) {
+    return PropertyItemList(
+      (json['results'] as List<dynamic>)
+          .map((item) => PropertyItem.fromJson(item as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }
