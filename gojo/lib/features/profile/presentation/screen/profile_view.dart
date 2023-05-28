@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -12,6 +13,8 @@ import 'package:gojo/features/profile/presentation/screen/model/profile_media_it
 import 'package:gojo/features/profile/presentation/screen/profile_icon_button.dart';
 import 'package:gojo/features/route_guard/presentation/bloc/route_guard_bloc.dart';
 
+import '../../../../core/repository/user_repository.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -20,8 +23,10 @@ class ProfileView extends StatelessWidget {
     return GojoParentView(
       label: "Profile",
       child: BlocProvider(
-        create: (context) => ProfileBloc(GetIt.I<ProfileRepositoryAPI>())
-          ..add(
+        create: (context) => ProfileBloc(
+          GetIt.I<ProfileRepositoryAPI>(),
+          GetIt.I<UserRepositoryAPI>(),
+        )..add(
             LoadProfileData(),
           ),
         child: Column(
@@ -43,29 +48,43 @@ class UserInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        switch (state.userLoadStatus) {
+          case FetchProfileMediaItemStatus.loading:
+            return const Center(child: CircularProgressIndicator());
+          case FetchProfileMediaItemStatus.error:
+            return const Center(child: Text("Error loading user data"));
+          case FetchProfileMediaItemStatus.loaded:
+            break;
+        }
+        return Column(
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(Resources.gojoImages.headShot),
-              radius: 60,
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                    state.user!.profilePicture,
+                  ),
+                  radius: 60,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: GojoPadding.large),
+              child: Text(
+                "${state.user!.firstName}  ${state.user!.lastName}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ],
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: GojoPadding.large),
-          child: Text(
-            "Natnael Abay",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
