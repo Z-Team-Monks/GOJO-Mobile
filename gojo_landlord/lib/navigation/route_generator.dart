@@ -25,7 +25,7 @@ class RouteGenerator {
       case GojoRoutes.appointments:
         return MaterialPageRoute(builder: (_) => const AppointmentsView());
       case GojoRoutes.withdraw:
-        return MaterialPageRoute(builder: (_) => const WithdrawRequest());
+        return MaterialPageRoute(builder: (_) => const WalletView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
