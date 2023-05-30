@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo/constants/strings/app_routes.dart';
 import 'package:gojo/features/profile/data_layer/repository/profile_repository.dart';
 import 'package:gojo/features/profile/presentation/bloc/profile_bloc.dart';

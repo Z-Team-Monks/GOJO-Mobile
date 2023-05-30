@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/constants/strings/facility_names.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/rating.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/rent_per_month.dart';
 
@@ -10,6 +9,7 @@ import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
+import '../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../constants/strings/app_routes.dart';
 import '../../data_layer/model/property_item.dart';
