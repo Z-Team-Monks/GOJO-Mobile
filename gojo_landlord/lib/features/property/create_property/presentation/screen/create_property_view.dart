@@ -85,6 +85,8 @@ class CreatePropertyForm extends StatelessWidget {
               const SizedBox(height: 12),
               DescriptionInputField(),
               const SizedBox(height: 12),
+              RentInputField(),
+              const SizedBox(height: 12),
               NumberOfBedRoomsInputField(),
               const SizedBox(height: 12),
               NumberofBathRoomsInputField(),
@@ -134,6 +136,33 @@ class TitleInputField extends StatelessWidget {
           },
           errorText: !state.titleInput.isPure && state.titleInput.isNotValid
               ? state.titleInput.getErrorMessage()
+              : null,
+        );
+      },
+    );
+  }
+}
+
+class RentInputField extends StatelessWidget {
+  RentInputField({super.key});
+
+  final _inputController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
+      builder: (context, state) {
+        if (state.rentInput.value != _inputController.text) {
+          _inputController.text = state.rentInput.value;
+        }
+        return GojoTextField(
+          labelText: "Rent",
+          controlller: _inputController,
+          onChanged: (value) {
+            context.read<CreatePropertyBloc>().add(RentInputChanged(value));
+          },
+          errorText: !state.rentInput.isPure && state.rentInput.isNotValid
+              ? state.rentInput.getErrorMessage()
               : null,
         );
       },

@@ -23,10 +23,8 @@ class WeeklyVisitingHours {
 
   WeeklyVisitingHours();
 
-  Map<String, dynamic> toJson() {
-    return {
-      'visiting_hours': map.values.map((e) => e.toJson()).toList(),
-    };
+  List<Map<String, dynamic>> toJson() {
+    return map.values.map((e) => e.toJson()).toList();
   }
 
   void addVisitingHour(VisitingHour visitingHour) {
