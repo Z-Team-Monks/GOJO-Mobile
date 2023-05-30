@@ -4,7 +4,7 @@ enum CreatePropertyPostStatus { initial, success, failure }
 
 class CreatePropertyState {
   final TitleInput titleInput;
-  final String descriptionInput;
+  final DescriptionInput descriptionInput;
   final NumberOfBedRoomsInput numberOfBedRoomsInput;
   final NumberOfBathroomsInput numberOfBathroomsInput;
   final SquareAreaInput sqaureAreaInput;
@@ -13,6 +13,7 @@ class CreatePropertyState {
   final DateTime? startDate;
   final DateTime? endDate;
   final AddressInput address;
+  final WeeklyVisitingHours weeklyVisitingHours;
   final CreatePropertyPostStatus postStatus;
 
   CreatePropertyState({
@@ -26,13 +27,14 @@ class CreatePropertyState {
     required this.startDate,
     required this.endDate,
     required this.address,
+    required this.weeklyVisitingHours,
     required this.postStatus,
   });
 
   factory CreatePropertyState.initial() {
     return CreatePropertyState(
       titleInput: const TitleInput.pure(),
-      descriptionInput: '',
+      descriptionInput: const DescriptionInput.pure(),
       numberOfBedRoomsInput: const NumberOfBedRoomsInput.pure(),
       numberOfBathroomsInput: const NumberOfBathroomsInput.pure(),
       sqaureAreaInput: const SquareAreaInput.pure(),
@@ -40,14 +42,15 @@ class CreatePropertyState {
       selectedFacilities: {},
       startDate: null,
       endDate: null,
-      postStatus: CreatePropertyPostStatus.initial,
       address: const AddressInput.pure(),
+      weeklyVisitingHours: WeeklyVisitingHours(),
+      postStatus: CreatePropertyPostStatus.initial,
     );
   }
 
   CreatePropertyState copyWith({
     TitleInput? titleInput,
-    String? descriptionInput,
+    DescriptionInput? descriptionInput,
     NumberOfBedRoomsInput? numberOfBedRoomsInput,
     NumberOfBathroomsInput? numberOfBathroomsInput,
     SquareAreaInput? sqaureAreaInput,
@@ -55,8 +58,9 @@ class CreatePropertyState {
     Set<String>? selectedFacilities,
     DateTime? startDate,
     DateTime? endDate,
-    CreatePropertyPostStatus? postStatus,
     AddressInput? address,
+    WeeklyVisitingHours? weeklyVisitingHours,
+    CreatePropertyPostStatus? postStatus,
   }) {
     return CreatePropertyState(
       titleInput: titleInput ?? this.titleInput,
@@ -70,8 +74,9 @@ class CreatePropertyState {
       selectedFacilities: selectedFacilities ?? this.selectedFacilities,
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
-      postStatus: postStatus ?? this.postStatus,
       address: address ?? this.address,
+      weeklyVisitingHours: weeklyVisitingHours ?? this.weeklyVisitingHours,
+      postStatus: postStatus ?? this.postStatus,
     );
   }
 }

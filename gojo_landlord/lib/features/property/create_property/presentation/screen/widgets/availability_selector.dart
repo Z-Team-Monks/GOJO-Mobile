@@ -40,13 +40,6 @@ class _AvailabilitySelectorState extends State<AvailabilitySelector> {
                 onPressed: () async {
                   await onStartDateSelected(context);
                 }),
-            const SizedBox(height: 10),
-            GojoDateField(
-                labelText: "End date",
-                controller: endDateController,
-                onPressed: () async {
-                  await onEndDateSelected(context);
-                }),
           ],
         );
       },

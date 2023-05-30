@@ -6,7 +6,7 @@ import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/requests/applications/requests.dart';
 import '../features/requests/appointements/appointments.dart';
-import '../features/withdrawal/withdrawal.dart';
+import '../features/wallet/withdrawal.dart';
 import '../root.dart';
 
 class RouteGenerator {

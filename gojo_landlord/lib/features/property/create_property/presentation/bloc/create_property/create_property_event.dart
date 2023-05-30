@@ -53,4 +53,14 @@ class AddressSelected extends CreatePropertyEvent {
   AddressSelected(this.address);
 }
 
+class VisitingHourAdded extends CreatePropertyEvent {
+  final VisitingHour visitingHour;
+  VisitingHourAdded(this.visitingHour);
+}
+
+class VisitingHourRemoved extends CreatePropertyEvent {
+  final String day;
+  VisitingHourRemoved(this.day);
+}
+
 class SaveButtonPressed extends CreatePropertyEvent {}

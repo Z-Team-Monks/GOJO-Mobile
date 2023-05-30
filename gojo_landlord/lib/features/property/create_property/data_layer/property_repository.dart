@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'model/category.dart';
 import 'model/facility.dart';
 import 'model/new_property.dart';
@@ -16,14 +18,20 @@ class PropertyRepositoryImpl implements PropertyRepositoryAPI {
 
   @override
   Future<List<Category>> getCategories() async {
-    final response = await client.getCategories();
-    return response.data.map<Category>((e) => Category.fromJson(e)).toList();
+    final categoriesResponse = await client.getCategories();
+    return List<Category>.from(
+        categoriesResponse.data['results'].map((categoryJson) {
+      return Category.fromJson(categoryJson);
+    }).toList());
   }
 
   @override
   Future<List<Facility>> getFacilities() async {
-    final response = await client.getFacilities();
-    return response.data.map<Facility>((e) => Facility.fromJson(e)).toList();
+    final facilitiesResponse = await client.getFacilities();
+    return List<Facility>.from(
+        facilitiesResponse.data['results'].map((facilityJson) {
+      return Facility.fromJson(facilityJson);
+    }).toList());
   }
 
   @override
@@ -53,8 +61,8 @@ class PropertyRepositoryFake implements PropertyRepositoryAPI {
     Facility(id: 8, name: "Pool"),
     Facility(id: 9, name: "Security"),
     Facility(id: 10, name: "Water"),
-    Facility(id: 11, name: "Number of Bed rooms"),
-    Facility(id: 12, name: "Number of Bath rooms"),
+    Facility(id: 11, name: "Bed rooms"),
+    Facility(id: 12, name: "Bath rooms"),
     Facility(id: 13, name: "Square area"),
   ];
 
@@ -71,5 +79,7 @@ class PropertyRepositoryFake implements PropertyRepositoryAPI {
   }
 
   @override
-  Future<void> createProperty(NewProperty newProperty) async {}
+  Future<void> createProperty(NewProperty newProperty) async {
+    debugPrint("New property: ${newProperty.toJson()}");
+  }
 }

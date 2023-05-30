@@ -4,8 +4,11 @@ import 'package:gojo_landlord/features/property/create_property/data_layer/model
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/category.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/new_property.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/model/address_input.dart';
+import 'package:gojo_landlord/features/property/create_property/presentation/model/description_input.dart';
 
+import '../../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../data_layer/model/facility.dart';
+import '../../../data_layer/model/visiting_hour.dart';
 import '../../../data_layer/property_repository.dart';
 import '../../model/number_of_bathrooms.dart';
 import '../../model/number_of_bedrooms_input.dart';
@@ -31,7 +34,9 @@ class CreatePropertyBloc
       emit(state.copyWith(titleInput: titleInput));
     });
     on<DescriptionInputChanged>((event, emit) {
-      emit(state.copyWith(descriptionInput: event.descriptionInput));
+      final descriptionInput =
+          DescriptionInput.dirty(value: event.descriptionInput);
+      emit(state.copyWith(descriptionInput: descriptionInput));
     });
     on<NumberOfBedRoomsInputChanged>((event, emit) {
       final numberOfBedRoomsInput = NumberOfBedRoomsInput.dirty(
@@ -55,13 +60,14 @@ class CreatePropertyBloc
       emit(state.copyWith(selectedCategory: event.selectedCategory));
     });
     on<FacilitySelected>((event, emit) {
-      final selectedFacility = event.selectedFacility;
-      if (state.selectedFacilities.contains(selectedFacility)) {
-        state.selectedFacilities.remove(selectedFacility);
+      final newFacility = event.selectedFacility;
+      final selectedFacilities = state.selectedFacilities;
+      if (selectedFacilities.contains(newFacility)) {
+        selectedFacilities.remove(newFacility);
       } else {
-        state.selectedFacilities.add(selectedFacility);
+        selectedFacilities.add(newFacility);
       }
-      emit(state);
+      emit(state.copyWith(selectedFacilities: selectedFacilities));
     });
 
     on<StartDateSelected>((event, emit) {
@@ -76,15 +82,28 @@ class CreatePropertyBloc
       emit(state.copyWith(address: address));
     });
 
-    on<SaveButtonPressed>((event, emit) {
-      final numberOfBedrooms = _getFacility("Number of Bed rooms")
-          .copyWith(amount: int.tryParse(state.numberOfBedRoomsInput.value));
+    on<VisitingHourAdded>((event, emit) {
+      final visitingHours = state.weeklyVisitingHours;
+      visitingHours.addVisitingHour(event.visitingHour);
+      emit(state.copyWith(weeklyVisitingHours: visitingHours));
+    });
 
-      final numberOfBathrooms = _getFacility("Number of Bath rooms")
-          .copyWith(amount: int.tryParse(state.numberOfBathroomsInput.value));
+    on<VisitingHourRemoved>((event, emit) {
+      final visitingHours = state.weeklyVisitingHours;
+      visitingHours.removeVisitingHour(event.day);
+      emit(state.copyWith(weeklyVisitingHours: visitingHours));
+    });
 
-      final squareArea = _getFacility("Square area")
-          .copyWith(amount: int.tryParse(state.sqaureAreaInput.value));
+    on<SaveButtonPressed>((event, emit) async {
+      final numberOfBedrooms = _getFacility(GojoFacilities.numberOfBedRooms)
+          .copyWith(amount: double.tryParse(state.numberOfBedRoomsInput.value));
+
+      final numberOfBathrooms = _getFacility(GojoFacilities.numberOfBathRooms)
+          .copyWith(
+              amount: double.tryParse(state.numberOfBathroomsInput.value));
+
+      final squareArea = _getFacility(GojoFacilities.squareArea)
+          .copyWith(amount: double.tryParse(state.sqaureAreaInput.value));
 
       final facilities = [
         numberOfBedrooms,
@@ -98,15 +117,17 @@ class CreatePropertyBloc
       final category = _getCategory(state.selectedCategory!);
 
       final newProperty = NewProperty(
+        title: state.titleInput.value,
+        description: state.descriptionInput.value,
         startDate: state.startDate!,
-        endDate: state.endDate!,
         facilities: facilities,
         category: category,
         address: state.address.value!,
+        weeklyVisitingHour: state.weeklyVisitingHours,
       );
 
       try {
-        propertyRepository.createProperty(newProperty);
+        // await propertyRepository.createProperty(newProperty);
         emit(state.copyWith(postStatus: CreatePropertyPostStatus.success));
         emit(CreatePropertyState.initial());
       } catch (e) {
@@ -115,14 +136,36 @@ class CreatePropertyBloc
     });
   }
 
+  static List<Facility> getSelectableFacilites(List<Facility> facilities) {
+    final facilitiesNotToInclude = [
+      GojoFacilities.numberOfBathRooms,
+      GojoFacilities.numberOfBedRooms,
+      GojoFacilities.squareArea,
+    ];
+
+    return facilities
+        .where((element) => !facilitiesNotToInclude.contains(element.name))
+        .toList();
+  }
+
   Category _getCategory(String categoryName) {
-    return fetchedCategories
-        .firstWhere((category) => category.name == categoryName);
+    try {
+      return fetchedCategories
+          .firstWhere((category) => category.name == categoryName);
+    } catch (e) {
+      throw Exception("Category not found");
+    }
   }
 
   Facility _getFacility(String facilityName) {
     debugPrint(facilityName);
-    return fetchedFacilities
-        .firstWhere((facility) => facility.name == facilityName);
+
+    debugPrint(fetchedFacilities.toList().toString());
+    try {
+      return fetchedFacilities
+          .firstWhere((facility) => facility.name == facilityName);
+    } catch (e) {
+      throw Exception("Facility not found");
+    }
   }
 }

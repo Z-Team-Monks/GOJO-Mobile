@@ -7,6 +7,10 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
 import 'package:gojo_landlord/features/profile/presentation/bloc/profile_bloc.dart';
 
+import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
+import '../../../../constants/strings/app_routes.dart';
+import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -38,7 +42,7 @@ class UserInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -58,6 +62,8 @@ class UserInfoSection extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 4),
+        const LogoutButton(),
       ],
     );
   }
@@ -144,6 +150,28 @@ class InReviewPropertiesTab extends StatelessWidget {
             return const ErrorView();
         }
       },
+    );
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: GojoCircleIconButton(
+        icon: Icons.logout,
+        label: "Logout",
+        onPressed: () {
+          context.read<RouteGuardBloc>().add(Logout());
+          Navigator.pushNamedAndRemoveUntil(
+              context, GojoRoutes.app, (route) => false);
+        },
+      ),
     );
   }
 }

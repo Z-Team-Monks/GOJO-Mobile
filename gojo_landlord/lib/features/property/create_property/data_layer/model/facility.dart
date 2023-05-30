@@ -1,7 +1,9 @@
+import '../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
+
 class Facility {
   final String name;
   final int id;
-  final int? amount;
+  final double? amount;
 
   Facility({
     required this.name,
@@ -10,7 +12,11 @@ class Facility {
   });
 
   factory Facility.fromJson(Map<String, dynamic> json) {
-    return Facility(name: json['name'], id: json['id'], amount: json['amount']);
+    return Facility(
+      name: json['name'] as String,
+      id: json['id'] as int,
+      amount: json['amount'] as double?,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +30,7 @@ class Facility {
   Facility copyWith({
     String? name,
     int? id,
-    int? amount,
+    double? amount,
   }) {
     return Facility(
       name: name ?? this.name,

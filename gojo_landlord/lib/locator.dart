@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:gojo_landlord/features/property/create_property/data_layer/property_client.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/property_repository.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,7 +26,7 @@ class Locator {
       () => ProfileRepositoryFake(),
     );
     GetIt.I.registerLazySingleton<PropertyRepositoryAPI>(
-      () => PropertyRepositoryFake(),
+      () => PropertyRepositoryImpl(PropertyClientImpl()),
     );
   }
 

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/messages/contacts/presentation/screen/contacts_view.dart';
-import 'features/notification/presentation/notification_view.dart';
 import 'features/profile/presentation/screens/profile_view.dart';
 import 'features/property/create_property/presentation/screen/create_property_view.dart';
-import 'features/withdrawal/withdrawal.dart';
+import 'features/wallet/withdrawal.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -18,11 +17,10 @@ class _RootViewState extends State<RootView> {
   int _selectedTab = 0;
 
   final List _pages = [
-    const ProfileView(),
+    const WalletView(),
     const ContactsView(),
     const CreatePropertyView(),
-    const WithdrawRequest(),
-    const NotificationView(),
+    const ProfileView(),
   ];
 
   _changeTab(int index) {
@@ -40,10 +38,11 @@ class _RootViewState extends State<RootView> {
         onTap: (index) => _changeTab(index),
         selectedItemColor: Resources.gojoColors.primaryColor,
         unselectedItemColor: Resources.gojoColors.darkGrey,
+        showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.wallet),
+            label: "Wallet",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
@@ -54,12 +53,8 @@ class _RootViewState extends State<RootView> {
             label: "Add",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.paid),
-            label: "Transactions",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notifications",
+            icon: Icon(Icons.person),
+            label: "Profile",
           ),
         ],
       ),

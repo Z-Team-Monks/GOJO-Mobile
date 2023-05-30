@@ -14,7 +14,7 @@ class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
     required String phoneNumber,
     required String password,
   }) {
-    return post("users/login/", {
+    return post("users/landlord_login/", {
       "username": phoneNumber,
       "password": password,
     });

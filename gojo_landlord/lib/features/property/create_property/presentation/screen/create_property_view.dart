@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/property_repository.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/category.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/facility.dart';
@@ -17,7 +18,7 @@ import 'widgets/availability_selector.dart';
 import 'widgets/facility_selector.dart';
 import 'widgets/form_input_label.dart';
 import 'widgets/adress_picker.dart';
-import 'widgets/time_picker.dart';
+import 'widgets/visiting_hours/visiting_hour_selector.dart';
 
 class CreatePropertyView extends StatelessWidget {
   const CreatePropertyView({super.key});
@@ -66,62 +67,95 @@ class CreatePropertyForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CreatePropertyBloc(
-          propertyRepository: GetIt.I<PropertyRepositoryAPI>(),
-          fetchedCategories: categories,
-          fetchedFacilities: facilities),
-      child: BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: GojoPadding.small),
-            child: ListView(
-              children: [
-                const FormInputLabel(
-                  label: "Info",
-                  isRequired: true,
+        propertyRepository: GetIt.I<PropertyRepositoryAPI>(),
+        fetchedCategories: categories,
+        fetchedFacilities: facilities,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: GojoPadding.small),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const FormInputLabel(
+                label: "Info",
+                isRequired: true,
+              ),
+              const SizedBox(height: 8),
+              TitleInputField(),
+              const SizedBox(height: 12),
+              DescriptionInputField(),
+              const SizedBox(height: 12),
+              NumberOfBedRoomsInputField(),
+              const SizedBox(height: 12),
+              NumberofBathRoomsInputField(),
+              const SizedBox(height: 12),
+              SquareAreaInputField(),
+              const SizedBox(height: 20),
+              const AvailabilitySelector(),
+              const SizedBox(height: 20),
+              const AddressPicker(),
+              const SizedBox(height: 20),
+              const VisitingHourSelector(),
+              const SizedBox(height: 20),
+              CategorySelector(categories: categories),
+              const SizedBox(height: 20),
+              FacilitiesSelector(
+                facilities: CreatePropertyBloc.getSelectableFacilites(
+                  facilities,
                 ),
-                const SizedBox(height: 8),
-                const TitleInputField(),
-                const SizedBox(height: 12),
-                const DescriptionInputField(),
-                const SizedBox(height: 12),
-                const NumberOfBedRoomsInputField(),
-                const SizedBox(height: 12),
-                const NumberofBathRoomsInputField(),
-                const SizedBox(height: 12),
-                const SquareAreaInputField(),
-                const SizedBox(height: 20),
-                const AvailabilitySelector(),
-                const SizedBox(height: 20),
-                const AddressPicker(),
-                const SizedBox(height: 20),
-                const TimePickerRow(),
-                const SizedBox(height: 20),
-                CategorySelector(categories: categories),
-                const SizedBox(height: 20),
-                FacilitiesSelector(facilities: facilities),
-                const SizedBox(height: 20),
-                const SaveButton(),
-                const SizedBox(height: 12),
-              ],
-            ),
-          );
-        },
+              ),
+              const SizedBox(height: 20),
+              const SaveButton(),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
+class TitleInputField extends StatelessWidget {
+  TitleInputField({super.key});
+
+  final _textInputController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
+      builder: (context, state) {
+        if (state.titleInput.value != _textInputController.text) {
+          _textInputController.text = state.titleInput.value;
+        }
+        return GojoTextField(
+          labelText: "Title",
+          controlller: _textInputController,
+          onChanged: (value) {
+            context.read<CreatePropertyBloc>().add(TitleInputChanged(value));
+          },
+          errorText: !state.titleInput.isPure && state.titleInput.isNotValid
+              ? state.titleInput.getErrorMessage()
+              : null,
+        );
+      },
+    );
+  }
+}
+
 class SquareAreaInputField extends StatelessWidget {
-  const SquareAreaInputField({
-    super.key,
-  });
+  SquareAreaInputField({super.key});
+
+  final _inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
       builder: (context, state) {
+        if (state.sqaureAreaInput.value != _inputController.text) {
+          _inputController.text = state.sqaureAreaInput.value;
+        }
         return GojoTextField(
           labelText: "Square area",
+          controlller: _inputController,
           onChanged: (value) {
             context
                 .read<CreatePropertyBloc>()
@@ -138,16 +172,20 @@ class SquareAreaInputField extends StatelessWidget {
 }
 
 class NumberofBathRoomsInputField extends StatelessWidget {
-  const NumberofBathRoomsInputField({
-    super.key,
-  });
+  NumberofBathRoomsInputField({super.key});
+
+  final _inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
       builder: (context, state) {
+        if (state.numberOfBathroomsInput.value != _inputController.text) {
+          _inputController.text = state.numberOfBathroomsInput.value;
+        }
         return GojoTextField(
           labelText: "Number of bathrooms",
+          controlller: _inputController,
           onChanged: (value) {
             context
                 .read<CreatePropertyBloc>()
@@ -164,16 +202,20 @@ class NumberofBathRoomsInputField extends StatelessWidget {
 }
 
 class NumberOfBedRoomsInputField extends StatelessWidget {
-  const NumberOfBedRoomsInputField({
-    super.key,
-  });
+  NumberOfBedRoomsInputField({super.key});
+
+  final _inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
       builder: (context, state) {
+        if (state.numberOfBedRoomsInput.value != _inputController.text) {
+          _inputController.text = state.numberOfBedRoomsInput.value;
+        }
         return GojoTextField(
           labelText: "Number of bedrooms",
+          controlller: _inputController,
           onChanged: (value) {
             context
                 .read<CreatePropertyBloc>()
@@ -190,38 +232,29 @@ class NumberOfBedRoomsInputField extends StatelessWidget {
 }
 
 class DescriptionInputField extends StatelessWidget {
-  const DescriptionInputField({
-    super.key,
-  });
+  DescriptionInputField({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return GojoTextField(
-      labelText: "Description",
-      maxLines: 5,
-      onChanged: (value) {
-        context.read<CreatePropertyBloc>().add(DescriptionInputChanged(value));
-      },
-    );
-  }
-}
-
-class TitleInputField extends StatelessWidget {
-  const TitleInputField({
-    super.key,
-  });
+  final _inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
       builder: (context, state) {
+        if (state.descriptionInput.value != _inputController.text) {
+          _inputController.text = state.descriptionInput.value;
+        }
         return GojoTextField(
-          labelText: "Title",
+          labelText: "Description",
+          controlller: _inputController,
+          maxLines: 5,
           onChanged: (value) {
-            context.read<CreatePropertyBloc>().add(TitleInputChanged(value));
+            context
+                .read<CreatePropertyBloc>()
+                .add(DescriptionInputChanged(value));
           },
-          errorText: !state.titleInput.isPure && state.titleInput.isNotValid
-              ? state.titleInput.getErrorMessage()
+          errorText: !state.descriptionInput.isPure &&
+                  state.descriptionInput.isNotValid
+              ? state.descriptionInput.getErrorMessage()
               : null,
         );
       },
@@ -236,7 +269,21 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreatePropertyBloc, CreatePropertyState>(
+    return BlocConsumer<CreatePropertyBloc, CreatePropertyState>(
+      listener: (context, state) {
+        switch (state.postStatus) {
+          case CreatePropertyPostStatus.success:
+            GojoSnackBars.showSuccess(context,
+                "Property created. It will be posted when approved by admin");
+            break;
+          case CreatePropertyPostStatus.failure:
+            GojoSnackBars.showError(context,
+                "Can't do operation right now. Please try again later!");
+            break;
+          case CreatePropertyPostStatus.initial:
+            break;
+        }
+      },
       builder: (context, state) {
         final isButtonActive = isFormValid(state);
         return GojoBarButton(
@@ -253,17 +300,17 @@ class SaveButton extends StatelessWidget {
   }
 
   bool isFormValid(CreatePropertyState state) {
-    final allFormsInputsAreValid = Formz.validate([
+    final allFormzInputsAreValid = Formz.validate([
       state.titleInput,
       state.numberOfBedRoomsInput,
       state.numberOfBathroomsInput,
       state.sqaureAreaInput,
       state.address,
+      state.descriptionInput,
     ]);
 
-    return allFormsInputsAreValid &&
+    return allFormzInputsAreValid &&
         state.selectedCategory != null &&
-        state.startDate != null &&
-        state.endDate != null;
+        state.startDate != null;
   }
 }
