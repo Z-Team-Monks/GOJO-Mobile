@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
@@ -24,6 +25,7 @@ class PropertyClientImpl extends BaseApiClient implements PropertyClientAPI {
   @override
   Future<Response> postProperty(Map<String, dynamic> newPropertyJson) async {
     final user = await GetIt.I<UserRepositoryAPI>().getUser();
+    debugPrint(newPropertyJson.toString());
     return post("properties/", newPropertyJson, token: user?.token);
   }
 }

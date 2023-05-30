@@ -127,7 +127,7 @@ class CreatePropertyBloc
       );
 
       try {
-        // await propertyRepository.createProperty(newProperty);
+        await propertyRepository.createProperty(newProperty);
         emit(state.copyWith(postStatus: CreatePropertyPostStatus.success));
         emit(CreatePropertyState.initial());
       } catch (e) {

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/route_guard/presentation/bloc/route_guard_bloc.dart';
+import 'firebase_options.dart';
 import 'locator.dart';
 import 'navigation/route_generator.dart';
 
@@ -14,6 +16,11 @@ void main() async {
 
   // Initializes repositories using get_it.
   await Locator.setup();
+
+  // Initialize firebase.
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(
     BlocProvider(

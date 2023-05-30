@@ -6,6 +6,11 @@ abstract class SignInClientAPI {
     required String phoneNumber,
     required String password,
   });
+
+  Future<void> registerFirebaseToken({
+    required String firebaseToken,
+    required String appToken,
+  });
 }
 
 class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
@@ -18,5 +23,19 @@ class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
       "username": phoneNumber,
       "password": password,
     });
+  }
+
+  @override
+  Future<void> registerFirebaseToken({
+    required String firebaseToken,
+    required String appToken,
+  }) {
+    return post(
+      "users/fb_registration_token/",
+      {
+        "token": firebaseToken,
+      },
+      token: appToken,
+    );
   }
 }
