@@ -32,12 +32,6 @@ class _RootViewState extends State<RootView> {
 
   @override
   Widget build(BuildContext context) {
-    // The notification service is set up here because it needs the context
-    // object to show a notification bar.
-    // Another reason is that the notification service should start after a user
-    // has logged in.
-    NotificationService.setUp(context);
-
     return Scaffold(
       body: _pages[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
