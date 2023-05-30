@@ -28,12 +28,17 @@ class ProfileView extends StatelessWidget {
         )..add(
             LoadProfileData(),
           ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            UserInfoSection(),
-            ProfileButtons(),
-            UserPropertiesSection(),
+        child: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                const [UserInfoSection(), ProfileButtons()],
+              ),
+            ),
+            const SliverFillRemaining(
+              hasScrollBody: true,
+              child: UserPropertiesSection(),
+            )
           ],
         ),
       ),
