@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:gojo/core/model/user.dart';
 import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
@@ -28,7 +29,15 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
         phoneNumber: phoneNumber,
         password: password,
       );
-      return Left(User.fromJson(response.data['user']));
+
+      final user = User.fromJson(response.data['user']);
+
+      await signInClient.registerFirebaseToken(
+        firebaseToken: FirebaseMessaging.instance.getToken().toString(),
+        appToken: user.token!,
+      );
+
+      return Left(user);
     } catch (e) {
       if (e is DioError) {
         debugPrint("Dio error ${e.message}");

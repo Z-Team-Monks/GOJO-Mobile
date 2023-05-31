@@ -5,6 +5,7 @@ enum CreatePropertyPostStatus { initial, success, failure }
 class CreatePropertyState {
   final TitleInput titleInput;
   final DescriptionInput descriptionInput;
+  final RentInput rentInput;
   final NumberOfBedRoomsInput numberOfBedRoomsInput;
   final NumberOfBathroomsInput numberOfBathroomsInput;
   final SquareAreaInput sqaureAreaInput;
@@ -19,6 +20,7 @@ class CreatePropertyState {
   CreatePropertyState({
     required this.titleInput,
     required this.descriptionInput,
+    required this.rentInput,
     required this.numberOfBedRoomsInput,
     required this.numberOfBathroomsInput,
     required this.sqaureAreaInput,
@@ -35,6 +37,7 @@ class CreatePropertyState {
     return CreatePropertyState(
       titleInput: const TitleInput.pure(),
       descriptionInput: const DescriptionInput.pure(),
+      rentInput: const RentInput.pure(),
       numberOfBedRoomsInput: const NumberOfBedRoomsInput.pure(),
       numberOfBathroomsInput: const NumberOfBathroomsInput.pure(),
       sqaureAreaInput: const SquareAreaInput.pure(),
@@ -51,6 +54,7 @@ class CreatePropertyState {
   CreatePropertyState copyWith({
     TitleInput? titleInput,
     DescriptionInput? descriptionInput,
+    RentInput? rentInput,
     NumberOfBedRoomsInput? numberOfBedRoomsInput,
     NumberOfBathroomsInput? numberOfBathroomsInput,
     SquareAreaInput? sqaureAreaInput,
@@ -65,6 +69,7 @@ class CreatePropertyState {
     return CreatePropertyState(
       titleInput: titleInput ?? this.titleInput,
       descriptionInput: descriptionInput ?? this.descriptionInput,
+      rentInput: rentInput ?? this.rentInput,
       numberOfBedRoomsInput:
           numberOfBedRoomsInput ?? this.numberOfBedRoomsInput,
       numberOfBathroomsInput:

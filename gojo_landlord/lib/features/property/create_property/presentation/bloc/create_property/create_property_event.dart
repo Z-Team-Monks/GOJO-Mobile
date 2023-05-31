@@ -13,6 +13,11 @@ class DescriptionInputChanged extends CreatePropertyEvent {
   DescriptionInputChanged(this.descriptionInput);
 }
 
+class RentInputChanged extends CreatePropertyEvent {
+  final String rent;
+  RentInputChanged(this.rent);
+}
+
 class NumberOfBedRoomsInputChanged extends CreatePropertyEvent {
   final String numberOfBedRoomsInput;
   NumberOfBedRoomsInputChanged(this.numberOfBedRoomsInput);

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
@@ -27,7 +28,15 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
         phoneNumber: phoneNumber,
         password: password,
       );
-      return Left(User.fromJson(response.data['user']));
+
+      final user = User.fromJson(response.data['user']);
+
+      await signInClient.registerFirebaseToken(
+        firebaseToken: FirebaseMessaging.instance.getToken().toString(),
+        appToken: user.token!,
+      );
+
+      return Left(user);
     } catch (e) {
       if (e is DioError) {
         debugPrint("Dio error ${e.message}");

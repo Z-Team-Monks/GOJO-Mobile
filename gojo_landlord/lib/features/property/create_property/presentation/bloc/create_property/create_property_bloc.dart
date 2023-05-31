@@ -4,6 +4,7 @@ import 'package:gojo_landlord/features/property/create_property/data_layer/model
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/category.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/new_property.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/model/address_input.dart';
+import 'package:gojo_landlord/features/property/create_property/presentation/model/rent_input.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/model/description_input.dart';
 
 import '../../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
@@ -38,6 +39,12 @@ class CreatePropertyBloc
           DescriptionInput.dirty(value: event.descriptionInput);
       emit(state.copyWith(descriptionInput: descriptionInput));
     });
+
+    on<RentInputChanged>((event, emit) {
+      final rentInput = RentInput.dirty(value: event.rent);
+      emit(state.copyWith(rentInput: rentInput));
+    });
+
     on<NumberOfBedRoomsInputChanged>((event, emit) {
       final numberOfBedRoomsInput = NumberOfBedRoomsInput.dirty(
         value: event.numberOfBedRoomsInput,
@@ -119,6 +126,7 @@ class CreatePropertyBloc
       final newProperty = NewProperty(
         title: state.titleInput.value,
         description: state.descriptionInput.value,
+        amount: double.tryParse(state.rentInput.value)!,
         startDate: state.startDate!,
         facilities: facilities,
         category: category,
@@ -127,7 +135,7 @@ class CreatePropertyBloc
       );
 
       try {
-        // await propertyRepository.createProperty(newProperty);
+        await propertyRepository.createProperty(newProperty);
         emit(state.copyWith(postStatus: CreatePropertyPostStatus.success));
         emit(CreatePropertyState.initial());
       } catch (e) {
