@@ -1,50 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../../../../Gojo-Mobile-Shared/UI/input_fields/search_bar.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../../navigation/args/chat_args.dart';
+import '../../../../profile/presentation/screens/profile_view.dart';
+import '../../data/repository/contact_repository.dart';
+import '../bloc/bloc/contact_bloc.dart';
 
-/// Represents a screen with a list view of user's chat history.
-///
-/// TODO: This feature is duplicated in the tenant app. It should be moved
-///  to the shared folder if its functionality is the same in both apps.
 class ContactsView extends StatelessWidget {
   const ContactsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ContactBloc(
+        GetIt.I<ContactRepository>(),
+      )..add(ContactLoad()),
+      child: const _ContactsView(),
+    );
+  }
+}
+
+/// Represents a screen with a list view of user's chat history.
+class _ContactsView extends StatelessWidget {
+  const _ContactsView();
+
+  @override
+  Widget build(BuildContext context) {
     return GojoParentView(
+      label: "Messages",
       child: Column(
         children: [
-          GojoSearchBar(
-            label: "Search",
-            onChanged: (val) => debugPrint(val),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: (() {
-                  Navigator.pushNamed(context, GojoRoutes.chat);
-                }),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: GojoPadding.small),
-                  child: GojoContentItem(
-                    image: AssetImage(Resources.gojoImages.headShot),
-                    title: "Connor Fraizer",
-                    content:
-                        "What are the facility conditions? specially the WIFI? How about the facility condition specially the WIFI?",
-                    rightAlignedTitle: "7:11 pm",
-                    rightAlignedContent: "5",
-                  ),
-                ),
-              );
+          const SizedBox(height: 10),
+          BlocBuilder<ContactBloc, ContactState>(
+            builder: (context, state) {
+              switch (state.fetchStatus) {
+                case FetchContactsStatus.loading:
+                  return const LoadingView();
+                case FetchContactsStatus.error:
+                  return const ErrorView();
+                default:
+                  if (state.contacts.isEmpty) {
+                    return const Center(child: Text("No messages Yet!"));
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: state.contacts.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: (() {
+                          Navigator.pushNamed(
+                            context,
+                            GojoRoutes.chat,
+                            arguments: ChatArgs(
+                              messages: state.contacts[index].chatMessages,
+                              tenant: state.contacts[index].landlord,
+                            ),
+                          );
+                        }),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: GojoPadding.small),
+                          child: GojoContentItem(
+                            image: AssetImage(Resources.gojoImages.headShot),
+                            title:
+                                "${state.contacts[index].landlord.firstName} ${state.contacts[index].landlord.lastName}",
+                            content:
+                                state.contacts[index].chatMessages[0].message,
+                            rightAlignedTitle:
+                                state.contacts[index].chatMessages[0].timestamp,
+                            rightAlignedContent:
+                                "${state.contacts[index].unreadMessages}",
+                          ),
+                        ),
+                      );
+                    },
+                  );
+              }
             },
           ),
         ],

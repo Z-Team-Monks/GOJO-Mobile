@@ -9,7 +9,10 @@ import 'Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import 'Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_client.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_repository.dart';
+import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
+import 'features/messages/contacts/data/repository/contact_repository.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
+import 'features/requests/appointments/data_layer/repository/my_appointments_repository.dart';
 
 class Locator {
   static setup() async {
@@ -26,7 +29,23 @@ class Locator {
       () => ProfileRepositoryFake(),
     );
     GetIt.I.registerLazySingleton<PropertyRepositoryAPI>(
-      () => PropertyRepositoryImpl(PropertyClientImpl()),
+      () => PropertyRepositoryFake(),
+      // () => PropertyRepositoryImpl(PropertyClientImpl()),
+    );
+    GetIt.I.registerLazySingleton(
+      () => ChatMessageBloc(),
+    );
+
+    GetIt.I.registerLazySingleton<ContactRepository>(
+      () => const ContactRepositoryFakeImpl(),
+      // () => ContactRepositoryImpl(
+      //   conctactClientAPI: ContactClientImpl(),
+      // ),
+    );
+
+    GetIt.I.registerLazySingleton<MyAppointmentsRepositoryAPI>(
+      () => MyAppointmentsRepositoryFake(),
+      // () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
     );
   }
 

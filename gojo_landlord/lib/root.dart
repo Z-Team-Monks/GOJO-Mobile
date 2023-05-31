@@ -38,6 +38,9 @@ class _RootViewState extends State<RootView> {
         onTap: (index) => _changeTab(index),
         selectedItemColor: Resources.gojoColors.primaryColor,
         unselectedItemColor: Resources.gojoColors.darkGrey,
+        type: BottomNavigationBarType.fixed,
+        elevation: 10,
+        selectedFontSize: 12,
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
@@ -49,7 +52,7 @@ class _RootViewState extends State<RootView> {
             label: "Messages",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
+            icon: Icon(Icons.add_home),
             label: "Add",
           ),
           BottomNavigationBarItem(

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
-import 'package:gojo_landlord/constants/strings/app_routes.dart';
 import 'package:gojo_landlord/features/profile/data_layer/model/property_item.dart';
 
 class InReviewMediaItem extends StatelessWidget {

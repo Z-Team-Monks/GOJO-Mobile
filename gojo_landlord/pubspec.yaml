@@ -57,6 +57,8 @@ dependencies:
   hive_flutter: ^1.1.0
   dartz: ^0.10.1
   path_provider: ^2.0.15
+  web_socket_channel: ^2.4.0
+  expandable: ^5.0.1
 
 
 dev_dependencies:

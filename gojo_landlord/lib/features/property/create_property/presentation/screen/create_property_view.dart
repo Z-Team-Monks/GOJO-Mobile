@@ -26,7 +26,7 @@ class CreatePropertyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Add a new property",
+      label: "New Property",
       child: BlocProvider(
         create: (context) =>
             PropertyFormValuesBloc(GetIt.I<PropertyRepositoryAPI>())

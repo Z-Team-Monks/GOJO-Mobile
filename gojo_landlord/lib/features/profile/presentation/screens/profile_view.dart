@@ -114,10 +114,11 @@ class PostedPropertiesTab extends StatelessWidget {
         switch (state.postedMediaItemsFetchStatus) {
           case FetchProfileMediaItemStatus.loaded:
             return ListView.builder(
-                itemCount: state.postedMediaItems.length,
-                itemBuilder: ((context, index) {
-                  return state.postedMediaItems[index];
-                }));
+              itemCount: state.postedMediaItems.length,
+              itemBuilder: ((context, index) {
+                return state.postedMediaItems[index];
+              }),
+            );
           case FetchProfileMediaItemStatus.loading:
             return const LoadingView();
           case FetchProfileMediaItemStatus.error:
