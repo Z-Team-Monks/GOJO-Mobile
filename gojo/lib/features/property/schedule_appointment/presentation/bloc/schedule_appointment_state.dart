@@ -1,16 +1,16 @@
 part of 'schedule_appointment_bloc.dart';
 
-enum ScheduleAppointmentStatus { inprogress, success, error, finished }
+enum ScheduleAppointmentStatus { init, inprogress, success, error, finished }
 
 class ScheduleAppointmentState extends Equatable {
   final ScheduleAppointmentStatus status;
-  final DateTime date;
+  final DateTime? date;
   final List<String> timeSlots;
   final String timeSlot;
 
   const ScheduleAppointmentState({
-    this.status = ScheduleAppointmentStatus.inprogress,
-    required this.date,
+    this.status = ScheduleAppointmentStatus.init,
+    this.date,
     required this.timeSlots,
     this.timeSlot = "",
   });
@@ -31,4 +31,6 @@ class ScheduleAppointmentState extends Equatable {
 
   @override
   List<Object?> get props => [status, date, timeSlots, timeSlot];
+
+  bool get isFormValid => timeSlot.isNotEmpty && date != null;
 }

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/input_fields/date_field.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../../Gojo-Mobile-Shared/UI/input_fields/date_field.dart';
+import '../../../../detail/data/model/visiting_hours.dart';
 import '../../bloc/schedule_appointment_bloc.dart';
 
 class DatePicker extends StatefulWidget {
   final String label;
-  final List<int>? availableDays;
+  final VisitingHours? visitingHours;
 
   const DatePicker({
     super.key,
     required this.label,
-    this.availableDays,
+    this.visitingHours,
   });
 
   @override
@@ -41,8 +42,8 @@ class _DatePickerState extends State<DatePicker> {
     final DateTime? picked = await showDatePicker(
       context: context,
       selectableDayPredicate: (day) {
-        if (widget.availableDays != null) {
-          return widget.availableDays?.contains(day.weekday) ?? true;
+        if (widget.visitingHours != null) {
+          return widget.visitingHours?.contains(day) ?? true;
         }
         return true;
       },
@@ -60,34 +61,29 @@ class _DatePickerState extends State<DatePicker> {
   }
 
   DateTime _getFirstAvailableDate(BuildContext context) {
-    final DateTime now = DateTime.now();
-    if (widget.availableDays == null) {
-      return now;
-    }
+    DateTime firstAvailableDate = DateTime.now();
 
-    var offset = 0;
-    for (int day = 0; day < 7; day++) {
-      final currentWeekDay = (now.weekday - 1 + day) % 7 + 1;
-      if (widget.availableDays?.contains(currentWeekDay) ?? false) {
-        offset = day;
-        break;
+    for (var visitingHour in widget.visitingHours!.visitingHours) {
+      DateTime dateTime = DateFormat('EEE').parse(visitingHour.day);
+
+      if (dateTime.isAfter(firstAvailableDate)) {
+        firstAvailableDate = dateTime;
       }
     }
 
-    final DateTime firstAvailableDate = DateTime(
-      now.year,
-      now.month,
-      now.day + offset,
-    );
     return firstAvailableDate;
   }
 
   DateTime _getLastAvailableDate(BuildContext context) {
-    final DateTime now = DateTime.now();
-    return DateTime(
-      now.year,
-      now.month + 1,
-      32,
-    );
+    DateTime lastAvailableDate = _getFirstAvailableDate(context);
+
+    for (var visitingHour in widget.visitingHours!.visitingHours) {
+      DateTime dateTime = DateFormat('EEE').parse(visitingHour.day);
+      if (dateTime.isAfter(lastAvailableDate)) {
+        lastAvailableDate = dateTime;
+      }
+    }
+
+    return lastAvailableDate.add(const Duration(days: 30));
   }
 }

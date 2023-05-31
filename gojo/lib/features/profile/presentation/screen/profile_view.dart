@@ -2,17 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/constants/strings/app_routes.dart';
-import 'package:gojo/features/profile/data_layer/repository/profile_repository.dart';
-import 'package:gojo/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:gojo/features/profile/presentation/screen/model/profile_media_item.dart';
-import 'package:gojo/features/profile/presentation/screen/profile_icon_button.dart';
-import 'package:gojo/features/route_guard/presentation/bloc/route_guard_bloc.dart';
 
+import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
+import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../constants/strings/app_routes.dart';
 import '../../../../core/repository/user_repository.dart';
+import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
+import '../../data_layer/repository/profile_repository.dart';
+import '../bloc/profile_bloc.dart';
+import 'model/profile_media_item.dart';
+import 'profile_icon_button.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

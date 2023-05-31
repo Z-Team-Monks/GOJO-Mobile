@@ -98,6 +98,7 @@ class _ApplicationForm extends StatelessWidget {
                         title: "Apply",
                         loadingState:
                             state.status == ApplicationStatus.inprogress,
+                        isActive: state.isFormValid,
                         onClick: () {
                           BlocProvider.of<ApplyForRentBloc>(context).add(
                             ApplicationSubmitted(),

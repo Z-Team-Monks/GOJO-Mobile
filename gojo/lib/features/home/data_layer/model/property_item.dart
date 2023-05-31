@@ -1,5 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
 class Facility {
   final String name;
   final int? amount;

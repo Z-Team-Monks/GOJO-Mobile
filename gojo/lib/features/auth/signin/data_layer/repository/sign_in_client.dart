@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:gojo/Gojo-Mobile-Shared/network/base_api_client.dart';
+
+import '../../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 
 abstract class SignInClientAPI {
   Future<Response> authenticate({
@@ -19,7 +20,7 @@ class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
     required String phoneNumber,
     required String password,
   }) {
-    return post("users/login/", {
+    return post("users/tenant_login/", {
       "username": phoneNumber,
       "password": password,
     });

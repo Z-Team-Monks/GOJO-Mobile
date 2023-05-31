@@ -40,8 +40,8 @@ class ReviewCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Mar 2, 2023",
-                      style: TextStyle(
+                      review.date,
+                      style: const TextStyle(
                         color: Color(0xFFC5BDBD),
                         fontSize: 13,
                       ),
@@ -49,7 +49,7 @@ class ReviewCard extends StatelessWidget {
                   ],
                 ),
                 Row(children: [
-                  for (var i = 0; i < 5; i++)
+                  for (var i = 0; i < review.rating; i++)
                     const Icon(
                       Icons.star,
                       size: 18,

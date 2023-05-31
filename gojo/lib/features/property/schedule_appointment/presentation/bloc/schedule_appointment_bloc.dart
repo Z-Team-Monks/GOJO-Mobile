@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gojo/features/property/detail/data/model/appointment.dart';
-import 'package:gojo/features/property/detail/data/repository/detail_repository.dart';
+
+import '../../../detail/data/model/appointment.dart';
+import '../../../detail/data/repository/detail_repository.dart';
 
 part 'schedule_appointment_event.dart';
 part 'schedule_appointment_state.dart';
@@ -12,22 +13,13 @@ class ScheduleAppointmentBloc
 
   ScheduleAppointmentBloc({
     required this.propertyDetailRepository,
-  }) : super(ScheduleAppointmentState(
-          date: DateTime.now(),
-          timeSlots: const [],
+  }) : super(const ScheduleAppointmentState(
+          timeSlots: [],
         )) {
     on<TimeSlotSelectedChanged>((event, emit) {
       emit(
         state.copywith(
           timeSlot: event.timeSlot,
-        ),
-      );
-    });
-
-    on<TimeSlotChanged>((event, emit) {
-      emit(
-        state.copywith(
-          timeSlots: event.timeSlots,
         ),
       );
     });
@@ -51,12 +43,12 @@ class ScheduleAppointmentBloc
         final appointment = AppointmentModel(
           propertyId: "1",
           date: state.date.toString(),
-          timeSlot: state.timeSlot,
+          timeSlot: state.timeSlot!,
         );
         propertyDetailRepository.scheduleAppointment(
           appointment,
         );
-        
+
         emit(
           state.copywith(
             status: ScheduleAppointmentStatus.success,

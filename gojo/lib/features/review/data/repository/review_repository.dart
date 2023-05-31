@@ -35,6 +35,7 @@ class ReviewRepositoryFake implements ReviewRepositoryAPI {
       user: user,
       rating: 4.5,
       comment: "This is a comment",
+      date: "2021-09-01",
     );
 
     return Future.delayed(

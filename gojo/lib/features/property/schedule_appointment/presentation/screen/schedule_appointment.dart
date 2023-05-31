@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import '../../../detail/data/model/availablity.dart';
+import '../../../detail/data/model/visiting_hours.dart';
 import '../../../detail/data/repository/detail_repository.dart';
 import '../bloc/schedule_appointment_bloc.dart';
 import 'widgets/date_picker.dart';
 import 'widgets/time_slot_drop_down.dart';
 
 class ScheduleAppointmentView extends StatelessWidget {
-  final AvailabilityModel availablity;
+  final VisitingHours visitingHours;
 
-  const ScheduleAppointmentView({super.key, required this.availablity});
+  const ScheduleAppointmentView({super.key, required this.visitingHours});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,16 @@ class ScheduleAppointmentView extends StatelessWidget {
       create: (context) => ScheduleAppointmentBloc(
         propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
       ),
-      child: _ScheduleAppointmentView(availablity: availablity),
+      child: _ScheduleAppointmentView(visitingHours: visitingHours),
     );
   }
 }
 
 class _ScheduleAppointmentView extends StatelessWidget {
-  final AvailabilityModel availablity;
+  final VisitingHours visitingHours;
 
   const _ScheduleAppointmentView({
-    required this.availablity,
+    required this.visitingHours,
   });
 
   @override
@@ -50,10 +50,15 @@ class _ScheduleAppointmentView extends StatelessWidget {
             );
             break;
           case ScheduleAppointmentStatus.inprogress:
+            GojoSnackBars.showLoading(
+              context,
+              "Scheduling an appointment...",
+            );
             break;
           case ScheduleAppointmentStatus.finished:
             Navigator.pop(context);
             break;
+          default:
         }
       },
       child: Dialog(
@@ -67,14 +72,15 @@ class _ScheduleAppointmentView extends StatelessWidget {
             children: [
               DatePicker(
                 label: "Date",
-                availableDays: availablity.days,
+                visitingHours: visitingHours,
               ),
               const SizedBox(height: 10),
               BlocBuilder<ScheduleAppointmentBloc, ScheduleAppointmentState>(
                 builder: (context, state) {
                   return TimeSlotDropDown(
-                    //TODO: replace date with bloc state
-                    freeTimeSlots: availablity.timeSlots["1"] ?? [],
+                    freeTimeSlots: visitingHours.getTimesByDay(
+                      state.date ?? DateTime.now(),
+                    ),
                   );
                 },
               ),
@@ -94,13 +100,20 @@ class _ScheduleAppointmentView extends StatelessWidget {
                           ?.copyWith(color: Colors.red),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      BlocProvider.of<ScheduleAppointmentBloc>(context).add(
-                        ScheduleAppointmentSubmitted(),
+                  BlocBuilder<ScheduleAppointmentBloc,
+                      ScheduleAppointmentState>(
+                    builder: (context, state) {
+                      return TextButton(
+                        onPressed: state.isFormValid
+                            ? () {
+                                BlocProvider.of<ScheduleAppointmentBloc>(
+                                        context)
+                                    .add(ScheduleAppointmentSubmitted());
+                              }
+                            : null,
+                        child: const Text("Request Appointment"),
                       );
                     },
-                    child: const Text("Request Appointment"),
                   ),
                 ],
               )

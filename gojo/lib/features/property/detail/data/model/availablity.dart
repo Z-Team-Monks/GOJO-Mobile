@@ -14,10 +14,12 @@ class AvailabilityModel {
     );
   }
 
-  factory AvailabilityModel.fromMap(Map<String, dynamic> map) {
+  factory AvailabilityModel.fromJson(Map<String, dynamic> map) {
     return AvailabilityModel(
       days: List<int>.from(map['days']),
       timeSlots: Map<String, List<String>>.from(map['timeSlots']),
     );
   }
+
+  
 }

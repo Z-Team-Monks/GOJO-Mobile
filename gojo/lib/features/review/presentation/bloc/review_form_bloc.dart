@@ -56,6 +56,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
         user: user,
         comment: state.message.value,
         rating: state.rating,
+        date: "",
       );
       emit(
         state.copyWith(

@@ -1,19 +1,18 @@
-import 'package:gojo/features/property/detail/data/model/apply_for_rent_model.dart';
-
 import '../../../../../core/model/user.dart';
-import '../model/appointment.dart';
-import '../model/availablity.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../review/data/models/review.dart';
+import '../model/apply_for_rent_model.dart';
+import '../model/appointment.dart';
 import '../model/property.dart';
+import '../model/visiting_hours.dart';
 import 'detail_client_api.dart';
 
 abstract class PropertyDetailRepository {
-  Future<Property> fetchProperty(String propertyId);
+  Future<Property> fetchProperty(int propertyId);
   Future<void> scheduleAppointment(AppointmentModel appointment);
   Future<void> applyForRent(ApplyForRentModel applyForRentModel);
-  Future<void> favorProperty(String propertyId);
-  Future<void> unfavorProperty(String propertyId);
+  Future<void> favorProperty(int propertyId);
+  Future<void> unfavorProperty(int propertyId);
 }
 
 class PropertyDetailRepositoryImpl implements PropertyDetailRepository {
@@ -22,7 +21,7 @@ class PropertyDetailRepositoryImpl implements PropertyDetailRepository {
   PropertyDetailRepositoryImpl(this.propertyDetailClient);
 
   @override
-  Future<Property> fetchProperty(String propertyId) async {
+  Future<Property> fetchProperty(int propertyId) async {
     return await propertyDetailClient.fetchProperty(propertyId);
   }
 
@@ -37,19 +36,19 @@ class PropertyDetailRepositoryImpl implements PropertyDetailRepository {
   }
 
   @override
-  Future<void> favorProperty(String propertyId) async {
+  Future<void> favorProperty(int propertyId) async {
     await propertyDetailClient.favorProperty(propertyId);
   }
 
   @override
-  Future<void> unfavorProperty(String propertyId) async {
+  Future<void> unfavorProperty(int propertyId) async {
     await propertyDetailClient.unfavorProperty(propertyId);
   }
 }
 
 class PropertyDetailRepositoryFake implements PropertyDetailRepository {
   @override
-  Future<Property> fetchProperty(String propertyId) {
+  Future<Property> fetchProperty(int propertyId) {
     const user = User(
       id: 1,
       firstName: "Kebede",
@@ -70,20 +69,23 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
         Facility(name: "Bedroom", amount: 2),
       ],
       images: const [
-        "",
+        "https://media.istockphoto.com/id/1272128530/photo/home-with-blue-siding-and-stone-fa%C3%A7ade-on-base-of-home.jpg?s=612x612&w=0&k=20&c=2nv-93cqakGCvVQ1CMavx_o14HSBruCDwKdv3Llh5Ek=",
+        "https://www.home-designing.com/wp-content/uploads/2019/10/Mini-Sofa-Bed-Grey-Velvet-Tufted-Cushions-With-White-Trim-Foldaway-Bed-600x600.jpg",
+        "https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVkcm9vbXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
       ],
-      price: 10000,
+      price: "10000",
       rating: 4.5,
-      area: 100,
       virtualTourId: "skjdflkj",
       reviews: const [
         Review(
           user: user,
+          date: "Mar 2, 2023",
           rating: 2.5,
           comment:
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
         Review(
+          date: "Mar 2, 2023",
           user: user,
           rating: 3.9,
           comment:
@@ -91,19 +93,29 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
         ),
         Review(
           user: user,
+          date: "Mar 2, 2023",
           rating: 4.0,
           comment:
               "The property exceeded my expectations with modern amenities, cozy atmosphere, and perfect location.",
         ),
       ],
-      availability: AvailabilityModel(
-        days: [1, 2, 3, 4, 5],
-        timeSlots: {
-          "1": ["10:00 AM", "11:00 AM", "12:00 AM"],
-          "2": ["10:00 AM", "11:00 AM", "12:00 AM"],
-          "3": ["9:00 AM", "11:00 AM", "12:00 AM"],
-        },
-      ),
+      visitingHours: VisitingHours(visitingHours: [
+        VisitingHourModel(
+          from: "2:00 PM",
+          to: "6:00 PM",
+          day: "Monday",
+        ),
+        VisitingHourModel(
+          from: "3:00 PM",
+          to: "5:00 PM",
+          day: "Tuesday",
+        ),
+        VisitingHourModel(
+          from: "2:00 AM",
+          to: "6:00 AM",
+          day: "Wednesday",
+        ),
+      ]),
       isFavorite: false,
     );
 
@@ -124,12 +136,12 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
   }
 
   @override
-  Future<void> favorProperty(String propertyId) async {
+  Future<void> favorProperty(int propertyId) async {
     return Future.delayed(const Duration(seconds: 1));
   }
 
   @override
-  Future<void> unfavorProperty(String propertyId) async {
+  Future<void> unfavorProperty(int propertyId) async {
     return Future.delayed(const Duration(seconds: 1));
   }
 }

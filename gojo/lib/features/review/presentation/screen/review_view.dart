@@ -103,6 +103,7 @@ class AddReviewPopup extends StatelessWidget {
                       builder: (context, state) {
                     return GojoBarButton(
                       title: "Submit",
+                      isActive: state.isFormValid,
                       loadingState: state.status == ReviewFormStatus.inprogress,
                       onClick: () {
                         BlocProvider.of<ReviewFormBloc>(context).add(

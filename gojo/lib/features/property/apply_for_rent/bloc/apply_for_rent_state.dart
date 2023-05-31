@@ -3,13 +3,13 @@ part of 'apply_for_rent_bloc.dart';
 enum ApplicationStatus { editing, inprogress, success, error, done }
 
 class ApplyForRentState extends Equatable {
-  final DateTime startDate;
+  final DateTime? startDate;
   final int? months;
   final String? message;
   final ApplicationStatus status;
 
   const ApplyForRentState({
-    required this.startDate,
+    this.startDate,
     this.months,
     this.message,
     this.status = ApplicationStatus.editing,
@@ -31,4 +31,6 @@ class ApplyForRentState extends Equatable {
 
   @override
   List<Object?> get props => [startDate, months, message, status];
+
+  bool get isFormValid => months != null && startDate != null;
 }

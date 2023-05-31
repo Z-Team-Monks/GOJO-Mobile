@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/core/model/user.dart';
-import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_client.dart';
+
+import '../../../../../core/model/user.dart';
+import 'sign_in_client.dart';
 
 abstract class SignInRepositoryAPI {
   Future<Either<User, Exception>> authenticate({
@@ -33,7 +32,7 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
       final user = User.fromJson(response.data['user']);
 
       await signInClient.registerFirebaseToken(
-        firebaseToken: FirebaseMessaging.instance.getToken().toString(),
+        firebaseToken: (await FirebaseMessaging.instance.getToken())!,
         appToken: user.token!,
       );
 

@@ -32,7 +32,7 @@ class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
 
   @override
   Future<List<Category>> getCategories() async {
-    final categoriesResponse = await get('categories/');
+    final categoriesResponse = await get('properties/categories/');
     return categoriesResponse.data['results'].map((categoryJson) {
       return Category.fromJson(categoryJson);
     }).toList();
@@ -40,7 +40,7 @@ class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
 
   @override
   Future<List<Facility>> getFacilities() async {
-    final facilitiesResponse = await get('facilities/');
+    final facilitiesResponse = await get('properties/facilities/');
     return facilitiesResponse.data['results'].map((facilityJson) {
       return Facility.fromJson(facilityJson);
     }).toList();

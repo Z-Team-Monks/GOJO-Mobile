@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/features/home/data_layer/repository/home_repository.dart';
-import 'package:gojo/features/home/presentation/bloc/property_filter/model/filter_input.dart';
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
+import 'package:meta/meta.dart';
+
+import '../../../data_layer/model/property_item.dart';
+import '../../../data_layer/repository/home_repository.dart';
+import '../property_filter/model/filter_input.dart';
 
 part 'property_items_event.dart';
 part 'property_items_state.dart';
@@ -27,8 +28,12 @@ class PropertyItemsBloc extends Bloc<PropertyItemsEvent, PropertyItemsState> {
           searchQuery,
           filterInput,
         );
-        emit(state.copyWith(
-            status: FetchPropertyItemsStatus.success, items: items));
+        emit(
+          state.copyWith(
+            status: FetchPropertyItemsStatus.success,
+            items: items,
+          ),
+        );
       } catch (e) {
         emit(state.copyWith(status: FetchPropertyItemsStatus.error));
       }

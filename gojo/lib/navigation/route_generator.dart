@@ -16,6 +16,7 @@ import '../features/virtual_tour/presentation/screen/virutal_tour.dart';
 import '../root.dart';
 import 'args/chat_args.dart';
 import 'args/otp_args.dart';
+import 'args/property_detail_args.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,7 +24,10 @@ class RouteGenerator {
       case GojoRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeView());
       case GojoRoutes.propertyDetail:
-        return MaterialPageRoute(builder: (_) => const DetailPage());
+        final args = settings.arguments as PropertyDetailArgs;
+        return MaterialPageRoute(
+          builder: (_) => DetailPage(propertyId: args.id),
+        );
       case GojoRoutes.virtualTour:
         return MaterialPageRoute(builder: (_) => const VirtualTourView());
       case GojoRoutes.signin:

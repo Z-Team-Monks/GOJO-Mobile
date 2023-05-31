@@ -8,7 +8,7 @@ part 'favorite_state.dart';
 
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
   final PropertyDetailRepository propertyDetailRepository;
-  final String propertyId;
+  final int propertyId;
   FavoriteBloc({
     required this.propertyDetailRepository,
     required this.propertyId,

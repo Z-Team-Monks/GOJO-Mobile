@@ -1,24 +1,22 @@
-import 'package:gojo/features/property/detail/data/model/availablity.dart';
-
 import '../../../../../core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../review/data/models/review.dart';
+import 'visiting_hours.dart';
 
 class Property {
-  final String id;
+  final int id;
   final String title;
   final User owner;
   final List<String> images;
   final String virtualTourId;
   final String address;
   final double rating;
-  final num price;
+  final String price;
   final String description;
-  final num area;
   final List<Facility> facilities;
   final List<Review> reviews;
   final String category;
-  final AvailabilityModel availability;
+  final VisitingHours? visitingHours;
   final bool isFavorite;
 
   const Property({
@@ -31,11 +29,10 @@ class Property {
     required this.address,
     required this.reviews,
     required this.rating,
-    required this.area,
     required this.facilities,
     required this.description,
     required this.category,
-    required this.availability,
+    this.visitingHours,
     required this.isFavorite,
   });
 
@@ -43,21 +40,24 @@ class Property {
     return Property(
       id: json['id'],
       owner: User.fromJson(json['owner']),
-      virtualTourId: json['virtualTourId'],
+      virtualTourId: json['virtualTourId'] ?? "",
       title: json['title'],
-      images: json['images'],
-      price: json['price'],
-      address: json['address'],
-      reviews: json['reviews'],
+      images: List<String>.from(json['images']),
+      price: json['amount'],
+      address: json['location']['street'] ?? "",
+      reviews: ((json['reviews'] as List))
+          .map(
+            (li) => Review.fromJson(li),
+          )
+          .toList(),
       rating: json['rating'],
-      area: json['area'],
       facilities: ((json['facilities'] as List))
           .map((li) => Facility.fromJson(li))
           .toList(),
       description: json['description'],
       category: json['category'],
-      availability: AvailabilityModel.fromMap(json['availability']),
-      isFavorite: json['is_favorite'] ?? false,
+      visitingHours: VisitingHours.fromJson(json['visiting_hours']),
+      isFavorite: json['favorite'] ?? false,
     );
   }
 
@@ -72,11 +72,9 @@ class Property {
       "address": address,
       "reviews": reviews,
       "rating": rating,
-      "area": area,
       "facilities": facilities,
       "description": description,
       "category": category,
-      "availability": availability,
     };
   }
 }

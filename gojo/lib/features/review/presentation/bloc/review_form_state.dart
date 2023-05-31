@@ -31,4 +31,6 @@ class ReviewFormState extends Equatable {
 
   @override
   List<Object> get props => [message, rating, status];
+
+  bool get isFormValid => message.isValid;
 }

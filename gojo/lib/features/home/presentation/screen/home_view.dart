@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/features/home/presentation/screen/widgets/rating.dart';
-import 'package:gojo/features/home/presentation/screen/widgets/rent_per_month.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
@@ -13,12 +11,15 @@ import '../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../constants/strings/app_routes.dart';
+import '../../../../navigation/args/property_detail_args.dart';
 import '../../data_layer/model/property_item.dart';
 import '../../data_layer/repository/home_repository.dart';
 import '../bloc/property_filter/model/filter_input.dart';
 import '../bloc/property_filter/property_filter_bloc.dart';
 import '../bloc/property_items/property_items_bloc.dart';
 import 'home_filter_form_view.dart';
+import 'widgets/rating.dart';
+import 'widgets/rent_per_month.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -205,7 +206,11 @@ class FeedListView extends StatelessWidget {
 
         return InkWell(
           onTap: () {
-            Navigator.pushNamed(context, GojoRoutes.propertyDetail);
+            Navigator.pushNamed(
+              context,
+              GojoRoutes.propertyDetail,
+              arguments: PropertyDetailArgs(id: propertyItem.id),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
@@ -218,7 +223,7 @@ class FeedListView extends StatelessWidget {
                   RentPerMonth(rentPerMonth: propertyItem.rent),
               image: Image(
                 image: CachedNetworkImageProvider(propertyItem.thumbnailUrl),
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
               iconTexts: [
                 getGojoIconText(

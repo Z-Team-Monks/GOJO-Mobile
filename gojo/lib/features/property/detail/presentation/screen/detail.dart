@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,9 @@ import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../home/data_layer/model/property_item.dart';
 import '../../../apply_for_rent/presentation/application.dart';
 import '../../../favorite/bloc/favorite_bloc.dart';
 import '../../../favorite/presentation/favorite_button.dart';
@@ -20,7 +23,11 @@ import 'widgets/rating.dart';
 import 'widgets/reviews.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final int propertyId;
+  const DetailPage({
+    Key? key,
+    required this.propertyId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class DetailPage extends StatelessWidget {
         propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
       )..add(
           LoadPropertyDetail(
-            propertyId: "propertyId",
+            propertyId: propertyId,
           ),
         ),
       child: const PropertyDetailView(),
@@ -120,35 +127,29 @@ class PropertyDetailViewContent extends StatelessWidget {
                     aspectRatio: 1.5,
                     viewportFraction: 1,
                   ),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    // TODO: Replace with fetched data
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 3),
-                          decoration: BoxDecoration(
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/sofa.jpeg'),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: GojoBorders.border(
-                              GojoBorderRadiusSize.large,
-                            ),
-                            color: Colors.amber,
+                  items: [
+                    for (var image in property.images)
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 3),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(image),
+                            fit: BoxFit.cover,
                           ),
-                        );
-                      },
-                    );
-                  }).toList(),
+                          borderRadius: GojoBorders.border(
+                            GojoBorderRadiusSize.large,
+                          ),
+                          color: Colors.amber,
+                        ),
+                      )
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RatingIndicator(
-                        rating: state.property!.rating,
-                      ),
+                      RatingIndicator(rating: state.property!.rating),
                       BlocProvider(
                         create: (context) => FavoriteBloc(
                           propertyId: state.property!.id,
@@ -168,9 +169,7 @@ class PropertyDetailViewContent extends StatelessWidget {
             );
           },
         ),
-        const SizedBox(
-          height: 12,
-        ),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,22 +215,25 @@ class PropertyDetailViewContent extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
+                const SizedBox(width: 12),
               ],
             )
           ],
         ),
         Row(
-          children: const [
-            // TODO: use the state values for Gojo Icon text
-            GojoIconText(iconData: Icons.bed, title: "5 bedrooms"),
-            GojoIconText(
-              iconData: Icons.aspect_ratio,
-              title: "214 m^2",
+          children: [
+            getGojoIconText(
+              GojoFacilities.numberOfBedRooms,
+              property.facilities,
             ),
-            GojoIconText(iconData: Icons.bathtub, title: "2 baths"),
+            getGojoIconText(
+              GojoFacilities.numberOfBathRooms,
+              property.facilities,
+            ),
+            getGojoIconText(
+              GojoFacilities.squareArea,
+              property.facilities,
+            ),
           ],
         ),
         const SizedBox(height: 5),
@@ -258,14 +260,12 @@ class PropertyDetailViewContent extends StatelessWidget {
         Text(
           property.description,
           maxLines: 3,
-          overflow: TextOverflow.ellipsis,
+          overflow: TextOverflow.fade,
         ),
         const SizedBox(height: 10),
         Column(
           children: [
-            const Divider(
-              thickness: 0.6,
-            ),
+            const Divider(thickness: 0.6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -274,19 +274,22 @@ class PropertyDetailViewContent extends StatelessWidget {
                   children: [
                     BlocBuilder<PropertyDetailBloc, PropertyDetailState>(
                       builder: (context, state) {
-                        return InkWell(
-                          child: const Icon(Icons.calendar_month),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return ScheduleAppointmentView(
-                                  availablity: state.property!.availability,
-                                );
-                              },
-                            );
-                          },
-                        );
+                        if (state.property!.visitingHours != null) {
+                          return InkWell(
+                            child: const Icon(Icons.calendar_month),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ScheduleAppointmentView(
+                                    visitingHours: state.property!.visitingHours!,
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        }
+                        return Container();
                       },
                     ),
                     const SizedBox(width: 8),
@@ -326,6 +329,31 @@ class PropertyDetailViewContent extends StatelessWidget {
       builder: (BuildContext context) {
         return const ApplicationForm();
       },
+    );
+  }
+
+  Facility getFacility(String facilityName, List<Facility> facilities) {
+    try {
+      return facilities.firstWhere(
+        (element) => element.name == facilityName,
+      );
+    } catch (e) {
+      return Facility(name: facilityName, amount: 0);
+    }
+  }
+
+  GojoIconText getGojoIconText(String facilityName, List<Facility> facilities) {
+    final facility = getFacility(facilityName, facilities);
+
+    final facilityIconMap = {
+      GojoFacilities.numberOfBedRooms: Icons.bed,
+      GojoFacilities.numberOfBathRooms: Icons.bathtub,
+      GojoFacilities.squareArea: Icons.aspect_ratio,
+    };
+
+    return GojoIconText(
+      iconData: facilityIconMap[facility.name] ?? Icons.featured_video,
+      title: "${facility.amount ?? ''}",
     );
   }
 }
