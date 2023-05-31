@@ -46,6 +46,7 @@ dependencies:
   formz: ^0.6.0
   get_it: ^7.3.0
   intl: ^0.18.1
+  cached_network_image: ^3.2.3
   open_street_map_search_and_pick: ^0.0.17
   
   firebase_core: ^2.13.1

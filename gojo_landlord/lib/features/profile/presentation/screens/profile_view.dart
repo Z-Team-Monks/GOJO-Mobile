@@ -1,13 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/resources/resources.dart';
 import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
 import 'package:gojo_landlord/features/profile/presentation/bloc/profile_bloc.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../constants/strings/app_routes.dart';
 import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
 
@@ -18,8 +19,10 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GojoParentView(
       child: BlocProvider(
-        create: (context) => ProfileBloc(GetIt.I<ProfileRepositoryAPI>())
-          ..add(
+        create: (context) => ProfileBloc(
+          GetIt.I<ProfileRepositoryAPI>(),
+          GetIt.I<UserRepositoryAPI>(),
+        )..add(
             LoadProfileData(),
           ),
         child: CustomScrollView(
@@ -39,37 +42,48 @@ class ProfileView extends StatelessWidget {
   }
 }
 
-// TODO: Use data from Auth bloc to display name and image of the current user.
 class UserInfoSection extends StatelessWidget {
   const UserInfoSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 4),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        switch (state.userLoadStatus) {
+          case FetchProfileMediaItemStatus.loading:
+            return const Center(child: CircularProgressIndicator());
+          case FetchProfileMediaItemStatus.error:
+            return const Center(child: Text("Error loading user data"));
+          case FetchProfileMediaItemStatus.loaded:
+            break;
+        }
+        return Column(
           children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(Resources.gojoImages.headShot),
-              radius: 60,
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                    state.user!.profilePicture,
+                  ),
+                  radius: 60,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: GojoPadding.large),
+              child: Text(
+                "${state.user!.firstName}  ${state.user!.lastName}",
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ],
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: GojoPadding.large),
-          child: Text(
-            "Natnael Abay",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        const LogoutButton(),
-      ],
+        );
+      },
     );
   }
 }
