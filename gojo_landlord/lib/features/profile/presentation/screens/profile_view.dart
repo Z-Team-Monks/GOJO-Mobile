@@ -30,7 +30,6 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             const SliverFillRemaining(
-              hasScrollBody: true,
               child: UserPropertiesSection(),
             )
           ],

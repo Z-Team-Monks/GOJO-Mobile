@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/features/requests/appointments/presentation/screen/my_appointments_view.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
-import '../features/requests/applications/requests.dart';
+import '../features/requests/applications/presentation/screen/application_requests_view.dart';
+import '../features/requests/appointments/presentation/screen/my_appointments_view.dart';
 import '../features/wallet/withdrawal.dart';
 import '../root.dart';
 import 'args/chat_args.dart';
@@ -28,7 +28,8 @@ class RouteGenerator {
           ),
         );
       case GojoRoutes.requests:
-        return MaterialPageRoute(builder: (_) => const RequestsPage());
+        return MaterialPageRoute(
+            builder: (_) => const ApplicationRequestsView());
       case GojoRoutes.appointments:
         return MaterialPageRoute(builder: (_) => const MyAppointmentsView());
       case GojoRoutes.withdraw:

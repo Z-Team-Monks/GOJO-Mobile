@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
-import 'package:gojo/features/applications/presentation/bloc/applications_bloc.dart';
-import 'package:gojo/features/applications/presentation/model/application_status.dart';
-import 'package:gojo/features/applications/presentation/screen/widgets/application_request_item.dart';
+
+import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/application/application_repository.dart';
+import '../bloc/applications_bloc.dart';
+import '../model/application_status.dart';
+import 'widgets/application_request_item.dart';
 
 class ApplicationsView extends StatelessWidget {
   const ApplicationsView({super.key});

@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/features/requests/applications/widgets/text_button.dart';
 
-import '../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import '../../../../../../Gojo-Mobile-Shared/resources/resources.dart';
+import 'text_button.dart';
 
-class UserRequest extends StatelessWidget {
-  const UserRequest({super.key});
+class ApplicationRequestItem extends StatelessWidget {
+  final String leadingImageUrl;
+  final String title;
+  final String topRightDate;
+  final String startDate;
+  final String endDate;
+  final String description;
+  final void Function() onReject;
+  final void Function() onApprove;
+
+  const ApplicationRequestItem({
+    super.key,
+    required this.leadingImageUrl,
+    required this.title,
+    required this.topRightDate,
+    required this.startDate,
+    required this.endDate,
+    required this.description,
+    required this.onReject,
+    required this.onApprove,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +41,17 @@ class UserRequest extends StatelessWidget {
                     CircleAvatar(
                       radius: 28,
                       backgroundImage: AssetImage(
-                        Resources.gojoImages.headShot,
+                        leadingImageUrl,
                       ),
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      "Kodak Yellow",
+                      title,
                       style: Theme.of(context).textTheme.titleMedium,
                     )
                   ],
                 ),
-                const Text("March 2, 2023")
+                Text(topRightDate),
               ],
             ),
             const SizedBox(height: 14),
@@ -41,7 +60,7 @@ class UserRequest extends StatelessWidget {
                 const Text("Date:"),
                 const SizedBox(width: 4),
                 Text(
-                  "Jan 4,2023 - Mar 4,2023",
+                  "$startDate - $endDate",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Colors.black.withOpacity(0.7),
@@ -50,8 +69,8 @@ class UserRequest extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 14),
-            const Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+            Text(
+              description,
               maxLines: 3,
               overflow: TextOverflow.fade,
             ),
@@ -62,7 +81,7 @@ class UserRequest extends StatelessWidget {
                 Expanded(
                   child: GojoTextButton(
                     label: "Reject",
-                    onPressed: () {},
+                    onPressed: onReject,
                     color: Colors.red,
                   ),
                 ),
@@ -70,7 +89,7 @@ class UserRequest extends StatelessWidget {
                 Expanded(
                   child: GojoTextButton(
                     label: "Approve",
-                    onPressed: () {},
+                    onPressed: onApprove,
                     color: Resources.gojoColors.primaryColor,
                   ),
                 ),

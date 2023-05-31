@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/features/applications/data_layer/model/application.dart';
-import 'package:gojo/features/applications/data_layer/repository/application_repository.dart';
-import 'package:meta/meta.dart';
+
+import '../../../../Gojo-Mobile-Shared/core/model/application.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/application/application_repository.dart';
 
 part 'applications_event.dart';
 part 'applications_state.dart';
