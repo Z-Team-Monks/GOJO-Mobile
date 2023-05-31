@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo_landlord/features/wallet/widgets/transaction_item.dart';
+import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_repository.dart';
+import 'package:gojo_landlord/features/wallet/presentation/bloc/withdraw/withdraw_bloc.dart';
 
-import '../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../bloc/wallet/wallet_bloc.dart';
+import 'widgets/transaction_item.dart';
+import 'widgets/withdraw_form.dart';
 
 class WalletView extends StatelessWidget {
   const WalletView({super.key});
@@ -13,16 +18,24 @@ class WalletView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GojoParentView(
       label: "Wallet",
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          children: const [
-            _Balance(),
-            SizedBox(height: 10),
-            _WithdrawButton(),
-            SizedBox(height: 40),
-            TransactionsView(),
-          ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => WalletBloc(GetIt.I.get<WalletRepositoryAPI>())
+              ..add(LoadWallet()),
+          ),
+        ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            children: const [
+              _Balance(),
+              SizedBox(height: 10),
+              _WithdrawButton(),
+              SizedBox(height: 40),
+              TransactionsView(),
+            ],
+          ),
         ),
       ),
     );
@@ -90,60 +103,23 @@ class _WithdrawButton extends StatelessWidget {
               onClick: () {
                 showDialog<void>(
                   context: context,
-                  builder: (BuildContext context) {
-                    return const _WithdrawDialogue();
+                  builder: (_) {
+                    return MultiBlocProvider(
+                      providers: [
+                        BlocProvider(
+                          create: (context) => WithdrawBloc(
+                            (GetIt.I.get<WalletRepositoryAPI>()),
+                          ),
+                        ),
+                        // BlocProvider.value(value: context.read<WalletBloc>()),
+                      ],
+                      child: const WithDrawForm(),
+                    );
                   },
                 );
               }),
         ),
       ],
-    );
-  }
-}
-
-class _WithdrawDialogue extends StatelessWidget {
-  const _WithdrawDialogue({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 18.0,
-          vertical: 18.0,
-        ),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "How much do you want to withdraw?",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            const GojoTextField(
-              labelText: "Amount",
-              textInputType: TextInputType.number,
-            ),
-            const SizedBox(height: 30),
-            GojoBarButton(
-              title: "Confirm",
-              onClick: () {},
-            )
-          ],
-        ),
-      ),
     );
   }
 }

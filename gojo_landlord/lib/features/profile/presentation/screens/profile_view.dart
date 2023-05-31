@@ -81,27 +81,25 @@ class UserPropertiesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Expanded(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            TabBar(
-              tabs: [
-                Tab(text: "Posted"),
-                Tab(text: "In Review"),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          TabBar(
+            tabs: [
+              Tab(text: "Posted"),
+              Tab(text: "In Review"),
+            ],
+          ),
+          SizedBox(height: 8),
+          Expanded(
+            child: TabBarView(
+              children: [
+                PostedPropertiesTab(),
+                InReviewPropertiesTab(),
               ],
             ),
-            SizedBox(height: 8),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  PostedPropertiesTab(),
-                  InReviewPropertiesTab(),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

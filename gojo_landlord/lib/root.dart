@@ -4,7 +4,7 @@ import 'Gojo-Mobile-Shared/resources/resources.dart';
 import 'features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'features/profile/presentation/screens/profile_view.dart';
 import 'features/property/create_property/presentation/screen/create_property_view.dart';
-import 'features/wallet/withdrawal.dart';
+import 'features/wallet/presentation/screen/wallet_view.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
