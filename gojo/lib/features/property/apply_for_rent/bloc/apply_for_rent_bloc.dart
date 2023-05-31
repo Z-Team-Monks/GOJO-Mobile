@@ -9,7 +9,7 @@ part 'apply_for_rent_state.dart';
 
 class ApplyForRentBloc extends Bloc<ApplyForRentEvent, ApplyForRentState> {
   final PropertyDetailRepository propertyDetailRepository;
-  final String propertyId;
+  final int propertyId;
   ApplyForRentBloc({
     required this.propertyDetailRepository,
     required this.propertyId,

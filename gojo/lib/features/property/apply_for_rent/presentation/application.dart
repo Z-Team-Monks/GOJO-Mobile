@@ -12,14 +12,15 @@ import '../../detail/data/repository/detail_repository.dart';
 import '../bloc/apply_for_rent_bloc.dart';
 
 class ApplicationForm extends StatelessWidget {
-  const ApplicationForm({super.key});
+  final int propertyId;
+  const ApplicationForm({super.key, required this.propertyId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ApplyForRentBloc(
         propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
-        propertyId: "",
+        propertyId: propertyId,
       ),
       child: const _ApplicationForm(),
     );

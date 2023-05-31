@@ -2,7 +2,7 @@ class ApplyForRentModel {
   final DateTime startDate;
   final int? months;
   final String? message;
-  final String propertyId;
+  final int propertyId;
 
   ApplyForRentModel({
     required this.startDate,

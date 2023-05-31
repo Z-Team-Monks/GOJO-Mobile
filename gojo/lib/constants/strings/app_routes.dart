@@ -8,7 +8,7 @@ class GojoRoutes {
   static const otp = '/otp';
   static const map = '/map';
   static const myAppointments = '/myAppointments';
-  static const propertyDetail = 'property detail';
+  static const propertyDetail = '/propertyDetail';
   static const appointment = 'appointment';
   static const virtualTour = 'virtual tour';
   static const applications = 'applications';

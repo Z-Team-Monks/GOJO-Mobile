@@ -282,7 +282,8 @@ class PropertyDetailViewContent extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return ScheduleAppointmentView(
-                                    visitingHours: state.property!.visitingHours!,
+                                    visitingHours:
+                                        state.property!.visitingHours!,
                                   );
                                 },
                               );
@@ -327,7 +328,7 @@ class PropertyDetailViewContent extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return const ApplicationForm();
+        return ApplicationForm(propertyId: property.id);
       },
     );
   }

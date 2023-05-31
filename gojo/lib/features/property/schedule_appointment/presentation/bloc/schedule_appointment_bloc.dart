@@ -13,9 +13,7 @@ class ScheduleAppointmentBloc
 
   ScheduleAppointmentBloc({
     required this.propertyDetailRepository,
-  }) : super(const ScheduleAppointmentState(
-          timeSlots: [],
-        )) {
+  }) : super(const ScheduleAppointmentState(timeSlots: [])) {
     on<TimeSlotSelectedChanged>((event, emit) {
       emit(
         state.copywith(
@@ -43,7 +41,7 @@ class ScheduleAppointmentBloc
         final appointment = AppointmentModel(
           propertyId: "1",
           date: state.date.toString(),
-          timeSlot: state.timeSlot!,
+          timeSlot: state.timeSlot,
         );
         propertyDetailRepository.scheduleAppointment(
           appointment,
