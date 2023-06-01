@@ -16,15 +16,15 @@ class WalletClientImpl extends BaseApiClient implements WalletClientAPI {
   @override
   Future<dynamic> getWallet() async {
     final user = await GetIt.I.get<UserRepositoryAPI>().getUser();
-    final response = await get('/wallet', token: user?.token);
-    return response;
+    final response = await get('transactions/', token: user?.token);
+    return response.data;
   }
 
   @override
   Future<void> withdraw(dynamic withdrawData) async {
     final user = await GetIt.I.get<UserRepositoryAPI>().getUser();
     final response = await post(
-      '/wallet/withdraw',
+      'transactions/',
       withdrawData,
       token: user?.token,
     );

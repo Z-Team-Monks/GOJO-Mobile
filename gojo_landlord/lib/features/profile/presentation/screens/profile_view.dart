@@ -81,6 +81,9 @@ class UserInfoSection extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 4),
+            const LogoutButton(),
+            const SizedBox(height: 4),
           ],
         );
       },
@@ -94,13 +97,14 @@ class UserPropertiesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const [
           TabBar(
             tabs: [
               Tab(text: "Posted"),
+              Tab(text: "Rented"),
               Tab(text: "In Review"),
             ],
           ),
@@ -108,6 +112,7 @@ class UserPropertiesSection extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
+                PostedPropertiesTab(),
                 PostedPropertiesTab(),
                 InReviewPropertiesTab(),
               ],

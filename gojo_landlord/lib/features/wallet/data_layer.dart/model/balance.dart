@@ -7,7 +7,7 @@ class Balance {
 
   factory Balance.fromJson(Map<String, dynamic> json) {
     return Balance(
-      amount: json['amount'],
+      amount: json['amount'].toDouble(),
     );
   }
 

@@ -58,8 +58,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<WalletRepositoryAPI>(
-      () => WalletRepositoryFake(),
-      // () => WalletRepositoryImpl(WalletClientImpl()),
+      // () => WalletRepositoryFake(),
+      () => WalletRepositoryImpl(WalletClientImpl()),
     );
   }
 

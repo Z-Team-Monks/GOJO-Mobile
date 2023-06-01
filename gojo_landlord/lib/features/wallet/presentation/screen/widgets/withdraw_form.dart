@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/wallet.dart';
-import 'package:gojo_landlord/features/wallet/presentation/bloc/wallet/wallet_bloc.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';

@@ -1,5 +1,5 @@
-import 'model/balance.dart';
-import 'model/transaction.dart';
+import 'balance.dart';
+import 'transaction.dart';
 
 class Wallet {
   final Balance balance;

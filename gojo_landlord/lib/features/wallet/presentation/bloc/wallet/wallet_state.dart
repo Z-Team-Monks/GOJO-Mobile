@@ -1,7 +1,6 @@
 part of 'wallet_bloc.dart';
 
 enum FetchWalletStatus {
-  initial,
   loading,
   loaded,
   error,
@@ -20,7 +19,7 @@ class WalletState {
         balance: Balance(amount: 0),
         transactions: [],
       ),
-      fetchWalletStatus: FetchWalletStatus.initial,
+      fetchWalletStatus: FetchWalletStatus.loading,
     );
   }
 
