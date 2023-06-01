@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 
 part 'route_guard_event.dart';
 part 'route_guard_state.dart';

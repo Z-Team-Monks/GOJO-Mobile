@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/model/user.dart';
 import '../../../../core/value_objects/message_input.dart';
 import '../../data/models/review.dart';
 import '../../data/repository/review_repository.dart';
@@ -13,9 +12,12 @@ const String successMessage = "Review Successfully submitted!";
 
 class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
   final ReviewRepositoryAPI reviewRepository;
+  final int propertyId;
 
-  ReviewFormBloc({required this.reviewRepository})
-      : super(const ReviewFormState()) {
+  ReviewFormBloc({
+    required this.reviewRepository,
+    required this.propertyId,
+  }) : super(const ReviewFormState()) {
     on<ReviewFormMessageChanged>((event, emit) {
       final message = MessageInput.dirty(value: event.message);
       emit(
@@ -44,19 +46,9 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
     });
 
     on<ReviewFormSubmitted>((event, emit) {
-      // TODO: implement get user from auth
-      const user = User(
-        id: 1,
-        firstName: "Kebede",
-        lastName: "Alemayehu",
-        phoneNumber: "0949024607",
-        profilePicture: "",
-      );
       Review review = Review(
-        user: user,
         comment: state.message.value,
         rating: state.rating,
-        date: "",
       );
       emit(
         state.copyWith(
@@ -64,7 +56,10 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
         ),
       );
       try {
-        reviewRepository.createReview(review);
+        reviewRepository.createReview(
+          review: review,
+          propertyId: propertyId,
+        );
         emit(
           state.copyWith(
             status: ReviewFormStatus.success,

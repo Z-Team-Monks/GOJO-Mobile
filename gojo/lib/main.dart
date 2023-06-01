@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import 'Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import 'Gojo-Mobile-Shared/resources/resources.dart';
-import 'core/repository/user_repository.dart';
 import 'features/route_guard/presentation/bloc/route_guard_bloc.dart';
 import 'firebase_options.dart';
 import 'locator.dart';

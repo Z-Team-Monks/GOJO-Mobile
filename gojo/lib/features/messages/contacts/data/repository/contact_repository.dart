@@ -1,4 +1,5 @@
-import '../../../../../core/model/user.dart';
+
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../model/chat.dart';
 import '../model/contact.dart';
 import 'contact_client_api.dart';

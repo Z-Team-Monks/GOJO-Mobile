@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
@@ -9,13 +10,15 @@ import '../bloc/review_form_bloc.dart';
 import 'widgets/gojo_rating_bar.dart';
 
 class ReviewForm extends StatelessWidget {
-  const ReviewForm({super.key});
+  final int propertyId;
+  const ReviewForm({super.key, required this.propertyId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => ReviewFormBloc(
-        reviewRepository: ReviewRepositoryFake(),
+        propertyId: propertyId,
+        reviewRepository: GetIt.I<ReviewRepositoryAPI>(),
       ),
       child: const AddReviewPopup(),
     );

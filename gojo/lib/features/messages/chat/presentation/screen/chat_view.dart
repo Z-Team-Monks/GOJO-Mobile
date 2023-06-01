@@ -9,9 +9,9 @@ import '../../../../../Gojo-Mobile-Shared/UI/input_fields/chat_input.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/received_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/chat_bubbles/sent_chat_bubble.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
-import '../../../../../core/model/user.dart';
-import '../../../../../core/repository/user_repository.dart';
 import '../../../contacts/data/model/chat.dart';
 import '../bloc/chat_message_bloc.dart';
 

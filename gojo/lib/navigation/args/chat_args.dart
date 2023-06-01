@@ -1,4 +1,4 @@
-import '../../core/model/user.dart';
+import '../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../features/messages/contacts/data/model/chat.dart';
 
 class ChatArgs {

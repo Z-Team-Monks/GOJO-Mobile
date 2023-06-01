@@ -1,4 +1,4 @@
-import '../../../../../core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../review/data/models/review.dart';
 import '../model/apply_for_rent_model.dart';
@@ -12,7 +12,6 @@ abstract class PropertyDetailRepository {
   Future<void> scheduleAppointment(AppointmentModel appointment);
   Future<void> applyForRent(ApplyForRentModel applyForRentModel);
   Future<void> favorProperty(int propertyId);
-  Future<void> unfavorProperty(int propertyId);
 }
 
 class PropertyDetailRepositoryImpl implements PropertyDetailRepository {
@@ -38,11 +37,6 @@ class PropertyDetailRepositoryImpl implements PropertyDetailRepository {
   @override
   Future<void> favorProperty(int propertyId) async {
     await propertyDetailClient.favorProperty(propertyId);
-  }
-
-  @override
-  Future<void> unfavorProperty(int propertyId) async {
-    await propertyDetailClient.unfavorProperty(propertyId);
   }
 }
 
@@ -137,11 +131,6 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
 
   @override
   Future<void> favorProperty(int propertyId) async {
-    return Future.delayed(const Duration(seconds: 1));
-  }
-
-  @override
-  Future<void> unfavorProperty(int propertyId) async {
     return Future.delayed(const Duration(seconds: 1));
   }
 }

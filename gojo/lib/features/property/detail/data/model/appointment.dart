@@ -10,8 +10,7 @@ class AppointmentModel {
   });
 
   Map<String, dynamic> toJson() => {
-        "propertyId": propertyId,
         "date": date,
-        "timeSlot": timeSlot,
+        "time": timeSlot,
       };
 }

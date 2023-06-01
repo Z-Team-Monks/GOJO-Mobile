@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 
 class ChatMessage extends Equatable {
   final String message;
@@ -17,11 +17,10 @@ class ChatMessage extends Equatable {
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) {
     return ChatMessage(
-      message: json['content'],
-      timestamp: json['timestamp'],
-      sender: User.fromJson(json['sender']),
-      fromMe: json['from_me']
-    );
+        message: json['content'],
+        timestamp: json['timestamp'],
+        sender: User.fromJson(json['sender']),
+        fromMe: json['from_me']);
   }
 
   Map<String, dynamic> toJson() {

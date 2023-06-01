@@ -29,11 +29,13 @@ class _DatePickerState extends State<DatePicker> {
     return GojoDateField(
       labelText: widget.label,
       controller: dateFieldController,
-      onPressed: () {
-        _selectDate(context);
-        BlocProvider.of<ScheduleAppointmentBloc>(context).add(
-          DateChanged(date: selectedDate),
-        );
+      onPressed: () async {
+        await _selectDate(context);
+        if (mounted) {
+          BlocProvider.of<ScheduleAppointmentBloc>(context).add(
+            DateChanged(date: selectedDate),
+          );
+        }
       },
     );
   }
@@ -42,10 +44,7 @@ class _DatePickerState extends State<DatePicker> {
     final DateTime? picked = await showDatePicker(
       context: context,
       selectableDayPredicate: (day) {
-        if (widget.visitingHours != null) {
-          return widget.visitingHours?.contains(day) ?? true;
-        }
-        return true;
+        return widget.visitingHours?.contains(day) ?? false;
       },
       initialDate: _getFirstAvailableDate(context),
       firstDate: _getFirstAvailableDate(context),
@@ -63,27 +62,26 @@ class _DatePickerState extends State<DatePicker> {
   DateTime _getFirstAvailableDate(BuildContext context) {
     DateTime firstAvailableDate = DateTime.now();
 
-    for (var visitingHour in widget.visitingHours!.visitingHours) {
-      DateTime dateTime = DateFormat('EEE').parse(visitingHour.day);
-
-      if (dateTime.isAfter(firstAvailableDate)) {
-        firstAvailableDate = dateTime;
-      }
+    while (!widget.visitingHours!.contains(firstAvailableDate)) {
+      firstAvailableDate = firstAvailableDate.add(
+        const Duration(days: 1),
+      );
     }
 
     return firstAvailableDate;
   }
 
   DateTime _getLastAvailableDate(BuildContext context) {
-    DateTime lastAvailableDate = _getFirstAvailableDate(context);
+    DateTime lastAvailableDate = _getFirstAvailableDate(context).add(
+      const Duration(days: 30),
+    );
 
-    for (var visitingHour in widget.visitingHours!.visitingHours) {
-      DateTime dateTime = DateFormat('EEE').parse(visitingHour.day);
-      if (dateTime.isAfter(lastAvailableDate)) {
-        lastAvailableDate = dateTime;
-      }
+    while (!widget.visitingHours!.contains(lastAvailableDate)) {
+      lastAvailableDate = lastAvailableDate.subtract(
+        const Duration(days: 1),
+      );
     }
 
-    return lastAvailableDate.add(const Duration(days: 30));
+    return lastAvailableDate;
   }
 }

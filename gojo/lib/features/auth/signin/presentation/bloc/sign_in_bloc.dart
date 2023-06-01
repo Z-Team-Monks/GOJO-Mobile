@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/core/repository/user_repository.dart';
-import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_repository.dart';
-import 'package:gojo/features/auth/signin/presentation/model/password_input.dart';
-import 'package:gojo/features/auth/signin/presentation/model/phone_number_input.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../data_layer/repository/sign_in_repository.dart';
+import '../model/password_input.dart';
+import '../model/phone_number_input.dart';
 
 part 'sign_in_event.dart';
 part 'sign_in_state.dart';

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/core/repository/user_repository.dart';
-import 'package:gojo/features/auth/signin/data_layer/repository/sign_in_repository.dart';
-import 'package:gojo/features/auth/signin/presentation/bloc/sign_in_bloc.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/app_icon.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/text_link.dart';
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../data_layer/repository/sign_in_repository.dart';
+import '../bloc/sign_in_bloc.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});

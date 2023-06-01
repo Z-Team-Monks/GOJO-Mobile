@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import '../../detail/data/model/apply_for_rent_model.dart';
 import '../../detail/data/repository/detail_repository.dart';
@@ -37,7 +39,11 @@ class ApplyForRentBloc extends Bloc<ApplyForRentEvent, ApplyForRentState> {
         );
         await propertyDetailRepository.applyForRent(applyForRentModel);
         emit(state.copyWith(status: ApplicationStatus.success));
+      } on DioError catch (e) {
+        debugPrint(e.response.toString());
+        emit(state.copyWith(status: ApplicationStatus.error));
       } catch (e) {
+        debugPrint(e.toString());
         emit(state.copyWith(status: ApplicationStatus.error));
       }
 

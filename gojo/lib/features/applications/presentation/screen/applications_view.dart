@@ -19,9 +19,7 @@ class ApplicationsView extends StatelessWidget {
       child: BlocProvider(
         create: (context) =>
             ApplicationsBloc(GetIt.I<ApplicationsRepositoryAPI>())
-              ..add(
-                LoadApplications(),
-              ),
+              ..add(LoadApplications()),
         child: const ApplicationsTabView(),
       ),
     );

@@ -6,8 +6,13 @@ import 'review_card.dart';
 
 class Reviews extends StatelessWidget {
   final List<Review> reviews;
+  final int propertyId;
 
-  const Reviews({super.key, required this.reviews});
+  const Reviews({
+    super.key,
+    required this.reviews,
+    required this.propertyId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class Reviews extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return const ReviewForm();
+                    return ReviewForm(propertyId: propertyId);
                   },
                 );
               },

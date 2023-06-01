@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import 'sign_in_client.dart';
 
 abstract class SignInRepositoryAPI {

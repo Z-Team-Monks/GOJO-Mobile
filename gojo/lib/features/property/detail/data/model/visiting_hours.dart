@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class VisitingHours {
@@ -7,10 +8,13 @@ class VisitingHours {
     required this.visitingHours,
   });
 
-  factory VisitingHours.fromJson(Map<String, dynamic> json) {
+  factory VisitingHours.fromJson(dynamic json) {
+    debugPrint(json.toString());
     return VisitingHours(
-      visitingHours: (json['visiting_hours'] as List)
-          .map((e) => VisitingHourModel.fromJson(e as Map<String, dynamic>))
+      visitingHours: (json as List)
+          .map(
+            (e) => VisitingHourModel.fromJson(e),
+          )
           .toList(),
     );
   }
@@ -32,9 +36,11 @@ class VisitingHours {
     return times;
   }
 
-  List<String> getTimesByDay(DateTime day) {
+  List<String> getTimesByDay(DateTime? day) {
+    if (day == null) return [];
+
     for (var visitingHour in visitingHours) {
-      if (visitingHour.day == getWeekday(day)) {
+      if (visitingHour.day == DateFormat('EEEE').format(day)) {
         return getTimesBetweenInterval(visitingHour.from, visitingHour.to);
       }
     }
@@ -43,30 +49,11 @@ class VisitingHours {
 
   bool contains(DateTime dateTime) {
     for (var visitingHour in visitingHours) {
-      if (visitingHour.day == getWeekday(dateTime)) {
+      if (visitingHour.day == DateFormat('EEEE').format(dateTime)) {
         return true;
       }
     }
     return false;
-  }
-
-  static String getWeekday(DateTime dateTime) {
-    switch (dateTime.weekday) {
-      case DateTime.monday:
-        return "Monday";
-      case DateTime.tuesday:
-        return "Tuesday";
-      case DateTime.wednesday:
-        return "Wednesday";
-      case DateTime.thursday:
-        return "Thursday";
-      case DateTime.friday:
-        return "Friday";
-      case DateTime.saturday:
-        return "Saturday";
-      default:
-        return "Sunday";
-    }
   }
 }
 

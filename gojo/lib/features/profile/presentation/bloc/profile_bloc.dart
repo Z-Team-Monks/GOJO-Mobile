@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/core/repository/user_repository.dart';
-import 'package:meta/meta.dart';
 
-import '../../../../core/model/user.dart';
+import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../screen/model/profile_media_item.dart';
 

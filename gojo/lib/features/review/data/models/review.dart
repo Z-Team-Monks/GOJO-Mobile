@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../core/model/user.dart';
+import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
 
 class Review extends Equatable {
-  final User user;
+  final User? user;
   final String comment;
-  final String date;
+  final String? date;
   final num rating;
 
   const Review({
-    required this.user,
+    this.user,
     required this.comment,
     required this.rating,
-    required this.date,
+    this.date,
   });
 
   factory Review.fromJson(Map<String, dynamic> json) {
@@ -26,10 +26,8 @@ class Review extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      "user": user,
       "comment": comment,
       "rating": rating,
-      "date": DateTime.now(),
     };
   }
 

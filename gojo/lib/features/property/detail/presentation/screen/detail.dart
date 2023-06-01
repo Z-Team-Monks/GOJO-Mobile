@@ -314,12 +314,13 @@ class PropertyDetailViewContent extends StatelessWidget {
                 )
               ],
             ),
-            const Divider(
-              thickness: 0.6,
-            ),
+            const Divider(thickness: 0.6),
           ],
         ),
-        Reviews(reviews: property.reviews),
+        Reviews(
+          reviews: property.reviews,
+          propertyId: property.id,
+        ),
       ],
     );
   }

@@ -77,10 +77,9 @@ class _ScheduleAppointmentView extends StatelessWidget {
               const SizedBox(height: 10),
               BlocBuilder<ScheduleAppointmentBloc, ScheduleAppointmentState>(
                 builder: (context, state) {
+                  debugPrint(state.date.toString());
                   return TimeSlotDropDown(
-                    freeTimeSlots: visitingHours.getTimesByDay(
-                      state.date ?? DateTime.now(),
-                    ),
+                    freeTimeSlots: visitingHours.getTimesByDay(state.date),
                   );
                 },
               ),

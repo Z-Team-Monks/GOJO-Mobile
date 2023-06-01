@@ -1,4 +1,4 @@
-import '../../../../../core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../review/data/models/review.dart';
 import 'visiting_hours.dart';
@@ -57,7 +57,7 @@ class Property {
       description: json['description'],
       category: json['category'],
       visitingHours: VisitingHours.fromJson(json['visiting_hours']),
-      isFavorite: json['favorite'] ?? false,
+      isFavorite: json['favorite'],
     );
   }
 

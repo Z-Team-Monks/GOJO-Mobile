@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import 'chat.dart';
 
 class Contact extends Equatable {

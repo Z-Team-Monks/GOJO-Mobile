@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/network/base_api_client.dart';
 
-import '../../../../core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 import '../model/appointment.dart';
 
 abstract class MyAppointmentsClientAPI {

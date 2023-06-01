@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import '../../detail/data/repository/detail_repository.dart';
 
@@ -19,29 +20,13 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
 
     on<FavoriteStatusChanged>((event, emit) async {
       final isFavorite = !state.isFavorite;
-
-      if (isFavorite) {
-        _handleDeleteFavorite();
-      } else {
-        _handlePostFavorite();
+      try {
+        await propertyDetailRepository.favorProperty(propertyId);
+        debugPrint("property favorite status changed");
+        emit(state.copywith(isFavorite: isFavorite));
+      } catch (e) {
+        debugPrint(e.toString());
       }
-      emit(state.copywith(isFavorite: isFavorite));
     });
-  }
-
-  void _handleDeleteFavorite() async {
-    try {
-      await propertyDetailRepository.unfavorProperty(propertyId);
-    } catch (e) {
-      // ignore
-    }
-  }
-
-  void _handlePostFavorite() async {
-    try {
-      await propertyDetailRepository.favorProperty(propertyId);
-    } catch (e) {
-      // ignore
-    }
   }
 }

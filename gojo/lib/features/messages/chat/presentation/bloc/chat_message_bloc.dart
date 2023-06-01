@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../../core/repository/user_repository.dart';
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../contacts/data/model/chat.dart';
 
 part 'chat_message_event.dart';

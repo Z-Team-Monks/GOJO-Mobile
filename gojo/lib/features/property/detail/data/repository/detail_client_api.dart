@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
-import '../../../../../core/repository/user_repository.dart';
 import '../model/apply_for_rent_model.dart';
 import '../model/appointment.dart';
 import '../model/property.dart';
@@ -29,7 +28,6 @@ class PropertyDetailClientImpl extends BaseApiClient
       'properties/$propertyId/',
       token: user.token,
     );
-    debugPrint(fetchPropertyResponse.data.toString());
     return Property.fromJson(fetchPropertyResponse.data);
   }
 
@@ -43,7 +41,7 @@ class PropertyDetailClientImpl extends BaseApiClient
 
     await post(
       'properties/${appointment.propertyId}/schedule_appointment/',
-      appointment,
+      appointment.toJson(),
       token: user.token,
     );
   }
@@ -57,7 +55,7 @@ class PropertyDetailClientImpl extends BaseApiClient
     }
 
     await post(
-      "properties/${applyForRentModel.propertyId}/apply_for_rent/",
+      "applications/",
       applyForRentModel.toJson(),
       token: user.token,
     );
@@ -71,8 +69,8 @@ class PropertyDetailClientImpl extends BaseApiClient
       throw Exception("User's not logged in!");
     }
 
-    await post(
-      "properties/$propertyId/favor/",
+    await patch(
+      "properties/$propertyId/favorite/",
       null,
       token: user.token,
     );
@@ -86,8 +84,9 @@ class PropertyDetailClientImpl extends BaseApiClient
       throw Exception("User's not logged in!");
     }
 
-    await delete(
-      "properties/$propertyId/favor/",
+    await patch(
+      "properties/$propertyId/favorite/",
+      null,
       token: user.token,
     );
   }

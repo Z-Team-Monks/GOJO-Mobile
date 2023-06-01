@@ -6,8 +6,8 @@ import 'package:get_it/get_it.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../constants/strings/app_routes.dart';
-import '../../../../core/repository/user_repository.dart';
 import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../bloc/profile_bloc.dart';
@@ -25,9 +25,7 @@ class ProfileView extends StatelessWidget {
         create: (context) => ProfileBloc(
           GetIt.I<ProfileRepositoryAPI>(),
           GetIt.I<UserRepositoryAPI>(),
-        )..add(
-            LoadProfileData(),
-          ),
+        )..add(LoadProfileData()),
         child: CustomScrollView(
           slivers: [
             SliverList(

@@ -1,11 +1,9 @@
-import '../../../../core/model/user.dart';
 import '../models/review.dart';
 import 'review_client_api.dart';
 
-/// An abstract class defining the interface for a review repository API.
 abstract class ReviewRepositoryAPI {
-  /// Returns a `Future` that resolves to a list of review property items.
-  Future<Review> createReview(Review review);
+  Future<Review> createReview(
+      {required Review review, required int propertyId});
 }
 
 class ReviewRepositoryImpl implements ReviewRepositoryAPI {
@@ -14,8 +12,12 @@ class ReviewRepositoryImpl implements ReviewRepositoryAPI {
   ReviewRepositoryImpl(this.reviewClient);
 
   @override
-  Future<Review> createReview(Review review) async {
-    final newReview = await reviewClient.createReview(review);
+  Future<Review> createReview({
+    required Review review,
+    required int propertyId,
+  }) async {
+    final newReview =
+        await reviewClient.createReview(review: review, propertyId: propertyId);
     return newReview;
   }
 }
@@ -23,19 +25,13 @@ class ReviewRepositoryImpl implements ReviewRepositoryAPI {
 /// A Fake implementation of the [ReviewRepositoryAPI] contract.
 class ReviewRepositoryFake implements ReviewRepositoryAPI {
   @override
-  Future<Review> createReview(Review review) {
-    const user = User(
-      id: 1,
-      firstName: "Kebede",
-      lastName: "Alemayehu",
-      phoneNumber: "0949024607",
-      profilePicture: "",
-    );
+  Future<Review> createReview({
+    required Review review,
+    required int propertyId,
+  }) {
     const review = Review(
-      user: user,
       rating: 4.5,
       comment: "This is a comment",
-      date: "2021-09-01",
     );
 
     return Future.delayed(

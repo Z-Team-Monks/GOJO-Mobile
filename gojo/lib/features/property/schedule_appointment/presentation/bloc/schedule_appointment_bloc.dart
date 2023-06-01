@@ -15,27 +15,21 @@ class ScheduleAppointmentBloc
     required this.propertyDetailRepository,
   }) : super(const ScheduleAppointmentState(timeSlots: [])) {
     on<TimeSlotSelectedChanged>((event, emit) {
-      emit(
-        state.copywith(
-          timeSlot: event.timeSlot,
-        ),
-      );
+      emit(state.copywith(
+        timeSlot: event.timeSlot,
+      ));
     });
 
     on<DateChanged>((event, emit) {
-      emit(
-        state.copywith(
-          date: event.date,
-        ),
-      );
+      emit(state.copywith(
+        date: event.date,
+      ));
     });
 
     on<ScheduleAppointmentSubmitted>((event, emit) {
-      emit(
-        state.copywith(
-          status: ScheduleAppointmentStatus.inprogress,
-        ),
-      );
+      emit(state.copywith(
+        status: ScheduleAppointmentStatus.inprogress,
+      ));
 
       try {
         final appointment = AppointmentModel(

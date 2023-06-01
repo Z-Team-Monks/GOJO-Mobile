@@ -33,14 +33,14 @@ class ReviewCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${review.user.firstName} ${review.user.lastName}",
+                      "${review.user!.firstName} ${review.user!.lastName}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      review.date,
+                      review.date!,
                       style: const TextStyle(
                         color: Color(0xFFC5BDBD),
                         fontSize: 13,
