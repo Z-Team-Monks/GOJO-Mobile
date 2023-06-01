@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 
-enum TransactionType {
-  deposit,
-  withdrawal,
-  pending,
-}
+import '../../../data_layer.dart/model/transaction.dart';
 
 class TransactionItem extends StatelessWidget {
   final TransactionType type;
@@ -32,6 +28,8 @@ class TransactionItem extends StatelessWidget {
           _LeadingIcon(type: type),
           const SizedBox(width: 18),
           Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,16 +45,18 @@ class TransactionItem extends StatelessWidget {
                     children: [
                       Text(
                         date,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.grey.shade600,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.grey.shade600),
                       ),
                       const _Pipe(),
                       Text(
                         time,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.grey.shade600,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.grey.shade600),
                       ),
                     ],
                   )
@@ -67,10 +67,14 @@ class TransactionItem extends StatelessWidget {
           const Spacer(),
           Text(
             "${_getAmountPrefix(type)} $amount ETB",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.bold, fontSize: 13),
           ),
+          // const Spacer(),
         ],
       ),
     );
@@ -78,7 +82,7 @@ class TransactionItem extends StatelessWidget {
 
   String _getAmountPrefix(type) {
     switch (type) {
-      case TransactionType.deposit:
+      case TransactionType.payed:
         return "+";
       default:
         return "-";
@@ -124,19 +128,29 @@ class _LeadingIcon extends StatelessWidget {
 
   Icon _getIcon(TransactionType type) {
     switch (type) {
-      case TransactionType.deposit:
+      case TransactionType.payed:
         return const Icon(
           Icons.payments,
           color: Colors.green,
         );
-      case TransactionType.withdrawal:
+      case TransactionType.approved:
         return const Icon(
           Icons.credit_card,
+          color: Colors.red,
+        );
+      case TransactionType.denied:
+        return const Icon(
+          Icons.do_not_disturb,
           color: Colors.red,
         );
       case TransactionType.pending:
         return const Icon(
           Icons.pending,
+          color: Colors.blue,
+        );
+      default:
+        return const Icon(
+          Icons.money,
           color: Colors.blue,
         );
     }

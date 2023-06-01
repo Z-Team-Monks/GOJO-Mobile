@@ -6,7 +6,7 @@ import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/requests/applications/presentation/screen/application_requests_view.dart';
 import '../features/requests/appointments/presentation/screen/my_appointments_view.dart';
-import '../features/wallet/withdrawal.dart';
+import '../features/wallet/presentation/screen/wallet_view.dart';
 import '../root.dart';
 import 'args/chat_args.dart';
 
