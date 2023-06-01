@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gojo_landlord/features/profile/presentation/screens/widgets/rented_media_items.dart';
 
 import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
@@ -18,8 +19,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       : super(ProfileState.initial()) {
     on<LoadProfileData>((event, emit) async {
       emit(state.copyWith(
-        postedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-        inReviewMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
+        postedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+        inReviewMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
       ));
 
       try {
@@ -29,11 +30,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
         emit(state.copyWith(
           user: user,
-          userLoadStatus: FetchProfileMediaItemStatus.loaded,
+          userLoadStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         emit(state.copyWith(
-          userLoadStatus: FetchProfileMediaItemStatus.error,
+          userLoadStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
 
@@ -47,11 +48,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
         emit(state.copyWith(
           postedMediaItems: postedPropertyMediaItems,
-          postedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
+          postedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         emit(state.copyWith(
-          postedMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
+          postedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.error,
+        ));
+      }
+
+      try {
+        final rentedProperties =
+            await profileRepository.getInReviewProperties();
+        final rentedPropertyMediaItems = rentedProperties.items
+            .map((propertyItem) => RentedMediaItem.fromPropertyItem(
+                  propertyItem,
+                ))
+            .toList();
+
+        emit(state.copyWith(
+          rentedMediaItems: rentedPropertyMediaItems,
+          rentedItemsFetchStatus: FetchPropertyMediaItemStatus.loaded,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          rentedItemsFetchStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
 
@@ -66,11 +86,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
         emit(state.copyWith(
           inReviewMediaItems: appliedPropertyMediaItems,
-          inReviewMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
+          inReviewMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         emit(state.copyWith(
-          inReviewMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
+          inReviewMediaItemsFetchStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
     });

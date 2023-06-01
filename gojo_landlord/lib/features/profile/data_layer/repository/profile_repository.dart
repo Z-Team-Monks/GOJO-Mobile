@@ -5,6 +5,8 @@ import 'profile_client.dart';
 abstract class ProfileRepositoryAPI {
   Future<PropertyItemList> getPostedProperties();
 
+  Future<PropertyItemList> getRentedProperties();
+
   Future<PropertyItemList> getInReviewProperties();
 }
 
@@ -19,6 +21,11 @@ class ProfileRepositoryImpl implements ProfileRepositoryAPI {
   }
 
   @override
+  Future<PropertyItemList> getRentedProperties() {
+    return profileClient.getRentedProperties();
+  }
+
+  @override
   Future<PropertyItemList> getInReviewProperties() {
     return profileClient.getInReviewProperties();
   }
@@ -26,23 +33,30 @@ class ProfileRepositoryImpl implements ProfileRepositoryAPI {
 
 class ProfileRepositoryFake implements ProfileRepositoryAPI {
   final PropertyItemList postedPropertyItems;
+  final PropertyItemList rentedPropertyItems;
   final PropertyItemList inreviewPropertyItems;
 
   static final fakePropertyItems = PropertyItemList([
     PropertyItem(
-      id: "1",
-      title: "Villa, Kemah Tinggi",
+      id: 1,
+      title: "Kemah Tinggi",
+      desciption: "Kemah Tinggi",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
+      category: "Villa",
     ),
     PropertyItem(
-      id: "2",
-      title: "Studio in 4kilo",
+      id: 1,
+      title: "Kemah Tinggi",
+      desciption: "Kemah Tinggi",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
+      category: "Villa",
     ),
     PropertyItem(
-      id: "3",
-      title: "Condominium",
+      id: 1,
+      title: "Kemah Tinggi",
+      desciption: "Kemah Tinggi",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
+      category: "Villa",
     ),
   ]);
 
@@ -50,6 +64,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     PropertyItemList? postedPropertyItems,
     PropertyItemList? inreviewPropertyItems,
   })  : postedPropertyItems = postedPropertyItems ?? fakePropertyItems,
+        rentedPropertyItems = postedPropertyItems ?? fakePropertyItems,
         inreviewPropertyItems = inreviewPropertyItems ?? fakePropertyItems;
 
   @override
@@ -65,6 +80,14 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     return Future.delayed(
       const Duration(seconds: 1),
       () => inreviewPropertyItems,
+    );
+  }
+
+  @override
+  Future<PropertyItemList> getRentedProperties() {
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () => rentedPropertyItems,
     );
   }
 }

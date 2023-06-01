@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:gojo_landlord/features/profile/data_layer/repository/profile_client.dart';
 import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_client.dart';
 import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_repository.dart';
 import 'package:hive/hive.dart';
@@ -28,7 +29,7 @@ class Locator {
       () => SignInRepositoryImpl(SignInClientImpl()),
     );
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
-      () => ProfileRepositoryFake(),
+      () => ProfileRepositoryImpl(ProfileClientImpl()),
     );
     GetIt.I.registerLazySingleton<PropertyRepositoryAPI>(
       () => PropertyRepositoryFake(),
