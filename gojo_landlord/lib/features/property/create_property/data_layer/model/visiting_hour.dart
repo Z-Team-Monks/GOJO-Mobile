@@ -1,7 +1,7 @@
 class VisitingHour {
   final String day;
-  final int from;
-  final int to;
+  final String from;
+  final String to;
 
   VisitingHour({
     required this.day,

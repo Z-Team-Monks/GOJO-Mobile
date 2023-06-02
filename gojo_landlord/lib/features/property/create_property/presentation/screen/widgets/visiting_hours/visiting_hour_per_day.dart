@@ -29,7 +29,11 @@ class _VisitingHoursPerDayState extends State<VisitingHoursPerDay> {
               setState(() {
                 if (value) {
                   context.read<CreatePropertyBloc>().add(VisitingHourAdded(
-                        VisitingHour(day: widget.day, from: 9, to: 11),
+                        VisitingHour(
+                          day: widget.day,
+                          from: "9:00 AM",
+                          to: "11:00 PM",
+                        ),
                       ));
                 } else {
                   context
