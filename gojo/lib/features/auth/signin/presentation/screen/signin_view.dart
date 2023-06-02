@@ -77,7 +77,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        Text("Elevate your rental buisiness with us!"),
+        Text("Find your next home!"),
         SizedBox(height: 30),
       ],
     );
@@ -104,6 +104,7 @@ class _SignInForm extends StatelessWidget {
           children: [
             GojoTextField(
               labelText: "Phone number",
+              textInputType: TextInputType.number,
               onChanged: (value) {
                 context.read<SignInBloc>().add(PhoneNumberChanged(value));
               },
