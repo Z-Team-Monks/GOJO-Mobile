@@ -1,9 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo_landlord/Gojo-Mobile-Shared/network/base_api_client.dart';
-import 'package:gojo_landlord/features/wallet/data_layer/model/withdraw.dart';
 
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 
 abstract class WalletClientAPI {
   Future<dynamic> getWallet();

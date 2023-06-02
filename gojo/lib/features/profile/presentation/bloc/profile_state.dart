@@ -1,15 +1,15 @@
 part of 'profile_bloc.dart';
 
-enum FetchProfileMediaItemStatus { loading, loaded, error }
+enum FetchPropertyMediaItemStatus { loading, loaded, error }
 
 @immutable
 class ProfileState {
-  final List<ProfileMediaItem> rentedMediaItems;
-  final List<ProfileMediaItem> favoriteMediaItems;
+  final List<PropertyMediaItem> rentedMediaItems;
+  final List<PropertyMediaItem> favoriteMediaItems;
   final User? user;
-  final FetchProfileMediaItemStatus rentedMediaItemsFetchStatus;
-  final FetchProfileMediaItemStatus favoriteMediaItemsFetchStatus;
-  final FetchProfileMediaItemStatus userLoadStatus;
+  final FetchPropertyMediaItemStatus rentedMediaItemsFetchStatus;
+  final FetchPropertyMediaItemStatus favoriteMediaItemsFetchStatus;
+  final FetchPropertyMediaItemStatus userLoadStatus;
 
   const ProfileState({
     required this.rentedMediaItems,
@@ -25,19 +25,19 @@ class ProfileState {
       rentedMediaItems: [],
       favoriteMediaItems: [],
       user: null,
-      rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-      favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-      userLoadStatus: FetchProfileMediaItemStatus.loading,
+      rentedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+      favoriteMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+      userLoadStatus: FetchPropertyMediaItemStatus.loading,
     );
   }
 
   ProfileState copyWith({
-    List<ProfileMediaItem>? rentedMediaItems,
-    List<ProfileMediaItem>? favoriteMediaItems,
+    List<PropertyMediaItem>? rentedMediaItems,
+    List<PropertyMediaItem>? favoriteMediaItems,
     User? user,
-    FetchProfileMediaItemStatus? rentedMediaItemsFetchStatus,
-    FetchProfileMediaItemStatus? favoriteMediaItemsFetchStatus,
-    FetchProfileMediaItemStatus? userLoadStatus,
+    FetchPropertyMediaItemStatus? rentedMediaItemsFetchStatus,
+    FetchPropertyMediaItemStatus? favoriteMediaItemsFetchStatus,
+    FetchPropertyMediaItemStatus? userLoadStatus,
   }) {
     return ProfileState(
       rentedMediaItems: rentedMediaItems ?? this.rentedMediaItems,

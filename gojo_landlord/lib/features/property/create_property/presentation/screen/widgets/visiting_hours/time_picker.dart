@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/visiting_hour.dart';
+import 'package:gojo_landlord/utils/date_time.dart';
 
 import '../../../bloc/create_property/create_property_bloc.dart';
+import '../../../../../../../utils/date_time.dart';
 
 class TimePicker extends StatefulWidget {
   final String day;
@@ -15,7 +17,7 @@ class TimePicker extends StatefulWidget {
 
 class _TimePickerState extends State<TimePicker> {
   int? selectedStartHour = 9;
-  int? selectedEndHour = 11;
+  int? selectedEndHour = 17;
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +75,13 @@ class _TimePickerState extends State<TimePicker> {
   }
 
   updateCurrentDayVisitingHour() {
+    final formattedStartHour = HourFormats.to12Hour(selectedStartHour!);
+    final formattedEndHour = HourFormats.to12Hour(selectedEndHour!);
     context.read<CreatePropertyBloc>().add(
           VisitingHourAdded(VisitingHour(
             day: widget.day,
-            from: selectedStartHour!,
-            to: selectedEndHour!,
+            from: formattedStartHour,
+            to: formattedEndHour,
           )),
         );
   }
@@ -132,7 +136,7 @@ class _HourDropdownState extends State<HourDropdown> {
           items: _hours.map((int hour) {
             return DropdownMenuItem<int>(
               value: hour,
-              child: Text('$hour:00'),
+              child: Text(HourFormats.to12Hour(hour)),
             );
           }).toList(),
           onChanged: widget.onChanged,

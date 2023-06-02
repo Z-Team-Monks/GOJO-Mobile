@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
+import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../constants/strings/app_routes.dart';
@@ -53,11 +54,11 @@ class UserInfoSection extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         switch (state.userLoadStatus) {
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
             return const Center(child: Text("Error loading user data"));
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             break;
         }
         return Column(
@@ -195,13 +196,13 @@ class RentedPropertiesTab extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: ((context, state) {
         switch (state.rentedMediaItemsFetchStatus) {
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             return ProfileTab(
               children: state.rentedMediaItems,
             );
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
             return const ErrorView();
         }
       }),
@@ -217,13 +218,13 @@ class FavoritePropertiesTab extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: ((context, state) {
         switch (state.favoriteMediaItemsFetchStatus) {
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             return ProfileTab(
               children: state.favoriteMediaItems,
             );
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
             return const ErrorView();
         }
       }),
@@ -232,53 +233,21 @@ class FavoritePropertiesTab extends StatelessWidget {
 }
 
 class ProfileTab extends StatelessWidget {
-  final List<ProfileMediaItem> children;
+  final List<PropertyMediaItem> children;
   const ProfileTab({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: children
-          .map((profileMediaItem) => ProfileMedia(
-                title: profileMediaItem.title,
-                image: Image.network(
-                  profileMediaItem.thumbnailUrl,
-                ),
-                onTap: () => Navigator.pushNamed(
-                  context,
-                  GojoRoutes.propertyDetail,
-                ),
-              ))
-          .toList(),
+    return ListView.builder(
+      itemCount: children.length,
+      itemBuilder: (context, index) {
+        return children[index];
+      },
     );
   }
 }
 
 /// A widget that displays an image and title of a property.
-class ProfileMedia extends StatelessWidget {
-  final String title;
-  final Image image;
-  final void Function() onTap;
-
-  const ProfileMedia({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: GojoMiniMediaItem(
-        image: image,
-        title: title,
-      ),
-    );
-  }
-}
 
 // TODO: Use generic LoadingView
 class LoadingView extends StatelessWidget {

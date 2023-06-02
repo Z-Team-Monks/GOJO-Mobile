@@ -1,22 +1,14 @@
-import 'package:gojo/features/home/data_layer/model/property_item.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
+import '../../../../home/data_layer/model/property_item.dart';
 
-// Represents data to be displayed in the media item widget of profile page.
-class ProfileMediaItem {
-  final int id;
-  final String title;
-  final String thumbnailUrl;
-
-  ProfileMediaItem({
-    required this.id,
-    required this.title,
-    required this.thumbnailUrl,
-  });
-
-  factory ProfileMediaItem.fromPropertyItem(PropertyItem propertyItem) {
-    return ProfileMediaItem(
-      id: propertyItem.id,
+extension PropertyMediaItemExtension on PropertyMediaItem {
+  static PropertyMediaItem fromPropertyItem(PropertyItem propertyItem) {
+    return PropertyMediaItem(
       title: propertyItem.title,
       thumbnailUrl: propertyItem.thumbnailUrl,
+      subtitle: propertyItem.category,
+      content: propertyItem.description ?? "",
+      onPressed: () {},
     );
   }
 }

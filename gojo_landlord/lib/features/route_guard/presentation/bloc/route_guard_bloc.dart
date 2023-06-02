@@ -11,12 +11,12 @@ class RouteGuardBloc extends Bloc<RouteGuardEvent, RouteGuardState> {
 
   RouteGuardBloc(this.userRepository) : super(RouteGuardState.loading) {
     on<LoadRouteGuardStatus>((event, emit) async {
-      // final user = await userRepository.getUser();
-      // if (user != null) {
-      emit(RouteGuardState.authenticated);
-      // } else {
-      //   emit(RouteGuardState.unauthenticated);
-      // }
+      final user = await userRepository.getUser();
+      if (user != null) {
+        emit(RouteGuardState.authenticated);
+      } else {
+        emit(RouteGuardState.unauthenticated);
+      }
     });
     on<Logout>((event, emit) async {
       emit(RouteGuardState.loading);

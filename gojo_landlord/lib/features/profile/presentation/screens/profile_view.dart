@@ -50,11 +50,11 @@ class UserInfoSection extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         switch (state.userLoadStatus) {
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
             return const Center(child: Text("Error loading user data"));
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             break;
         }
         return Column(
@@ -113,7 +113,7 @@ class UserPropertiesSection extends StatelessWidget {
             child: TabBarView(
               children: [
                 PostedPropertiesTab(),
-                PostedPropertiesTab(),
+                RentedPropertiesTab(),
                 InReviewPropertiesTab(),
               ],
             ),
@@ -134,16 +134,43 @@ class PostedPropertiesTab extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         switch (state.postedMediaItemsFetchStatus) {
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             return ListView.builder(
               itemCount: state.postedMediaItems.length,
               itemBuilder: ((context, index) {
                 return state.postedMediaItems[index];
               }),
             );
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const LoadingView();
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
+            return const ErrorView();
+        }
+      },
+    );
+  }
+}
+
+class RentedPropertiesTab extends StatelessWidget {
+  const RentedPropertiesTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        switch (state.rentedItemsFetchStatus) {
+          case FetchPropertyMediaItemStatus.loaded:
+            return ListView.builder(
+              itemCount: state.rentedMediaItems.length,
+              itemBuilder: ((context, index) {
+                return state.rentedMediaItems[index];
+              }),
+            );
+          case FetchPropertyMediaItemStatus.loading:
+            return const LoadingView();
+          case FetchPropertyMediaItemStatus.error:
             return const ErrorView();
         }
       },
@@ -161,15 +188,15 @@ class InReviewPropertiesTab extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         switch (state.inReviewMediaItemsFetchStatus) {
-          case FetchProfileMediaItemStatus.loaded:
+          case FetchPropertyMediaItemStatus.loaded:
             return ListView.builder(
                 itemCount: state.inReviewMediaItems.length,
                 itemBuilder: ((context, index) {
                   return state.inReviewMediaItems[index];
                 }));
-          case FetchProfileMediaItemStatus.loading:
+          case FetchPropertyMediaItemStatus.loading:
             return const LoadingView();
-          case FetchProfileMediaItemStatus.error:
+          case FetchPropertyMediaItemStatus.error:
             return const ErrorView();
         }
       },

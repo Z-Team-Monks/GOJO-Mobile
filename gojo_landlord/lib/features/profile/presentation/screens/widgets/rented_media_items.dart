@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/constants/strings/app_routes.dart';
-import 'package:gojo_landlord/features/profile/data_layer/model/property_item.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
+import '../../../data_layer/model/property_item.dart';
 
-class PostedMediaItem extends StatelessWidget {
+class RentedMediaItem extends StatelessWidget {
   final int propertyId;
   final String title;
   final String thumbnailUrl;
@@ -12,7 +12,7 @@ class PostedMediaItem extends StatelessWidget {
   final String category;
   final Widget? trailingButtons;
 
-  const PostedMediaItem({
+  const RentedMediaItem({
     Key? key,
     required this.title,
     required this.thumbnailUrl,
@@ -22,8 +22,8 @@ class PostedMediaItem extends StatelessWidget {
     this.trailingButtons,
   }) : super(key: key);
 
-  factory PostedMediaItem.fromPropertyItem(PropertyItem item) {
-    return PostedMediaItem(
+  factory RentedMediaItem.fromPropertyItem(PropertyItem item) {
+    return RentedMediaItem(
       title: item.title,
       thumbnailUrl: item.thumbnailUrl,
       propertyId: item.id,
@@ -53,16 +53,9 @@ class _TrailingButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         PropertyMediaItemButton(
-          title: "Applications",
+          title: "End Contract",
           onClick: () {
             Navigator.pushNamed(context, GojoRoutes.requests);
-          },
-        ),
-        const SizedBox(width: 10),
-        PropertyMediaItemButton(
-          title: "Appointments",
-          onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.appointments);
           },
         ),
       ],

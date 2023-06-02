@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../screen/model/profile_media_item.dart';
 
@@ -17,9 +18,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       : super(ProfileState.initial()) {
     on<LoadProfileData>((event, emit) async {
       emit(state.copyWith(
-        rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-        favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-        userLoadStatus: FetchProfileMediaItemStatus.loading,
+        rentedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+        favoriteMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+        userLoadStatus: FetchPropertyMediaItemStatus.loading,
       ));
 
       try {
@@ -29,30 +30,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
         emit(state.copyWith(
           user: user,
-          userLoadStatus: FetchProfileMediaItemStatus.loaded,
+          userLoadStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         emit(state.copyWith(
-          userLoadStatus: FetchProfileMediaItemStatus.error,
+          userLoadStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
 
       try {
         final rentedProperties = await profileRepository.getRentedProperties();
         final rentedPropertyMediaItems = rentedProperties.items
-            .map((propertyItem) => ProfileMediaItem.fromPropertyItem(
+            .map((propertyItem) => PropertyMediaItemExtension.fromPropertyItem(
                   propertyItem,
                 ))
             .toList();
 
         emit(state.copyWith(
           rentedMediaItems: rentedPropertyMediaItems,
-          rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
+          rentedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         debugPrint(e.toString());
         emit(state.copyWith(
-          rentedMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
+          rentedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
 
@@ -60,19 +61,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         final favoriteProperties =
             await profileRepository.getFavoriteProperties();
         final appliedPropertyMediaItems = favoriteProperties.items
-            .map((propertyItem) => ProfileMediaItem.fromPropertyItem(
+            .map((propertyItem) => PropertyMediaItemExtension.fromPropertyItem(
                   propertyItem,
                 ))
             .toList();
 
         emit(state.copyWith(
           favoriteMediaItems: appliedPropertyMediaItems,
-          favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.loaded,
+          favoriteMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loaded,
         ));
       } catch (e) {
         debugPrint(e.toString());
         emit(state.copyWith(
-          favoriteMediaItemsFetchStatus: FetchProfileMediaItemStatus.error,
+          favoriteMediaItemsFetchStatus: FetchPropertyMediaItemStatus.error,
         ));
       }
     });

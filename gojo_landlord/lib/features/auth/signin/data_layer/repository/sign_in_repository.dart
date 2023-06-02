@@ -30,9 +30,10 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
       );
 
       final user = User.fromJson(response.data['user']);
+      final firebaseToken = await FirebaseMessaging.instance.getToken() ?? "";
 
       await signInClient.registerFirebaseToken(
-        firebaseToken: FirebaseMessaging.instance.getToken().toString(),
+        firebaseToken: firebaseToken,
         appToken: user.token!,
       );
 

@@ -32,6 +32,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     PropertyItem(
       id: 1,
       title: "Villa, Kemah Tinggi",
+      description: "Description goes here",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Villa",
       facilities: [
@@ -44,6 +45,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     PropertyItem(
       id: 2,
       title: "Studio in 4kilo",
+      description: "Description goes here",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
       facilities: [
@@ -56,6 +58,7 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     PropertyItem(
       id: 3,
       title: "Condominium",
+      description: "Description goes here",
       thumbnailUrl: Resources.gojoImages.sofaNetwork,
       category: "Studio",
       facilities: [

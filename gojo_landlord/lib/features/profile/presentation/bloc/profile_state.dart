@@ -1,52 +1,63 @@
 part of 'profile_bloc.dart';
 
-enum FetchProfileMediaItemStatus { loading, loaded, error }
+enum FetchPropertyMediaItemStatus { loading, loaded, error }
 
 @immutable
 class ProfileState {
   final List<PostedMediaItem> postedMediaItems;
   final List<InReviewMediaItem> inReviewMediaItems;
+  final List<RentedMediaItem> rentedMediaItems;
   final User? user;
-  final FetchProfileMediaItemStatus postedMediaItemsFetchStatus;
-  final FetchProfileMediaItemStatus inReviewMediaItemsFetchStatus;
-  final FetchProfileMediaItemStatus userLoadStatus;
+  final FetchPropertyMediaItemStatus postedMediaItemsFetchStatus;
+  final FetchPropertyMediaItemStatus inReviewMediaItemsFetchStatus;
+  final FetchPropertyMediaItemStatus rentedItemsFetchStatus;
+  final FetchPropertyMediaItemStatus userLoadStatus;
 
   const ProfileState({
     required this.postedMediaItems,
     required this.inReviewMediaItems,
+    required this.rentedMediaItems,
+    required this.user,
     required this.postedMediaItemsFetchStatus,
     required this.inReviewMediaItemsFetchStatus,
+    required this.rentedItemsFetchStatus,
     required this.userLoadStatus,
-    required this.user,
   });
 
   factory ProfileState.initial() {
     return const ProfileState(
       postedMediaItems: [],
       inReviewMediaItems: [],
+      rentedMediaItems: [],
       user: null,
-      userLoadStatus: FetchProfileMediaItemStatus.loading,
-      postedMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
-      inReviewMediaItemsFetchStatus: FetchProfileMediaItemStatus.loading,
+      postedMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+      inReviewMediaItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+      rentedItemsFetchStatus: FetchPropertyMediaItemStatus.loading,
+      userLoadStatus: FetchPropertyMediaItemStatus.loading,
     );
   }
 
   ProfileState copyWith({
     List<PostedMediaItem>? postedMediaItems,
     List<InReviewMediaItem>? inReviewMediaItems,
+    List<RentedMediaItem>? rentedMediaItems,
     User? user,
-    FetchProfileMediaItemStatus? postedMediaItemsFetchStatus,
-    FetchProfileMediaItemStatus? inReviewMediaItemsFetchStatus,
-    FetchProfileMediaItemStatus? userLoadStatus,
+    FetchPropertyMediaItemStatus? postedMediaItemsFetchStatus,
+    FetchPropertyMediaItemStatus? inReviewMediaItemsFetchStatus,
+    FetchPropertyMediaItemStatus? rentedItemsFetchStatus,
+    FetchPropertyMediaItemStatus? userLoadStatus,
   }) {
     return ProfileState(
       postedMediaItems: postedMediaItems ?? this.postedMediaItems,
       inReviewMediaItems: inReviewMediaItems ?? this.inReviewMediaItems,
+      rentedMediaItems: rentedMediaItems ?? this.rentedMediaItems,
       user: user ?? this.user,
       postedMediaItemsFetchStatus:
           postedMediaItemsFetchStatus ?? this.postedMediaItemsFetchStatus,
       inReviewMediaItemsFetchStatus:
           inReviewMediaItemsFetchStatus ?? this.inReviewMediaItemsFetchStatus,
+      rentedItemsFetchStatus:
+          rentedItemsFetchStatus ?? this.rentedItemsFetchStatus,
       userLoadStatus: userLoadStatus ?? this.userLoadStatus,
     );
   }

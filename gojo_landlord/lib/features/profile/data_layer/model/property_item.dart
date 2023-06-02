@@ -1,22 +1,27 @@
-import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-@immutable
 class PropertyItem {
-  final String id;
+  final int id;
   final String title;
+  final String desciption;
   final String thumbnailUrl;
+  final String category;
 
   const PropertyItem({
     required this.id,
     required this.title,
+    required this.desciption,
     required this.thumbnailUrl,
+    required this.category,
   });
 
   factory PropertyItem.fromJson(Map<String, dynamic> json) {
     return PropertyItem(
-      id: json['id'],
-      title: json['title'],
-      thumbnailUrl: json['thumbnailUrl'],
+      id: json['id'] as int,
+      title: json['title'] as String,
+      desciption: json['description'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      category: json['category'] as String,
     );
   }
 }
@@ -26,9 +31,11 @@ class PropertyItemList {
 
   PropertyItemList(this.items);
 
-  factory PropertyItemList.fromJson(List<dynamic> json) {
+  factory PropertyItemList.fromJson(Map<String, dynamic> json) {
     return PropertyItemList(
-      json.map((e) => PropertyItem.fromJson(e)).toList(),
+      (json['results'] as List<dynamic>)
+          .map((item) => PropertyItem.fromJson(item as Map<String, dynamic>))
+          .toList(),
     );
   }
 }
