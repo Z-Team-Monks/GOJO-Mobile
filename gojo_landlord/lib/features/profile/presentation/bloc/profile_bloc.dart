@@ -57,8 +57,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
 
       try {
-        final rentedProperties =
-            await profileRepository.getInReviewProperties();
+        final rentedProperties = await profileRepository.getRentedProperties();
         final rentedPropertyMediaItems = rentedProperties.items
             .map((propertyItem) => RentedMediaItem.fromPropertyItem(
                   propertyItem,

@@ -38,8 +38,8 @@ class RentedMediaItem extends StatelessWidget {
       title: title,
       thumbnailUrl: thumbnailUrl,
       trailingButtons: trailingButtons ?? const _TrailingButtons(),
-      content: '',
-      subtitle: '',
+      subtitle: category,
+      content: description,
     );
   }
 }

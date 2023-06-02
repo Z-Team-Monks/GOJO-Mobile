@@ -114,6 +114,7 @@ class _SignInForm extends StatelessWidget {
             GojoTextField(
               labelText: "Password",
               isObscure: true,
+              textInputType: TextInputType.number,
               onChanged: (value) {
                 context.read<SignInBloc>().add(PasswordChanged(value));
               },

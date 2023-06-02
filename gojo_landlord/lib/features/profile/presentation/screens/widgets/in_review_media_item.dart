@@ -35,8 +35,8 @@ class InReviewMediaItem extends StatelessWidget {
     return PropertyMediaItem(
       title: title,
       thumbnailUrl: thumbnailUrl,
-      content: '',
-      subtitle: '',
+      subtitle: category,
+      content: description,
     );
   }
 }
