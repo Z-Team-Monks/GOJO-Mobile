@@ -8,7 +8,6 @@ import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_repos
 import 'package:gojo_landlord/features/wallet/presentation/bloc/withdraw/withdraw_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../data_layer/model/transaction.dart';
 import '../bloc/wallet/wallet_bloc.dart';
 import 'widgets/transaction_item.dart';
 import 'widgets/withdraw_form.dart';
@@ -20,23 +19,26 @@ class WalletView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GojoParentView(
       label: "Wallet",
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => WalletBloc(GetIt.I.get<WalletRepositoryAPI>())
-              ..add(LoadWallet()),
-          ),
-        ],
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            children: const [
-              _Balance(),
-              SizedBox(height: 10),
-              _WithdrawButton(),
-              SizedBox(height: 40),
-              TransactionsView(),
-            ],
+      child: SingleChildScrollView(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  WalletBloc(GetIt.I.get<WalletRepositoryAPI>())
+                    ..add(LoadWallet()),
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Column(
+              children: const [
+                _Balance(),
+                SizedBox(height: 10),
+                _WithdrawButton(),
+                SizedBox(height: 40),
+                _TransactionsView(),
+              ],
+            ),
           ),
         ),
       ),
@@ -67,12 +69,18 @@ class _Balance extends StatelessWidget {
             builder: (context, state) {
               switch (state.fetchWalletStatus) {
                 case FetchWalletStatus.loading:
-                  return const Center(child: CircularProgressIndicator());
-                case FetchWalletStatus.error:
-                  return const SizedBox(
-                    height: 40,
-                    child: Center(child: Text("Can't load balance!")),
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    child: const Center(child: CircularProgressIndicator()),
                   );
+                case FetchWalletStatus.error:
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    child: const Center(
+                      child: Text("Can't load balance at the moment!"),
+                    ),
+                  );
+
                 default:
                   break;
               }
@@ -140,7 +148,6 @@ class _WithdrawButton extends StatelessWidget {
                             (GetIt.I.get<WalletRepositoryAPI>()),
                           ),
                         ),
-                        // BlocProvider.value(value: context.read<WalletBloc>()),
                       ],
                       child: const WithDrawForm(),
                     );
@@ -153,8 +160,8 @@ class _WithdrawButton extends StatelessWidget {
   }
 }
 
-class TransactionsView extends StatelessWidget {
-  const TransactionsView({super.key});
+class _TransactionsView extends StatelessWidget {
+  const _TransactionsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -173,13 +180,16 @@ class TransactionsView extends StatelessWidget {
           builder: (context, state) {
             switch (state.fetchWalletStatus) {
               case FetchWalletStatus.loading:
-                return const Center(child: CircularProgressIndicator());
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: const Center(child: CircularProgressIndicator()),
+                );
 
               case FetchWalletStatus.error:
-                return const Padding(
-                  padding: EdgeInsets.only(top: 38.0),
-                  child: Center(
-                    child: Text("Can't load transactions right now!"),
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: const Center(
+                    child: Text("Can't load transactions at the moment!"),
                   ),
                 );
               case FetchWalletStatus.loaded:
