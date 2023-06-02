@@ -29,6 +29,7 @@ class Category {
 class PropertyItem {
   final int id;
   final String title;
+  final String? description;
   final String thumbnailUrl;
   final String category;
   final List<Facility> facilities;
@@ -43,6 +44,7 @@ class PropertyItem {
     required this.facilities,
     required this.rent,
     required this.rating,
+    this.description,
   });
 
   factory PropertyItem.fromJson(Map<String, dynamic> json) {
@@ -56,6 +58,7 @@ class PropertyItem {
           .toList(),
       rent: json['amount'] as String,
       rating: json['rating'] as double,
+      description: json['description'] as String?,
     );
   }
 }
