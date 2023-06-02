@@ -10,3 +10,15 @@ class AmountChanged extends WithdrawEvent {
 
   AmountChanged({required this.amount});
 }
+
+class BankChanged extends WithdrawEvent {
+  final String bank;
+
+  BankChanged({required this.bank});
+}
+
+class AccountNumberChanged extends WithdrawEvent {
+  final String accountNumber;
+
+  AccountNumberChanged({required this.accountNumber});
+}

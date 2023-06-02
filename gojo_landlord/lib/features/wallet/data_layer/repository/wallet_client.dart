@@ -22,7 +22,7 @@ class WalletClientImpl extends BaseApiClient implements WalletClientAPI {
   Future<void> withdraw(dynamic withdrawData) async {
     final user = await GetIt.I.get<UserRepositoryAPI>().getUser();
     final response = await post(
-      'transactions/',
+      'transactions/withdraw/',
       withdrawData,
       token: user?.token,
     );

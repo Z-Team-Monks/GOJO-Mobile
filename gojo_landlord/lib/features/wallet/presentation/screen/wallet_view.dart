@@ -194,18 +194,20 @@ class _TransactionsView extends StatelessWidget {
                 );
               case FetchWalletStatus.loaded:
                 return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.wallet.transactions.length,
-                    itemBuilder: (context, index) {
-                      final transactionItem = state.wallet.transactions[index];
-                      return TransactionItem(
-                        type: transactionItem.type,
-                        title: transactionItem.title,
-                        date: transactionItem.date,
-                        time: transactionItem.time,
-                        amount: transactionItem.amount,
-                      );
-                    });
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.wallet.transactions.length,
+                  itemBuilder: (context, index) {
+                    final transactionItem = state.wallet.transactions[index];
+                    return TransactionItem(
+                      type: transactionItem.type,
+                      title: transactionItem.title,
+                      date: transactionItem.date,
+                      time: transactionItem.time,
+                      amount: transactionItem.amount,
+                    );
+                  },
+                );
             }
           },
         ),
