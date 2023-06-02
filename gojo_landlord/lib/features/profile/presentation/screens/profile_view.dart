@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
-import 'package:gojo_landlord/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:gojo_landlord/features/profile/presentation/bloc/profile/profile_bloc.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';

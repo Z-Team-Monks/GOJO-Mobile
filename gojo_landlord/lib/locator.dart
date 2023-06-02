@@ -29,7 +29,8 @@ class Locator {
       () => SignInRepositoryImpl(SignInClientImpl()),
     );
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
-      () => ProfileRepositoryImpl(ProfileClientImpl()),
+      () => ProfileRepositoryFake(),
+      // () => ProfileRepositoryImpl(ProfileClientImpl()),
     );
     GetIt.I.registerLazySingleton<PropertyRepositoryAPI>(
       () => PropertyRepositoryFake(),

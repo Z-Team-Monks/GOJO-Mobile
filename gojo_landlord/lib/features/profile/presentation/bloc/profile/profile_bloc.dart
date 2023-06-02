@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/features/profile/presentation/screens/widgets/rented_media_items.dart';
 
-import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
-import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
-import '../../data_layer/repository/profile_repository.dart';
-import '../screens/widgets/in_review_media_item.dart';
-import '../screens/widgets/posted_media_item.dart';
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
+import '../../../data_layer/repository/profile_repository.dart';
+import '../../screens/widgets/in_review_media_item.dart';
+import '../../screens/widgets/posted_media_item.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gojo_landlord/constants/strings/app_routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
+import 'package:gojo_landlord/features/profile/presentation/screens/widgets/end_contract_dialogue.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../../data_layer/model/property_item.dart';
+import '../../bloc/end_contract/end_contract_bloc.dart';
 
 class RentedMediaItem extends StatelessWidget {
   final int propertyId;
@@ -37,15 +41,34 @@ class RentedMediaItem extends StatelessWidget {
     return PropertyMediaItem(
       title: title,
       thumbnailUrl: thumbnailUrl,
-      trailingButtons: trailingButtons ?? const _TrailingButtons(),
+      trailingButtons: trailingButtons ??
+          _TrailingButton(
+            () => _showEndRentalDialog(context),
+          ),
       subtitle: category,
       content: description,
     );
   }
+
+  Future<void> _showEndRentalDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return BlocProvider(
+          create: (context) => EndContractBloc(GetIt.I<ProfileRepositoryAPI>()),
+          child: EndContractDialogue(
+            propertyTitle: title,
+            propertyId: propertyId,
+          ),
+        );
+      },
+    );
+  }
 }
 
-class _TrailingButtons extends StatelessWidget {
-  const _TrailingButtons();
+class _TrailingButton extends StatelessWidget {
+  final void Function() onTrailingButtonPressed;
+  const _TrailingButton(this.onTrailingButtonPressed);
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +77,7 @@ class _TrailingButtons extends StatelessWidget {
       children: [
         PropertyMediaItemButton(
           title: "End Contract",
-          onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.requests);
-          },
+          onClick: onTrailingButtonPressed,
         ),
       ],
     );

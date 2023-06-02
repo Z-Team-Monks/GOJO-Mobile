@@ -8,6 +8,8 @@ abstract class ProfileRepositoryAPI {
   Future<PropertyItemList> getRentedProperties();
 
   Future<PropertyItemList> getInReviewProperties();
+
+  Future<void> endContract(int propertyId);
 }
 
 class ProfileRepositoryImpl implements ProfileRepositoryAPI {
@@ -28,6 +30,11 @@ class ProfileRepositoryImpl implements ProfileRepositoryAPI {
   @override
   Future<PropertyItemList> getInReviewProperties() {
     return profileClient.getInReviewProperties();
+  }
+
+  @override
+  Future<void> endContract(int propertyId) {
+    return profileClient.endContract(propertyId);
   }
 }
 
@@ -88,6 +95,14 @@ class ProfileRepositoryFake implements ProfileRepositoryAPI {
     return Future.delayed(
       const Duration(seconds: 1),
       () => rentedPropertyItems,
+    );
+  }
+
+  @override
+  Future<void> endContract(int propertyId) {
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () => null,
     );
   }
 }
