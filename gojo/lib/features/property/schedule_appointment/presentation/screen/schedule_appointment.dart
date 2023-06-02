@@ -11,14 +11,20 @@ import 'widgets/time_slot_drop_down.dart';
 
 class ScheduleAppointmentView extends StatelessWidget {
   final VisitingHours visitingHours;
+  final int propertyId;
 
-  const ScheduleAppointmentView({super.key, required this.visitingHours});
+  const ScheduleAppointmentView({
+    super.key,
+    required this.visitingHours,
+    required this.propertyId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ScheduleAppointmentBloc(
         propertyDetailRepository: GetIt.I<PropertyDetailRepository>(),
+        propertyId: propertyId,
       ),
       child: _ScheduleAppointmentView(visitingHours: visitingHours),
     );
@@ -44,7 +50,7 @@ class _ScheduleAppointmentView extends StatelessWidget {
             );
             break;
           case ScheduleAppointmentStatus.error:
-            GojoSnackBars.showSuccess(
+            GojoSnackBars.showError(
               context,
               "Can't Schedule an appointment",
             );

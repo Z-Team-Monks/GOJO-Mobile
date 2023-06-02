@@ -284,6 +284,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                                   return ScheduleAppointmentView(
                                     visitingHours:
                                         state.property!.visitingHours!,
+                                    propertyId: state.property!.id,
                                   );
                                 },
                               );

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../data_layer.dart/model/balance.dart';
-import '../../../data_layer.dart/repository/wallet_repository.dart';
-import '../../../data_layer.dart/model/wallet.dart';
+import '../../../data_layer/model/balance.dart';
+import '../../../data_layer/repository/wallet_repository.dart';
+import '../../../data_layer/model/wallet.dart';
 
 part 'wallet_event.dart';
 part 'wallet_state.dart';

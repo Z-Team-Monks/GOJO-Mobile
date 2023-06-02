@@ -24,8 +24,10 @@ class TransactionsClientImpl extends BaseApiClient
       throw Exception("User's not logged in!");
     }
 
-    final finishedTranasctionsResponse =
-        await get("transactions/?status=paid", token: user.token);
+    final finishedTranasctionsResponse = await get(
+      "transactions/?status=paid",
+      token: user.token,
+    );
 
     return (finishedTranasctionsResponse.data['results'] as List)
         .map((e) => FinishedTransaction.fromJson(e))
@@ -40,8 +42,11 @@ class TransactionsClientImpl extends BaseApiClient
       throw Exception("User's not logged in!");
     }
 
-    final pendingTranasctionsResponse =
-        await get("transactions/?status=pending", token: user.token);
+    final pendingTranasctionsResponse = await get(
+      "transactions/?status=pending",
+      token: user.token,
+    );
+
     return (pendingTranasctionsResponse.data['results'] as List)
         .map((e) => PendingTrasaction.fromJson(e))
         .toList();

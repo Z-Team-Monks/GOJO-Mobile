@@ -7,6 +7,7 @@ import 'Gojo-Mobile-Shared/core/repository/application/application_cilent.dart';
 import 'Gojo-Mobile-Shared/core/repository/application/application_repository.dart';
 import 'Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import 'Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
+import 'features/appointments/data_layer/repository/my_appointments_client.dart';
 import 'features/appointments/data_layer/repository/my_appointments_repository.dart';
 import 'features/auth/register/data/repository/register_client_api.dart';
 import 'features/auth/register/data/repository/register_repository.dart';
@@ -17,11 +18,13 @@ import 'features/home/data_layer/repository/home_repository.dart';
 import 'features/map/data/repository/map_view_repository.dart';
 import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
 import 'features/messages/contacts/data/repository/contact_repository.dart';
+import 'features/profile/data_layer/repository/profile_client.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
 import 'features/property/detail/data/repository/detail_client_api.dart';
 import 'features/property/detail/data/repository/detail_repository.dart';
 import 'features/review/data/repository/review_client_api.dart';
 import 'features/review/data/repository/review_repository.dart';
+import 'features/transactions/data_layer/repository/transactions_client.dart';
 import 'features/transactions/data_layer/repository/transactions_repository.dart';
 
 class Locator {
@@ -43,13 +46,13 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
-      () => ProfileRepositoryFake(),
-      // () => ProfileRepositoryImpl(ProfileClientImpl()),
+      // () => ProfileRepositoryFake(),
+      () => ProfileRepositoryImpl(ProfileClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<TransactionsRepositoryAPI>(
-      () => TransactionsRepositoryFake(),
-      // () => TransactionsRepositoryImpl(TransactionsClientImpl()),
+      // () => TransactionsRepositoryFake(),
+      () => TransactionsRepositoryImpl(TransactionsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<ApplicationsRepositoryAPI>(
@@ -58,8 +61,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<MyAppointmentsRepositoryAPI>(
-      () => MyAppointmentsRepositoryFake(),
-      // () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
+      // () => MyAppointmentsRepositoryFake(),
+      () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton(

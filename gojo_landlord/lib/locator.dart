@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_client.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_repository.dart';
+import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_client.dart';
+import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_repository.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 

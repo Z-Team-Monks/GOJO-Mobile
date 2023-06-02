@@ -1,7 +1,7 @@
-import 'package:gojo_landlord/features/wallet/data_layer.dart/model/balance.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/model/withdraw.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_client.dart';
+import '../model/balance.dart';
 import '../model/wallet.dart';
+import '../model/withdraw.dart';
+import 'wallet_client.dart';
 
 abstract class WalletRepositoryAPI {
   Future<Wallet> getWallet();

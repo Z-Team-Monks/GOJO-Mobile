@@ -70,11 +70,17 @@ class MapViewContent extends StatelessWidget {
                   state.center.lng,
                 ),
                 zoom: 18,
+                maxZoom: 18,
               ),
               children: [
                 TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                ),
+                    urlTemplate:
+                        "https://api.mapbox.com/styles/v1/nati123/clid8v2jw002o01r008qb4bqq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmF0aTEyMyIsImEiOiJja3ppc2JzMmExcXBsMndwZGplamVjYjB2In0.GlIgUrBczURuuqgWsmjSGw",
+                    additionalOptions: const {
+                      'accessToken':
+                          'sk.eyJ1IjoibmF0aTEyMyIsImEiOiJjbGlkOHRwYWMwOWtuM2VxZjM0NHVwMzVrIn0.M33SSeIw7e1fANfx3v2q5A',
+                      'id': 'mapbox.mapbox-streets-v8'
+                    }),
                 MarkerLayer(
                   markers: [
                     for (var property in state.properties)
@@ -87,7 +93,7 @@ class MapViewContent extends StatelessWidget {
                           icon: Icon(
                             Icons.house,
                             size: 30,
-                            color: Resources.gojoColors.black,
+                            color: Resources.gojoColors.primaryColor,
                           ),
                           onPressed: () {
                             BlocProvider.of<MapViewBloc>(context).add(

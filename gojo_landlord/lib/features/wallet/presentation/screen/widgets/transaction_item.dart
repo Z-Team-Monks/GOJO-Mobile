@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 
-import '../../../data_layer.dart/model/transaction.dart';
+import '../../../data_layer/model/transaction.dart';
 
 class TransactionItem extends StatelessWidget {
   final TransactionType type;

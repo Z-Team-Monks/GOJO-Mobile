@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_repository.dart';
+import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_repository.dart';
 import 'package:meta/meta.dart';
 
-import '../../../data_layer.dart/model/withdraw.dart';
+import '../../../data_layer/model/withdraw.dart';
 import 'model/withdraw_input.dart';
 
 part 'withdraw_event.dart';

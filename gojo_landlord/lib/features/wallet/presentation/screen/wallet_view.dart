@@ -4,11 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
-import 'package:gojo_landlord/features/wallet/data_layer.dart/repository/wallet_repository.dart';
+import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_repository.dart';
 import 'package:gojo_landlord/features/wallet/presentation/bloc/withdraw/withdraw_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../data_layer.dart/model/transaction.dart';
+import '../../data_layer/model/transaction.dart';
 import '../bloc/wallet/wallet_bloc.dart';
 import 'widgets/transaction_item.dart';
 import 'widgets/withdraw_form.dart';
