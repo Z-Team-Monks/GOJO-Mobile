@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import 'package:gojo_landlord/features/wallet/data_layer.dart/model/bank.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
@@ -48,7 +49,7 @@ class WithDrawForm extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
-                      "How much do you want to withdraw?",
+                      "Please fill the following information.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -57,6 +58,10 @@ class WithDrawForm extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 const AmountInput(),
+                const SizedBox(height: 20),
+                const BankInput(),
+                const SizedBox(height: 20),
+                const AccountInput(),
                 const SizedBox(height: 30),
                 const _ConfirmButton()
               ],
@@ -86,6 +91,79 @@ class AmountInput extends StatelessWidget {
           errorText: !state.amountInput.isPure && state.amountInput.isNotValid
               ? state.amountInput.getErrorMessage()
               : null,
+        );
+      },
+    );
+  }
+}
+
+class AccountInput extends StatelessWidget {
+  const AccountInput({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WithdrawBloc, WithdrawState>(
+      builder: (context, state) {
+        return GojoTextField(
+          labelText: "Bank Account",
+          textInputType: TextInputType.number,
+          onChanged: (value) {
+            context
+                .read<WithdrawBloc>()
+                .add(AccountNumberChanged(accountNumber: value));
+          },
+          errorText: !state.accountNumberInput.isPure &&
+                  state.accountNumberInput.isNotValid
+              ? state.accountNumberInput.getErrorMessage()
+              : null,
+        );
+      },
+    );
+  }
+}
+
+class BankInput extends StatelessWidget {
+  const BankInput({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WithdrawBloc, WithdrawState>(
+      builder: (context, state) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton<String>(
+              value: state.selectedBank,
+              underline: Container(),
+              isExpanded: true,
+              hint: Text(
+                "Pick a bank",
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+              ),
+              onChanged: (String? value) {
+                if (value != null) {
+                  context.read<WithdrawBloc>().add(BankChanged(bank: value));
+                }
+              },
+              items: Bank.banks.map<DropdownMenuItem<String>>((Bank value) {
+                return DropdownMenuItem<String>(
+                  value: value.name,
+                  child: Text(value.name),
+                );
+              }).toList(),
+            ),
+          ),
         );
       },
     );

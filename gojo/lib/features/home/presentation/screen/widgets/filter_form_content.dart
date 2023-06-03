@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/input_fields/text_radio_button.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import 'package:gojo/features/home/presentation/bloc/property_filter/property_filter_bloc.dart';
@@ -10,6 +9,8 @@ import 'package:gojo/features/home/presentation/bloc/property_items/property_ite
 import 'package:gojo/utils/list_extensions.dart';
 import 'package:group_button/group_button.dart';
 
+import '../../../data_layer/model/property_item.dart';
+
 class FilterFormContent extends StatelessWidget {
   RangeValues _sliderRangeValues = const RangeValues(
     minRangeValue,
@@ -17,7 +18,6 @@ class FilterFormContent extends StatelessWidget {
   );
 
   final _ratingValues = const ["1", "2", "3", "4", "5"];
-
   final _categoryController = GroupButtonController();
   final _facilitiesController = GroupButtonController();
   final _ratingController = GroupButtonController();
@@ -39,7 +39,12 @@ class FilterFormContent extends StatelessWidget {
           label: "Category",
           isRadio: false,
           controller: _categoryController,
-          items: state.filterInput.categories,
+          items: _getCategoryStrings(state.filterInput.categories),
+          onItemSelected: (selectedItem, p1, p2) {
+            context
+                .read<PropertyFilterBloc>()
+                .add(CategorySelected(selectedItem));
+          },
         ),
         const Padding(
           padding: EdgeInsets.all(GojoPadding.medium),
@@ -65,6 +70,10 @@ class FilterFormContent extends StatelessWidget {
               onChanged: (RangeValues values) {
                 setState(() {
                   _sliderRangeValues = values;
+                  context.read<PropertyFilterBloc>().add(PriceRangeChanged(
+                        _sliderRangeValues.start,
+                        _sliderRangeValues.end,
+                      ));
                 });
               },
             );
@@ -74,25 +83,24 @@ class FilterFormContent extends StatelessWidget {
           label: "Facilities",
           isRadio: false,
           controller: _facilitiesController,
-          items: state.filterInput.facilities,
+          items: _getFacilityStrings(state.filterInput.facilities),
+          onItemSelected: (selectedFacility, p1, p2) {
+            context
+                .read<PropertyFilterBloc>()
+                .add(FacilitySelected(selectedFacility));
+          },
         ),
-        const Padding(
-          padding: EdgeInsets.all(GojoPadding.medium),
-          child: Text(
-            "Location",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const GojoTextField(labelText: ""),
         const SizedBox(height: 10),
         GojoTextRadioButton(
           label: "Rating",
           isRadio: false,
           controller: _ratingController,
           items: _ratingValues,
+          onItemSelected: (selectedRating, p1, p2) {
+            context
+                .read<PropertyFilterBloc>()
+                .add(RatingChanged(selectedRating));
+          },
         ),
         const SizedBox(height: 12),
         GojoBarButton(
@@ -133,20 +141,20 @@ class FilterFormContent extends StatelessWidget {
 
     _updateController(
       groupButtonController: _categoryController,
-      items: state.filterInput.categories,
-      selectedItems: state.filterInput.selectedCategories,
+      items: _getCategoryStrings(state.filterInput.categories),
+      selectedItems: _getCategoryStrings(state.filterInput.selectedCategories),
     );
 
     _updateController(
       groupButtonController: _facilitiesController,
-      items: state.filterInput.facilities,
-      selectedItems: state.filterInput.selectedFacilities,
+      items: _getFacilityStrings(state.filterInput.facilities),
+      selectedItems: _getFacilityStrings(state.filterInput.selectedFacilities),
     );
 
     _updateController(
       groupButtonController: _ratingController,
       items: _ratingValues,
-      selectedItems: state.filterInput.selectedRating,
+      selectedItems: [state.filterInput.selectedRating],
     );
   }
 
@@ -170,15 +178,9 @@ class FilterFormContent extends StatelessWidget {
   }) {
     final state = propertyFilterBloc.state;
     final newFilterInput = state.filterInput.copyWith(
-      selectedCategories: state.filterInput.categories.getItemsAtIndices(
-        _categoryController.selectedIndexes.toList(),
-      ),
-      selectedFacilities: state.filterInput.facilities.getItemsAtIndices(
-        _facilitiesController.selectedIndexes.toList(),
-      ),
-      selectedRating: _ratingValues.getItemsAtIndices(
-        _ratingController.selectedIndexes.toList(),
-      ),
+      selectedCategories: state.filterInput.selectedCategories,
+      selectedFacilities: state.filterInput.selectedFacilities,
+      selectedRating: state.filterInput.selectedRating,
       minimumPriceRange: _sliderRangeValues.start,
       maximumPriceRange: _sliderRangeValues.end,
     );
@@ -199,6 +201,14 @@ class FilterFormContent extends StatelessWidget {
       UpdatePropertyFilter(filterInput),
     );
     propertyItemsBloc.add(UpdateFilterInputs(filterInput));
+  }
+
+  _getCategoryStrings(List<Category> categories) {
+    return categories.map((e) => e.name).toList();
+  }
+
+  _getFacilityStrings(List<Facility> facilities) {
+    return facilities.map((e) => e.name).toList();
   }
 
   static const double minRangeValue = 0;

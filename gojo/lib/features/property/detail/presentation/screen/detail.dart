@@ -349,7 +349,7 @@ class PropertyDetailViewContent extends StatelessWidget {
         (element) => element.name == facilityName,
       );
     } catch (e) {
-      return Facility(name: facilityName, amount: 0);
+      return Facility(name: facilityName, amount: 0, id: -1);
     }
   }
 

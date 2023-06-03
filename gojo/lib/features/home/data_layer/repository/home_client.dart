@@ -33,7 +33,9 @@ class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
   @override
   Future<List<Category>> getCategories() async {
     final categoriesResponse = await get('properties/categories/');
-    return categoriesResponse.data['results'].map((categoryJson) {
+    final List<dynamic> categoryJsonList = categoriesResponse.data['results'];
+
+    return categoryJsonList.map((categoryJson) {
       return Category.fromJson(categoryJson);
     }).toList();
   }
@@ -41,7 +43,9 @@ class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
   @override
   Future<List<Facility>> getFacilities() async {
     final facilitiesResponse = await get('properties/facilities/');
-    return facilitiesResponse.data['results'].map((facilityJson) {
+    final List<dynamic> facilityJsonList = facilitiesResponse.data['results'];
+
+    return facilityJsonList.map((facilityJson) {
       return Facility.fromJson(facilityJson);
     }).toList();
   }
