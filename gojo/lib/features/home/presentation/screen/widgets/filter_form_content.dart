@@ -62,7 +62,7 @@ class FilterFormContent extends StatelessWidget {
             return RangeSlider(
               values: _sliderRangeValues,
               max: maxRangeValue,
-              divisions: 10,
+              divisions: 100,
               labels: RangeLabels(
                 _sliderRangeValues.start.round().toString(),
                 _sliderRangeValues.end.round().toString(),
@@ -212,5 +212,5 @@ class FilterFormContent extends StatelessWidget {
   }
 
   static const double minRangeValue = 0;
-  static const double maxRangeValue = 1000;
+  static const double maxRangeValue = 100000;
 }

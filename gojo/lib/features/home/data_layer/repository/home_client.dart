@@ -24,7 +24,7 @@ class HomeClientImpl extends BaseApiClient implements HomeClientAPI {
   Future<PropertyItemList> getPropertyItems(String queryUrl) async {
     String getPropertiesUrl = 'properties/';
     if (queryUrl.isNotEmpty) {
-      getPropertiesUrl += '?$queryUrl/';
+      getPropertiesUrl += '?$queryUrl';
     }
     final homePropertiesResponse = await get(getPropertiesUrl);
     return PropertyItemList.fromJson(homePropertiesResponse.data);
