@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/filter_form_content.dart';
 
+import '../../../../data_layer/model/property_item.dart';
+
 @immutable
 class FilterInput {
-  final List<String> categories;
-  final List<String> selectedCategories;
+  final List<Category> categories;
+  final List<Category> selectedCategories;
 
-  final List<String> facilities;
-  final List<String> selectedFacilities;
+  final List<Facility> facilities;
+  final List<Facility> selectedFacilities;
 
   final double minimumPriceRange;
   final double maximumPriceRange;
 
   final String? location;
-  final List<String> selectedRating;
+  final String selectedRating;
 
   const FilterInput({
     required this.categories,
@@ -27,14 +29,14 @@ class FilterInput {
   });
 
   FilterInput copyWith({
-    List<String>? categories,
-    List<String>? selectedCategories,
-    List<String>? facilities,
-    List<String>? selectedFacilities,
+    List<Category>? categories,
+    List<Category>? selectedCategories,
+    List<Facility>? facilities,
+    List<Facility>? selectedFacilities,
     double? minimumPriceRange,
     double? maximumPriceRange,
     String? location,
-    List<String>? selectedRating,
+    String? selectedRating,
   }) {
     return FilterInput(
       categories: categories ?? this.categories,
@@ -56,7 +58,7 @@ class FilterInput {
       selectedFacilities: [],
       minimumPriceRange: FilterFormContent.minRangeValue,
       maximumPriceRange: FilterFormContent.maxRangeValue,
-      selectedRating: [],
+      selectedRating: "1",
     );
   }
 }

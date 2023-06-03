@@ -63,13 +63,13 @@ class HomeRepositoryImpl implements HomeRepositoryAPI {
     FilterInput filterInput,
   ) {
     final filterQueryParams = {
-      'searchTerm': searchTerm,
-      'categories': filterInput.selectedCategories.join(','),
-      'facilities': filterInput.selectedFacilities.join(','),
+      'q': searchTerm,
+      'categories': filterInput.selectedCategories.map((c) => c.id).join(','),
+      'facilities': filterInput.selectedFacilities.map((f) => f.id).join(','),
       'minPrice': filterInput.minimumPriceRange.toString(),
       'maxPrice': filterInput.maximumPriceRange.toString(),
       'location': filterInput.location,
-      'rating': filterInput.selectedRating.join(','),
+      'rating': filterInput.selectedRating,
     };
 
     final nonEmptyQueryParams = filterQueryParams.entries
@@ -96,8 +96,8 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
         thumbnailUrl: Resources.gojoImages.sofaNetwork,
         category: "Villa",
         facilities: [
-          Facility(name: "Kitchen", amount: 1),
-          Facility(name: "Bed rooms", amount: 2),
+          Facility(id: 1, name: "Kitchen", amount: 1),
+          Facility(id: 2, name: "Bed rooms", amount: 2),
         ],
         rent: "14000",
         rating: 4.97,
@@ -108,8 +108,8 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
         thumbnailUrl: Resources.gojoImages.sofaNetwork,
         category: "Villa",
         facilities: [
-          Facility(name: "Kitchen", amount: 1),
-          Facility(name: "Bedroom", amount: 2),
+          Facility(id: 1, name: "Kitchen", amount: 1),
+          Facility(id: 2, name: "Bedroom", amount: 2),
         ],
         rent: "14000",
         rating: 4.97,
@@ -120,8 +120,8 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
         thumbnailUrl: Resources.gojoImages.sofaNetwork,
         category: "Villa",
         facilities: [
-          Facility(name: "Kitchen", amount: 1),
-          Facility(name: "Bedroom", amount: 2),
+          Facility(id: 1, name: "Kitchen", amount: 1),
+          Facility(id: 2, name: "Bedroom", amount: 2),
         ],
         rent: "14000",
         rating: 4.97,
@@ -151,8 +151,8 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
     return Future.delayed(
       const Duration(seconds: 1),
       () => [
-        Facility(name: "Swimming pool"),
-        Facility(name: "Gym"),
+        Facility(id: 3, name: "Swimming pool"),
+        Facility(id: 4, name: "Gym"),
       ],
     );
   }

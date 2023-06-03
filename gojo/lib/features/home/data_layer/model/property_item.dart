@@ -1,11 +1,13 @@
 class Facility {
   final String name;
   final int? amount;
+  final int id;
 
-  Facility({required this.name, this.amount});
+  Facility({required this.name, required this.id, this.amount});
 
   factory Facility.fromJson(Map<String, dynamic> json) {
     return Facility(
+      id: json['id'] as int,
       name: json['name'] as String,
       amount: (json['amount'] as double?)?.toInt(),
     );
