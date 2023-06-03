@@ -10,9 +10,12 @@ part 'my_appointments_state.dart';
 class MyAppointmentsBloc
     extends Bloc<MyAppointmentsEvent, MyAppointmentsState> {
   MyAppointmentsRepositoryAPI myAppointmentsRepositoryAPI;
+  int propertyId;
 
-  MyAppointmentsBloc(this.myAppointmentsRepositoryAPI)
-      : super(MyAppointmentsState.initial()) {
+  MyAppointmentsBloc({
+    required this.myAppointmentsRepositoryAPI,
+    required this.propertyId,
+  }) : super(MyAppointmentsState.initial()) {
     on<LoadMyAppointments>((event, emit) async {
       emit(state.copyWith(
         fetchAppointmentstatus: FetchAppointmentStatus.loading,
@@ -20,7 +23,7 @@ class MyAppointmentsBloc
 
       try {
         final myAppointments =
-            await myAppointmentsRepositoryAPI.getMyAppointments();
+            await myAppointmentsRepositoryAPI.getMyAppointments(propertyId);
 
         emit(state.copyWith(
           appointments: myAppointments,
@@ -34,11 +37,11 @@ class MyAppointmentsBloc
       }
     });
 
-    on<ApproveAppointment>((event, emit) async {
+    on<CancelAppointment>((event, emit) async {
       try {
         emit(
           state.copyWith(
-            approveAppointmentStatus: ApproveAppointmentStatus.loading,
+            cancelAppointmentStatus: CancelAppointmentStatus.loading,
           ),
         );
 
@@ -50,6 +53,29 @@ class MyAppointmentsBloc
 
         emit(state.copyWith(
           appointments: updatedAppointments,
+          cancelAppointmentStatus: CancelAppointmentStatus.success,
+        ));
+      } catch (e) {
+        debugPrint(e.toString());
+        emit(state.copyWith(
+          cancelAppointmentStatus: CancelAppointmentStatus.error,
+        ));
+      }
+    });
+
+    on<ApproveAppointment>((event, emit) async {
+      try {
+        emit(
+          state.copyWith(
+            approveAppointmentStatus: ApproveAppointmentStatus.loading,
+          ),
+        );
+
+        await myAppointmentsRepositoryAPI.approveAppointment(
+          event.appointmentId,
+        );
+
+        emit(state.copyWith(
           approveAppointmentStatus: ApproveAppointmentStatus.success,
         ));
       } catch (e) {

@@ -111,6 +111,7 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
         ),
       ]),
       isFavorite: false,
+      messages: [],
     );
 
     return Future.delayed(

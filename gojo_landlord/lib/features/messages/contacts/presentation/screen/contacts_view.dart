@@ -60,7 +60,7 @@ class _ContactsView extends StatelessWidget {
                             GojoRoutes.chat,
                             arguments: ChatArgs(
                               messages: state.contacts[index].chatMessages,
-                              tenant: state.contacts[index].landlord,
+                              tenant: state.contacts[index].tenant,
                             ),
                           );
                         }),
@@ -70,7 +70,7 @@ class _ContactsView extends StatelessWidget {
                           child: GojoContentItem(
                             image: AssetImage(Resources.gojoImages.headShot),
                             title:
-                                "${state.contacts[index].landlord.firstName} ${state.contacts[index].landlord.lastName}",
+                                "${state.contacts[index].tenant.firstName} ${state.contacts[index].tenant.lastName}",
                             content:
                                 state.contacts[index].chatMessages[0].message,
                             rightAlignedTitle:

@@ -13,8 +13,12 @@ class ContractFileChanged extends ApplicationsEvent {
 
 class ApprovePendingApplication extends ApplicationsEvent {
   final int applicationId;
+  final String contractFilePath;
 
-  ApprovePendingApplication(this.applicationId);
+  ApprovePendingApplication({
+    required this.applicationId,
+    required this.contractFilePath,
+  });
 }
 
 class RejectPendingApplication extends ApplicationsEvent {

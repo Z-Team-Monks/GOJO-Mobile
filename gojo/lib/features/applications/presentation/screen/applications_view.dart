@@ -35,22 +35,7 @@ class ApplicationsTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ApplicationsBloc, ApplicationsState>(
       listener: (context, state) {
-        switch (state.withdrawApplicationStatus) {
-          case WithdrawApplicationStatus.loading:
-            GojoSnackBars.showLoading(context, "Withdrawing application...");
-            break;
-          case WithdrawApplicationStatus.success:
-            GojoSnackBars.showSuccess(context, "Application withdrawn!");
-            break;
-          case WithdrawApplicationStatus.error:
-            GojoSnackBars.showError(
-              context,
-              "Couldn't withdraw application. Try again later!",
-            );
-            break;
-          default:
-            break;
-        }
+        p
       },
       child: DefaultTabController(
         length: 3,

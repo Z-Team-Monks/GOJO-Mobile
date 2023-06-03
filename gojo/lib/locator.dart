@@ -17,6 +17,7 @@ import 'features/home/data_layer/repository/home_client.dart';
 import 'features/home/data_layer/repository/home_repository.dart';
 import 'features/map/data/repository/map_view_repository.dart';
 import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
+import 'features/messages/contacts/data/repository/contact_client_api.dart';
 import 'features/messages/contacts/data/repository/contact_repository.dart';
 import 'features/profile/data_layer/repository/profile_client.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
@@ -85,10 +86,10 @@ class Locator {
       ),
     );
     GetIt.I.registerLazySingleton<ContactRepository>(
-      () => const ContactRepositoryFakeImpl(),
-      // () => ContactRepositoryImpl(
-      //   conctactClientAPI: ContactClientImpl(),
-      // ),
+      // () => const ContactRepositoryFakeImpl(),
+      () => ContactRepositoryImpl(
+        conctactClientAPI: ContactClientImpl(),
+      ),
     );
 
     GetIt.I.registerLazySingleton<ReviewRepositoryAPI>(

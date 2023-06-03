@@ -13,14 +13,16 @@ class MyAppointementsItem extends StatelessWidget {
   final String date;
   final String phoneNumber;
   final AppointmentStatusType status;
-  final Function()? onClick;
+  final Function()? onApprove;
+  final Function()? onCancel;
 
   const MyAppointementsItem({
     super.key,
     required this.fullName,
     required this.date,
     required this.phoneNumber,
-    required this.onClick,
+    required this.onApprove,
+    required this.onCancel,
     required this.status,
   });
 
@@ -73,10 +75,20 @@ class MyAppointementsItem extends StatelessWidget {
                 Text(phoneNumber),
                 const SizedBox(height: 15),
                 status == AppointmentStatusType.pending
-                    ? GojoBarButton(
-                        customHeight: 40,
-                        title: "Approve",
-                        onClick: onClick,
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GojoBarButton(
+                            customHeight: 40,
+                            title: "Cancel",
+                            onClick: onCancel,
+                          ),
+                          GojoBarButton(
+                            customHeight: 40,
+                            title: "Approve",
+                            onClick: onApprove,
+                          ),
+                        ],
                       )
                     : Container(),
               ],

@@ -1,5 +1,6 @@
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
+import '../../../../messages/contacts/data/model/chat.dart';
 import '../../../../review/data/models/review.dart';
 import 'visiting_hours.dart';
 
@@ -18,6 +19,7 @@ class Property {
   final String category;
   final VisitingHours? visitingHours;
   final bool isFavorite;
+  final List<ChatMessage> messages;
 
   const Property({
     required this.id,
@@ -34,6 +36,7 @@ class Property {
     required this.category,
     this.visitingHours,
     required this.isFavorite,
+    required this.messages,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
@@ -58,6 +61,9 @@ class Property {
       category: json['category'],
       visitingHours: VisitingHours.fromJson(json['visiting_hours']),
       isFavorite: json['favorite'],
+      messages: ((json['messages'] as List))
+          .map((li) => ChatMessage.fromJson(li))
+          .toList(),
     );
   }
 

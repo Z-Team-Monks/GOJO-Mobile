@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/constants/strings/app_routes.dart';
 import 'package:gojo_landlord/features/profile/data_layer/model/property_item.dart';
+import 'package:gojo_landlord/navigation/args/applications_args.dart';
+import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 
@@ -37,7 +39,7 @@ class PostedMediaItem extends StatelessWidget {
     return PropertyMediaItem(
       title: title,
       thumbnailUrl: thumbnailUrl,
-      trailingButtons: trailingButtons ?? const _TrailingButtons(),
+      trailingButtons: trailingButtons ?? _TrailingButtons(propertyId),
       subtitle: category,
       content: description,
     );
@@ -45,7 +47,8 @@ class PostedMediaItem extends StatelessWidget {
 }
 
 class _TrailingButtons extends StatelessWidget {
-  const _TrailingButtons();
+  final int propertyId;
+  const _TrailingButtons(this.propertyId);
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +58,22 @@ class _TrailingButtons extends StatelessWidget {
         PropertyMediaItemButton(
           title: "Applications",
           onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.requests);
+            Navigator.pushNamed(
+              context,
+              GojoRoutes.requests,
+              arguments: ApplicationsArgs(propertyId: propertyId),
+            );
           },
         ),
         const SizedBox(width: 10),
         PropertyMediaItemButton(
           title: "Appointments",
           onClick: () {
-            Navigator.pushNamed(context, GojoRoutes.appointments);
+            Navigator.pushNamed(
+              context,
+              GojoRoutes.appointments,
+              arguments: AppointmentArgs(propertyId: propertyId),
+            );
           },
         ),
       ],

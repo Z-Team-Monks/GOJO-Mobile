@@ -9,16 +9,19 @@ part 'applications_state.dart';
 
 class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
   final ApplicationsRepositoryAPI applicationRepository;
+  final int propertyId;
 
-  ApplicationsBloc(this.applicationRepository)
-      : super(ApplicationsState.initial()) {
+  ApplicationsBloc({
+    required this.applicationRepository,
+    required this.propertyId,
+  }) : super(ApplicationsState.initial()) {
     on<LoadApplications>((event, emit) async {
       emit(state.copyWith(
         fetchApplicationsFetchStatus: FetchApplicationsStatus.loading,
       ));
       try {
-        final pendingApplicationRequestItems =
-            await applicationRepository.getPendingApplications();
+        final pendingApplicationRequestItems = await applicationRepository
+            .getPendingApplications(propertyId: propertyId);
 
         emit(state.copyWith(
           pendingApplications: pendingApplicationRequestItems,
@@ -38,8 +41,24 @@ class ApplicationsBloc extends Bloc<ApplicationsEvent, ApplicationsState> {
       ));
     });
 
-    on<ApprovePendingApplication>((event, emit) {
-      // TODO: implement event handler
+    on<ApprovePendingApplication>((event, emit) async {
+      emit(state.copyWith(
+        approveApplicationStatus: ApproveApplicationStatus.loading,
+      ));
+      try {
+        await applicationRepository.approvePendingApplication(
+          pendingApplicationId: event.applicationId,
+          contractFilePath: event.contractFilePath,
+        );
+        emit(state.copyWith(
+          approveApplicationStatus: ApproveApplicationStatus.success,
+        ));
+      } catch (e) {
+        debugPrint(e.toString());
+        emit(state.copyWith(
+          approveApplicationStatus: ApproveApplicationStatus.error,
+        ));
+      }
     });
 
     on<RejectPendingApplication>((event, emit) async {

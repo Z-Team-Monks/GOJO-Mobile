@@ -9,7 +9,6 @@ enum RejectApplicationStatus { init, loading, success, error }
 class ApplicationsState {
   final List<Application> pendingApplications;
   final FetchApplicationsStatus fetchApplicationsFetchStatus;
-  final String? contractFilePath;
   final ApproveApplicationStatus approveApplicationStatus;
   final RejectApplicationStatus rejectApplicationStatus;
 
@@ -18,7 +17,6 @@ class ApplicationsState {
     required this.fetchApplicationsFetchStatus,
     required this.approveApplicationStatus,
     required this.rejectApplicationStatus,
-    this.contractFilePath,
   });
 
   factory ApplicationsState.initial() {
@@ -45,7 +43,6 @@ class ApplicationsState {
           approveApplicationStatus ?? this.approveApplicationStatus,
       rejectApplicationStatus:
           rejectApplicationStatus ?? this.rejectApplicationStatus,
-      contractFilePath: contractFilePath ?? this.contractFilePath,
     );
   }
 }

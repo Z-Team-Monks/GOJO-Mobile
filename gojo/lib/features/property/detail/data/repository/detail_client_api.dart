@@ -28,6 +28,7 @@ class PropertyDetailClientImpl extends BaseApiClient
       'properties/$propertyId/',
       token: user.token,
     );
+
     return Property.fromJson(fetchPropertyResponse.data);
   }
 

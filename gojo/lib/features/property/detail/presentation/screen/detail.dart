@@ -10,6 +10,7 @@ import '../../../../../Gojo-Mobile-Shared/UI/widgets/icon_text.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../../navigation/args/chat_args.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../apply_for_rent/presentation/application.dart';
 import '../../../favorite/bloc/favorite_bloc.dart';
@@ -303,7 +304,14 @@ class PropertyDetailViewContent extends StatelessWidget {
                     InkWell(
                       child: Icon(Icons.chat_bubble_outline_rounded),
                       onTap: () {
-                        Navigator.pushNamed(context, GojoRoutes.chat);
+                        Navigator.pushNamed(
+                          context,
+                          GojoRoutes.chat,
+                          arguments: ChatArgs(
+                            messages: property.messages,
+                            landlord: property.owner,
+                          ),
+                        );
                       },
                     ),
                     const SizedBox(width: 8),

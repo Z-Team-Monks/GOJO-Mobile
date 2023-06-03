@@ -11,7 +11,8 @@ import '../bloc/my_appointments_bloc.dart';
 import 'widgets/my_appointment_item.dart';
 
 class MyAppointmentsView extends StatelessWidget {
-  const MyAppointmentsView({super.key});
+  final int propertyId;
+  const MyAppointmentsView({super.key, required this.propertyId});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,11 @@ class MyAppointmentsView extends StatelessWidget {
               padding: const EdgeInsets.all(GojoPadding.large),
               child: SingleChildScrollView(
                 child: BlocProvider(
-                  create: (context) =>
-                      MyAppointmentsBloc(GetIt.I<MyAppointmentsRepositoryAPI>())
-                        ..add(LoadMyAppointments()),
+                  create: (context) => MyAppointmentsBloc(
+                    propertyId: propertyId,
+                    myAppointmentsRepositoryAPI:
+                        GetIt.I<MyAppointmentsRepositoryAPI>(),
+                  )..add(LoadMyAppointments()),
                   child: const _MyAppointmentsContent(),
                 ),
               ),
@@ -64,6 +67,21 @@ class _MyAppointmentsContent extends StatelessWidget {
               context, "Appointment Approved successfully");
           break;
         case ApproveAppointmentStatus.initial:
+          break;
+      }
+
+      switch (state.cancelAppointmentStatus) {
+        case CancelAppointmentStatus.loading:
+          GojoSnackBars.showLoading(context, "Canceling appointment...");
+          break;
+        case CancelAppointmentStatus.error:
+          GojoSnackBars.showError(context, "Error cancelling appointment");
+          break;
+        case CancelAppointmentStatus.success:
+          GojoSnackBars.showSuccess(
+              context, "Appointment cancelled successfully");
+          break;
+        case CancelAppointmentStatus.initial:
           break;
       }
     }, builder: (context, state) {
@@ -106,9 +124,16 @@ class _MyAppointmentsListView extends StatelessWidget {
                 ? AppointmentStatusType.pending
                 : AppointmentStatusType.approved,
             date: appointments[index].date,
-            onClick: () {
+            onApprove: () {
               context.read<MyAppointmentsBloc>().add(
                     ApproveAppointment(
+                      appointments[index].id,
+                    ),
+                  );
+            },
+            onCancel: () {
+              context.read<MyAppointmentsBloc>().add(
+                    CancelAppointment(
                       appointments[index].id,
                     ),
                   );

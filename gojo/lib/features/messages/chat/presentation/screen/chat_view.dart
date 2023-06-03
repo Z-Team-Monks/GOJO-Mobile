@@ -71,7 +71,7 @@ class _ChatContentState extends State<ChatContent> {
       final tenant = await GetIt.I<UserRepositoryAPI>().getUser();
       _channel = IOWebSocketChannel.connect(
         Uri.parse(
-          "ws://localhost:8000/ws/chat/${tenant!.id}/${widget.landlord.id}/",
+          "ws://192.168.43.27:8000/ws/chat/${tenant!.id}/${widget.landlord.id}/",
         ),
       );
       addListener();
@@ -173,7 +173,7 @@ class _ChatContentState extends State<ChatContent> {
 
   sendMessage(ChatMessageSend chatMessage) {
     debugPrint(chatMessage.message);
-    _channel.sink.add(jsonEncode({"content": chatMessage}));
+    _channel.sink.add(jsonEncode({"content": chatMessage.message}));
     chatMessageBloc.add(chatMessage);
   }
 

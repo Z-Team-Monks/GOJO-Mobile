@@ -18,7 +18,7 @@ class GojoTextButton extends StatelessWidget {
       onPressed: onPressed,
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(5),
           side: BorderSide(color: color),
         ),
       ),

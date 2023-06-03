@@ -10,3 +10,9 @@ class ApproveAppointment extends MyAppointmentsEvent {
 
   ApproveAppointment(this.appointmentId);
 }
+
+class CancelAppointment extends MyAppointmentsEvent {
+  final int appointmentId;
+
+  CancelAppointment(this.appointmentId);
+}

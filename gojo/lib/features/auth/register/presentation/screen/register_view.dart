@@ -10,6 +10,7 @@ import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/pick_file_button.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
 import '../../../../../navigation/args/otp_args.dart';
@@ -18,7 +19,6 @@ import '../bloc/register_bloc.dart';
 import 'widgets/choose_profile.dart';
 import 'widgets/data_filled.dart';
 import 'widgets/label_row.dart';
-import 'widgets/selected_file.dart';
 import 'widgets/vertical_line.dart';
 
 class RegisterView extends StatelessWidget {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gojo_landlord/navigation/args/applications_args.dart';
+import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
@@ -28,10 +30,15 @@ class RouteGenerator {
           ),
         );
       case GojoRoutes.requests:
+        final args = settings.arguments as ApplicationsArgs;
         return MaterialPageRoute(
-            builder: (_) => const ApplicationRequestsView());
+          builder: (_) => ApplicationRequestsView(propertyId: args.propertyId),
+        );
       case GojoRoutes.appointments:
-        return MaterialPageRoute(builder: (_) => const MyAppointmentsView());
+        final args = settings.arguments as AppointmentArgs;
+        return MaterialPageRoute(
+          builder: (_) => MyAppointmentsView(propertyId: args.propertyId),
+        );
       case GojoRoutes.withdraw:
         return MaterialPageRoute(builder: (_) => const WalletView());
       default:
