@@ -6,8 +6,11 @@ import 'package:get_it/get_it.dart';
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/change_language_dialogue.dart';
+import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../Gojo-Mobile-Shared/shared_features/locale/presentation/bloc/app_locale_bloc.dart';
 import '../../../../constants/strings/app_routes.dart';
 import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
 import '../../data_layer/repository/profile_repository.dart';
@@ -124,6 +127,8 @@ class ProfileButtons extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
+          const ChangeLanguageButton(),
+          const SizedBox(width: 15),
           const LogoutButton(),
         ],
       ),
@@ -147,6 +152,42 @@ class LogoutButton extends StatelessWidget {
           context.read<RouteGuardBloc>().add(Logout());
           Navigator.pushNamedAndRemoveUntil(
               context, GojoRoutes.app, (route) => false);
+        },
+      ),
+    );
+  }
+}
+
+class ChangeLanguageButton extends StatelessWidget {
+  const ChangeLanguageButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    void changeLanugae(String newLanguage) {
+      context
+          .read<AppLocaleBloc>()
+          .add(ChangeAppLocale(locale: Locale(newLanguage)));
+    }
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: GojoCircleIconButton(
+        icon: Icons.language,
+        label: "Language",
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext _) {
+              final selectedLanguage =
+                  context.read<AppLocaleBloc>().state.locale.languageCode;
+              return LanguageDialog(
+                selectedLanguage: selectedLanguage,
+                onLanguageChanged: changeLanugae,
+              );
+            },
+          );
         },
       ),
     );

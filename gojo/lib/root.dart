@@ -6,6 +6,7 @@ import 'features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'features/profile/presentation/screen/profile_view.dart';
 import 'features/transactions/presentation/screens/transactions_view.dart';
 import 'Gojo-Mobile-Shared/shared_features/notification/repository/notification_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -43,22 +44,22 @@ class _RootViewState extends State<RootView> {
         elevation: 10,
         selectedFontSize: 12,
         showUnselectedLabels: true,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: "Messages",
+            label: AppLocalizations.of(context)!.messages,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.payments),
-            label: "Transactions",
+            label: AppLocalizations.of(context)!.transactions,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: "Profile",
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),
