@@ -5,6 +5,7 @@ import 'features/messages/contacts/presentation/screen/contacts_view.dart';
 import 'features/profile/presentation/screens/profile_view.dart';
 import 'features/property/create_property/presentation/screen/create_property_view.dart';
 import 'features/wallet/presentation/screen/wallet_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RootView extends StatefulWidget {
   const RootView({super.key});
@@ -42,22 +43,22 @@ class _RootViewState extends State<RootView> {
         elevation: 10,
         selectedFontSize: 12,
         showUnselectedLabels: true,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.wallet),
-            label: "Wallet",
+            icon: const Icon(Icons.wallet),
+            label: AppLocalizations.of(context)!.wallet,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: "Messages",
+            icon: const Icon(Icons.message),
+            label: AppLocalizations.of(context)!.messages,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_home),
-            label: "Add",
+            icon: const Icon(Icons.add_home),
+            label: AppLocalizations.of(context)!.add,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: const Icon(Icons.person),
+            label: AppLocalizations.of(context)!.profile,
           ),
         ],
       ),
