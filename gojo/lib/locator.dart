@@ -42,8 +42,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<HomeRepositoryAPI>(
-      // () => HomeRepositoryFake(),
-      () => HomeRepositoryImpl(HomeClientImpl()),
+      () => HomeRepositoryFake(),
+      // () => HomeRepositoryImpl(HomeClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
@@ -52,18 +52,18 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<TransactionsRepositoryAPI>(
-      // () => TransactionsRepositoryFake(),
-      () => TransactionsRepositoryImpl(TransactionsClientImpl()),
+      () => TransactionsRepositoryFake(),
+      // () => TransactionsRepositoryImpl(TransactionsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<ApplicationsRepositoryAPI>(
-      // () => ApplicationRepositoryFake(),
-      () => ApplicationRepositoryImpl(ApplicationsClientImpl()),
+      () => ApplicationRepositoryFake(),
+      // () => ApplicationRepositoryImpl(ApplicationsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<MyAppointmentsRepositoryAPI>(
-      // () => MyAppointmentsRepositoryFake(),
-      () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
+      () => MyAppointmentsRepositoryFake(),
+      // () => MyAppointmentsRepositoryImpl(MyAppointmemtsClientImpl()),
     );
 
     GetIt.I.registerLazySingleton(
@@ -71,8 +71,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<PropertyDetailRepository>(
-      // () => PropertyDetailRepositoryFake(),
-      () => PropertyDetailRepositoryImpl(PropertyDetailClientImpl()),
+      () => PropertyDetailRepositoryFake(),
+      // () => PropertyDetailRepositoryImpl(PropertyDetailClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<MapViewRepository>(
