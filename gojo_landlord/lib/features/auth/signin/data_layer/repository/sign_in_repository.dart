@@ -41,8 +41,15 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
     } catch (e) {
       if (e is DioError) {
         debugPrint("Dio error ${e.message}");
-        if (e.response != null && e.response!.statusCode == 400) {
-          return Right(Exception("Invalid phone number or password!"));
+        if (e.response != null) {
+          if (e.response!.statusCode == 400) {
+            return Right(Exception("Invalid phone number or password!"));
+          }
+          if (e.response!.statusCode == 412) {
+            return Right(Exception(
+              "Account is yet to be verified! Please hang on!",
+            ));
+          }
         }
       }
       debugPrint("Other error ${e.toString()}");

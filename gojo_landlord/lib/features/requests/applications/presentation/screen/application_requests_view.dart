@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/pick_file_button.dart';
 import 'package:gojo_landlord/features/profile/presentation/screens/profile_view.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
@@ -36,7 +37,7 @@ class _ApplicationRequestsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Application Requests",
+      label: AppLocalizations.of(context)!.applicationRequests,
       child: BlocConsumer<ApplicationsBloc, ApplicationsState>(
         listener: (context, state) {
           switch (state.rejectApplicationStatus) {

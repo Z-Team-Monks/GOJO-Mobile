@@ -1,11 +1,10 @@
-import 'package:json_annotation/json_annotation.dart';
-
 class PropertyItem {
   final int id;
   final String title;
   final String desciption;
   final String thumbnailUrl;
   final String category;
+  final String? contractUrl;
 
   const PropertyItem({
     required this.id,
@@ -13,6 +12,7 @@ class PropertyItem {
     required this.desciption,
     required this.thumbnailUrl,
     required this.category,
+    this.contractUrl,
   });
 
   factory PropertyItem.fromJson(Map<String, dynamic> json) {
@@ -22,6 +22,7 @@ class PropertyItem {
       desciption: json['description'] as String,
       thumbnailUrl: json['thumbnail_url'] as String,
       category: json['category'] as String,
+      contractUrl: json['contract_url'] as String?,
     );
   }
 }
