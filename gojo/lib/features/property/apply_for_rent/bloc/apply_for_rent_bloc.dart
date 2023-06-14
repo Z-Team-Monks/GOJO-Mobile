@@ -33,7 +33,7 @@ class ApplyForRentBloc extends Bloc<ApplyForRentEvent, ApplyForRentState> {
       try {
         final ApplyForRentModel applyForRentModel = ApplyForRentModel(
           startDate: state.startDate!,
-          months: state.months,
+          months: int.parse(state.months!),
           message: state.message,
           propertyId: propertyId,
         );

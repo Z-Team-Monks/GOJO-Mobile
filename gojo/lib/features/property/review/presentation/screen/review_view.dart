@@ -80,7 +80,11 @@ class AddReviewPopup extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   GojoRatingBar(
-                    onRatingUpdate: (rating) {},
+                    onRatingUpdate: (rating) {
+                      BlocProvider.of<ReviewFormBloc>(context).add(
+                        ReviewFormRatingChanged(rating: rating),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   BlocBuilder<ReviewFormBloc, ReviewFormState>(

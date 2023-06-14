@@ -58,7 +58,7 @@ class FilterInput {
       selectedFacilities: [],
       minimumPriceRange: FilterFormContent.minRangeValue,
       maximumPriceRange: FilterFormContent.maxRangeValue,
-      selectedRating: "1",
+      selectedRating: "0",
     );
   }
 }

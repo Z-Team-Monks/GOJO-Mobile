@@ -2,10 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
-import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/change_language_dialogue.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
@@ -15,7 +14,6 @@ import '../../../../constants/strings/app_routes.dart';
 import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../bloc/profile_bloc.dart';
-import 'model/profile_media_item.dart';
 import 'profile_icon_button.dart';
 
 class ProfileView extends StatelessWidget {
@@ -24,7 +22,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Profile",
+      label: AppLocalizations.of(context)!.profile,
       child: BlocProvider(
         create: (context) => ProfileBloc(
           GetIt.I<ProfileRepositoryAPI>(),
@@ -60,7 +58,9 @@ class UserInfoSection extends StatelessWidget {
           case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchPropertyMediaItemStatus.error:
-            return const Center(child: Text("Error loading user data"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+            );
           case FetchPropertyMediaItemStatus.loaded:
             break;
         }
@@ -72,19 +72,19 @@ class UserInfoSection extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: CachedNetworkImageProvider(
-                    state.user!.profilePicture,
+                    state.user!.displayProfilePicture!,
                   ),
                   radius: 60,
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: GojoPadding.large),
+              padding: const EdgeInsets.symmetric(vertical: GojoPadding.medium),
               child: Text(
                 "${state.user!.firstName}  ${state.user!.lastName}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 17,
                 ),
               ),
             ),
@@ -109,7 +109,7 @@ class ProfileButtons extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ProfileIconButton(
               icon: Icons.description,
-              label: "Applications",
+              label: AppLocalizations.of(context)!.applications,
               onPressed: () {
                 Navigator.pushNamed(context, GojoRoutes.applications);
               },
@@ -120,7 +120,7 @@ class ProfileButtons extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ProfileIconButton(
               icon: Icons.calendar_month,
-              label: "Appointments",
+              label: AppLocalizations.of(context)!.appointments,
               onPressed: () {
                 Navigator.pushNamed(context, GojoRoutes.myAppointments);
               },
@@ -147,7 +147,7 @@ class LogoutButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ProfileIconButton(
         icon: Icons.logout,
-        label: "Logout",
+        label: AppLocalizations.of(context)!.logout,
         onPressed: () {
           context.read<RouteGuardBloc>().add(Logout());
           Navigator.pushNamedAndRemoveUntil(
@@ -175,7 +175,7 @@ class ChangeLanguageButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GojoCircleIconButton(
         icon: Icons.language,
-        label: "Language",
+        label: AppLocalizations.of(context)!.language,
         onPressed: () {
           showDialog(
             context: context,
@@ -206,15 +206,15 @@ class UserPropertiesSection extends StatelessWidget {
       child: Expanded(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             TabBar(
               tabs: [
-                Tab(text: "Rented"),
-                Tab(text: "Favorites"),
+                Tab(text: AppLocalizations.of(context)!.rented),
+                Tab(text: AppLocalizations.of(context)!.favorites),
               ],
             ),
-            SizedBox(height: 8),
-            Expanded(
+            const SizedBox(height: 8),
+            const Expanded(
               child: TabBarView(
                 children: [
                   RentedPropertiesTab(),
@@ -239,6 +239,8 @@ class RentedPropertiesTab extends StatelessWidget {
         switch (state.rentedMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
             return ProfileTab(
+              emptyChildrenText:
+                  AppLocalizations.of(context)!.noRentedProperties,
               children: state.rentedMediaItems,
             );
           case FetchPropertyMediaItemStatus.loading:
@@ -261,6 +263,8 @@ class FavoritePropertiesTab extends StatelessWidget {
         switch (state.favoriteMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
             return ProfileTab(
+              emptyChildrenText:
+                  AppLocalizations.of(context)!.noFavoriteProperties,
               children: state.favoriteMediaItems,
             );
           case FetchPropertyMediaItemStatus.loading:
@@ -274,11 +278,25 @@ class FavoritePropertiesTab extends StatelessWidget {
 }
 
 class ProfileTab extends StatelessWidget {
-  final List<PropertyMediaItem> children;
-  const ProfileTab({super.key, required this.children});
+  final List<Widget> children;
+  final String emptyChildrenText;
+  const ProfileTab({
+    super.key,
+    required this.children,
+    required this.emptyChildrenText,
+  });
 
   @override
   Widget build(BuildContext context) {
+    if (children.isEmpty) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+          child: Text(emptyChildrenText),
+        ),
+      );
+    }
     return ListView.builder(
       itemCount: children.length,
       itemBuilder: (context, index) {
@@ -298,7 +316,12 @@ class LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 }
 
@@ -310,6 +333,12 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Failed to load data"));
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      child: Center(
+          child: Text(
+        AppLocalizations.of(context)!.errorLoadingContent,
+      )),
+    );
   }
 }

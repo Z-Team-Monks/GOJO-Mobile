@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 
@@ -20,7 +21,7 @@ class HostAvatar extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Host",
+                  AppLocalizations.of(context)!.host,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
                 const SizedBox(width: 10),

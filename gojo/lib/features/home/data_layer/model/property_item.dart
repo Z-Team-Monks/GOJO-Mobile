@@ -37,6 +37,7 @@ class PropertyItem {
   final List<Facility> facilities;
   final String rent;
   final double rating;
+  final String? contractUrl;
 
   const PropertyItem({
     required this.id,
@@ -47,6 +48,7 @@ class PropertyItem {
     required this.rent,
     required this.rating,
     this.description,
+    this.contractUrl,
   });
 
   factory PropertyItem.fromJson(Map<String, dynamic> json) {
@@ -61,6 +63,7 @@ class PropertyItem {
       rent: json['amount'] as String,
       rating: json['rating'] as double,
       description: json['description'] as String?,
+      contractUrl: json['contract_url'] as String?,
     );
   }
 }

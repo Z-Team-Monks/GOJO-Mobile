@@ -4,7 +4,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 class VirtualTourView extends StatefulWidget {
-  const VirtualTourView({super.key});
+  final int propertyId;
+
+  const VirtualTourView({super.key, required this.propertyId});
 
   @override
   State<VirtualTourView> createState() => _VirtualTourViewState();
@@ -12,7 +14,9 @@ class VirtualTourView extends StatefulWidget {
 
 class _VirtualTourViewState extends State<VirtualTourView> {
   late final WebViewController controller;
-  final virtualTourUrl = 'https://vr-demo-git-main-par0s.vercel.app/';
+  // final virtualTourUrl = 'https://vr-demo-git-main-par0s.vercel.app/';
+  // final virtualTourUrl =
+  //     'http://192.168.149.134:3000/tour/view/${widget.propertyId}';
 
   @override
   void initState() {
@@ -20,7 +24,7 @@ class _VirtualTourViewState extends State<VirtualTourView> {
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
-        Uri.parse(virtualTourUrl),
+        Uri.parse('http://192.168.149.134:3000/tour/view/21'),
       );
   }
 

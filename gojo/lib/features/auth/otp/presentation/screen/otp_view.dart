@@ -10,6 +10,7 @@ import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
 import '../../../register/data/repository/register_repository.dart';
 import '../bloc/otp_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OTPView extends StatelessWidget {
   final String phone;
@@ -101,7 +102,7 @@ class _OTPView extends StatelessWidget {
                       Resources.gojoColors.primaryColor,
                     ),
                   ),
-                  pinLength: 4,
+                  pinLength: 6,
                   onChanged: (code) {
                     BlocProvider.of<OtpBloc>(context).add(
                       OTPCodeChanged(otp: code),
@@ -112,9 +113,9 @@ class _OTPView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("I didn't receive any code. "),
+                    Text(AppLocalizations.of(context)!.noCodeReceived),
                     TextLink(
-                      label: "RESEND",
+                      label: AppLocalizations.of(context)!.resend,
                       onClick: () {
                         BlocProvider.of<OtpBloc>(context).add(
                           ResendVerificationCode(),
@@ -127,9 +128,9 @@ class _OTPView extends StatelessWidget {
                 BlocBuilder<OtpBloc, OtpState>(
                   builder: (context, state) {
                     return GojoBarButton(
-                      title: "Verify",
+                      title: AppLocalizations.of(context)!.verify,
                       loadingState: state.status == OtpStatus.inprogress,
-                      onClick: (state.otpCode.length == 4)
+                      onClick: (state.otpCode.length == 6)
                           ? () {
                               BlocProvider.of<OtpBloc>(context).add(
                                 VerifcationSubmitted(),

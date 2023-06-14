@@ -16,12 +16,9 @@ class ReviewCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CircleAvatar(
+          CircleAvatar(
+            backgroundImage: NetworkImage(review.user!.displayProfilePicture!),
             radius: 25,
-            child: Icon(
-              Icons.person,
-              color: Colors.white,
-            ), // TODO: add user avatar
           ),
           const SizedBox(width: 10),
           SizedBox(

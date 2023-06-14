@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/navigation/args/virtual_tour_args.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
@@ -29,7 +30,12 @@ class RouteGenerator {
           builder: (_) => DetailPage(propertyId: args.id),
         );
       case GojoRoutes.virtualTour:
-        return MaterialPageRoute(builder: (_) => const VirtualTourView());
+        final args = settings.arguments as VirtualTourArgs;
+        return MaterialPageRoute(
+          builder: (_) => VirtualTourView(
+            propertyId: args.id,
+          ),
+        );
       case GojoRoutes.signin:
         return MaterialPageRoute(builder: (_) => const SignInView());
       case GojoRoutes.contacts:

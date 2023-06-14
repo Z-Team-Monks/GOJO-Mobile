@@ -9,6 +9,7 @@ import '../../data_layer/model/appointment.dart';
 import '../../data_layer/repository/my_appointments_repository.dart';
 import '../bloc/my_appointments_bloc.dart';
 import 'widgets/my_appointment_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyAppointmentsView extends StatelessWidget {
   const MyAppointmentsView({super.key});
@@ -78,8 +79,8 @@ class _MyAppointmentsContent extends StatelessWidget {
         case FetchAppointmentStatus.error:
           return SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
-            child: const Center(
-              child: Text("Error"),
+            child: Center(
+              child: Text(AppLocalizations.of(context)!.errorLoadingContent),
             ),
           );
       }
@@ -95,6 +96,14 @@ class _MyAppointmentsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (appointments.isEmpty) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.7,
+        child: Center(
+          child: Text("No appointments!"),
+        ),
+      );
+    }
     return ListView.builder(
         shrinkWrap: true,
         itemCount: appointments.length,
@@ -129,12 +138,12 @@ class _Header extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text("Full Name",
+            Text(AppLocalizations.of(context)!.fullName,
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
                     ?.copyWith(fontSize: 16)),
-            Text("Date",
+            Text(AppLocalizations.of(context)!.date,
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall

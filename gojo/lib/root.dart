@@ -46,7 +46,7 @@ class _RootViewState extends State<RootView> {
         showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home) ,
             label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(

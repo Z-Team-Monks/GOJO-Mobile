@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo/features/home/presentation/bloc/property_filter/property_filter_bloc.dart';
 import 'package:gojo/features/home/presentation/screen/widgets/filter_form_content.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GojoHomeFilterFormView extends StatelessWidget {
   const GojoHomeFilterFormView({super.key});
@@ -48,6 +49,6 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Couldn't fetch filters");
+    return Text(AppLocalizations.of(context)!.errorLoadingContent);
   }
 }

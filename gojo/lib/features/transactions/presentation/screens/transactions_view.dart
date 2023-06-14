@@ -8,6 +8,7 @@ import '../../data_layer/repository/transactions_repository.dart';
 import '../bloc/transactions_bloc.dart';
 import 'widgets/finished_tranaction_item.dart';
 import 'widgets/pending_transactoin_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({super.key});
@@ -94,6 +95,12 @@ class PendingPaymentsTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.pendingTransactionFetchStatus) {
           case FetchTransactionStatus.loaded:
+            if (state.pendingTransactions.isEmpty) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: const Center(child: Text("No pending transactions!")),
+              );
+            }
             return ListView(children: [
               for (var transactionItem in state.pendingTransactions)
                 PendingTransactionItem(
@@ -111,7 +118,12 @@ class PendingPaymentsTab extends StatelessWidget {
           case FetchTransactionStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchTransactionStatus.error:
-            return const Center(child: Text("Error"));
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Center(
+                child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+              ),
+            );
         }
       },
     );
@@ -129,6 +141,12 @@ class FinishedTransactionTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.finishedTransactionsFetchStatus) {
           case FetchTransactionStatus.loaded:
+            if (state.finishedTransactions.isEmpty) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: const Center(child: Text("No completed transactions!")),
+              );
+            }
             return ListView(children: [
               for (var transactionItem in state.finishedTransactions)
                 FinishedTransactionItem(
@@ -141,7 +159,12 @@ class FinishedTransactionTab extends StatelessWidget {
           case FetchTransactionStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchTransactionStatus.error:
-            return const Center(child: Text("Error"));
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Center(
+                child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+              ),
+            );
         }
       },
     );

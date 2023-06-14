@@ -8,6 +8,7 @@ import '../../../../Gojo-Mobile-Shared/core/repository/application/application_r
 import '../bloc/applications_bloc.dart';
 import '../model/application_status.dart';
 import 'widgets/application_request_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ApplicationsView extends StatelessWidget {
   const ApplicationsView({super.key});
@@ -15,7 +16,7 @@ class ApplicationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Application requests",
+      label: AppLocalizations.of(context)!.applicationRequests,
       child: BlocProvider(
         create: (context) =>
             ApplicationsBloc(GetIt.I<ApplicationsRepositoryAPI>())
@@ -91,6 +92,14 @@ class PendingApplicationsTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.pendingApplicationsFetchStatus) {
           case FetchApplicationsStatus.loaded:
+            if (state.pendingApplications.isEmpty) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: Text("No pending applications"),
+                ),
+              );
+            }
             return ListView(
               children: state.pendingApplications
                   .map((application) => ApplicationRequestItem(
@@ -112,7 +121,8 @@ class PendingApplicationsTab extends StatelessWidget {
           case FetchApplicationsStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchApplicationsStatus.error:
-            return const Center(child: Text("Error"));
+            return Center(
+                child: Text(AppLocalizations.of(context)!.errorLoadingContent));
         }
       },
     );
@@ -130,6 +140,14 @@ class ApprovedApplicationsTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.approvedApplicationsFetchStatus) {
           case FetchApplicationsStatus.loaded:
+            if (state.approvedApplications.isEmpty) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: Text("No approved applications"),
+                ),
+              );
+            }
             return ListView(
               children: state.approvedApplications
                   .map((application) => ApplicationRequestItem(
@@ -146,7 +164,9 @@ class ApprovedApplicationsTab extends StatelessWidget {
           case FetchApplicationsStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchApplicationsStatus.error:
-            return const Center(child: Text("Error"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+            );
         }
       },
     );
@@ -164,6 +184,14 @@ class RejectedApplicationsTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.rejectedApplicationsFetchStatus) {
           case FetchApplicationsStatus.loaded:
+            if (state.rejectedApplications.isEmpty) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: Text("No rejected applications"),
+                ),
+              );
+            }
             return ListView(
               children: state.rejectedApplications
                   .map((application) => ApplicationRequestItem(
@@ -180,7 +208,7 @@ class RejectedApplicationsTab extends StatelessWidget {
           case FetchApplicationsStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchApplicationsStatus.error:
-            return const Center(child: Text("Error"));
+            return Text(AppLocalizations.of(context)!.errorLoadingContent);
         }
       },
     );

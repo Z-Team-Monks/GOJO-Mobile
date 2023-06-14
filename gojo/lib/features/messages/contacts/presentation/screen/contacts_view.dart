@@ -11,6 +11,7 @@ import '../../../../../navigation/args/chat_args.dart';
 import '../../../../profile/presentation/screen/profile_view.dart';
 import '../../data/repository/contact_repository.dart';
 import '../bloc/bloc/contact_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactsView extends StatelessWidget {
   const ContactsView({super.key});
@@ -33,7 +34,7 @@ class _ContactsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Messages",
+      label: AppLocalizations.of(context)!.messages,
       child: Column(
         children: [
           const SizedBox(height: 10),
@@ -46,7 +47,12 @@ class _ContactsView extends StatelessWidget {
                   return const ErrorView();
                 default:
                   if (state.contacts.isEmpty) {
-                    return const Center(child: Text("No messages Yet!"));
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      child: Center(
+                        child: Text(AppLocalizations.of(context)!.noMessages),
+                      ),
+                    );
                   }
                   return ListView.builder(
                     shrinkWrap: true,
@@ -68,13 +74,16 @@ class _ContactsView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: GojoPadding.small),
                           child: GojoContentItem(
-                            image: AssetImage(Resources.gojoImages.headShot),
+                            image: NetworkImage(
+                              state.contacts[index].landlord
+                                  .displayProfilePicture!,
+                            ),
                             title:
                                 "${state.contacts[index].landlord.firstName} ${state.contacts[index].landlord.lastName}",
                             content:
-                                state.contacts[index].chatMessages[0].message,
-                            rightAlignedTitle:
-                                state.contacts[index].chatMessages[0].timestamp,
+                                state.contacts[index].chatMessages.last.message,
+                            rightAlignedTitle: state
+                                .contacts[index].chatMessages.last.timestamp,
                             rightAlignedContent:
                                 "${state.contacts[index].unreadMessages}",
                           ),
