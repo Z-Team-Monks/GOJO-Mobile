@@ -318,7 +318,15 @@ class PropertyDetailViewContent extends StatelessWidget {
                     const SizedBox(width: 8),
                     InkWell(
                       child: Icon(Icons.my_location),
-                      onTap: () {},
+                      onTap: () async {
+                        var uri = Uri.parse(
+                            "google.navigation:q=${property.location!.lat},${property.location!.lng}&mode=d");
+                        try {
+                          await launchUrl(uri);
+                        } catch (e) {
+                          // ignore
+                        }
+                      },
                     ),
                     const SizedBox(width: 8),
                     InkWell(

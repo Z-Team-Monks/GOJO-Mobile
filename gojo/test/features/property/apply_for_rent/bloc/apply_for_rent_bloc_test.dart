@@ -39,11 +39,11 @@ void main() {
     blocTest<ApplyForRentBloc, ApplyForRentState>(
       'emits MonthsChanged state',
       build: () => applyForRentBloc,
-      act: (bloc) => bloc.add(MonthsChanged(months: 6)),
+      act: (bloc) => bloc.add(MonthsChanged(months: '6')),
       expect: () => [
         const ApplyForRentState(
           startDate: null,
-          months: 6,
+          months: '6',
           message: null,
           status: ApplicationStatus.editing,
         )
@@ -70,7 +70,7 @@ void main() {
       skip: 3,
       act: (bloc) {
         bloc.add(MessageChanged(message: 'Hello'));
-        bloc.add(MonthsChanged(months: 6));
+        bloc.add(MonthsChanged(months: '6'));
         bloc.add(StartDateChanged(startDate: now));
         when(
           mockRepository.applyForRent(any),
@@ -81,19 +81,19 @@ void main() {
         ApplyForRentState(
           status: ApplicationStatus.inprogress,
           message: 'Hello',
-          months: 6,
+          months: '6',
           startDate: now,
         ),
         ApplyForRentState(
           status: ApplicationStatus.success,
           message: 'Hello',
-          months: 6,
+          months: '6',
           startDate: now,
         ),
         ApplyForRentState(
           status: ApplicationStatus.done,
           message: 'Hello',
-          months: 6,
+          months: '6',
           startDate: now,
         ),
       ],

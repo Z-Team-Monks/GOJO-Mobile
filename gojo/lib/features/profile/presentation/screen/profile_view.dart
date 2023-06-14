@@ -32,7 +32,7 @@ class ProfileView extends StatelessWidget {
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate(
-                const [UserInfoSection(), ProfileButtons()],
+                const [ProfileButtons()],
               ),
             ),
             const SliverFillRemaining(

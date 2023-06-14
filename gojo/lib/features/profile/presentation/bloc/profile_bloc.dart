@@ -1,12 +1,13 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gojo/features/profile/presentation/screen/rented_media_item.dart';
 
+import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
-import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../screen/model/profile_media_item.dart';
+import '../screen/rented_media_item.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

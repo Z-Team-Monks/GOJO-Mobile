@@ -1,3 +1,5 @@
+import 'package:gojo/features/map/data/model/property_mapview_item.dart';
+
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../review/data/models/review.dart';
@@ -112,6 +114,7 @@ class PropertyDetailRepositoryFake implements PropertyDetailRepository {
       ]),
       isFavorite: false,
       messages: [],
+      location: const Location(lat: 9.321331, lng: 38.755792),
     );
 
     return Future.delayed(

@@ -4,8 +4,7 @@ enum FetchAppointmentStatus { loading, success, error }
 
 enum CancelAppointmentStatus { initial, loading, success, error }
 
-@immutable
-class MyAppointmentsState {
+class MyAppointmentsState extends Equatable {
   final List<Appointment> appointments;
   final FetchAppointmentStatus fetchAppointmentstatus;
   final CancelAppointmentStatus cancelAppointmentStatus;
@@ -36,4 +35,11 @@ class MyAppointmentsState {
           cancelAppointmentStatus ?? this.cancelAppointmentStatus,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        appointments,
+        fetchAppointmentstatus,
+        cancelAppointmentStatus,
+      ];
 }

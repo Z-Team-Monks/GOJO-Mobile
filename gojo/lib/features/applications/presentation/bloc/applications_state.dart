@@ -4,7 +4,7 @@ enum FetchApplicationsStatus { loading, loaded, error }
 
 enum WithdrawApplicationStatus { init, loading, success, error }
 
-class ApplicationsState {
+class ApplicationsState extends Equatable {
   final List<Application> pendingApplications;
   final List<Application> approvedApplications;
   final List<Application> rejectedApplications;
@@ -57,4 +57,15 @@ class ApplicationsState {
           withdrawApplicationStatus ?? this.withdrawApplicationStatus,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        pendingApplications,
+        approvedApplications,
+        rejectedApplications,
+        pendingApplicationsFetchStatus,
+        approvedApplicationsFetchStatus,
+        rejectedApplicationsFetchStatus,
+        withdrawApplicationStatus,
+      ];
 }

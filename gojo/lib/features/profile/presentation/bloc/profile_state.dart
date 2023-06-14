@@ -2,8 +2,7 @@ part of 'profile_bloc.dart';
 
 enum FetchPropertyMediaItemStatus { loading, loaded, error }
 
-@immutable
-class ProfileState {
+class ProfileState extends Equatable {
   final List<RentedMediaItem> rentedMediaItems;
   final List<PropertyMediaItem> favoriteMediaItems;
   final User? user;
@@ -50,4 +49,14 @@ class ProfileState {
       userLoadStatus: userLoadStatus ?? this.userLoadStatus,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        rentedMediaItems,
+        favoriteMediaItems,
+        user,
+        rentedMediaItemsFetchStatus,
+        favoriteMediaItemsFetchStatus,
+        userLoadStatus,
+      ];
 }

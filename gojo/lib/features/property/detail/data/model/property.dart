@@ -1,3 +1,5 @@
+import 'package:gojo/features/map/data/model/property_mapview_item.dart';
+
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../messages/contacts/data/model/chat.dart';
@@ -16,6 +18,7 @@ class Property {
   final String description;
   final List<Facility> facilities;
   final List<Review> reviews;
+  final Location? location;
   final String category;
   final VisitingHours? visitingHours;
   final bool isFavorite;
@@ -34,6 +37,7 @@ class Property {
     required this.facilities,
     required this.description,
     required this.category,
+    required this.location,
     this.visitingHours,
     required this.isFavorite,
     required this.messages,
@@ -64,6 +68,10 @@ class Property {
       messages: ((json['messages'] as List))
           .map((li) => ChatMessage.fromJson(li))
           .toList(),
+      location: Location(
+        lat: json['location']['latitude'],
+        lng: json['location']['longitude'],
+      ),
     );
   }
 

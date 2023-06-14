@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:gojo/features/appointments/data_layer/model/appointment.dart';
-import 'package:gojo/features/appointments/data_layer/repository/my_appointments_repository.dart';
+
+import '../../data_layer/model/appointment.dart';
+import '../../data_layer/repository/my_appointments_repository.dart';
 
 part 'my_appointments_event.dart';
 part 'my_appointments_state.dart';

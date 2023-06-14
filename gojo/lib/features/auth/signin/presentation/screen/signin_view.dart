@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
@@ -13,7 +14,6 @@ import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../../constants/strings/app_routes.dart';
 import '../../data_layer/repository/sign_in_repository.dart';
 import '../bloc/sign_in_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -127,7 +127,7 @@ class _SignInForm extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             GojoBarButton(
-              title: AppLocalizations.of(context)!.logout,
+              title: AppLocalizations.of(context)!.login,
               loadingState: state.status == SignInRequestStatus.loading,
               onClick: (() {
                 if (state.password.isPure || state.phoneNumber.isPure) {

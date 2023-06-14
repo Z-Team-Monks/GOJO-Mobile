@@ -47,7 +47,10 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
 
     on<ChatMessageReceive>((event, emit) {
       final messages = state.messages + [event.chat];
-      emit(state.copyWith(messages: messages));
+      emit(state.copyWith(
+        messages: messages,
+        fetchStatus: FetchChatMessageStatus.success,
+      ));
     });
   }
 }
