@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gojo/navigation/args/virtual_tour_args.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
@@ -83,7 +85,15 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Couldn't fetch property detail");
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.7,
+      width: MediaQuery.of(context).size.width,
+      child: Center(
+        child: Text(
+          AppLocalizations.of(context)!.errorLoadingContent,
+        ),
+      ),
+    );
   }
 }
 
@@ -187,11 +197,16 @@ class PropertyDetailViewContent extends StatelessWidget {
                       ),
                 ),
                 const SizedBox(height: 5),
-                Text(
-                  property.address,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: Colors.grey[500],
-                      ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.65,
+                  child: Text(
+                    property.address,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: Colors.grey[500],
+                        ),
+                  ),
                 ),
               ],
             ),
@@ -209,7 +224,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      "per month",
+                      AppLocalizations.of(context)!.perMonth,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
@@ -242,7 +257,7 @@ class PropertyDetailViewContent extends StatelessWidget {
         Row(
           children: [
             GojoBarButton(
-              title: "Apply",
+              title: AppLocalizations.of(context)!.apply,
               customHeight: 30,
               onClick: () {
                 showApplyForRentDialogue(context);
@@ -253,7 +268,11 @@ class PropertyDetailViewContent extends StatelessWidget {
               title: "360",
               customHeight: 30,
               onClick: () {
-                Navigator.pushNamed(context, GojoRoutes.virtualTour);
+                Navigator.pushNamed(
+                  context,
+                  GojoRoutes.virtualTour,
+                  arguments: VirtualTourArgs(id: property.id),
+                );
               },
             ),
           ],

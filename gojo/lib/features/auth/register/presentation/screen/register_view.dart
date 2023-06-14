@@ -20,6 +20,7 @@ import 'widgets/choose_profile.dart';
 import 'widgets/data_filled.dart';
 import 'widgets/label_row.dart';
 import 'widgets/vertical_line.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
@@ -144,7 +145,7 @@ class _RegisterViewState extends State<_RegisterView> {
               InkWell(
                 child: LabelRow(
                   step: 1,
-                  title: "Personal Information",
+                  title: AppLocalizations.of(context)!.personalInformation,
                   isSelected: currentStep == 1,
                 ),
                 onTap: () {
@@ -196,7 +197,7 @@ class _RegisterViewState extends State<_RegisterView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Personal Information",
+          AppLocalizations.of(context)!.personalInformation,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 15),
@@ -237,7 +238,7 @@ class _RegisterViewState extends State<_RegisterView> {
         BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, state) {
             return GojoTextField(
-              labelText: "Phone",
+              labelText: AppLocalizations.of(context)!.phoneNumber,
               initialValue: state.phone.value,
               errorText: !state.phone.isPure && state.phone.isNotValid
                   ? state.phone.getErrorMessage()
@@ -296,7 +297,7 @@ class _RegisterViewState extends State<_RegisterView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Identification Card",
+          AppLocalizations.of(context)!.identificationCard,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
@@ -402,7 +403,7 @@ class _RegisterViewState extends State<_RegisterView> {
         BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, state) {
             return DataFilled(
-              label: "Phone Number",
+              label: AppLocalizations.of(context)!.phoneNumber,
               value: state.phone.value,
             );
           },
@@ -418,7 +419,7 @@ class _RegisterViewState extends State<_RegisterView> {
           builder: (context, state) {
             return CheckboxListTile(
               contentPadding: const EdgeInsets.all(0),
-              title: const Text("I consent the details are valid"),
+              title: Text(AppLocalizations.of(context)!.detailValidConsent),
               value: state.consentConfirmed,
               onChanged: (newValue) {
                 BlocProvider.of<RegisterBloc>(context).add(
@@ -433,7 +434,7 @@ class _RegisterViewState extends State<_RegisterView> {
         BlocBuilder<RegisterBloc, RegisterState>(
           builder: (context, state) {
             return GojoBarButton(
-              title: "Confirm",
+              title: AppLocalizations.of(context)!.confirm,
               loadingState: state.formStatus == RegisterFormStatus.inprogress,
               onClick: state.isRegisterFormValid
                   ? () {
@@ -455,7 +456,7 @@ class _RegisterViewState extends State<_RegisterView> {
         type: FileType.image,
         onFileLoading: (FilePickerStatus status) =>
             debugPrint(status.toString()),
-        dialogTitle: "Pick Your ID",
+        dialogTitle: AppLocalizations.of(context)!.pickYourId,
         lockParentWindow: true,
       ));
       return paths?.files.single.path;

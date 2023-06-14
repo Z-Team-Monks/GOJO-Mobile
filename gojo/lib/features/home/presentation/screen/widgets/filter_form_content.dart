@@ -8,6 +8,7 @@ import 'package:gojo/features/home/presentation/bloc/property_filter/model/filte
 import 'package:gojo/features/home/presentation/bloc/property_items/property_items_bloc.dart';
 import 'package:gojo/utils/list_extensions.dart';
 import 'package:group_button/group_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data_layer/model/property_item.dart';
 
@@ -36,7 +37,7 @@ class FilterFormContent extends StatelessWidget {
       children: [
         const SizedBox(height: 20),
         GojoTextRadioButton(
-          label: "Category",
+          label: AppLocalizations.of(context)!.category,
           isRadio: false,
           controller: _categoryController,
           items: _getCategoryStrings(state.filterInput.categories),
@@ -46,11 +47,11 @@ class FilterFormContent extends StatelessWidget {
                 .add(CategorySelected(selectedItem));
           },
         ),
-        const Padding(
-          padding: EdgeInsets.all(GojoPadding.medium),
+        Padding(
+          padding: const EdgeInsets.all(GojoPadding.medium),
           child: Text(
-            "Price range",
-            style: TextStyle(
+            AppLocalizations.of(context)!.priceRange,
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -80,7 +81,7 @@ class FilterFormContent extends StatelessWidget {
           },
         ),
         GojoTextRadioButton(
-          label: "Facilities",
+          label: AppLocalizations.of(context)!.facilities,
           isRadio: false,
           controller: _facilitiesController,
           items: _getFacilityStrings(state.filterInput.facilities),
@@ -104,7 +105,7 @@ class FilterFormContent extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         GojoBarButton(
-          title: "Apply",
+          title: AppLocalizations.of(context)!.apply,
           onClick: () {
             _applyNewFilterInputChanges(
               propertyFilterBloc: propertyFilterBloc,

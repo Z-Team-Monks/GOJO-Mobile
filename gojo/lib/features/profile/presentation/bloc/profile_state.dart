@@ -4,7 +4,7 @@ enum FetchPropertyMediaItemStatus { loading, loaded, error }
 
 @immutable
 class ProfileState {
-  final List<PropertyMediaItem> rentedMediaItems;
+  final List<RentedMediaItem> rentedMediaItems;
   final List<PropertyMediaItem> favoriteMediaItems;
   final User? user;
   final FetchPropertyMediaItemStatus rentedMediaItemsFetchStatus;
@@ -32,7 +32,7 @@ class ProfileState {
   }
 
   ProfileState copyWith({
-    List<PropertyMediaItem>? rentedMediaItems,
+    List<RentedMediaItem>? rentedMediaItems,
     List<PropertyMediaItem>? favoriteMediaItems,
     User? user,
     FetchPropertyMediaItemStatus? rentedMediaItemsFetchStatus,

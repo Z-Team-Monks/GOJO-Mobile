@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gojo/features/profile/presentation/screen/rented_media_item.dart';
 
 import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
@@ -41,7 +42,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       try {
         final rentedProperties = await profileRepository.getRentedProperties();
         final rentedPropertyMediaItems = rentedProperties.items
-            .map((propertyItem) => PropertyMediaItemExtension.fromPropertyItem(
+            .map((propertyItem) => RentedMediaItem.fromPropertyItem(
                   propertyItem,
                 ))
             .toList();

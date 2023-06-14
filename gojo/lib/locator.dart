@@ -15,6 +15,7 @@ import 'features/auth/signin/data_layer/repository/sign_in_client.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_repository.dart';
 import 'features/home/data_layer/repository/home_client.dart';
 import 'features/home/data_layer/repository/home_repository.dart';
+import 'features/map/data/repository/map_view_client.dart';
 import 'features/map/data/repository/map_view_repository.dart';
 import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
 import 'features/messages/contacts/data/repository/contact_client_api.dart';
@@ -76,8 +77,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<MapViewRepository>(
-      () => MapViewRepositoryFake(),
-      // () => MapViewRepositoryImpl(MapViewClientImpl()),
+      // () => MapViewRepositoryFake(),
+      () => MapViewRepositoryImpl(MapViewClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<RegisterRepository>(

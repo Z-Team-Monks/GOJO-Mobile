@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../detail/data/model/visiting_hours.dart';
@@ -98,7 +99,7 @@ class _ScheduleAppointmentView extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Cancel",
+                      AppLocalizations.of(context)!.cancel,
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
@@ -116,7 +117,9 @@ class _ScheduleAppointmentView extends StatelessWidget {
                                     .add(ScheduleAppointmentSubmitted());
                               }
                             : null,
-                        child: const Text("Request Appointment"),
+                        child: Text(
+                          AppLocalizations.of(context)!.requestAppointment,
+                        ),
                       );
                     },
                   ),

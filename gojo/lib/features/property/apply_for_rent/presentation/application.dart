@@ -75,7 +75,7 @@ class _ApplicationForm extends StatelessWidget {
                     textInputType: TextInputType.number,
                     onChanged: (value) {
                       BlocProvider.of<ApplyForRentBloc>(context).add(
-                        MonthsChanged(months: int.parse(value)),
+                        MonthsChanged(months: value),
                       );
                     },
                     hintText: "Stay Months",

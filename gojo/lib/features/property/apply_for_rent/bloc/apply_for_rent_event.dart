@@ -12,7 +12,7 @@ class StartDateChanged extends ApplyForRentEvent {
 }
 
 class MonthsChanged extends ApplyForRentEvent {
-  final int months;
+  final String months;
 
   MonthsChanged({required this.months});
 

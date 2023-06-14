@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 
 import '../../../../applications/presentation/model/application_status.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum AppointmentStatusType {
   pending,
@@ -45,7 +46,7 @@ class MyAppointementsItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Status: ",
+                "${AppLocalizations.of(context)!.status}: ",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(width: 2),
@@ -61,7 +62,7 @@ class MyAppointementsItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Status: ",
+                      "${AppLocalizations.of(context)!.status}: ",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(width: 2),
@@ -76,7 +77,7 @@ class MyAppointementsItem extends StatelessWidget {
                 status == AppointmentStatusType.pending
                     ? GojoBarButton(
                         customHeight: 40,
-                        title: "Cancel ",
+                        title: "${AppLocalizations.of(context)!.cancel} ",
                         onClick: onCancel,
                       )
                     : Container(),

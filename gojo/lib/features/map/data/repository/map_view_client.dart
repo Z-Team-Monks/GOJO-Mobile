@@ -13,7 +13,7 @@ class MapViewClientImpl extends BaseApiClient implements MapViewClient {
   Future<List<PropertyMapViewItem>> fetchPropertiesNearby(
       Location location) async {
     final response = await get(
-      'properties/?lat=${location.lat}&lng=${location.lng}',
+      'properties/',
     );
 
     debugPrint(response.data.toString());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RentPerMonth extends StatelessWidget {
   final String rentPerMonth;
@@ -17,7 +18,10 @@ class RentPerMonth extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               ),
         ),
-        Text("/ Month", style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          "/ ${AppLocalizations.of(context)!.perMonth}",
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ],
     );
   }

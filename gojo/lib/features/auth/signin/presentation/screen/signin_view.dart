@@ -13,6 +13,7 @@ import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import '../../../../../constants/strings/app_routes.dart';
 import '../../data_layer/repository/sign_in_repository.dart';
 import '../bloc/sign_in_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -39,10 +40,10 @@ class SignInView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account?"),
+                    Text(AppLocalizations.of(context)!.dontHaveAccount),
                     const SizedBox(width: 5),
                     TextLink(
-                      label: "Register",
+                      label: AppLocalizations.of(context)!.register,
                       onClick: () {
                         Navigator.pushNamed(context, GojoRoutes.register);
                       },
@@ -65,19 +66,19 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         SizedBox(height: 80),
         GojoAppIcon(),
         SizedBox(height: 50),
         Text(
-          "Welcome to Gojo!",
+          AppLocalizations.of(context)!.welcomeToGojo,
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
         ),
         SizedBox(height: 10),
-        Text("Find your next home!"),
+        Text(AppLocalizations.of(context)!.gojoMoto),
         SizedBox(height: 30),
       ],
     );
@@ -103,7 +104,7 @@ class _SignInForm extends StatelessWidget {
         return Column(
           children: [
             GojoTextField(
-              labelText: "Phone number",
+              labelText: AppLocalizations.of(context)!.phoneNumber,
               textInputType: TextInputType.number,
               onChanged: (value) {
                 context.read<SignInBloc>().add(PhoneNumberChanged(value));
@@ -115,7 +116,7 @@ class _SignInForm extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             GojoTextField(
-              labelText: "Password",
+              labelText: AppLocalizations.of(context)!.password,
               isObscure: true,
               onChanged: (value) {
                 context.read<SignInBloc>().add(PasswordChanged(value));
@@ -126,25 +127,21 @@ class _SignInForm extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             GojoBarButton(
-              title: "Login",
+              title: AppLocalizations.of(context)!.logout,
               loadingState: state.status == SignInRequestStatus.loading,
               onClick: (() {
                 if (state.password.isPure || state.phoneNumber.isPure) {
-                  context.read<SignInBloc>().add(
-                        PasswordChanged(state.password.value),
-                      );
-                  context.read<SignInBloc>().add(
-                        PhoneNumberChanged(state.phoneNumber.value),
-                      );
+                  context
+                      .read<SignInBloc>()
+                      .add(PasswordChanged(state.password.value));
+                  context
+                      .read<SignInBloc>()
+                      .add(PhoneNumberChanged(state.phoneNumber.value));
                 } else {
-                  context.read<SignInBloc>().add(
-                        Authenticate(
-                            phoneNumber: state.phoneNumber.value,
-                            password: state.password.value),
-                      );
+                  context.read<SignInBloc>().add(Authenticate(
+                      phoneNumber: state.phoneNumber.value,
+                      password: state.password.value));
                 }
-
-                // Navigator.pushNamed(context, GojoRoutes.root);
               }),
             ),
           ],

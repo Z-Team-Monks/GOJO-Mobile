@@ -165,7 +165,12 @@ class _ChatContentState extends State<ChatContent> {
       debugPrint(event);
       chatMessageBloc.add(
         ChatMessageReceive(
-          chat: ChatMessage.fromJson(jsonDecode(event)),
+          chat: ChatMessage(
+            message: jsonDecode(event)['message'],
+            fromMe: false,
+            timestamp: DateTime.now().toIso8601String(),
+            sender: widget.landlord,
+          ),
         ),
       );
     });

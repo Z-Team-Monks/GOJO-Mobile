@@ -5,6 +5,7 @@ import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../model/application_status.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ApplicationRequestItem extends StatelessWidget {
   final String leadingImageUrl;
@@ -116,7 +117,7 @@ class ApplicationCollapsed extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Status: ",
+                          "${AppLocalizations.of(context)!.status}: ",
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(width: 2),
@@ -169,7 +170,7 @@ class ApplicationExpanded extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text("Date:"),
+              Text("${AppLocalizations.of(context)!.date}:"),
               const SizedBox(width: 4),
               Text(
                 getFormattedRangeDate(startDate, endDate),
@@ -191,7 +192,7 @@ class ApplicationExpanded extends StatelessWidget {
           Visibility(
             visible: status == ApplicationStatusType.pending,
             child: GojoBarButton(
-              title: "Withdraw",
+              title: AppLocalizations.of(context)!.withdraw,
               onClick: onWithDraw,
               customHeight: 30,
               customWidth: 150,

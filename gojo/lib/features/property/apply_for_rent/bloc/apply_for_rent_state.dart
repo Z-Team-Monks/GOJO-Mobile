@@ -4,7 +4,7 @@ enum ApplicationStatus { editing, inprogress, success, error, done }
 
 class ApplyForRentState extends Equatable {
   final DateTime? startDate;
-  final int? months;
+  final String? months;
   final String? message;
   final ApplicationStatus status;
 
@@ -17,7 +17,7 @@ class ApplyForRentState extends Equatable {
 
   ApplyForRentState copyWith({
     DateTime? startDate,
-    int? months,
+    String? months,
     String? message,
     ApplicationStatus? status,
   }) {

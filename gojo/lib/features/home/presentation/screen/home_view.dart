@@ -20,6 +20,7 @@ import '../bloc/property_items/property_items_bloc.dart';
 import 'home_filter_form_view.dart';
 import 'widgets/rating.dart';
 import 'widgets/rent_per_month.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -96,7 +97,7 @@ class HomeSearchBar extends StatelessWidget {
     return BlocBuilder<PropertyItemsBloc, PropertyItemsState>(
       builder: (context, state) {
         return GojoSearchBar(
-          label: "Search for your next home",
+          label: AppLocalizations.of(context)!.searchForYourNextHome,
           onChanged: (newValue) {
             propertyItemsBloc.add(
               LoadPropertyItems(
@@ -151,6 +152,11 @@ class HomeViewContent extends StatelessWidget {
         builder: (context, state) {
       switch (state.status) {
         case FetchPropertyItemsStatus.success:
+          if (state.items.isEmpty) {
+            return Center(
+              child: Text("No available properties at the moment !"),
+            );
+          }
           return FeedListView(feeditems: state.items);
         case FetchPropertyItemsStatus.error:
           return const ErrorView();
@@ -169,7 +175,9 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Couldn't fetch properties"));
+    return Center(
+      child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+    );
   }
 }
 
