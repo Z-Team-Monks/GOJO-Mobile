@@ -46,7 +46,6 @@ class ProfileView extends StatelessWidget {
   }
 }
 
-// TODO: Use data from Auth bloc to display name and image of the current user.
 class UserInfoSection extends StatelessWidget {
   const UserInfoSection({super.key});
 

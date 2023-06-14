@@ -16,7 +16,7 @@ class TransactionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Transactions",
+      label: AppLocalizations.of(context)!.transactions,
       child: BlocProvider(
         create: (context) => TransactionsBloc(
           GetIt.I<TransactionsRepositoryAPI>(),
@@ -42,15 +42,15 @@ class _TransactionsTabViewState extends State<TransactionsTabView> {
     return DefaultTabController(
       length: 2,
       child: Column(
-        children: const [
+        children: [
           TabBar(
             tabs: [
-              Tab(text: "Pending"),
-              Tab(text: "Completed"),
+              Tab(text: AppLocalizations.of(context)!.pending),
+              Tab(text: AppLocalizations.of(context)!.completed),
             ],
           ),
-          SizedBox(height: 8),
-          Expanded(
+          const SizedBox(height: 8),
+          const Expanded(
             child: TabBarView(
               children: [
                 PendingPaymentsTab(),

@@ -40,7 +40,7 @@ class _MapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Gojo Map View",
+      label: "Map",
       isFullScreen: true,
       child: BlocBuilder<MapViewBloc, MapViewState>(builder: (context, state) {
         switch (state.status) {

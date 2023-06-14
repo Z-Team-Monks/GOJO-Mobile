@@ -38,16 +38,16 @@ class ApplicationsTabView extends StatelessWidget {
       listener: (context, state) {
         switch (state.withdrawApplicationStatus) {
           case WithdrawApplicationStatus.loading:
-            GojoSnackBars.showLoading(context, "Withdrawing application...");
+            GojoSnackBars.showLoading(
+                context, AppLocalizations.of(context)!.withdrawingApplicaiton);
             break;
           case WithdrawApplicationStatus.success:
-            GojoSnackBars.showSuccess(context, "Application withdrawn!");
+            GojoSnackBars.showSuccess(
+                context, AppLocalizations.of(context)!.applicationWithdrawn);
             break;
           case WithdrawApplicationStatus.error:
-            GojoSnackBars.showError(
-              context,
-              "Couldn't withdraw application. Try again later!",
-            );
+            GojoSnackBars.showError(context,
+                AppLocalizations.of(context)!.couldntWithdrawApplication);
             break;
           default:
             break;
@@ -56,16 +56,16 @@ class ApplicationsTabView extends StatelessWidget {
       child: DefaultTabController(
         length: 3,
         child: Column(
-          children: const [
+          children: [
             TabBar(
               tabs: [
-                Tab(text: "Pending"),
-                Tab(text: "Approved"),
-                Tab(text: "Rejected"),
+                Tab(text: AppLocalizations.of(context)!.pending),
+                Tab(text: AppLocalizations.of(context)!.approved),
+                Tab(text: AppLocalizations.of(context)!.rejected),
               ],
             ),
-            SizedBox(height: 8),
-            Expanded(
+            const SizedBox(height: 8),
+            const Expanded(
               child: TabBarView(
                 children: [
                   PendingApplicationsTab(),
@@ -96,7 +96,8 @@ class PendingApplicationsTab extends StatelessWidget {
               return SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
-                  child: Text("No pending applications"),
+                  child:
+                      Text(AppLocalizations.of(context)!.noPendingApplications),
                 ),
               );
             }
@@ -144,7 +145,8 @@ class ApprovedApplicationsTab extends StatelessWidget {
               return SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
-                  child: Text("No approved applications"),
+                  child: Text(
+                      AppLocalizations.of(context)!.noApprovedApplications),
                 ),
               );
             }
@@ -188,7 +190,9 @@ class RejectedApplicationsTab extends StatelessWidget {
               return SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
-                  child: Text("No rejected applications"),
+                  child: Text(
+                    AppLocalizations.of(context)!.noRejectedApplications,
+                  ),
                 ),
               );
             }

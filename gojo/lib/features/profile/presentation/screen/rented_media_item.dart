@@ -75,7 +75,7 @@ class _TrailingButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         PropertyMediaItemButton(
-          title: "Show Contract",
+          title: AppLocalizations.of(context)!.showContract,
           onClick: onTrailingButtonPressed,
         ),
       ],

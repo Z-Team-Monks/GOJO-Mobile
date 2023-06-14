@@ -1,7 +1,10 @@
 {
-  "app_name": "Gojo",
+  "appName": "Gojo",
+  "completed": "Completed",
   "home": "Home",
+  "map": "Map",
   "messages": "Messages",
   "profile": "Profile",
+  "showContract": "Show contract",
   "transactions": "Transactions"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
@@ -9,7 +10,6 @@ import '../../data_layer/model/appointment.dart';
 import '../../data_layer/repository/my_appointments_repository.dart';
 import '../bloc/my_appointments_bloc.dart';
 import 'widgets/my_appointment_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyAppointmentsView extends StatelessWidget {
   const MyAppointmentsView({super.key});
@@ -17,7 +17,7 @@ class MyAppointmentsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "My Appointments",
+      label: AppLocalizations.of(context)!.myAppointments,
       child: CustomScrollView(
         slivers: [
           SliverList(
@@ -55,14 +55,22 @@ class _MyAppointmentsContent extends StatelessWidget {
         listener: (context, state) {
       switch (state.cancelAppointmentStatus) {
         case CancelAppointmentStatus.loading:
-          GojoSnackBars.showLoading(context, "Canceling appointment...");
+          GojoSnackBars.showLoading(
+            context,
+            AppLocalizations.of(context)!.cancelingAppointment,
+          );
           break;
         case CancelAppointmentStatus.error:
-          GojoSnackBars.showError(context, "Error cancelling appointment");
+          GojoSnackBars.showError(
+            context,
+            AppLocalizations.of(context)!.errorCancelingAppointment,
+          );
           break;
         case CancelAppointmentStatus.success:
           GojoSnackBars.showSuccess(
-              context, "Appointment cancelled successfully");
+            context,
+            AppLocalizations.of(context)!.appointmentCanceledSuccesfully,
+          );
           break;
         case CancelAppointmentStatus.initial:
           break;
@@ -100,7 +108,7 @@ class _MyAppointmentsListView extends StatelessWidget {
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.7,
         child: Center(
-          child: Text("No appointments!"),
+          child: Text(AppLocalizations.of(context)!.noAppointments),
         ),
       );
     }
