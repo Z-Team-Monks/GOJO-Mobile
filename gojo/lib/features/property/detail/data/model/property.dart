@@ -1,7 +1,7 @@
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
 import '../../../../messages/contacts/data/model/chat.dart';
-import '../../../../review/data/models/review.dart';
+import '../../../review/data/models/review.dart';
 import 'visiting_hours.dart';
 
 class Property {

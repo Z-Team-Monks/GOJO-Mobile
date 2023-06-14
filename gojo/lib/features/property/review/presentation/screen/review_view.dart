@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
-import '../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import '../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../data/repository/review_repository.dart';
 import '../bloc/review_form_bloc.dart';
 import 'widgets/gojo_rating_bar.dart';

@@ -43,7 +43,9 @@ class SignInView extends StatelessWidget {
                     const SizedBox(width: 5),
                     TextLink(
                       label: "Register",
-                      onClick: () {},
+                      onClick: () {
+                        Navigator.pushNamed(context, GojoRoutes.register);
+                      },
                     )
                   ],
                 ),

@@ -23,8 +23,8 @@ import 'features/profile/data_layer/repository/profile_client.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
 import 'features/property/detail/data/repository/detail_client_api.dart';
 import 'features/property/detail/data/repository/detail_repository.dart';
-import 'features/review/data/repository/review_client_api.dart';
-import 'features/review/data/repository/review_repository.dart';
+import 'features/property/review/data/repository/review_client_api.dart';
+import 'features/property/review/data/repository/review_repository.dart';
 import 'features/transactions/data_layer/repository/transactions_client.dart';
 import 'features/transactions/data_layer/repository/transactions_repository.dart';
 

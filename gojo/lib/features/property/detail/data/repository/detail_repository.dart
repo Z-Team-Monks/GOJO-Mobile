@@ -1,6 +1,6 @@
 import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 import '../../../../home/data_layer/model/property_item.dart';
-import '../../../../review/data/models/review.dart';
+import '../../../review/data/models/review.dart';
 import '../model/apply_for_rent_model.dart';
 import '../model/appointment.dart';
 import '../model/property.dart';

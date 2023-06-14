@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
-import '../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
+import '../../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
+import '../../../../../Gojo-Mobile-Shared/network/base_api_client.dart';
 import '../models/review.dart';
 
 /// An abstract class defining the API contract for reviewing property

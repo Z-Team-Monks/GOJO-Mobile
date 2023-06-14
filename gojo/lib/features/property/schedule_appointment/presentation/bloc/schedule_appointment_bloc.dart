@@ -49,7 +49,6 @@ class ScheduleAppointmentBloc
           timeSlot: state.timeSlot,
         );
 
-        debugPrint(DateFormat("yyyy-MM-dd").format(state.date!));
         await propertyDetailRepository.scheduleAppointment(
           appointment,
         );

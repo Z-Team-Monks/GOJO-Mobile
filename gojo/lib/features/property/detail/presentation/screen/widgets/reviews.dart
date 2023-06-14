@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../review/data/models/review.dart';
-import '../../../../../review/presentation/screen/review_view.dart';
+import '../../../../review/data/models/review.dart';
+import '../../../../review/presentation/screen/review_view.dart';
 import 'review_card.dart';
 
 class Reviews extends StatelessWidget {

@@ -65,6 +65,7 @@ dependencies:
   expandable: ^5.0.1
   dashed_rect: ^0.0.4
   file_picker: ^5.3.1
+  sms_autofill: ^2.3.0
 
 
 dev_dependencies:

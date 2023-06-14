@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-import '../../../../core/value_objects/message_input.dart';
+import '../../../../../core/value_objects/message_input.dart';
 import '../../data/models/review.dart';
 import '../../data/repository/review_repository.dart';
 
@@ -45,7 +46,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
       );
     });
 
-    on<ReviewFormSubmitted>((event, emit) {
+    on<ReviewFormSubmitted>((event, emit) async {
       Review review = Review(
         comment: state.message.value,
         rating: state.rating,
@@ -56,7 +57,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
         ),
       );
       try {
-        reviewRepository.createReview(
+        await reviewRepository.createReview(
           review: review,
           propertyId: propertyId,
         );
@@ -67,6 +68,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
           ),
         );
       } catch (e) {
+        debugPrint(e.toString());
         emit(
           state.copyWith(
             status: ReviewFormStatus.error,

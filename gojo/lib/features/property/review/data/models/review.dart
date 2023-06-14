@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../Gojo-Mobile-Shared/core/model/user.dart';
+import '../../../../../Gojo-Mobile-Shared/core/model/user.dart';
 
 class Review extends Equatable {
   final User? user;

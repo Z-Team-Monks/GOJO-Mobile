@@ -4,6 +4,7 @@ import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
 import '../app.dart';
 import '../constants/strings/app_routes.dart';
+import '../features/auth/otp/presentation/screen/otp_view.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
 import '../features/messages/chat/presentation/screen/chat_view.dart';
 import '../features/requests/applications/presentation/screen/application_requests_view.dart';
@@ -11,6 +12,7 @@ import '../features/requests/appointments/presentation/screen/my_appointments_vi
 import '../features/wallet/presentation/screen/wallet_view.dart';
 import '../root.dart';
 import 'args/chat_args.dart';
+import 'args/otp_args.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -38,6 +40,11 @@ class RouteGenerator {
         final args = settings.arguments as AppointmentArgs;
         return MaterialPageRoute(
           builder: (_) => MyAppointmentsView(propertyId: args.propertyId),
+        );
+      case GojoRoutes.otp:
+        final args = settings.arguments as OtpArgs;
+        return MaterialPageRoute(
+          builder: (_) => OTPView(phone: args.phone),
         );
       case GojoRoutes.withdraw:
         return MaterialPageRoute(builder: (_) => const WalletView());
