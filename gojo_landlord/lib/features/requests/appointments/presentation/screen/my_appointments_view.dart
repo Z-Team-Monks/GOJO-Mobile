@@ -87,6 +87,14 @@ class _MyAppointmentsContent extends StatelessWidget {
     }, builder: (context, state) {
       switch (state.fetchAppointmentstatus) {
         case FetchAppointmentStatus.success:
+          if (state.appointments.isEmpty) {
+            return SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: const Center(
+                child: Text("No appointments"),
+              ),
+            );
+          }
           return _MyAppointmentsListView(appointments: state.appointments);
         case FetchAppointmentStatus.loading:
           return SizedBox(

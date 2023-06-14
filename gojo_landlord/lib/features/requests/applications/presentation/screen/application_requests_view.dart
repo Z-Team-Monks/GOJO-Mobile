@@ -77,6 +77,31 @@ class _ApplicationRequestsView extends StatelessWidget {
             case FetchApplicationsStatus.loading:
               return const LoadingView();
             case FetchApplicationsStatus.loaded:
+              if (state.pendingApplications.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "No applications yet",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "You will see applications here when tenants apply for your property",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return SingleChildScrollView(
                 child: Column(
                   children: [

@@ -144,6 +144,9 @@ class PostedPropertiesTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.postedMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
+            if (state.postedMediaItems.isEmpty) {
+              return const Center(child: Text("No posted properties"));
+            }
             return ListView.builder(
               itemCount: state.postedMediaItems.length,
               itemBuilder: ((context, index) {
@@ -171,6 +174,9 @@ class RentedPropertiesTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.rentedItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
+            if (state.rentedMediaItems.isEmpty) {
+              return const Center(child: Text("No rented properties"));
+            }
             return ListView.builder(
               itemCount: state.rentedMediaItems.length,
               itemBuilder: ((context, index) {
@@ -198,6 +204,9 @@ class InReviewPropertiesTab extends StatelessWidget {
       builder: (context, state) {
         switch (state.inReviewMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
+            if (state.inReviewMediaItems.isEmpty) {
+              return const Center(child: Text("No in review properties"));
+            }
             return ListView.builder(
                 itemCount: state.inReviewMediaItems.length,
                 itemBuilder: ((context, index) {

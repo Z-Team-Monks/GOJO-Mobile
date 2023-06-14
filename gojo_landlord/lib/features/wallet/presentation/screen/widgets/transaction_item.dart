@@ -85,7 +85,7 @@ class TransactionItem extends StatelessWidget {
       case TransactionType.payed:
         return "+";
       default:
-        return "-";
+        return "";
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gojo/features/property/detail/presentation/bloc/property_detail_bloc.dart';
 
 import '../../../../review/data/models/review.dart';
 import '../../../../review/presentation/screen/review_view.dart';
@@ -23,8 +25,8 @@ class Reviews extends StatelessWidget {
           children: [
             const Text("Reviews"),
             IconButton(
-              onPressed: () {
-                showDialog(
+              onPressed: () async {
+                await showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return ReviewForm(propertyId: propertyId);

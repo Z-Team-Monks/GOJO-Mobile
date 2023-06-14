@@ -22,7 +22,7 @@ class RegisterClientImpl extends BaseApiClient implements RegisterClientAPI {
       "phone": user.phoneNumber,
       "password": user.password,
     });
-    await post('users/landlord', formData);
+    await post('users/landlord/', formData);
   }
 
   @override

@@ -51,6 +51,11 @@ class ProfileClientImpl extends BaseApiClient implements ProfileClientAPI {
 
   @override
   Future<void> endContract(int propertyId) async {
-    await _makeRequest('properties/$propertyId/end_contract');
+    final user = await _getUser();
+    await post(
+      'properties/$propertyId/end_contract/',
+      null,
+      token: user?.token,
+    );
   }
 }

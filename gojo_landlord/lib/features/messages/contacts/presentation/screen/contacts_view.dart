@@ -72,9 +72,9 @@ class _ContactsView extends StatelessWidget {
                             title:
                                 "${state.contacts[index].tenant.firstName} ${state.contacts[index].tenant.lastName}",
                             content:
-                                state.contacts[index].chatMessages[0].message,
-                            rightAlignedTitle:
-                                state.contacts[index].chatMessages[0].timestamp,
+                                state.contacts[index].chatMessages.last.message,
+                            rightAlignedTitle: state
+                                .contacts[index].chatMessages.last.timestamp,
                             rightAlignedContent:
                                 "${state.contacts[index].unreadMessages}",
                           ),

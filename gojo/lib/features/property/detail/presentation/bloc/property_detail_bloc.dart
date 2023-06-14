@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:gojo/features/property/detail/presentation/screen/widgets/reviews.dart';
 
+import '../../../review/data/models/review.dart';
 import '../../data/model/property.dart';
 import '../../data/repository/detail_repository.dart';
 
@@ -29,6 +31,11 @@ class PropertyDetailBloc
         debugPrint(e.toString());
         emit(state.copyWith(status: FetchPropertyDetailStatus.error));
       }
+    });
+
+    on<ReviewsAdded>((event, emit) {
+      state.property!.reviews.add(event.review);
+      emit(state.copyWith(property: state.property));
     });
   }
 }

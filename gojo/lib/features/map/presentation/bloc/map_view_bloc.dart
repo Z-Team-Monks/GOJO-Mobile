@@ -17,6 +17,13 @@ class MapViewBloc extends Bloc<MapViewEvent, MapViewState> {
       emit(state.copyWith(
         selectedProperty: event.property,
       ));
+      add(MapViewCenterChanged(center: event.property.location));
+    });
+
+    on<MapViewCenterChanged>((event, emit) {
+      emit(state.copyWith(
+        center: event.center,
+      ));
     });
 
     on<MapViewLoad>((event, emit) async {
@@ -44,7 +51,6 @@ class MapViewBloc extends Bloc<MapViewEvent, MapViewState> {
           status: MapViewStatus.success,
         ));
       } catch (e) {
-        debugPrint(e.toString());
         emit(state.copyWith(
           status: MapViewStatus.error,
         ));

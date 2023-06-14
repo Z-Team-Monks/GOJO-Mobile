@@ -7,6 +7,8 @@ import 'Gojo-Mobile-Shared/core/repository/application/application_cilent.dart';
 import 'Gojo-Mobile-Shared/core/repository/application/application_repository.dart';
 import 'Gojo-Mobile-Shared/core/repository/user_repository.dart';
 import 'Gojo-Mobile-Shared/local_storage/local_storage_impl.dart';
+import 'features/auth/register/data/repository/register_client_api.dart';
+import 'features/auth/register/data/repository/register_repository.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_client.dart';
 import 'features/auth/signin/data_layer/repository/sign_in_repository.dart';
 import 'features/messages/chat/presentation/bloc/chat_message_bloc.dart';
@@ -14,6 +16,7 @@ import 'features/messages/contacts/data/repository/contact_client_api.dart';
 import 'features/messages/contacts/data/repository/contact_repository.dart';
 import 'features/profile/data_layer/repository/profile_client.dart';
 import 'features/profile/data_layer/repository/profile_repository.dart';
+import 'features/property/create_property/data_layer/property_client.dart';
 import 'features/property/create_property/data_layer/property_repository.dart';
 import 'features/requests/appointments/data_layer/repository/my_appointments_client.dart';
 import 'features/requests/appointments/data_layer/repository/my_appointments_repository.dart';
@@ -32,12 +35,12 @@ class Locator {
       () => SignInRepositoryImpl(SignInClientImpl()),
     );
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
-      () => ProfileRepositoryFake(),
-      // () => ProfileRepositoryImpl(ProfileClientImpl()),
+      // () => ProfileRepositoryFake(),
+      () => ProfileRepositoryImpl(ProfileClientImpl()),
     );
     GetIt.I.registerLazySingleton<PropertyRepositoryAPI>(
-      () => PropertyRepositoryFake(),
-      // () => PropertyRepositoryImpl(PropertyClientImpl()),
+      // () => PropertyRepositoryFake(),
+      () => PropertyRepositoryImpl(PropertyClientImpl()),
     );
     GetIt.I.registerLazySingleton(
       () => ChatMessageBloc(),
@@ -62,6 +65,11 @@ class Locator {
       ),
     );
 
+    GetIt.I.registerLazySingleton<RegisterRepository>(
+      () => RegisterRepositoryImpl(
+        RegisterClientImpl(),
+      ),
+    );
     GetIt.I.registerLazySingleton<WalletRepositoryAPI>(
       // () => WalletRepositoryFake(),
       () => WalletRepositoryImpl(WalletClientImpl()),

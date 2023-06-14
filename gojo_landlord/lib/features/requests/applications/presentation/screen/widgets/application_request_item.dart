@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../Gojo-Mobile-Shared/resources/resources.dart';
@@ -40,7 +41,7 @@ class ApplicationRequestItem extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 28,
-                      backgroundImage: AssetImage(
+                      backgroundImage: CachedNetworkImageProvider(
                         leadingImageUrl,
                       ),
                     ),

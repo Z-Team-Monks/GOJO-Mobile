@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
@@ -316,8 +317,12 @@ class PropertyDetailViewContent extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     InkWell(
-                      child: Icon(Icons.call),
-                      onTap: () {},
+                      child: const Icon(Icons.call),
+                      onTap: () async {
+                        await launchUrl(
+                          Uri(scheme: 'tel', path: property.owner.phoneNumber),
+                        );
+                      },
                     ),
                   ],
                 )

@@ -85,6 +85,7 @@ class Locator {
         RegisterClientImpl(),
       ),
     );
+    
     GetIt.I.registerLazySingleton<ContactRepository>(
       // () => const ContactRepositoryFakeImpl(),
       () => ContactRepositoryImpl(

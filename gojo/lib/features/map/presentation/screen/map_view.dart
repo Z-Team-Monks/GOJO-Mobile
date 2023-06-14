@@ -62,7 +62,6 @@ class MapViewContent extends StatelessWidget {
       children: [
         BlocBuilder<MapViewBloc, MapViewState>(
           builder: (context, state) {
-            debugPrint("location ${state.center.lat} ${state.center.lng}");
             return FlutterMap(
               options: MapOptions(
                 center: latlng.LatLng(

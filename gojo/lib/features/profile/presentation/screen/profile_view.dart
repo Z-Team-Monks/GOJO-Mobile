@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
-import '../../../../Gojo-Mobile-Shared/UI/list_items/mini_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/change_language_dialogue.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
@@ -15,7 +14,6 @@ import '../../../../constants/strings/app_routes.dart';
 import '../../../route_guard/presentation/bloc/route_guard_bloc.dart';
 import '../../data_layer/repository/profile_repository.dart';
 import '../bloc/profile_bloc.dart';
-import 'model/profile_media_item.dart';
 import 'profile_icon_button.dart';
 
 class ProfileView extends StatelessWidget {

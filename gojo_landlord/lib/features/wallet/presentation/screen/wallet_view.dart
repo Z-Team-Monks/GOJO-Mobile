@@ -193,6 +193,14 @@ class _TransactionsView extends StatelessWidget {
                   ),
                 );
               case FetchWalletStatus.loaded:
+                if (state.wallet.transactions.isEmpty) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: const Center(
+                      child: Text("No transactions yet."),
+                    ),
+                  );
+                }
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

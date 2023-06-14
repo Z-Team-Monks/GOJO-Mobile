@@ -10,3 +10,12 @@ class LoadPropertyDetail extends PropertyDetailEvent {
   @override
   List<Object?> get props => [propertyId];
 }
+
+class ReviewsAdded extends PropertyDetailEvent {
+  final Review review;
+
+  ReviewsAdded({required this.review});
+
+  @override
+  List<Object?> get props => [review];
+}

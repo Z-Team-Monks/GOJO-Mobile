@@ -83,14 +83,6 @@ class _OTPView extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 30),
-                Text(
-                  "02:32",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Resources.gojoColors.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 15),
                 PinInputTextField(
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,
@@ -101,7 +93,7 @@ class _OTPView extends StatelessWidget {
                       Resources.gojoColors.primaryColor,
                     ),
                   ),
-                  pinLength: 4,
+                  pinLength: 6,
                   onChanged: (code) {
                     BlocProvider.of<OtpBloc>(context).add(
                       OTPCodeChanged(otp: code),
@@ -129,7 +121,7 @@ class _OTPView extends StatelessWidget {
                     return GojoBarButton(
                       title: "Verify",
                       loadingState: state.status == OtpStatus.inprogress,
-                      onClick: (state.otpCode.length == 4)
+                      onClick: (state.otpCode.length == 6)
                           ? () {
                               BlocProvider.of<OtpBloc>(context).add(
                                 VerifcationSubmitted(),

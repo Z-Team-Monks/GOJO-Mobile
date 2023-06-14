@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo_landlord/features/auth/register/presentation/screen/register_view.dart';
 import 'package:gojo_landlord/navigation/args/applications_args.dart';
 import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
@@ -45,6 +46,10 @@ class RouteGenerator {
         final args = settings.arguments as OtpArgs;
         return MaterialPageRoute(
           builder: (_) => OTPView(phone: args.phone),
+        );
+      case GojoRoutes.register:
+        return MaterialPageRoute(
+          builder: (_) => const RegisterView(),
         );
       case GojoRoutes.withdraw:
         return MaterialPageRoute(builder: (_) => const WalletView());
