@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/content_item.dart';
@@ -33,7 +34,7 @@ class _ContactsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Messages",
+      label: AppLocalizations.of(context)!.messages,
       child: Column(
         children: [
           const SizedBox(height: 10),

@@ -6,6 +6,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo_landlord/features/profile/data_layer/repository/profile_repository.dart';
 import 'package:gojo_landlord/features/profile/presentation/bloc/profile/profile_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/widgets/circle_icon_button.dart';
 import '../../../../Gojo-Mobile-Shared/core/repository/user_repository.dart';
@@ -20,6 +21,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
+      label: AppLocalizations.of(context)!.profile,
       child: BlocProvider(
         create: (context) => ProfileBloc(
           GetIt.I<ProfileRepositoryAPI>(),
@@ -55,7 +57,9 @@ class UserInfoSection extends StatelessWidget {
           case FetchPropertyMediaItemStatus.loading:
             return const Center(child: CircularProgressIndicator());
           case FetchPropertyMediaItemStatus.error:
-            return const Center(child: Text("Error loading user data"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+            );
           case FetchPropertyMediaItemStatus.loaded:
             break;
         }
@@ -109,16 +113,16 @@ class UserPropertiesSection extends StatelessWidget {
       length: 3,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           TabBar(
             tabs: [
-              Tab(text: "Posted"),
-              Tab(text: "Rented"),
-              Tab(text: "In Review"),
+              Tab(text: AppLocalizations.of(context)!.posted),
+              Tab(text: AppLocalizations.of(context)!.rented),
+              Tab(text: AppLocalizations.of(context)!.in_review),
             ],
           ),
-          SizedBox(height: 8),
-          Expanded(
+          const SizedBox(height: 8),
+          const Expanded(
             child: TabBarView(
               children: [
                 PostedPropertiesTab(),
@@ -145,7 +149,9 @@ class PostedPropertiesTab extends StatelessWidget {
         switch (state.postedMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
             if (state.postedMediaItems.isEmpty) {
-              return const Center(child: Text("No posted properties"));
+              return Center(
+                child: Text(AppLocalizations.of(context)!.noPostedProperties),
+              );
             }
             return ListView.builder(
               itemCount: state.postedMediaItems.length,
@@ -175,7 +181,9 @@ class RentedPropertiesTab extends StatelessWidget {
         switch (state.rentedItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
             if (state.rentedMediaItems.isEmpty) {
-              return const Center(child: Text("No rented properties"));
+              return Center(
+                  child:
+                      Text(AppLocalizations.of(context)!.noRentedProperties));
             }
             return ListView.builder(
               itemCount: state.rentedMediaItems.length,
@@ -205,7 +213,9 @@ class InReviewPropertiesTab extends StatelessWidget {
         switch (state.inReviewMediaItemsFetchStatus) {
           case FetchPropertyMediaItemStatus.loaded:
             if (state.inReviewMediaItems.isEmpty) {
-              return const Center(child: Text("No in review properties"));
+              return Center(
+                  child:
+                      Text(AppLocalizations.of(context)!.noInReviewProperties));
             }
             return ListView.builder(
                 itemCount: state.inReviewMediaItems.length,
@@ -233,7 +243,7 @@ class LogoutButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GojoCircleIconButton(
         icon: Icons.logout,
-        label: "Logout",
+        label: AppLocalizations.of(context)!.logout,
         onPressed: () {
           context.read<RouteGuardBloc>().add(Logout());
           Navigator.pushNamedAndRemoveUntil(
@@ -261,7 +271,7 @@ class ChangeLanguageButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GojoCircleIconButton(
         icon: Icons.language,
-        label: "Language",
+        label: AppLocalizations.of(context)!.language,
         onPressed: () {
           showDialog(
             context: context,
@@ -300,6 +310,8 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Failed to load data"));
+    return Center(
+      child: Text(AppLocalizations.of(context)!.errorLoadingContent),
+    );
   }
 }

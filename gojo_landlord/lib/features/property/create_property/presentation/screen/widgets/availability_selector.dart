@@ -4,6 +4,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/input_fields/date_field.dart
 import 'package:gojo_landlord/features/property/create_property/presentation/bloc/create_property/create_property_bloc.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/screen/widgets/form_input_label.dart';
 import '../../../../../../utils/date_time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AvailabilitySelector extends StatefulWidget {
   const AvailabilitySelector({super.key});
@@ -29,13 +30,13 @@ class _AvailabilitySelectorState extends State<AvailabilitySelector> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormInputLabel(
-              label: "Availability",
+            FormInputLabel(
+              label: AppLocalizations.of(context)!.availability,
               isRequired: true,
             ),
             const SizedBox(height: 8),
             GojoDateField(
-                labelText: "Start date",
+                labelText: AppLocalizations.of(context)!.startDate,
                 controller: startDateController,
                 onPressed: () async {
                   await onStartDateSelected(context);

@@ -7,6 +7,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import 'package:gojo_landlord/features/wallet/data_layer/repository/wallet_repository.dart';
 import 'package:gojo_landlord/features/wallet/presentation/bloc/withdraw/withdraw_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bloc/wallet/wallet_bloc.dart';
 import 'widgets/transaction_item.dart';
@@ -18,7 +19,7 @@ class WalletView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: "Wallet",
+      label: AppLocalizations.of(context)!.wallet,
       child: SingleChildScrollView(
         child: MultiBlocProvider(
           providers: [
@@ -57,7 +58,7 @@ class _Balance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Balance",
+            AppLocalizations.of(context)!.balance,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -76,8 +77,10 @@ class _Balance extends StatelessWidget {
                 case FetchWalletStatus.error:
                   return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
-                    child: const Center(
-                      child: Text("Can't load balance at the moment!"),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.errorLoadingContent,
+                      ),
                     ),
                   );
 
@@ -136,7 +139,7 @@ class _WithdrawButton extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
           child: GojoBarButton(
-              title: "Withdraw",
+              title: AppLocalizations.of(context)!.withdraw,
               onClick: () {
                 showDialog<void>(
                   context: context,
@@ -169,7 +172,7 @@ class _TransactionsView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Transactions",
+          AppLocalizations.of(context)!.transactions,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -188,16 +191,19 @@ class _TransactionsView extends StatelessWidget {
               case FetchWalletStatus.error:
                 return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.4,
-                  child: const Center(
-                    child: Text("Can't load transactions at the moment!"),
+                  child: Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.errorLoadingContent,
+                    ),
                   ),
                 );
               case FetchWalletStatus.loaded:
                 if (state.wallet.transactions.isEmpty) {
                   return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.4,
-                    child: const Center(
-                      child: Text("No transactions yet."),
+                    child: Center(
+                      child:
+                          Text(AppLocalizations.of(context)!.noTransactionsYet),
                     ),
                   );
                 }

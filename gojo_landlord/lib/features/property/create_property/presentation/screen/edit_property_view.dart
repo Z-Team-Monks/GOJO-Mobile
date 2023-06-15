@@ -21,8 +21,8 @@ import 'widgets/adress_picker.dart';
 import 'widgets/visiting_hours/visiting_hour_selector.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CreatePropertyView extends StatelessWidget {
-  const CreatePropertyView({super.key});
+class EditPropertyView extends StatelessWidget {
+  const EditPropertyView({super.key});
 
   @override
   Widget build(BuildContext context) {

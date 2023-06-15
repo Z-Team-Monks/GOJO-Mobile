@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/screen/widgets/form_input_label.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data_layer/model/category.dart';
 import '../../bloc/create_property/create_property_bloc.dart';
@@ -22,8 +23,8 @@ class _CategorySelectorState extends State<CategorySelector> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormInputLabel(
-              label: "Category",
+            FormInputLabel(
+              label: AppLocalizations.of(context)!.category,
               isRequired: true,
             ),
             Container(
@@ -41,7 +42,7 @@ class _CategorySelectorState extends State<CategorySelector> {
                   underline: Container(),
                   isExpanded: true,
                   hint: Text(
-                    "Pick a category",
+                    AppLocalizations.of(context)!.pickCategory,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.black.withOpacity(0.7),
                         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import 'package:gojo_landlord/features/wallet/data_layer/model/bank.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
@@ -18,14 +19,14 @@ class WithDrawForm extends StatelessWidget {
           case WithDrawRequestStatus.success:
             GojoSnackBars.showSuccess(
               context,
-              "Withdraw Request sent successfully!",
+              AppLocalizations.of(context)!.withdrawRequestSentSuccessfully,
             );
             Navigator.pop(context);
             break;
           case WithDrawRequestStatus.error:
             GojoSnackBars.showError(
               context,
-              "Something went wrong!",
+              AppLocalizations.of(context)!.somethingWentWrong,
             );
             break;
           default:
@@ -47,10 +48,11 @@ class WithDrawForm extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
-                      "Please fill the following information.",
-                      style: TextStyle(
+                      AppLocalizations.of(context)!
+                          .pleaseFilTheFollowingInformation,
+                      style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
@@ -83,7 +85,7 @@ class AmountInput extends StatelessWidget {
     return BlocBuilder<WithdrawBloc, WithdrawState>(
       builder: (context, state) {
         return GojoTextField(
-          labelText: "Amount",
+          labelText: AppLocalizations.of(context)!.amount,
           textInputType: TextInputType.number,
           onChanged: (value) {
             context.read<WithdrawBloc>().add(AmountChanged(amount: value));
@@ -107,7 +109,7 @@ class AccountInput extends StatelessWidget {
     return BlocBuilder<WithdrawBloc, WithdrawState>(
       builder: (context, state) {
         return GojoTextField(
-          labelText: "Bank Account",
+          labelText: AppLocalizations.of(context)!.bankAccount,
           textInputType: TextInputType.number,
           onChanged: (value) {
             context
@@ -146,7 +148,7 @@ class BankInput extends StatelessWidget {
               underline: Container(),
               isExpanded: true,
               hint: Text(
-                "Pick a bank",
+                AppLocalizations.of(context)!.pickBank,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.black.withOpacity(0.7),
                     ),
@@ -178,7 +180,7 @@ class _ConfirmButton extends StatelessWidget {
     return BlocBuilder<WithdrawBloc, WithdrawState>(
       builder: (context, state) {
         return GojoBarButton(
-          title: "Confirm",
+          title: AppLocalizations.of(context)!.confirm,
           isActive: _isButtonActive(state),
           loadingState: _isButtonLoading(state),
           onClick: () => _onClick(context, state),

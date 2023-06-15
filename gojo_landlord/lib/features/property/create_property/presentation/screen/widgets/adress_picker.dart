@@ -4,6 +4,7 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/design_tokens/borders.dart';
 import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/screen/widgets/form_input_label.dart';
 import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data_layer/model/address.dart';
 import '../../bloc/create_property/create_property_bloc.dart';
@@ -18,15 +19,18 @@ class AddressPicker extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormInputLabel(label: "Address", isRequired: true),
+            FormInputLabel(
+              label: AppLocalizations.of(context)!.address,
+              isRequired: true,
+            ),
             const StreetAddressTitle(),
             GojoBarButton(
               onClick: () {
                 _showAddressPickerDialogue(context);
               },
               title: state.address.value != null
-                  ? "Change Address"
-                  : "Pick Address",
+                  ? AppLocalizations.of(context)!.changeAddress
+                  : AppLocalizations.of(context)!.pickAddress,
             ),
           ],
         );
@@ -82,11 +86,11 @@ class StreetAddressTitle extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 )
-              : const Padding(
-                  padding: EdgeInsets.all(8.0),
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Selected address will show here",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.selectedAddressWillShowHere,
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),
                   ),
@@ -108,7 +112,7 @@ class AddressPickerMap extends StatelessWidget {
       child: OpenStreetMapSearchAndPick(
           center: LatLong(9.0385658, 38.7624277),
           buttonColor: Theme.of(context).primaryColor,
-          buttonText: 'Set Current Location',
+          buttonText: AppLocalizations.of(context)!.setCurrentLocation,
           onPicked: (pickedData) {
             debugPrint(pickedData.latLong.latitude.toString());
             debugPrint(pickedData.latLong.longitude.toString());

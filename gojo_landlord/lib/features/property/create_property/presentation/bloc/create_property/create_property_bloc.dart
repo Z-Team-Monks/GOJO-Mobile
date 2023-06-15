@@ -27,7 +27,7 @@ class CreatePropertyBloc
 
   CreatePropertyBloc({
     required this.propertyRepository,
-    required this.fetchedCategories,
+    required this.fetchedCategories, 
     required this.fetchedFacilities,
   }) : super(CreatePropertyState.initial()) {
     on<TitleInputChanged>((event, emit) {
