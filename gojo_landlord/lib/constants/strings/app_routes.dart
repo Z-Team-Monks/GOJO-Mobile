@@ -8,4 +8,6 @@ class GojoRoutes {
   static const withdraw = '/withdraw';
   static const otp = '/otp';
   static const app = '/';
+  static const forgotPassword = '/forgotPassword';
+  static const resetPassword = '/resetPassword';
 }

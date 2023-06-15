@@ -1,29 +1,29 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/text_link.dart';
 import '../../../../../Gojo-Mobile-Shared/resources/resources.dart';
 import '../../../../../constants/strings/app_routes.dart';
+import '../../../../../navigation/args/otp_args.dart';
+import '../../../otp/presentation/bloc/otp_bloc.dart';
 import '../../../register/data/repository/register_repository.dart';
-import '../bloc/otp_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class OTPView extends StatelessWidget {
-  final String phone;
-  const OTPView({super.key, required this.phone});
+class OTPForgotPasswordView extends StatelessWidget {
+  const OTPForgotPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => OtpBloc(
         registerRepository: GetIt.I<RegisterRepository>(),
-      )..add(SetPhone(phone: phone)),
+      ),
       child: const _OTPView(),
     );
   }
@@ -53,7 +53,8 @@ class _OTPView extends StatelessWidget {
             GojoSnackBars.showSuccess(context, "OTP Code Verified");
             Navigator.popAndPushNamed(
               context,
-              GojoRoutes.signin,
+              GojoRoutes.resetPassword,
+              arguments: OtpArgs(phone: state.phone.value),
             );
             break;
           default:
@@ -64,8 +65,7 @@ class _OTPView extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: GojoParentView(
-          hasAppBar: false,
-          label: "Gojo Verification",
+          label: "Forgot Password",
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
@@ -81,23 +81,36 @@ class _OTPView extends StatelessWidget {
                 const SizedBox(height: 10),
                 BlocBuilder<OtpBloc, OtpState>(
                   builder: (context, state) {
-                    return Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: "Enter the code from the sms we sent to ",
-                          ),
-                          TextSpan(
-                            text: state.phone.value,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                    return GojoTextField(
+                      labelText: 'Phone',
+                      hintText: 'Phone Number',
+                      errorText: !state.phone.isPure && state.phone.isNotValid
+                          ? state.phone.getErrorMessage()
+                          : null,
+                      onChanged: (value) {
+                        BlocProvider.of<OtpBloc>(context).add(
+                          SetPhone(phone: value),
+                        );
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                BlocBuilder<OtpBloc, OtpState>(
+                  builder: (context, state) {
+                    return TextLink(
+                      label: 'Get Code',
+                      onClick: () {
+                        if (state.phone.isPure || state.phone.isNotValid) {
+                          BlocProvider.of<OtpBloc>(context).add(
+                            SetPhone(phone: ''),
+                          );
+                          return;
+                        }
+                        BlocProvider.of<OtpBloc>(context).add(
+                          ResendVerificationCode(),
+                        );
+                      },
                     );
                   },
                 ),
@@ -124,11 +137,24 @@ class _OTPView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(AppLocalizations.of(context)!.noCodeReceived),
-                    TextLink(
-                      label: AppLocalizations.of(context)!.resend,
-                      onClick: () {
-                        BlocProvider.of<OtpBloc>(context).add(
-                          ResendVerificationCode(),
+                    BlocBuilder<OtpBloc, OtpState>(
+                      builder: (context, state) {
+                        return TextLink(
+                          label: AppLocalizations.of(context)!.resend,
+                          onClick: () {
+                            if (state.phone.isPure || state.phone.isNotValid) {
+                              BlocProvider.of<OtpBloc>(context).add(
+                                SetPhone(phone: ''),
+                              );
+                              return;
+                            }
+                            BlocProvider.of<OtpBloc>(context).add(
+                              ResendVerificationCode(),
+                            );
+                            BlocProvider.of<OtpBloc>(context).add(
+                              ResendVerificationCode(),
+                            );
+                          },
                         );
                       },
                     )

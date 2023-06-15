@@ -6,6 +6,7 @@ import '../app.dart';
 import '../constants/strings/app_routes.dart';
 import '../features/applications/presentation/screen/applications_view.dart';
 import '../features/appointments/presentation/screen/my_appointments_view.dart';
+import '../features/auth/forgotPassword/presentation/screen/get_phone_view.dart';
 import '../features/auth/otp/presentation/screen/otp_view.dart';
 import '../features/auth/register/presentation/screen/register_view.dart';
 import '../features/auth/signin/presentation/screen/signin_view.dart';
@@ -61,7 +62,12 @@ class RouteGenerator {
           builder: (_) => OTPView(phone: args.phone),
         );
       case GojoRoutes.forgotPassword:
-        return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
+        return MaterialPageRoute(builder: (_) => const OTPForgotPasswordView());
+      case GojoRoutes.resetPassword:
+        final args = settings.arguments as OtpArgs;
+        return MaterialPageRoute(
+          builder: (_) => ForgotPasswordView(phoneNumber: args.phone),
+        );
       case GojoRoutes.map:
         return MaterialPageRoute(builder: (_) => const MapView());
       case GojoRoutes.myAppointments:

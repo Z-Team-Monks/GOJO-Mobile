@@ -1,6 +1,7 @@
 part of 'otp_bloc.dart';
 
 enum OtpStatus {
+  init,
   sending,
   codeSent,
   inprogress,
@@ -11,18 +12,18 @@ enum OtpStatus {
 class OtpState extends Equatable {
   final OtpStatus status;
   final String otpCode;
-  final String phone;
+  final PhoneNumberInput phone;
 
   const OtpState({
-    this.status = OtpStatus.sending,
+    this.status = OtpStatus.init,
     this.otpCode = "",
-    this.phone = "",
+    this.phone = const PhoneNumberInput.pure(),
   });
 
   copyWith({
     OtpStatus? status,
     String? otpCode,
-    String? phone,
+    PhoneNumberInput? phone,
   }) {
     return OtpState(
       status: status ?? this.status,

@@ -49,6 +49,13 @@ class SignInView extends StatelessWidget {
                     )
                   ],
                 ),
+                const SizedBox(height: 10),
+                TextLink(
+                  label: "Forgot password",
+                  onClick: () {
+                    Navigator.pushNamed(context, GojoRoutes.forgotPassword);
+                  },
+                ),
                 const SizedBox(height: 30)
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/text_link.dart';
@@ -34,11 +35,27 @@ class _OTPView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
-        if (state.status == OtpStatus.success) {
-          Navigator.popAndPushNamed(
-            context,
-            GojoRoutes.signin,
-          );
+        switch (state.status) {
+          case OtpStatus.inprogress:
+            GojoSnackBars.showLoading(context, "Verifying OTP");
+            break;
+          case OtpStatus.sending:
+            GojoSnackBars.showLoading(context, "Requesting Otp Code");
+            break;
+          case OtpStatus.codeSent:
+            GojoSnackBars.showSuccess(context, "OTP Code Sent check your SMS");
+            break;
+          case OtpStatus.error:
+            GojoSnackBars.showError(context, "Verifying OTP Failed");
+            break;
+          case OtpStatus.success:
+            GojoSnackBars.showSuccess(context, "OTP Code Verified");
+            Navigator.popAndPushNamed(
+              context,
+              GojoRoutes.signin,
+            );
+            break;
+          default:
         }
       },
       child: GestureDetector(
@@ -70,7 +87,7 @@ class _OTPView extends StatelessWidget {
                             text: "Enter the code from the sms we sent to ",
                           ),
                           TextSpan(
-                            text: state.phone,
+                            text: state.phone.value,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge
@@ -84,14 +101,6 @@ class _OTPView extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 30),
-                Text(
-                  "02:32",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Resources.gojoColors.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 15),
                 PinInputTextField(
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,

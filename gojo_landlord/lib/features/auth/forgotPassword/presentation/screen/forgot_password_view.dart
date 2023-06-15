@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
-import 'package:gojo/Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
+import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
 import '../../../signin/data_layer/repository/sign_in_repository.dart';
 import '../bloc/forgot_password_bloc.dart';
 

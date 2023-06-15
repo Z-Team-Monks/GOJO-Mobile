@@ -11,6 +11,11 @@ abstract class SignInRepositoryAPI {
     required String phoneNumber,
     required String password,
   });
+
+  Future<Either<void, Exception>> forgotPassword({
+    required String phoneNumber,
+    required String newPassword,
+  });
 }
 
 class SignInRepositoryImpl implements SignInRepositoryAPI {
@@ -53,6 +58,22 @@ class SignInRepositoryImpl implements SignInRepositoryAPI {
         }
       }
       debugPrint("Other error ${e.toString()}");
+      return Right(Exception("Can't connect at the moment. Try again later!"));
+    }
+  }
+
+  @override
+  Future<Either<void, Exception>> forgotPassword({
+    required String phoneNumber,
+    required String newPassword,
+  }) async {
+    try {
+      final response = await signInClient.forgotPassword(
+        phoneNumber: phoneNumber,
+        newPassword: newPassword,
+      );
+      return const Left(null);
+    } catch (e) {
       return Right(Exception("Can't connect at the moment. Try again later!"));
     }
   }
