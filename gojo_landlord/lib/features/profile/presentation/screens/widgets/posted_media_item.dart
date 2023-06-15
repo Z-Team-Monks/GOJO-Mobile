@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gojo_landlord/constants/strings/app_routes.dart';
 import 'package:gojo_landlord/features/profile/data_layer/model/property_item.dart';
 import 'package:gojo_landlord/navigation/args/applications_args.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/list_items/property_media_item.dart';
@@ -30,7 +31,7 @@ class PostedMediaItem extends StatelessWidget {
       thumbnailUrl: item.thumbnailUrl,
       propertyId: item.id,
       category: item.category,
-      description: item.desciption,
+      description: item.description,
     );
   }
 
@@ -56,7 +57,7 @@ class _TrailingButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         PropertyMediaItemButton(
-          title: "Applications",
+          title: AppLocalizations.of(context)!.applications,
           onClick: () {
             Navigator.pushNamed(
               context,
@@ -67,7 +68,7 @@ class _TrailingButtons extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         PropertyMediaItemButton(
-          title: "Appointments",
+          title: AppLocalizations.of(context)!.appointments,
           onClick: () {
             Navigator.pushNamed(
               context,

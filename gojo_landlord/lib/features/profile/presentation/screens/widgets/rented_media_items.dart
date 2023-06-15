@@ -39,7 +39,7 @@ class RentedMediaItem extends StatelessWidget {
       thumbnailUrl: item.thumbnailUrl,
       propertyId: item.id,
       category: item.category,
-      description: item.desciption,
+      description: item.description,
       contractUrl: item.contractUrl ?? _templateContract,
     );
   }
@@ -100,12 +100,12 @@ class _TrailingButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         PropertyMediaItemButton(
-          title: "Show Contract",
+          title: AppLocalizations.of(context)!.showContract,
           onClick: onEndContractPressed,
         ),
         const SizedBox(width: 10),
         PropertyMediaItemButton(
-          title: "End Contract",
+          title: AppLocalizations.of(context)!.endContract,
           onClick: onShowContractPressed,
         ),
       ],

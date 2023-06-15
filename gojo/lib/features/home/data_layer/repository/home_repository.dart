@@ -92,33 +92,36 @@ class HomeRepositoryFake implements HomeRepositoryAPI {
     final items = [
       PropertyItem(
         id: 1,
-        title: "Villa, Kemah Tinggi",
-        thumbnailUrl: Resources.gojoImages.sofaNetwork,
-        category: "Villa",
-        facilities: [
-          Facility(id: 1, name: "Kitchen", amount: 1),
-          Facility(id: 2, name: "Bed rooms", amount: 2),
-        ],
-        rent: "14000",
-        rating: 4.97,
-      ),
-      PropertyItem(
-        id: 1,
-        title: "Villa, Kemah Tinggi",
+        title: "Kemah Tinggi",
         thumbnailUrl: Resources.gojoImages.sofaNetwork,
         category: "Villa",
         facilities: [
           Facility(id: 1, name: "Kitchen", amount: 1),
           Facility(id: 2, name: "Bedroom", amount: 2),
+          Facility(id: 3, name: "Square area", amount: 500),
         ],
         rent: "14000",
         rating: 4.97,
       ),
       PropertyItem(
         id: 1,
-        title: "Villa, Kemah Tinggi",
+        title: "Great Housing",
+        thumbnailUrl:
+            "https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80",
+        category: "Apartama",
+        facilities: [
+          Facility(id: 1, name: "Kitchen", amount: 1),
+          Facility(id: 2, name: "Bedroom", amount: 2),
+          Facility(id: 3, name: "Square area", amount: 350),
+        ],
+        rent: "14000",
+        rating: 4.97,
+      ),
+      PropertyItem(
+        id: 1,
+        title: "Tiny home in 4 kilo",
         thumbnailUrl: Resources.gojoImages.sofaNetwork,
-        category: "Villa",
+        category: "Condominium",
         facilities: [
           Facility(id: 1, name: "Kitchen", amount: 1),
           Facility(id: 2, name: "Bedroom", amount: 2),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gojo_landlord/features/auth/register/presentation/screen/register_view.dart';
+import 'package:gojo_landlord/features/property/create_property/presentation/screen/edit_property_view.dart';
 import 'package:gojo_landlord/navigation/args/applications_args.dart';
 import 'package:gojo_landlord/navigation/args/appointments_args.dart';
 
@@ -15,6 +16,7 @@ import '../features/requests/appointments/presentation/screen/my_appointments_vi
 import '../features/wallet/presentation/screen/wallet_view.dart';
 import '../root.dart';
 import 'args/chat_args.dart';
+import 'args/edit_property_args.dart';
 import 'args/otp_args.dart';
 
 class RouteGenerator {
@@ -62,6 +64,11 @@ class RouteGenerator {
         );
       case GojoRoutes.withdraw:
         return MaterialPageRoute(builder: (_) => const WalletView());
+      case GojoRoutes.editProperty:
+        final args = settings.arguments as EditPropertyArgs;
+        return MaterialPageRoute(
+          builder: (_) => EditPropertyView(propertyItem: args.propertyItem),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

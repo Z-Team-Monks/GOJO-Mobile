@@ -43,8 +43,8 @@ class Locator {
     );
 
     GetIt.I.registerLazySingleton<HomeRepositoryAPI>(
-      // () => HomeRepositoryFake(),
-      () => HomeRepositoryImpl(HomeClientImpl()),
+      () => HomeRepositoryFake(),
+      // () => HomeRepositoryImpl(HomeClientImpl()),
     );
 
     GetIt.I.registerLazySingleton<ProfileRepositoryAPI>(
@@ -86,7 +86,7 @@ class Locator {
         RegisterClientImpl(),
       ),
     );
-    
+
     GetIt.I.registerLazySingleton<ContactRepository>(
       // () => const ContactRepositoryFakeImpl(),
       () => ContactRepositoryImpl(

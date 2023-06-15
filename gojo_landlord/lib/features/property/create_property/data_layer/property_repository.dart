@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo_landlord/features/property/create_property/data_layer/model/update_property.dart';
 
 import 'model/category.dart';
 import 'model/facility.dart';
@@ -9,6 +10,7 @@ abstract class PropertyRepositoryAPI {
   Future<List<Category>> getCategories();
   Future<List<Facility>> getFacilities();
   Future<void> createProperty(NewProperty newProperty);
+  Future<void> updateProperty(UpdateProperty updatedProperty);
 }
 
 class PropertyRepositoryImpl implements PropertyRepositoryAPI {
@@ -37,6 +39,11 @@ class PropertyRepositoryImpl implements PropertyRepositoryAPI {
   @override
   Future<void> createProperty(NewProperty newProperty) async {
     await client.postProperty(newProperty.toJson());
+  }
+
+  @override
+  Future<void> updateProperty(UpdateProperty updatedProperty) async {
+    await client.updateProperty(updatedProperty.id, updatedProperty.toJson());
   }
 }
 
@@ -82,6 +89,9 @@ class PropertyRepositoryFake implements PropertyRepositoryAPI {
   Future<void> createProperty(NewProperty newProperty) async {
     debugPrint("New property: ${newProperty.toJson()}");
   }
+
+  @override
+  Future<void> updateProperty(UpdateProperty updatedProperty) async {
+    debugPrint("Updated property: ${updatedProperty.toJson()}");
+  }
 }
-
-

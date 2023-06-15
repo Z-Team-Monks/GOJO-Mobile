@@ -69,3 +69,8 @@ class VisitingHourRemoved extends CreatePropertyEvent {
 }
 
 class SaveButtonPressed extends CreatePropertyEvent {}
+
+class EditSaveButtonPressed extends CreatePropertyEvent {
+  final int propertyId;
+  EditSaveButtonPressed(this.propertyId);
+}

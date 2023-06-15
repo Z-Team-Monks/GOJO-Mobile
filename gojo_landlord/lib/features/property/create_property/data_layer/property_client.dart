@@ -9,6 +9,10 @@ abstract class PropertyClientAPI {
   Future<Response> getCategories();
   Future<Response> getFacilities();
   Future<Response> postProperty(Map<String, dynamic> newPropertyJson);
+  Future<Response> updateProperty(
+    int propertyId,
+    Map<String, dynamic> updatedPropertyJson,
+  );
 }
 
 class PropertyClientImpl extends BaseApiClient implements PropertyClientAPI {
@@ -27,5 +31,19 @@ class PropertyClientImpl extends BaseApiClient implements PropertyClientAPI {
     final user = await GetIt.I<UserRepositoryAPI>().getUser();
     debugPrint(newPropertyJson.toString());
     return post("properties/", newPropertyJson, token: user?.token);
+  }
+
+  @override
+  Future<Response> updateProperty(
+    int propertyId,
+    Map<String, dynamic> updatedPropertyJson,
+  ) async {
+    final user = await GetIt.I<UserRepositoryAPI>().getUser();
+    debugPrint(updatedPropertyJson.toString());
+    return post(
+      "properties/$propertyId/updateProperty/",
+      updatedPropertyJson,
+      token: user?.token,
+    );
   }
 }

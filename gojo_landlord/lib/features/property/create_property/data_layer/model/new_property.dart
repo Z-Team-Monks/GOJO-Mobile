@@ -6,6 +6,7 @@ import 'facility.dart';
 import 'visiting_hour.dart';
 
 class NewProperty {
+  final String? id;
   final String title;
   final String description;
   final double amount;
@@ -16,6 +17,7 @@ class NewProperty {
   final WeeklyVisitingHours weeklyVisitingHour;
 
   NewProperty({
+    this.id,
     required this.title,
     required this.description,
     required this.amount,
@@ -28,6 +30,7 @@ class NewProperty {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'amount': amount,
       'description': description,

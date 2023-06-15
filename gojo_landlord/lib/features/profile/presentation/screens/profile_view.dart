@@ -71,7 +71,7 @@ class UserInfoSection extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundImage: CachedNetworkImageProvider(
-                    state.user!.profilePicture,
+                    state.user!.displayProfilePicture!,
                   ),
                   radius: 60,
                 ),

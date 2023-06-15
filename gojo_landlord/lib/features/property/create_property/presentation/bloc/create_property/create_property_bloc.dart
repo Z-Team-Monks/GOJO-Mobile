@@ -9,6 +9,7 @@ import 'package:gojo_landlord/features/property/create_property/presentation/mod
 
 import '../../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
 import '../../../data_layer/model/facility.dart';
+import '../../../data_layer/model/update_property.dart';
 import '../../../data_layer/model/visiting_hour.dart';
 import '../../../data_layer/property_repository.dart';
 import '../../model/number_of_bathrooms.dart';
@@ -24,12 +25,14 @@ class CreatePropertyBloc
   final PropertyRepositoryAPI propertyRepository;
   final List<Category> fetchedCategories;
   final List<Facility> fetchedFacilities;
+  final CreatePropertyState? initialState;
 
-  CreatePropertyBloc({
-    required this.propertyRepository,
-    required this.fetchedCategories, 
-    required this.fetchedFacilities,
-  }) : super(CreatePropertyState.initial()) {
+  CreatePropertyBloc(
+      {required this.propertyRepository,
+      required this.fetchedCategories,
+      required this.fetchedFacilities,
+      this.initialState})
+      : super(initialState ?? CreatePropertyState.initial()) {
     on<TitleInputChanged>((event, emit) {
       final titleInput = TitleInput.dirty(value: event.titleInput);
       emit(state.copyWith(titleInput: titleInput));
@@ -136,6 +139,44 @@ class CreatePropertyBloc
 
       try {
         await propertyRepository.createProperty(newProperty);
+        emit(state.copyWith(postStatus: CreatePropertyPostStatus.success));
+        emit(CreatePropertyState.initial());
+      } catch (e) {
+        emit(state.copyWith(postStatus: CreatePropertyPostStatus.failure));
+      }
+    });
+
+    on<EditSaveButtonPressed>((event, emit) async {
+      final numberOfBedrooms = _getFacility(GojoFacilities.numberOfBedRooms)
+          .copyWith(amount: double.tryParse(state.numberOfBedRoomsInput.value));
+
+      final numberOfBathrooms = _getFacility(GojoFacilities.numberOfBathRooms)
+          .copyWith(
+              amount: double.tryParse(state.numberOfBathroomsInput.value));
+
+      final squareArea = _getFacility(GojoFacilities.squareArea)
+          .copyWith(amount: double.tryParse(state.sqaureAreaInput.value));
+
+      final facilities = [
+        numberOfBedrooms,
+        numberOfBathrooms,
+        squareArea,
+      ];
+
+      final category = _getCategory(state.selectedCategory!);
+
+      final updatedProperty = UpdateProperty(
+        id: event.propertyId,
+        title: state.titleInput.value,
+        description: state.descriptionInput.value,
+        rent: state.rentInput.value,
+        facilities: facilities,
+        category: category,
+        address: state.address.value!,
+      );
+
+      try {
+        await propertyRepository.updateProperty(updatedProperty);
         emit(state.copyWith(postStatus: CreatePropertyPostStatus.success));
         emit(CreatePropertyState.initial());
       } catch (e) {

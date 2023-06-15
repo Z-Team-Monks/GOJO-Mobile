@@ -6,28 +6,40 @@ import 'package:gojo_landlord/Gojo-Mobile-Shared/UI/snack_bars/snackbars.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/property_repository.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/category.dart';
 import 'package:gojo_landlord/features/property/create_property/data_layer/model/facility.dart';
+import 'package:gojo_landlord/features/property/create_property/presentation/model/title_input.dart';
 import 'package:gojo_landlord/features/property/create_property/presentation/screen/widgets/category_selector.dart';
 
 import '../../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/input_fields/text_field.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/bar_button.dart';
 import '../../../../../Gojo-Mobile-Shared/UI/widgets/parent_view.dart';
+import '../../../../../Gojo-Mobile-Shared/constants/facilities.dart';
+import '../../../../profile/data_layer/model/property_item.dart';
+import '../../data_layer/model/visiting_hour.dart';
 import '../bloc/create_property/create_property_bloc.dart';
 import '../bloc/property_form_values/property_form_values_bloc.dart';
-import 'widgets/availability_selector.dart';
+import '../model/address_input.dart';
+import '../model/description_input.dart';
+import '../model/number_of_bathrooms.dart';
+import '../model/number_of_bedrooms_input.dart';
+import '../model/rent_input.dart';
+import '../model/square_area_input.dart';
 import 'widgets/facility_selector.dart';
 import 'widgets/form_input_label.dart';
 import 'widgets/adress_picker.dart';
-import 'widgets/visiting_hours/visiting_hour_selector.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditPropertyView extends StatelessWidget {
-  const EditPropertyView({super.key});
+  final PropertyItem propertyItem;
+  const EditPropertyView({
+    Key? key,
+    required this.propertyItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GojoParentView(
-      label: AppLocalizations.of(context)!.newProperty,
+      label: AppLocalizations.of(context)!.edit_property,
       child: BlocProvider(
         create: (context) =>
             PropertyFormValuesBloc(GetIt.I<PropertyRepositoryAPI>())
@@ -44,9 +56,10 @@ class EditPropertyView extends StatelessWidget {
                   ),
                 );
               case PropertyFormValuesFetchState.success:
-                return CreatePropertyForm(
+                return EditPropertyForm(
                   facilities: state.facilities,
                   categories: state.categories,
+                  propertyItem: propertyItem,
                 );
             }
           },
@@ -56,11 +69,14 @@ class EditPropertyView extends StatelessWidget {
   }
 }
 
-class CreatePropertyForm extends StatelessWidget {
-  const CreatePropertyForm({
+class EditPropertyForm extends StatelessWidget {
+  final PropertyItem propertyItem;
+
+  const EditPropertyForm({
     super.key,
     required this.facilities,
     required this.categories,
+    required this.propertyItem,
   });
 
   final List<Facility> facilities;
@@ -68,11 +84,63 @@ class CreatePropertyForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CreatePropertyState getInitialState() {
+      final inputFilters = [
+        GojoFacilities.numberOfBedRooms,
+        GojoFacilities.numberOfBathRooms,
+        GojoFacilities.squareArea,
+      ];
+
+      final numberOfBedRooms = propertyItem.facilities
+          ?.firstWhere(
+              (element) => element.name == GojoFacilities.numberOfBedRooms)
+          .amount;
+
+      final numberOfBathRooms = propertyItem.facilities
+          ?.firstWhere(
+              (element) => element.name == GojoFacilities.numberOfBathRooms)
+          .amount;
+
+      final squareArea = propertyItem.facilities
+          ?.firstWhere(
+            (element) => element.name == GojoFacilities.squareArea,
+          )
+          .amount;
+
+      var facilitiesWithoutInputFilters = [...propertyItem.facilities ?? []];
+      facilitiesWithoutInputFilters.removeWhere(
+        (element) => inputFilters.contains(element.name),
+      );
+      final selectedFacilities =
+          facilitiesWithoutInputFilters.map((f) => f.name).toSet();
+
+      return CreatePropertyState(
+        titleInput: TitleInput.dirty(value: propertyItem.title),
+        descriptionInput: DescriptionInput.dirty(
+          value: propertyItem.description,
+        ),
+        rentInput: RentInput.dirty(value: "${propertyItem.rent}" ?? ""),
+        numberOfBedRoomsInput:
+            NumberOfBedRoomsInput.dirty(value: numberOfBedRooms.toString()),
+        numberOfBathroomsInput:
+            NumberOfBathroomsInput.dirty(value: numberOfBathRooms.toString()),
+        sqaureAreaInput: SquareAreaInput.dirty(value: squareArea.toString()),
+        selectedCategory: propertyItem.category,
+        selectedFacilities: {...selectedFacilities},
+        startDate: null,
+        endDate: null,
+        address: AddressInput.dirty(value: propertyItem.address),
+        weeklyVisitingHours: WeeklyVisitingHours(),
+        postStatus: CreatePropertyPostStatus.initial,
+      );
+    }
+
     return BlocProvider(
       create: (context) => CreatePropertyBloc(
         propertyRepository: GetIt.I<PropertyRepositoryAPI>(),
         fetchedCategories: categories,
         fetchedFacilities: facilities,
+        initialState: getInitialState(),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: GojoPadding.small),
@@ -96,21 +164,17 @@ class CreatePropertyForm extends StatelessWidget {
               const SizedBox(height: 12),
               SquareAreaInputField(),
               const SizedBox(height: 20),
-              const AvailabilitySelector(),
-              const SizedBox(height: 20),
               const AddressPicker(),
-              const SizedBox(height: 20),
-              const VisitingHourSelector(),
               const SizedBox(height: 20),
               CategorySelector(categories: categories),
               const SizedBox(height: 20),
-              FacilitiesSelector(
-                facilities: CreatePropertyBloc.getSelectableFacilites(
-                  facilities,
-                ),
-              ),
+              // FacilitiesSelector(
+              //   facilities: CreatePropertyBloc.getSelectableFacilites(
+              //     facilities,
+              //   ),
+              // ),
               const SizedBox(height: 20),
-              const SaveButton(),
+              SaveButton(propertyId: propertyItem.id),
               const SizedBox(height: 12),
             ],
           ),
@@ -295,8 +359,10 @@ class DescriptionInputField extends StatelessWidget {
 }
 
 class SaveButton extends StatelessWidget {
+  final int propertyId;
   const SaveButton({
     super.key,
+    required this.propertyId,
   });
 
   @override
@@ -305,8 +371,8 @@ class SaveButton extends StatelessWidget {
       listener: (context, state) {
         switch (state.postStatus) {
           case CreatePropertyPostStatus.success:
-            GojoSnackBars.showSuccess(
-                context, AppLocalizations.of(context)!.propertyCreated);
+            GojoSnackBars.showSuccess(context, "Property updated successfully");
+            Navigator.pop(context);
             break;
           case CreatePropertyPostStatus.failure:
             GojoSnackBars.showError(
@@ -317,14 +383,12 @@ class SaveButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final isButtonActive = isFormValid(state);
         return GojoBarButton(
           title: AppLocalizations.of(context)!.save,
-          isActive: isButtonActive,
           onClick: (() {
-            if (isButtonActive) {
-              context.read<CreatePropertyBloc>().add(SaveButtonPressed());
-            }
+            context
+                .read<CreatePropertyBloc>()
+                .add(EditSaveButtonPressed(propertyId));
           }),
         );
       },
