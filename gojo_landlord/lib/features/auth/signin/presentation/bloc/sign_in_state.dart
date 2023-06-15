@@ -2,8 +2,7 @@ part of 'sign_in_bloc.dart';
 
 enum SignInRequestStatus { initial, editing, loading, success, error }
 
-@immutable
-class SignInState {
+class SignInState extends Equatable {
   final SignInRequestStatus status;
   final PasswordInput password;
   final PhoneNumberInput phoneNumber;
@@ -47,4 +46,12 @@ class SignInState {
       errorMessage: null,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        status,
+        password,
+        phoneNumber,
+        errorMessage,
+      ];
 }

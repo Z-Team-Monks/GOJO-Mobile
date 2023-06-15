@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gojo/Gojo-Mobile-Shared/core/model/user.dart';
+import 'package:gojo/Gojo-Mobile-Shared/core/repository/user_repository.dart';
 
 import 'package:gojo/features/home/data_layer/model/property_item.dart';
 import 'package:gojo/features/profile/data_layer/repository/profile_repository.dart';
@@ -12,7 +13,7 @@ import 'package:mockito/mockito.dart';
 import 'profile_bloc_test.mocks.dart';
 
 // Annotate the test file with @GenerateMocks
-@GenerateMocks([ProfileRepositoryAPI])
+@GenerateMocks([ProfileRepositoryAPI, UserRepositoryAPI])
 void main() {
   late ProfileBloc profileBloc;
   late MockProfileRepositoryAPI mockProfileRepository;

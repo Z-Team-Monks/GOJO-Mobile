@@ -84,8 +84,7 @@ class _ContactsView extends StatelessWidget {
                                 state.contacts[index].chatMessages.last.message,
                             rightAlignedTitle: state
                                 .contacts[index].chatMessages.last.timestamp,
-                            rightAlignedContent:
-                                "${state.contacts[index].unreadMessages}",
+                            rightAlignedContent: "",
                           ),
                         ),
                       );

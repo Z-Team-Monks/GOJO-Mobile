@@ -49,16 +49,25 @@ class _RegisterViewState extends State<_RegisterView> {
   Widget build(BuildContext context) {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
-        if (state.formStatus == RegisterFormStatus.error) {
-          GojoSnackBars.showError(context, "User Registration Failed!");
-        } else if (state.formStatus == RegisterFormStatus.success) {
-          Navigator.pushNamed(
-            context,
-            GojoRoutes.otp,
-            arguments: OtpArgs(
-              phone: state.phone.value,
-            ),
-          );
+        switch (state.formStatus) {
+          case RegisterFormStatus.inprogress:
+            GojoSnackBars.showLoading(
+                context, "User Registration inprogress..");
+            break;
+          case RegisterFormStatus.error:
+            GojoSnackBars.showError(context, "User Registration Failed!");
+            break;
+          case RegisterFormStatus.success:
+            GojoSnackBars.showSuccess(context, "Phone Verification code sent!");
+            Navigator.pushNamed(
+              context,
+              GojoRoutes.otp,
+              arguments: OtpArgs(
+                phone: state.phone.value,
+              ),
+            );
+            break;
+          default:
         }
       },
       child: GojoParentView(

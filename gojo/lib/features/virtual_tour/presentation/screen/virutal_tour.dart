@@ -24,7 +24,7 @@ class _VirtualTourViewState extends State<VirtualTourView> {
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
-        Uri.parse('http://192.168.149.134:3000/tour/view/21'),
+        Uri.parse('http://192.168.28.134:3000/tour/view/${widget.propertyId}'),
       );
   }
 

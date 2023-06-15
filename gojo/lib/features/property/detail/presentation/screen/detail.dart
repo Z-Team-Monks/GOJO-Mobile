@@ -232,7 +232,6 @@ class PropertyDetailViewContent extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(width: 12),
               ],
             )
           ],
@@ -317,7 +316,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     InkWell(
-                      child: Icon(Icons.my_location),
+                      child: const Icon(Icons.my_location),
                       onTap: () async {
                         var uri = Uri.parse(
                             "google.navigation:q=${property.location!.lat},${property.location!.lng}&mode=d");
@@ -330,7 +329,7 @@ class PropertyDetailViewContent extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     InkWell(
-                      child: Icon(Icons.chat_bubble_outline_rounded),
+                      child: const Icon(Icons.chat_bubble_outline_rounded),
                       onTap: () {
                         Navigator.pushNamed(
                           context,
