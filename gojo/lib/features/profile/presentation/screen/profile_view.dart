@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../../../Gojo-Mobile-Shared/UI/design_tokens/padding.dart';
 import '../../../../Gojo-Mobile-Shared/UI/widgets/change_language_dialogue.dart';
@@ -32,7 +32,7 @@ class ProfileView extends StatelessWidget {
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate(
-                const [ProfileButtons()],
+                const [UserInfoSection(), ProfileButtons()],
               ),
             ),
             const SliverFillRemaining(
