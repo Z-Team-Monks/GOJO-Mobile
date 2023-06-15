@@ -56,10 +56,10 @@ class _RegisterViewState extends State<_RegisterView> {
                 context, "User Registration inprogress..");
             break;
           case RegisterFormStatus.error:
-            GojoSnackBars.showSuccess(context, "User Registration Failed!");
+            GojoSnackBars.showError(context, "User Registration Failed!");
             break;
           case RegisterFormStatus.success:
-            GojoSnackBars.showError(context, "Phone Verification code sent!");
+            GojoSnackBars.showSuccess(context, "Phone Verification code sent!");
             Navigator.pushNamed(
               context,
               GojoRoutes.otp,
