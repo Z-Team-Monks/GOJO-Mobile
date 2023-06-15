@@ -12,6 +12,11 @@ abstract class SignInClientAPI {
     required String firebaseToken,
     required String appToken,
   });
+
+  Future<Response> forgotPassword({
+    required String phoneNumber,
+    required String newPassword,
+  });
 }
 
 class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
@@ -37,6 +42,20 @@ class SignInClientImpl extends BaseApiClient implements SignInClientAPI {
         "token": firebaseToken,
       },
       token: appToken,
+    );
+  }
+
+  @override
+  Future<Response> forgotPassword({
+    required String phoneNumber,
+    required String newPassword,
+  }) {
+    return post(
+      "users/forgot_password/",
+      {
+        "phone_number": phoneNumber,
+        "new_password": newPassword,
+      },
     );
   }
 }

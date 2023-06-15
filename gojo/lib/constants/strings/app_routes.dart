@@ -12,5 +12,6 @@ class GojoRoutes {
   static const appointment = 'appointment';
   static const virtualTour = 'virtual tour';
   static const applications = 'applications';
+  static const forgotPassword = '/forgotPassword';
   static const app = '/';
 }

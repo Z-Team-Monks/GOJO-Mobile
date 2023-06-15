@@ -51,8 +51,8 @@ class RentedMediaItem extends StatelessWidget {
       thumbnailUrl: thumbnailUrl,
       trailingButtons: trailingButtons ??
           _TrailingButtons(
-            onEndContractPressed: () => _showEndRentalDialog(context),
-            onShowContractPressed: () => _showContract(context),
+            onEndContractPressed: () => _showContract(context),
+            onShowContractPressed: () => _showEndRentalDialog(context),
           ),
       subtitle: category,
       content: description,
@@ -103,6 +103,7 @@ class _TrailingButtons extends StatelessWidget {
           title: "Show Contract",
           onClick: onEndContractPressed,
         ),
+        const SizedBox(width: 10),
         PropertyMediaItemButton(
           title: "End Contract",
           onClick: onShowContractPressed,

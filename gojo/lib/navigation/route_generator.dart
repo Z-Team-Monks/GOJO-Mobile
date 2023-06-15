@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gojo/features/auth/forgotPassword/presentation/screen/forgot_password_view.dart';
 import 'package:gojo/navigation/args/virtual_tour_args.dart';
 
 import '../app.dart';
@@ -59,6 +60,8 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => OTPView(phone: args.phone),
         );
+      case GojoRoutes.forgotPassword:
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case GojoRoutes.map:
         return MaterialPageRoute(builder: (_) => const MapView());
       case GojoRoutes.myAppointments:
