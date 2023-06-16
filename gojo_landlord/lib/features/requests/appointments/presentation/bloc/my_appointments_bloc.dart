@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data_layer/model/appointment.dart';
 import '../../data_layer/repository/my_appointments_repository.dart';
+import '../screen/widgets/my_appointment_item.dart';
 
 part 'my_appointments_event.dart';
 part 'my_appointments_state.dart';
@@ -75,7 +76,22 @@ class MyAppointmentsBloc
           event.appointmentId,
         );
 
+        final approvedAppointment = state.appointments
+            .where(
+              (element) => element.id == event.appointmentId,
+            )
+            .first;
+
+        final updatedAppointments = state.appointments
+            .where((element) => element.id != event.appointmentId)
+            .toList();
+
+        updatedAppointments.add(approvedAppointment.copyWith(
+          status: "approved",
+        ));
+
         emit(state.copyWith(
+          appointments: updatedAppointments,
           approveAppointmentStatus: ApproveAppointmentStatus.success,
         ));
       } catch (e) {

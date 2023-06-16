@@ -98,7 +98,10 @@ class PendingPaymentsTab extends StatelessWidget {
             if (state.pendingTransactions.isEmpty) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: const Center(child: Text("No pending transactions!")),
+                child: Center(
+                    child: Text(
+                  AppLocalizations.of(context)!.noPendingTransactions,
+                )),
               );
             }
             return ListView(children: [
@@ -144,7 +147,9 @@ class FinishedTransactionTab extends StatelessWidget {
             if (state.finishedTransactions.isEmpty) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
-                child: const Center(child: Text("No completed transactions!")),
+                child: Center(
+                    child: Text(
+                        AppLocalizations.of(context)!.noCompletedTransactions)),
               );
             }
             return ListView(children: [

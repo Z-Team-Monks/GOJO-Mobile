@@ -22,4 +22,20 @@ class Appointment {
       status: json['status'],
     );
   }
+
+  Appointment copyWith({
+    int? id,
+    String? fullName,
+    String? date,
+    String? phoneNumber,
+    String? status,
+  }) {
+    return Appointment(
+      id: id ?? this.id,
+      fullName: fullName ?? this.fullName,
+      date: date ?? this.date,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      status: status ?? this.status,
+    );
+  }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gojo/features/property/detail/presentation/bloc/property_detail_bloc.dart';
 
 import '../../../../review/data/models/review.dart';
 import '../../../../review/presentation/screen/review_view.dart';
 import 'review_card.dart';
 
-class Reviews extends StatelessWidget {
+class Reviews extends StatefulWidget {
   final List<Review> reviews;
   final int propertyId;
 
@@ -15,6 +17,11 @@ class Reviews extends StatelessWidget {
     required this.propertyId,
   });
 
+  @override
+  State<Reviews> createState() => _ReviewsState();
+}
+
+class _ReviewsState extends State<Reviews> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,9 +35,13 @@ class Reviews extends StatelessWidget {
                 await showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return ReviewForm(propertyId: propertyId);
+                    return ReviewForm(propertyId: widget.propertyId);
                   },
                 );
+                if (mounted) {
+                  BlocProvider.of<PropertyDetailBloc>(context)
+                      .add(LoadPropertyDetail(propertyId: widget.propertyId));
+                }
               },
               icon: const Icon(Icons.add),
             )
@@ -44,7 +55,7 @@ class Reviews extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        ReviewsListView(reviews: reviews),
+        ReviewsListView(reviews: widget.reviews),
         // reviews.isEmpty ? Text(AppLocalizations.of(context)!.errorLoadingContent): for (var review in reviews) ReviewCard(review: review),
       ],
     );

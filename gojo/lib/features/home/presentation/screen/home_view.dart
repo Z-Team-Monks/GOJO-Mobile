@@ -154,7 +154,7 @@ class HomeViewContent extends StatelessWidget {
         case FetchPropertyItemsStatus.success:
           if (state.items.isEmpty) {
             return Center(
-              child: Text("No available properties at the moment !"),
+              child: Text(AppLocalizations.of(context)!.noAvailableProperties),
             );
           }
           return FeedListView(feeditems: state.items);
