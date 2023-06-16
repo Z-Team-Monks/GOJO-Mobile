@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -69,7 +70,8 @@ class _ContactsView extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: GojoPadding.small),
                           child: GojoContentItem(
-                            image: AssetImage(Resources.gojoImages.headShot),
+                            image: CachedNetworkImageProvider(
+                                state.contacts[index].tenant.profilePicture),
                             title:
                                 "${state.contacts[index].tenant.firstName} ${state.contacts[index].tenant.lastName}",
                             content:
